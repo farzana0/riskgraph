@@ -2,7 +2,7 @@
 
 You do not need to use Mila. Codex can build and test the code here. Anthropic runs the AI model; Render will run the small website/API.
 
-Participant progress, October 18: the public `farzana0/riskgraph` repository exists, and the participant reports SurrealDB account creation and promo redemption. The next account step is **Step 4: deploy an Agent Memory Context**; API keys and hosted integration tests are still pending. Render account setup remains pending.
+Participant progress, October 18: source is published at [farzana0/riskgraph](https://github.com/farzana0/riskgraph), and GitHub's automated checks passed. The participant reports SurrealDB promo redemption and Agent Memory context setup. The next account step is **Step 3: create the Render account and redeem its credit**. Real provider calls and hosted memory tests are still pending; context setup does not by itself connect the application.
 
 Do one step at a time. You do not need to create every account today.
 

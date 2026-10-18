@@ -4,6 +4,8 @@
 
 **47 tests passed** on the final application source in Python 3.9.6. Command: `python -m pytest -q`. Final test duration: 2.29 seconds after dependencies loaded. Dependencies are pinned in the requirements files. Render targets Python 3.11; a remote deployment and container build have not been executed.
 
+After publication, [GitHub Actions also passed on Ubuntu with Python 3.11](https://github.com/farzana0/riskgraph/actions/runs/39147467550), including the tests and 80-case offline evaluation. Initial source commit: `898b7215daac66e15b0b8ee10e1fb304b7cd845f`. Subsequent documentation-only status updates do not change the tested application code.
+
 Coverage includes:
 
 - Strict money validation and monitor checks at policy boundaries.
@@ -49,4 +51,4 @@ Dashboard, decision-trace, and mobile screenshots accompany the delivered source
 
 ## Not yet verified
 
-No real Anthropic API call, hosted Agent Memory remember/recall, sponsor-credit balance, Render deployment, GitHub publication, or Devpost submission was performed. The user reports only Anthropic is ready and has requested guided account setup. Eon Era is not integrated. No production-data or real-money operation was attempted.
+No real Anthropic API call, hosted Agent Memory remember/recall, sponsor-credit balance verification, Render deployment, or Devpost submission was performed. The user reports completing SurrealDB account, promo, and context setup. Eon Era is not integrated. No production-data or real-money operation was attempted.
