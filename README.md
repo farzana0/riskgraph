@@ -4,6 +4,8 @@
 
 A hackathon MVP for support operations teams evaluating AI refund agents. A synthetic agent proposes refunds, an independent monitor checks trusted order facts before simulated execution, and a dashboard shows frequency/severity risk with honest uncertainty from small samples.
 
+**Live demo:** https://riskgraph-fa98.onrender.com — deployed on Render. Public synthetic evidence is viewable; new evaluations require operator access. See [deployment verification](docs/DEPLOYMENT.md) for completed checks and remaining live-provider validation.
+
 ## Try it locally
 
 No Mila cluster, GPU, or account is required for the offline demonstration. Python 3.9–3.11 works; deployment targets Python 3.11.
@@ -79,4 +81,4 @@ Verify `/healthz`, the dashboard, a new run with the operator token, export, a b
 
 Prepared during Build Week starting October 18, 2026, with AI coding assistance in Codex. Architecture, statistical choices, application code, UI, synthetic scenarios, tests, and deployment scaffolding were prepared in this chat. No pre-existing RiskGraph repository was provided. Established mathematical methods and third-party libraries are credited in `docs/METHODS.md` and `docs/SOURCES.md`. No external UI template or third-party customer dataset was used. Participants must review this disclosure and add any other work or tools they used before submission.
 
-**Current delivery boundary:** the offline MVP and contract-tested adapters are published at [farzana0/riskgraph](https://github.com/farzana0/riskgraph). [GitHub's automated checks passed](https://github.com/farzana0/riskgraph/actions/runs/39147467550). The participant reports completing Agent Memory context setup. Real Claude calls, hosted Agent Memory verification, Render deployment, and Devpost submission are still pending.
+**Current delivery boundary:** the offline MVP and contract-tested adapters are published at [farzana0/riskgraph](https://github.com/farzana0/riskgraph), and the [Render demo is live](https://riskgraph-fa98.onrender.com). [GitHub's automated checks passed](https://github.com/farzana0/riskgraph/actions/runs/39147467550). Both provider configurations are detected by the deployed app. Real Claude calls, hosted Agent Memory read/write verification, a persistence restart check, and Devpost submission are still pending.

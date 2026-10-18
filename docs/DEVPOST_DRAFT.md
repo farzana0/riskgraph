@@ -18,7 +18,7 @@ The estimator separates frequency from positive-loss severity. Disclosed Beta an
 
 Python, FastAPI, NumPy/SciPy, SQLite, HTML/CSS/JavaScript, and a Render deployment Blueprint. Claude proposes schema-validated actions through the Anthropic Messages API. SurrealDB Agent Memory is integrated through scoped remember/recall operations so prior incidents can become context for future decisions, without gaining authority over the monitor's policy.
 
-**Sponsor status to update:** the local offline demo and mocked API-contract tests are complete; real Anthropic evaluations, hosted Agent Memory evidence, and Render deployment must be verified before claiming live use. Eon Era is optional and currently not integrated. No Expo or Clerk integration is claimed.
+**Sponsor status to update:** the [Render deployment is live](https://riskgraph-fa98.onrender.com), the offline demo works, and mocked API-contract tests passed. Real Anthropic evaluations and hosted Agent Memory read/write evidence must still be verified before claiming those integrations work. Eon Era is optional and currently not integrated. No Expo or Clerk integration is claimed.
 
 ## What is distinctive
 
@@ -47,8 +47,8 @@ The project was implemented during Build Week starting October 18, 2026 with AI 
 
 ## Submission fields still needed
 
-- Public GitHub repository URL.
-- Successful live deployment URL.
+- Public GitHub repository: https://github.com/farzana0/riskgraph
+- Successful live deployment: https://riskgraph-fa98.onrender.com
 - All team members, up to four.
 - Actual sponsor evidence and measured results.
 - Optional public demo video link, at most four minutes.

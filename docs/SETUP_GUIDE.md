@@ -2,7 +2,7 @@
 
 You do not need to use Mila. Codex can build and test the code here. Anthropic runs the AI model; Render will run the small website/API.
 
-Participant progress, October 18: source is published at [farzana0/riskgraph](https://github.com/farzana0/riskgraph), and GitHub's automated checks passed. The participant reports SurrealDB promo redemption and Agent Memory context setup. The next account step is **Step 3: create the Render account and redeem its credit**. Real provider calls and hosted memory tests are still pending; context setup does not by itself connect the application.
+Participant progress, October 18: source is published at [farzana0/riskgraph](https://github.com/farzana0/riskgraph), GitHub's automated checks passed, and [RiskGraph is live on Render](https://riskgraph-fa98.onrender.com). The deployed app detects both provider configurations and requires operator access. The next step is to enter the generated operator token privately in the app and run small real integration checks. Real provider calls, hosted memory read/write, and restart persistence are still pending. Render's GitHub connection is sufficient for deployment; connecting Render to this chat is optional.
 
 Do one step at a time. You do not need to create every account today.
 

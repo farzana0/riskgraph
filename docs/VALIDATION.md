@@ -51,4 +51,4 @@ Dashboard, decision-trace, and mobile screenshots accompany the delivered source
 
 ## Not yet verified
 
-No real Anthropic API call, hosted Agent Memory remember/recall, sponsor-credit balance verification, Render deployment, or Devpost submission was performed. The user reports completing SurrealDB account, promo, and context setup. Eon Era is not integrated. No production-data or real-money operation was attempted.
+The [Render app](https://riskgraph-fa98.onrender.com) is now live, with verified HTTPS health, dashboard, static assets, synthetic audit/export, and unauthenticated mutation rejection. See `docs/DEPLOYMENT.md` for evidence. Real Anthropic calls, hosted Agent Memory remember/recall, sponsor-credit balances, restart persistence, and Devpost submission are not yet verified. The user reports completing SurrealDB account, promo, and context setup. Eon Era is not integrated. No production-data or real-money operation was attempted.
