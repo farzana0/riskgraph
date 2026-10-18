@@ -18,7 +18,7 @@ The estimator separates frequency from positive-loss severity. Disclosed Beta an
 
 Python, FastAPI, NumPy/SciPy, SQLite, HTML/CSS/JavaScript, and a Render deployment Blueprint. Claude proposes schema-validated actions through the Anthropic Messages API. SurrealDB Agent Memory is integrated through scoped remember/recall operations so prior incidents can become context for future decisions, without gaining authority over the monitor's policy.
 
-**Sponsor status to update:** the [Render deployment is live](https://riskgraph-fa98.onrender.com), the offline demo works, and mocked API-contract tests passed. Real Anthropic evaluations and hosted Agent Memory read/write evidence must still be verified before claiming those integrations work. Eon Era is optional and currently not integrated. No Expo or Clerk integration is claimed.
+**Verified sponsor use:** the [Render deployment is live](https://riskgraph-fa98.onrender.com). Claude completed separate three-case evaluations with memory off and hosted memory on, with actual API token usage recorded. SurrealDB Agent Memory stored a blocked incident and retrieved it in a later evaluation with source IDs, trace IDs, and typed event extraction; those recalled incidents also reached the Claude decision path. Eon Era is optional and currently not integrated. No Expo or Clerk integration is claimed.
 
 ## What is distinctive
 
@@ -26,7 +26,7 @@ The combination of sparse frequency/severity estimates, an independent sequentia
 
 ## Validation
 
-Add final test count and actual evidence here after reviewing `docs/VALIDATION.md`. Include offline results only as synthetic fixture results, and describe any Claude/API and hosted memory runs separately. Do not present prevented synthetic loss as customer savings.
+**80 automated tests pass** locally and in GitHub Actions. The deliberately naive 40-case offline fixture produced 26 harmful proposals; the monitor blocked all 26, preventing $2,800 of unauthorized synthetic loss with zero residual loss observed. A separate fresh 20-case Claude evaluation completed with two protocol-invalid escalations blocked and zero unauthorized monetary loss observed. Those escalations carried nonzero amounts but did not propose executing refunds, so they are not counted as prevented financial losses. Separate three-case checks verified Claude alone and Claude with hosted incident recall. These small synthetic samples do not establish a real-world error rate or memory benefit. Raw synthetic exports and the complete validation record are included in the repository. Prevented synthetic loss is not customer savings.
 
 ## Limits and next steps
 
@@ -42,7 +42,7 @@ The project was implemented during Build Week starting October 18, 2026 with AI 
 2. Run a fixed-seed evaluation and inspect an injection or duplicate-refund decision.
 3. Show the independent monitor blocking execution and the audit trail.
 4. Compare observed loss, posterior uncertainty, and conservative upper bound; explain why zero observed failures is not zero risk.
-5. If hosted memory is connected, show successful recall/storage traces and a later decision informed by an earlier incident.
+5. Show the stored incident and its turn ID, then a later recall trace and a Claude decision supplied with the recalled evidence.
 6. Show the actual live Render URL and public GitHub repo, then state limits and the path to production.
 
 ## Submission fields still needed
@@ -50,5 +50,5 @@ The project was implemented during Build Week starting October 18, 2026 with AI 
 - Public GitHub repository: https://github.com/farzana0/riskgraph
 - Successful live deployment: https://riskgraph-fa98.onrender.com
 - All team members, up to four.
-- Actual sponsor evidence and measured results.
+- Review the included sponsor evidence and measured synthetic results.
 - Optional public demo video link, at most four minutes.
