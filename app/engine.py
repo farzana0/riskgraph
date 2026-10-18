@@ -93,6 +93,8 @@ class Engine:
                     result = self.memory.remember(event)
                     event["memory"]["write_status"] = "surreal_stored"
                     event["memory"]["turn_id"] = result.get("turnId")
+                    if result.get("riskgraph_scope_prepared"):
+                        event["memory"]["scope_prepared"] = True
                 except (httpx.HTTPError, ValueError, TypeError) as exc:
                     event["memory"]["write_status"] = "surreal_write_failed"
                     event["memory"]["write_error"] = failure_details(exc, "surreal")
