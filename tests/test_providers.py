@@ -32,6 +32,37 @@ def test_provider_error_does_not_leak_secret(case,monkeypatch):
     assert "test-secret" not in str(error.value)
 
 
+@pytest.mark.parametrize("status,code", [(400,"invalid_request"),(401,"authentication"),(402,"credits"),(403,"permission"),(404,"not_found"),(429,"rate_limit"),(503,"http_error")])
+def test_provider_failure_has_actionable_redacted_diagnostics(case,monkeypatch,status,code):
+    monkeypatch.setenv("ANTHROPIC_API_KEY","test-secret")
+    agent=Agent(httpx.Client(transport=httpx.MockTransport(lambda r:httpx.Response(status,json={"error":{"message":"test-secret"}}))))
+    with pytest.raises(ProviderError) as error:
+        agent.propose(case,"claude",[])
+    diagnostic=error.value.diagnostic
+    assert diagnostic["code"]==code
+    assert diagnostic["http_status"]==status
+    assert "test-secret" not in json.dumps(diagnostic)
+
+
+def test_anthropic_insufficient_credit_http_400_is_classified(case,monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY","test-secret")
+    agent=Agent(httpx.Client(transport=httpx.MockTransport(lambda r:httpx.Response(400,json={"error":{"message":"Your credit balance is too low. test-secret"}}))))
+    with pytest.raises(ProviderError) as error:
+        agent.propose(case,"claude",[])
+    assert error.value.diagnostic["code"]=="credits"
+    assert "test-secret" not in json.dumps(error.value.diagnostic)
+
+
+def test_provider_timeout_is_distinct_from_bad_output(case,monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY","test-secret")
+    def handler(request):raise httpx.ReadTimeout("test-secret",request=request)
+    agent=Agent(httpx.Client(transport=httpx.MockTransport(handler)))
+    with pytest.raises(ProviderError) as error:
+        agent.propose(case,"claude",[])
+    assert error.value.diagnostic["code"]=="timeout"
+    assert "test-secret" not in str(error.value)
+
+
 def test_agent_memory_routes_scoping_and_idempotency(monkeypatch):
     monkeypatch.setenv("SURREAL_MEMORY_URL","https://memory.example")
     monkeypatch.setenv("SURREAL_MEMORY_CONTEXT","riskgraph")

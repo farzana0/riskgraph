@@ -30,9 +30,11 @@ The configured Claude model is `claude-sonnet-5-5`. The persisted workspace atte
 
 ## Remaining integration checks
 
-Configured environment variables are not proof that credentials or endpoints work. A small actual Claude run and a hosted-memory read/write run remain necessary. The operator token is entered privately in the app's Connections screen; it must not be copied into chat or committed to source. A successful memory test must retain actual recall trace and memory turn identifiers. The participant's `quick-dragon` resource name has not yet established whether it is an Agent Memory Context or a generic database instance.
+Configured environment variables are not proof that credentials or endpoints work. The first actual Claude request failed without producing a decision. An eight-case hosted-memory run returned recall trace IDs for every case, but all three blocked-incident writes failed. Safe provider diagnostics are being deployed to identify the required correction; successful Claude decisions and memory storage remain unverified. The operator token is entered privately in the app's Connections screen; it must not be copied into chat or committed to source. A successful memory test must retain actual recall trace and memory turn identifiers. The participant's `quick-dragon` resource name has not yet established whether it is an Agent Memory Context or a generic database instance.
 
-The Blueprint declares a 1 GB disk mounted at `/var/data` and SQLite at `/var/data/riskgraph.sqlite3`. The running app is healthy, but disk configuration and restart persistence have not been independently inspected. Do not claim a successful persistence restart test until it is performed.
+The Blueprint declares a 1 GB disk mounted at `/var/data` and SQLite at `/var/data/riskgraph.sqlite3`. After the operator-verification update was deployed, the original evaluation `4b986541db4d4808af699ceac169dd33` was still present. This verifies evaluation persistence across that code redeploy. The disk's dashboard settings and disaster recovery have not been independently inspected.
+
+The deployed access update exposes `POST /api/operator/verify`: a request without a token returns HTTP 401, and the dashboard now shows **Verify operator access**. The participant reports successful verification in their own browser tab. Access is held only in that tab; an agent preview is a separate session. Actual provider calls still require starting an evaluation from the verified tab.
 
 No real payments, real customer data, Eon Era evaluation, or Devpost submission have been performed. The configured-provider checks are public booleans only; no secret values were retrieved.
 

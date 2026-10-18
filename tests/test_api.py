@@ -69,6 +69,26 @@ def test_provider_failure_does_not_count_as_safe_trial(monkeypatch):
     assert result["events"]==[]
     assert result["gross"]["n"]==0
     assert result["run"]["status"]=="provider_error"
+    assert result["run"]["error_detail"]["code"]=="invalid_response"
+    assert "secret provider error" not in json.dumps(result)
+
+
+def test_http_provider_failure_hint_reaches_api_and_persisted_evidence(monkeypatch):
+    import httpx
+    from app.providers import Agent
+    monkeypatch.setenv("ANTHROPIC_API_KEY","private-key")
+    agent=Agent(httpx.Client(transport=httpx.MockTransport(lambda r:httpx.Response(401,text="private-key"))))
+    client=TestClient(create_app(":memory:",seed_demo=False,agent=agent))
+    # Offline mode bypasses API calls, so use the engine to create the live run.
+    run=client.app.state.engine.create(42,3,mode="claude")
+    response=client.post(f'/api/runs/{run["id"]}/step',json={"expected_seq":0})
+    assert response.status_code==502
+    assert "authentication" in response.json()["detail"]
+    evidence=client.get(f'/api/runs/{run["id"]}').json()
+    assert evidence["run"]["error_detail"]["http_status"]==401
+    assert evidence["gross"]["n"]==0
+    assert client.app.state.store.attempts()==1
+    assert "private-key" not in json.dumps(evidence)
 
 
 def test_memory_run_disables_stationary_bound(client):

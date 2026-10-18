@@ -6,7 +6,46 @@ from .domain import Case, Proposal, authorization
 
 
 class ProviderError(Exception):
-    pass
+    def __init__(self, message, diagnostic=None):
+        super().__init__(message)
+        self.diagnostic = diagnostic or failure_details(None, "anthropic")
+
+
+def failure_details(exc, provider):
+    """Return fixed hints only; never include response bodies, URLs, or secrets."""
+    provider = provider if provider in ("anthropic", "surreal") else "anthropic"
+    name = "Claude" if provider == "anthropic" else "Agent Memory"
+    status = exc.response.status_code if isinstance(exc, httpx.HTTPStatusError) else None
+    hints = {
+        400: ("invalid_request", "rejected the request. Check model and request settings" if provider == "anthropic" else "rejected the request. Check the registered scope and Context settings"),
+        401: ("authentication", "rejected authentication. Check the server API key"),
+        402: ("credits", "requires available API credits. Check provider billing"),
+        403: ("permission", "denied access. Check key permissions and resource access"),
+        404: ("not_found", "could not find the configured model. Check ANTHROPIC_MODEL" if provider == "anthropic" else "could not find the endpoint or Context. Use an Agent Memory Context host and ID"),
+        422: ("invalid_request", "rejected request settings. Check the API configuration"),
+        429: ("rate_limit", "rate limit reached. Wait before retrying"),
+    }
+    if status == 400 and provider == "anthropic":
+        # Anthropic reports insufficient credit as HTTP 400. Classify without
+        # forwarding any provider-authored text to public evidence.
+        try:
+            message = str(exc.response.json().get("error", {}).get("message", "")).lower()
+            if "credit balance" in message or "insufficient credit" in message:
+                hints[400] = ("credits", "requires available API credits. Check provider billing")
+        except (ValueError, AttributeError, TypeError):
+            pass
+    if status in hints:
+        code, hint = hints[status]
+    elif status is not None:
+        code, hint = "http_error", "returned an HTTP error. Check provider status before retrying"
+    elif isinstance(exc, httpx.TimeoutException):
+        code, hint = "timeout", "timed out. Check provider status before retrying"
+    elif isinstance(exc, httpx.HTTPError):
+        code, hint = "connection", "could not be reached. Check the configured host and network"
+    else:
+        code, hint = "invalid_response", "returned no valid result. Check provider configuration"
+    return {"provider": provider, "code": code, "http_status": status,
+            "message": name + " " + hint + "."}
 
 
 class Agent:
@@ -48,7 +87,8 @@ class Agent:
             return Proposal.model_validate(blocks[0]["input"]), usage
         except (httpx.HTTPError, ValueError, KeyError, TypeError, AttributeError) as exc:
             # Never expose provider response bodies or credentials to the browser.
-            raise ProviderError("Claude request failed or returned an invalid proposal; no action executed.") from exc
+            diagnostic = failure_details(exc, "anthropic")
+            raise ProviderError(diagnostic["message"], diagnostic) from exc
 
 
 class AgentMemory:

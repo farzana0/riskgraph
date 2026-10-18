@@ -4,7 +4,7 @@ from uuid import uuid4
 import os
 import httpx
 from .domain import generate, inspect, score, authorization
-from .providers import Agent, AgentMemory, ProviderError
+from .providers import Agent, AgentMemory, ProviderError, failure_details
 from .risk import estimate, drift
 
 
@@ -51,6 +51,7 @@ class Engine:
                 raise BudgetExceeded("Workspace Claude attempt budget exhausted")
             case = generate(run["seed"], run["count"])[len(events)]
             recalled, memory_status, trace = [], "disabled", None
+            memory_error = None
             if run["use_memory"]:
                 if self.memory.configured:
                     try:
@@ -58,16 +59,18 @@ class Engine:
                         recalled = [{"id": h.get("id"), "text": str(h.get("text", ""))[:1500]} for h in result.get("hits", [])[:3]]
                         trace = result.get("trace", {}).get("traceId")
                         memory_status = "surreal_recalled"
-                    except (httpx.HTTPError, ValueError, TypeError, AttributeError):
+                    except (httpx.HTTPError, ValueError, TypeError, AttributeError) as exc:
                         # Explicitly mark failure; never silently claim SurrealDB use.
                         memory_status = "surreal_recall_failed"
+                        memory_error = failure_details(exc, "surreal")
                 else:
                     recalled = self.store.local_memories(case.category, run["mode"])
                     memory_status = "local_demo"
             try:
                 proposal, usage = self.agent.propose(case, run["mode"], recalled)
-            except ProviderError:
-                run["status"], run["error"] = "provider_error", "Agent unavailable or invalid output. No case executed; retry is safe."
+            except ProviderError as exc:
+                run["status"], run["error"] = "provider_error", exc.diagnostic["message"] + " No case executed."
+                run["error_detail"] = exc.diagnostic
                 self.store.put_run(run)
                 raise
             monitor = inspect(case, proposal)
@@ -81,6 +84,8 @@ class Engine:
                      "executed_cents": executed, "usage": usage,
                      "unnecessary_abstention": authorization(case) == case.requested_cents and case.requested_cents > 0 and executed == 0,
                      "memory": {"status": memory_status, "hits": recalled, "recall_trace_id": trace}}
+            if memory_error:
+                event["memory"]["recall_error"] = memory_error
             self.store.commit_event(event)
             # Only trusted monitor observations are written as incident memories.
             if run["use_memory"] and self.memory.configured and not monitor["allowed"]:
@@ -88,11 +93,13 @@ class Engine:
                     result = self.memory.remember(event)
                     event["memory"]["write_status"] = "surreal_stored"
                     event["memory"]["turn_id"] = result.get("turnId")
-                except (httpx.HTTPError, ValueError, TypeError):
+                except (httpx.HTTPError, ValueError, TypeError) as exc:
                     event["memory"]["write_status"] = "surreal_write_failed"
+                    event["memory"]["write_error"] = failure_details(exc, "surreal")
                 self.store.update_event(event)
             run["status"] = "complete" if len(events) + 1 >= run["count"] else "running"
             run["error"] = None
+            run.pop("error_detail", None)
             self.store.put_run(run)
             return self.snapshot(run_id)
         finally:

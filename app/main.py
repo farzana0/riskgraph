@@ -110,8 +110,8 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
             raise HTTPException(409, str(exc))
         except BudgetExceeded:
             raise HTTPException(429, "Workspace Claude attempt budget reached. Export evidence and review provider usage before increasing the server limit.")
-        except ProviderError:
-            raise HTTPException(502, "Agent request failed. No case executed; retry or use the offline demo.")
+        except ProviderError as exc:
+            raise HTTPException(502, exc.diagnostic["message"] + " No case executed.")
 
     @app.get("/api/runs/{run_id}/export")
     def export(run_id: str):

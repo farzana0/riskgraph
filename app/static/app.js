@@ -62,14 +62,18 @@ function render() {
   const d=s.drift;
   $("drift-status").textContent = d.alert ? `Reference-rate alert · max e-value ${d.max_e_value.toFixed(1)} ≥ 20. Proposed harm exceeds the 10% reference.` : `Reference-rate signal · e-value ${d.e_value.toFixed(2)} / 20 · no threshold crossing.`;
   $("drift-status").classList.toggle("alert",d.alert);
-  $("open-run").textContent = running ? "Ⅱ Pause after this case" : g.n < s.run.count ? "▶ Continue evaluation" : "＋ New evaluation";
-  $("open-run").classList.toggle("running", running);
+  $("continue-run").textContent = running ? "Ⅱ Pause after this case" : "▶ Continue evaluation";
+  $("continue-run").classList.toggle("hidden", !running && g.n >= s.run.count);
+  $("continue-run").classList.toggle("running", running);
+  $("open-run").disabled = running;
+  $("evaluation-error").textContent = s.run.error || "";
+  $("evaluation-error").classList.toggle("hidden", !s.run.error);
   chart(g,r); renderRows();
 }
 function eventDetail(eventId) {
   const e=snapshot.events.find(e => e.id === eventId); if(!e) return;
   $("detail-title").textContent = `${e.case.id} · ${title(e.case.category)}`;
-  $("event-detail").innerHTML = `<div class="detail-card"><h3>Trusted order state</h3><div class="detail-grid"><div>Paid<strong>${money(e.case.order.paid_cents/100)}</strong></div><div>Age<strong>${e.case.order.age_days} days</strong></div><div>Customer<strong>${escapeText(e.case.customer)}</strong></div><div>Owner<strong>${escapeText(e.case.order.owner)}</strong></div><div>Previously refunded<strong>${money(e.case.order.refunded_cents/100)}</strong></div><div>Requested<strong>${money(e.case.requested_cents/100)}</strong></div></div></div><div class="detail-card"><h3>Untrusted customer message</h3>${escapeText(e.case.message)}</div><div class="detail-card"><h3>Agent proposal</h3><strong>${escapeText(title(e.proposal.action))} · ${money(e.proposal.amount_cents/100)}</strong><p>${escapeText(e.proposal.reason)}</p></div><div class="detail-card"><h3>Independent monitor</h3><strong>${e.monitor.allowed ? "Allowed" : "Blocked"}</strong><p>${e.monitor.rules.length ? e.monitor.rules.map(x=>escapeText(title(x))).join(" · ") : "All policy checks passed"}</p><div class="detail-grid"><div>Proposed harm<strong>${money(e.gross_loss_cents/100)}</strong></div><div>Executed<strong>${money(e.executed_cents/100)}</strong></div><div>Residual harm<strong>${money(e.residual_loss_cents/100)}</strong></div><div>Prevented harm<strong>${money(e.prevented_loss_cents/100)}</strong></div></div></div><div class="detail-card"><h3>Memory provenance</h3>${escapeText(title(e.memory.status))} · ${e.memory.hits.length} recalled hits${e.memory.write_status ? `<p>${escapeText(title(e.memory.write_status))}</p>` : ""}${e.memory.recall_trace_id ? `<p>Trace: ${escapeText(e.memory.recall_trace_id)}</p>` : ""}${e.memory.hits.map(h=>`<p>${escapeText(h.text)}</p>`).join("")}</div><div class="detail-card"><h3>Audit identity</h3>${escapeText(e.id)}<br>${escapeText(e.at)}<br>Policy: ${escapeText(e.monitor.policy_version)}</div>`;
+  $("event-detail").innerHTML = `<div class="detail-card"><h3>Trusted order state</h3><div class="detail-grid"><div>Paid<strong>${money(e.case.order.paid_cents/100)}</strong></div><div>Age<strong>${e.case.order.age_days} days</strong></div><div>Customer<strong>${escapeText(e.case.customer)}</strong></div><div>Owner<strong>${escapeText(e.case.order.owner)}</strong></div><div>Previously refunded<strong>${money(e.case.order.refunded_cents/100)}</strong></div><div>Requested<strong>${money(e.case.requested_cents/100)}</strong></div></div></div><div class="detail-card"><h3>Untrusted customer message</h3>${escapeText(e.case.message)}</div><div class="detail-card"><h3>Agent proposal</h3><strong>${escapeText(title(e.proposal.action))} · ${money(e.proposal.amount_cents/100)}</strong><p>${escapeText(e.proposal.reason)}</p></div><div class="detail-card"><h3>Independent monitor</h3><strong>${e.monitor.allowed ? "Allowed" : "Blocked"}</strong><p>${e.monitor.rules.length ? e.monitor.rules.map(x=>escapeText(title(x))).join(" · ") : "All policy checks passed"}</p><div class="detail-grid"><div>Proposed harm<strong>${money(e.gross_loss_cents/100)}</strong></div><div>Executed<strong>${money(e.executed_cents/100)}</strong></div><div>Residual harm<strong>${money(e.residual_loss_cents/100)}</strong></div><div>Prevented harm<strong>${money(e.prevented_loss_cents/100)}</strong></div></div></div><div class="detail-card"><h3>Memory provenance</h3>${escapeText(title(e.memory.status))} · ${e.memory.hits.length} recalled hits${e.memory.write_status ? `<p>${escapeText(title(e.memory.write_status))}</p>` : ""}${e.memory.recall_trace_id ? `<p>Trace: ${escapeText(e.memory.recall_trace_id)}</p>` : ""}${e.memory.recall_error ? `<p>${escapeText(e.memory.recall_error.message)}</p>` : ""}${e.memory.write_error ? `<p>${escapeText(e.memory.write_error.message)}</p>` : ""}${e.memory.turn_id ? `<p>Memory turn: ${escapeText(e.memory.turn_id)}</p>` : ""}${e.memory.hits.map(h=>`<p>${escapeText(h.text)}</p>`).join("")}</div><div class="detail-card"><h3>Audit identity</h3>${escapeText(e.id)}<br>${escapeText(e.at)}<br>Policy: ${escapeText(e.monitor.policy_version)}</div>`;
   $("event-dialog").showModal();
 }
 document.addEventListener("click",e=>{const b=e.target.closest("[data-event]");if(b)eventDetail(b.dataset.event);});
@@ -87,14 +91,20 @@ async function advance() {
   running=true;render();
   while(running && snapshot.events.length < snapshot.run.count) {
     try {snapshot=await api(`/api/runs/${snapshot.run.id}/step`, {expected_seq:snapshot.events.length});render();}
-    catch(e){notice(e.message);break;}
+    catch(e){
+      notice(e.message);
+      try{snapshot=await api(`/api/runs/${snapshot.run.id}`);}catch{}
+      break;
+    }
     await new Promise(resolve=>setTimeout(resolve,120));
   }
   running=false;render();await history();
 }
-$("open-run").addEventListener("click",()=>{
+$("continue-run").addEventListener("click",()=>{
   if(running){running=false;render();return;}
-  if(snapshot && snapshot.events.length < snapshot.run.count){advance().catch(e=>notice(e.message));return;}
+  advance().catch(e=>notice(e.message));
+});
+$("open-run").addEventListener("click",()=>{
   if($("run-error"))$("run-error").textContent="";
   $("run-dialog").showModal();
 });

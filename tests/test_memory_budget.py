@@ -47,6 +47,25 @@ def test_memory_failure_is_explicit_without_silent_local_fallback():
     assert any(e["memory"].get("write_status")=="surreal_write_failed" for e in result["events"])
 
 
+def test_memory_write_failure_keeps_successful_recall_and_safe_diagnostic():
+    import json
+    class ReadOnlyMemory(HostedMemory):
+        def remember(self,event):
+            request=httpx.Request("POST","https://memory.example/private-key")
+            response=httpx.Response(403,request=request,text="private-key")
+            response.raise_for_status()
+    engine=Engine(Store(":memory:"),memory=ReadOnlyMemory())
+    run=engine.create(42,10,use_memory=True)
+    for i in range(10):result=engine.step(run["id"],i)
+    blocked=[e for e in result["events"] if not e["monitor"]["allowed"]]
+    assert blocked
+    for event in blocked:
+        assert event["memory"]["status"]=="surreal_recalled"
+        assert event["memory"]["write_error"]["code"]=="permission"
+        assert event["memory"]["write_error"]["http_status"]==403
+    assert "private-key" not in json.dumps(result)
+
+
 def test_local_memory_changes_later_injection_decisions():
     engine=Engine(Store(":memory:"))
     run=engine.create(42,40,use_memory=True)
