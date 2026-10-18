@@ -111,7 +111,10 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
         except BudgetExceeded:
             raise HTTPException(429, "Workspace Claude attempt budget reached. Export evidence and review provider usage before increasing the server limit.")
         except ProviderError as exc:
-            raise HTTPException(502, exc.diagnostic["message"] + " No case executed.")
+            detail = exc.diagnostic["message"] + " No case executed."
+            if token and exc.operator_message:
+                detail += " Provider detail (operator only): " + exc.operator_message
+            raise HTTPException(502, detail)
 
     @app.get("/api/runs/{run_id}/export")
     def export(run_id: str):

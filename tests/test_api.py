@@ -131,3 +131,33 @@ def test_operator_verification_is_read_only_and_rejects_wrong_token(monkeypatch)
 
 def test_operator_verification_rejects_cross_origin(client):
     assert client.post("/api/operator/verify",json={},headers={"Origin":"https://evil.example"}).status_code==403
+
+
+@pytest.mark.parametrize('protected',[True,False])
+def test_provider_details_are_operator_only_and_not_persisted(monkeypatch,protected):
+    import httpx
+    from app.providers import Agent
+    monkeypatch.setenv('ANTHROPIC_API_KEY','private-anthropic-key')
+    monkeypatch.setenv('SURREAL_MEMORY_API_KEY','private-memory-key')
+    monkeypatch.setenv('SURREAL_MEMORY_URL','https://memory.example')
+    monkeypatch.setenv('SURREAL_MEMORY_CONTEXT','riskgraph')
+    if protected:monkeypatch.setenv('RISKGRAPH_ADMIN_TOKEN','private-operator-key')
+    else:monkeypatch.delenv('RISKGRAPH_ADMIN_TOKEN',raising=False)
+    message='max_tokens must exceed the minimum. private-anthropic-key private-memory-key private-operator-key https://example.test/secret'
+    agent=Agent(httpx.Client(transport=httpx.MockTransport(lambda r:httpx.Response(400,json={'error':{'message':message}}))))
+    app=create_app(':memory:',seed_demo=False,agent=agent)
+    client=TestClient(app)
+    run=app.state.engine.create(901,1,mode='claude')
+    path=f'/api/runs/{run["id"]}'
+    headers={'X-Operator-Token':'private-operator-key'} if protected else {}
+    response=client.post(path+'/step',json={'expected_seq':0},headers=headers)
+    assert response.status_code==502
+    assert ('max_tokens must exceed' in response.text)==protected
+    if protected:
+        assert 'private-anthropic-key' not in response.text
+        assert 'private-memory-key' not in response.text
+        assert 'private-operator-key' not in response.text
+        assert 'example.test' not in response.text
+    evidence=client.get(path+'/export').text
+    assert 'max_tokens must exceed' not in evidence
+    assert 'operator_message' not in evidence

@@ -1,14 +1,39 @@
 import json
 import os
+import re
 from urllib.parse import quote
 import httpx
 from .domain import Case, Proposal, authorization
 
 
 class ProviderError(Exception):
-    def __init__(self, message, diagnostic=None):
+    def __init__(self, message, diagnostic=None, operator_message=None):
         super().__init__(message)
         self.diagnostic = diagnostic or failure_details(None, "anthropic")
+        self.operator_message = operator_message
+
+
+def private_provider_message(exc):
+    """Redacted troubleshooting text for the authenticated response only."""
+    if not isinstance(exc, httpx.HTTPStatusError):
+        return None
+    try:
+        body = exc.response.json()
+        error = body.get("error", {})
+        message = error.get("message") if isinstance(error, dict) else None
+        message = message or body.get("message") or body.get("detail")
+        if not isinstance(message, str):
+            return None
+    except (ValueError, AttributeError):
+        return None
+    for name in ("ANTHROPIC_API_KEY", "SURREAL_MEMORY_API_KEY", "RISKGRAPH_ADMIN_TOKEN"):
+        secret = os.getenv(name, "")
+        if secret:
+            message = re.sub(re.escape(secret), "[redacted]", message, flags=re.IGNORECASE)
+    message = re.sub(r"\b(?:sk-ant-|sp-)[A-Za-z0-9_-]+", "[redacted]", message)
+    message = re.sub(r"(?i)Bearer\s+\S+", "Bearer [redacted]", message)
+    message = re.sub(r"https?://\S+", "[provider link]", message)
+    return " ".join(message.split())[:800]
 
 
 def failure_details(exc, provider):
@@ -102,9 +127,9 @@ class Agent:
             usage = {key: value for key, value in usage.items() if key in ("input_tokens", "output_tokens") and type(value) is int and value >= 0}
             return Proposal.model_validate(blocks[0]["input"]), usage
         except (httpx.HTTPError, ValueError, KeyError, TypeError, AttributeError) as exc:
-            # Never expose provider response bodies or credentials to the browser.
+            # Persist fixed public hints; keep redacted provider text for operator-only troubleshooting.
             diagnostic = failure_details(exc, "anthropic")
-            raise ProviderError(diagnostic["message"], diagnostic) from exc
+            raise ProviderError(diagnostic["message"], diagnostic, private_provider_message(exc)) from exc
 
 
 class AgentMemory:
