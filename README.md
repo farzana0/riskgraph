@@ -50,7 +50,7 @@ Configure the variable names in `.env.example` as server environment variables. 
 - Claude: set `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, and a long random `RISKGRAPH_ADMIN_TOKEN`. The model default follows the official model list checked October 18, 2026; verify availability in your account before the first run.
 - Live API calls require operator access, are limited to 40 cases/run, and reserve against a persisted 200-attempt workspace budget. Failures consume attempts too; there are no automatic retries. These controls are request limits, not a dollar billing guarantee.
 - Agent Memory: set `SURREAL_MEMORY_URL` to the HTTPS Context host, `SURREAL_MEMORY_CONTEXT`, and `SURREAL_MEMORY_API_KEY`. Register `SURREAL_MEMORY_SCOPE` (default `org/riskgraph/demo`) first. A generic SurrealDB database endpoint is not an Agent Memory Context.
-- In **Connections**, enter the operator token. It stays in tab memory. Start an evaluation with Claude and optionally memory enabled. The token is sent only to your app server, and keys remain server-side.
+- In **Connections**, enter the operator token and click **Verify operator access**. The server checks it without calling a provider or creating an evaluation. Once verified, start an evaluation with Claude and optionally memory enabled. The token stays in tab memory and is sent only to your app server; provider keys remain server-side.
 - Hosted memory errors remain explicit in event evidence; the app does not silently claim a successful sponsor integration. Without a hosted Context, memory runs are labeled `local_demo`.
 
 ## Tests and evidence

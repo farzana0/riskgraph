@@ -37,7 +37,7 @@ There is no need to spend all $100. Save useful evaluation evidence while the cr
 4. Review the displayed costs. The configuration uses one small paid Python web service and a 1 GB persistent disk. Credits do not automatically mean spending is capped or the service becomes free forever.
 5. The provider secret fields are optional for the offline demo; leave all three SurrealDB values empty until connecting it. Add the Anthropic key privately in Render when ready.
 6. Create the service. Wait for deployment success and copy the actual Render app URL.
-7. In the service's Environment page, find `RISKGRAPH_ADMIN_TOKEN`. Enter its value in the app's **Connections → Operator access** field. Never publish the token.
+7. In the service's Environment page, find `RISKGRAPH_ADMIN_TOKEN` and copy its full value. Enter that value in the app's **Connections → Operator access** field and click **Verify operator access**. Continue when the app confirms access is verified. If you changed the value in Render, save and deploy that environment change before using it. Never publish the token.
 8. Check that the initial synthetic dashboard loads, a new evaluation completes, a blocked action opens, evidence downloads, and data remains after a service restart.
 
 Codex can guide each screen. Account creation, credit redemption, and any billing agreement stay under your control.

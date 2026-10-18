@@ -4,7 +4,15 @@ let snapshot, config, running = false, operatorToken = "", noticeTimer;
 const money = (x) => new Intl.NumberFormat("en-US", {style:"currency", currency:"USD", maximumFractionDigits:2}).format(x);
 const escapeText = (x) => String(x ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const title = (x) => String(x).replaceAll("_", " ").replace(/^\w/, c => c.toUpperCase());
-function notice(message) { $("notice").textContent = message; $("notice").classList.remove("hidden"); clearTimeout(noticeTimer); noticeTimer = setTimeout(() => $("notice").classList.add("hidden"), 8000); }
+function notice(message) {
+  if($("run-dialog").open){
+    let error=$("run-error");
+    if(!error){error=document.createElement("p");error.id="run-error";error.className="form-error";error.setAttribute("role","alert");$("run-form").append(error);}
+    error.textContent=message;
+  }
+  $("notice").textContent=message;$("notice").classList.remove("hidden");clearTimeout(noticeTimer);
+  noticeTimer=setTimeout(()=>$("notice").classList.add("hidden"),8000);
+}
 async function api(path, body) {
   const response = await fetch(path, body === undefined ? {} : {method:"POST",headers:{"Content-Type":"application/json", "X-Operator-Token":operatorToken},body:JSON.stringify(body)});
   if (!response.ok) { let error; try {error = await response.json();} catch {error = {};} throw new Error(typeof error.detail === "string" ? error.detail : `Request failed (${response.status}). Check inputs and try again.`); }
@@ -87,6 +95,7 @@ async function advance() {
 $("open-run").addEventListener("click",()=>{
   if(running){running=false;render();return;}
   if(snapshot && snapshot.events.length < snapshot.run.count){advance().catch(e=>notice(e.message));return;}
+  if($("run-error"))$("run-error").textContent="";
   $("run-dialog").showModal();
 });
 $("mode").addEventListener("change",()=>{$("count").max=$("mode").value==="claude"?40:200;if(Number($("count").value)>Number($("count").max))$("count").value=$("count").max;});
@@ -99,7 +108,18 @@ $("run-form").addEventListener("submit",async e=>{
   }catch(error){notice(error.message);}finally{submit.disabled=false;}
 });
 $("export").addEventListener("click",()=>{if(snapshot)window.location.href=`/api/runs/${snapshot.run.id}/export`;});
-$("save-token").addEventListener("click",()=>{operatorToken=$("operator-token").value;$("operator-token").value="";$("token-state").textContent=operatorToken?"Token held for this tab. It will be sent only to this app's server.":"Token cleared.";});
+$("save-token").addEventListener("click",async()=>{
+  operatorToken=$("operator-token").value.trim();
+  if(!operatorToken){$("token-state").textContent="Token cleared.";return;}
+  $("save-token").disabled=true;
+  $("token-state").textContent="Checking operator access…";
+  try {
+    await api("/api/operator/verify",{});
+    $("operator-token").value="";
+    $("token-state").textContent="Operator access verified. You can now start evaluations.";
+  }catch(error){operatorToken="";$("token-state").textContent=error.message;}
+  finally{$("save-token").disabled=false;}
+});
 async function init(){
   config=await api("/api/config");
   $("anthropic-status").textContent=config.anthropic_configured ? `Server key configured · ${config.model}. ${config.live_enabled ? "Live runs available with operator access." : "Set an operator token to enable live evaluations."} Workspace attempt budget: ${config.claude_attempts_used} / ${config.claude_attempts_limit}.` : "Not connected · offline demo ready.";

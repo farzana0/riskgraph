@@ -52,3 +52,9 @@ Dashboard, decision-trace, and mobile screenshots accompany the delivered source
 ## Not yet verified
 
 The [Render app](https://riskgraph-fa98.onrender.com) is now live, with verified HTTPS health, dashboard, static assets, synthetic audit/export, and unauthenticated mutation rejection. See `docs/DEPLOYMENT.md` for evidence. Real Anthropic calls, hosted Agent Memory remember/recall, sponsor-credit balances, restart persistence, and Devpost submission are not yet verified. The user reports completing SurrealDB account, promo, and context setup. Eon Era is not integrated. No production-data or real-money operation was attempted.
+
+## Operator-access follow-up
+
+The first attempted live evaluation was rejected by the server's operator check before a run or provider call was created. The original UI only confirmed token storage, which was misleading. A read-only `/api/operator/verify` endpoint now authenticates the entry immediately. The browser trims surrounding whitespace, clears rejected authorization from tab memory, and displays a verified-access message only after the server accepts it. Evaluation-dialog errors are also displayed inside the modal.
+
+The revised suite passes **49 tests**. Added checks verify rejection of missing/wrong tokens, successful authorized access without creating runs or consuming provider attempts, secret redaction, and cross-origin rejection. Browser QA verified an inline evaluation error, immediate invalid-token feedback, and acceptance of the valid local test token with accidental surrounding whitespace. This was a local test credential, not a production credential. The real production operator token still needs to be re-entered and accepted before provider integration tests can proceed.

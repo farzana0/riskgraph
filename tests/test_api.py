@@ -91,3 +91,23 @@ def test_persistence_survives_reopen(tmp_path,monkeypatch):
 def test_missing_run(client):
     assert client.get("/api/runs/unknown").status_code==404
     assert client.post("/api/runs/unknown/step",json={"expected_seq":0}).status_code==404
+
+
+def test_operator_verification_is_read_only_and_rejects_wrong_token(monkeypatch):
+    monkeypatch.setenv("RISKGRAPH_ADMIN_TOKEN","operator-secret")
+    class UnusedAgent:
+        def propose(self,*args):raise AssertionError("Verification must not call a provider")
+    app=create_app(":memory:",seed_demo=False,agent=UnusedAgent())
+    protected=TestClient(app)
+    assert protected.post("/api/operator/verify",json={}).status_code==401
+    wrong=protected.post("/api/operator/verify",json={},headers={"X-Operator-Token":"incorrect"})
+    assert wrong.status_code==401
+    assert "operator-secret" not in wrong.text
+    verified=protected.post("/api/operator/verify",json={},headers={"X-Operator-Token":"operator-secret"})
+    assert verified.json()=={"authorized":True,"token_required":True}
+    assert protected.get("/api/runs").json()==[]
+    assert app.state.store.attempts()==0
+
+
+def test_operator_verification_rejects_cross_origin(client):
+    assert client.post("/api/operator/verify",json={},headers={"Origin":"https://evil.example"}).status_code==403
