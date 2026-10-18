@@ -4,11 +4,17 @@ import pytest
 from app.providers import Agent, AgentMemory, ProviderError
 
 
+@pytest.fixture(autouse=True)
+def explicit_test_workspace(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_WORKSPACE_ID", "wrkspc_test")
+
+
 def test_anthropic_contract_and_usage(case,monkeypatch):
     monkeypatch.setenv("ANTHROPIC_API_KEY","test-secret")
     def handler(request):
         assert str(request.url)=="https://api.anthropic.com/v1/messages"
         assert request.headers["x-api-key"]=="test-secret"
+        assert request.headers["anthropic-workspace-id"]=="wrkspc_test"
         body=json.loads(request.content)
         assert body["tool_choice"]=={"type":"auto","disable_parallel_tool_use":True}
         assert body["thinking"]=={"type":"between_tools"}
@@ -164,3 +170,55 @@ def test_scope_registration_denial_does_not_attempt_grant_changes(monkeypatch):
     with pytest.raises(httpx.HTTPStatusError) as error:memory.remember(event)
     assert error.value.response.status_code==403
     assert paths==['/api/v1/riskgraph/facts','/api/v1/riskgraph/scopes']
+
+
+def test_default_workspace_lookup_is_cached_and_sent_before_message(case,monkeypatch):
+    monkeypatch.delenv('ANTHROPIC_WORKSPACE_ID')
+    monkeypatch.setenv('ANTHROPIC_API_KEY','test-secret')
+    methods=[]
+    def handler(request):
+        methods.append(request.method)
+        if request.method=='GET':
+            assert request.url.path=='/v1/organizations/workspaces'
+            assert request.url.params['include_default']=='true'
+            return httpx.Response(200,json={'data':[{'id':'wrkspc_default123','name':'Default','archived_at':None},{'id':'wrkspc_code123','name':'Claude Code','archived_at':None}],'has_more':False})
+        assert request.headers['anthropic-workspace-id']=='wrkspc_default123'
+        return httpx.Response(200,json={'stop_reason':'tool_use','content':[{'type':'tool_use','name':'propose_refund','input':{'action':'escalate','order_id':'o1','amount_cents':0,'reason':'review'}}]})
+    agent=Agent(httpx.Client(transport=httpx.MockTransport(handler)))
+    agent.propose(case,'claude',[])
+    agent.propose(case,'claude',[])
+    assert methods==['GET','POST','POST']
+    assert agent.workspace_source=='default_discovered'
+
+
+@pytest.mark.parametrize('reply',[
+    httpx.Response(403,json={'error':{'message':'No admin permission'}}),
+    httpx.Response(200,json={'data':[{'id':'wrkspc_other','name':'Other'}],'has_more':False}),
+    httpx.Response(200,json={'data':[{'id':'wrkspc_one','name':'Default'},{'id':'wrkspc_two','name':'Default'}],'has_more':False}),
+    httpx.Response(200,json={'data':[{'id':'wrkspc_old','name':'Default','archived_at':'2026-01-01'}],'has_more':False}),
+    httpx.Response(200,json={'data':[{'id':'invalid-id','name':'Default'}],'has_more':False}),
+    httpx.Response(200,json={'data':[{'id':'wrkspc_default','name':'Default'}],'has_more':True}),
+])
+def test_workspace_lookup_never_guesses_other_workspace_or_breaks_scoped_key(case,monkeypatch,reply):
+    monkeypatch.delenv('ANTHROPIC_WORKSPACE_ID')
+    monkeypatch.setenv('ANTHROPIC_API_KEY','test-secret')
+    def handler(request):
+        if request.method=='GET':return reply
+        assert 'anthropic-workspace-id' not in request.headers
+        return httpx.Response(200,json={'stop_reason':'tool_use','content':[{'type':'tool_use','name':'propose_refund','input':{'action':'escalate','order_id':'o1','amount_cents':0,'reason':'review'}}]})
+    agent=Agent(httpx.Client(transport=httpx.MockTransport(handler)))
+    proposal,_=agent.propose(case,'claude',[])
+    assert proposal.action=='escalate'
+    assert agent.workspace_source=='unselected'
+
+
+def test_explicit_workspace_skips_discovery(case,monkeypatch):
+    monkeypatch.setenv('ANTHROPIC_WORKSPACE_ID','  wrkspc_chosen  ')
+    monkeypatch.setenv('ANTHROPIC_API_KEY','test-secret')
+    def handler(request):
+        assert request.method=='POST'
+        assert request.headers['anthropic-workspace-id']=='wrkspc_chosen'
+        return httpx.Response(200,json={'stop_reason':'tool_use','content':[{'type':'tool_use','name':'propose_refund','input':{'action':'escalate','order_id':'o1','amount_cents':0,'reason':'review'}}]})
+    agent=Agent(httpx.Client(transport=httpx.MockTransport(handler)))
+    agent.propose(case,'claude',[])
+    assert agent.workspace_source=='explicit'

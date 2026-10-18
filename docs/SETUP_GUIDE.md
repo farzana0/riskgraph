@@ -25,7 +25,8 @@ Do one step at a time. You do not need to create every account today.
 2. Open your organisation's billing/credits view. Confirm the $100 credit was actually applied and note the exact expiry shown there. October 21 is participant-provided, not independently verified from the console.
 3. If credits fail, the supplied Discord announcements report a known activation issue. Do not assume it is an app bug.
 4. Configure an API key privately in the app's server environment when Codex walks you through it. Do not paste the key into chat, GitHub, screenshots, or Devpost.
-5. We will run a small Claude evaluation first, inspect the evidence and usage, then run the held-out evaluation. Aim to finish by October 20 to avoid an unknown October 21 cutoff time.
+5. If the key is not tied to one workspace, the app tries to find the Default workspace using the existing key. If that lookup is unavailable, open Claude Console → Settings → Workspaces, copy its `wrkspc_…` ID from the ID column, and add `ANTHROPIC_WORKSPACE_ID` in Render → Environment. Save and deploy the environment change. Use the workspace that should receive the evaluation usage.
+6. We will run a small Claude evaluation first, inspect the evidence and usage, then run the held-out evaluation. Aim to finish by October 20 to avoid an unknown October 21 cutoff time.
 
 There is no need to spend all $100. Save useful evaluation evidence while the credits are available. The app stores input/output token counts and limits attempted API calls.
 

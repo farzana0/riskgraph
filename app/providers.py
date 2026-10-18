@@ -59,6 +59,8 @@ def failure_details(exc, provider):
             message += " " + str(body.get("error", {}).get("message", "")).lower()
             if provider == "anthropic" and ("credit balance" in message or "insufficient credit" in message):
                 hints[400] = ("credits", "requires available API credits. Check provider billing")
+            elif provider == "anthropic" and "anthropic-workspace-id" in message:
+                hints[400] = ("workspace_required", "needs a workspace ID. Set ANTHROPIC_WORKSPACE_ID from Claude Console Settings → Workspaces")
             elif provider == "anthropic" and "tool_choice" in message and "not supported" in message:
                 hints[400] = ("tool_choice", "rejected the tool-choice setting. Update the model adapter")
             elif provider == "surreal" and "scope" in message and any(term in message for term in ("not registered", "unknown", "not found", "does not exist", "unregistered", "unresolved")):
@@ -82,6 +84,32 @@ def failure_details(exc, provider):
 class Agent:
     def __init__(self, client=None):
         self.client = client or httpx.Client(timeout=35)
+        self.workspace_id = os.getenv("ANTHROPIC_WORKSPACE_ID", "").strip()
+        self.workspace_source = "explicit" if self.workspace_id else "unselected"
+        self.workspace_checked = bool(self.workspace_id)
+
+    def _headers(self, key):
+        headers = {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"}
+        if not self.workspace_checked:
+            self.workspace_checked = True
+            try:
+                # One read-only lookup per process. A scoped key may lack this
+                # permission; its Messages call can still work without a header.
+                response = self.client.get("https://api.anthropic.com/v1/organizations/workspaces",
+                                           headers=headers, params={"include_default": "true", "limit": 1000})
+                response.raise_for_status()
+                data = response.json()
+                defaults = [w["id"] for w in data.get("data", [])
+                            if isinstance(w, dict) and w.get("name") == "Default" and not w.get("archived_at")
+                            and isinstance(w.get("id"), str) and re.fullmatch(r"wrkspc_[A-Za-z0-9]+", w["id"])]
+                if len(defaults) == 1 and not data.get("has_more", False):
+                    self.workspace_id = defaults[0]
+                    self.workspace_source = "default_discovered"
+            except (httpx.HTTPError, ValueError, TypeError, AttributeError):
+                pass
+        if self.workspace_id:
+            headers["anthropic-workspace-id"] = self.workspace_id
+        return headers
 
     def propose(self, case: Case, mode: str, memories):
         if mode == "offline":
@@ -115,7 +143,7 @@ class Agent:
             payload["thinking"] = {"type": "between_tools"}
             payload["output_config"] = {"effort": "low"}
         try:
-            response = self.client.post("https://api.anthropic.com/v1/messages", headers={"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json"}, json=payload)
+            response = self.client.post("https://api.anthropic.com/v1/messages", headers=self._headers(key), json=payload)
             response.raise_for_status()
             data = response.json()
             blocks = [b for b in data.get("content", []) if b.get("type") == "tool_use"]

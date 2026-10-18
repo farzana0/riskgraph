@@ -66,6 +66,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     def config():
         return {"anthropic_configured": bool(os.getenv("ANTHROPIC_API_KEY")),
                 "model": os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5-5"),
+                "anthropic_workspace_selection": getattr(engine.agent, "workspace_source", "unselected"),
                 "surreal_configured": engine.memory.configured,
                 "operator_token_required": bool(token),
                 "live_enabled": bool(token and os.getenv("ANTHROPIC_API_KEY")),

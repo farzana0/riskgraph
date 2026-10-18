@@ -74,3 +74,7 @@ The deployed retry returned HTTP 400 for Claude; official model-specific documen
 ## Verified hosted memory and private Claude troubleshooting
 
 The deployed revision `ef54a47da3f051b06b2f54665bc17e686b95a2b2` passed health checks. A two-case offline-agent memory run prepared the missing demo scope and stored a blocked incident with a real turn ID. A later two-case run retrieved the incident text, its memory-chunk source ID, an extracted event entity, and recall trace IDs; its new blocked incident was also stored successfully. Claude still returned HTTP 400 with zero observations. The new **72-test** suite checks that redacted provider details appear only in an authenticated operator error response and never in public run/export evidence. Provider keys, the operator token, and provider URLs are removed before that private display. Successful Claude decisions remain pending.
+
+## Workspace-header diagnosis
+
+The authenticated private error from revision `78c90c5` identified the remaining Claude rejection: the configured API key is not workspace-scoped and the request needs `anthropic-workspace-id`. The adapter now supports an explicit `ANTHROPIC_WORKSPACE_ID` and a one-time read-only lookup of the Default workspace with the existing key. **80 tests passed** locally. Tests cover explicit selection, cached Default lookup, denied lookup, archived/invalid/ambiguous/non-default entries, and incomplete pagination. No workspace is created and no permissions are modified. The corrected workspace header still needs deployed verification.
