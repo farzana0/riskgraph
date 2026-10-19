@@ -126,14 +126,14 @@ $("save-token").addEventListener("click",async()=>{
   try {
     await api("/api/operator/verify",{});
     $("operator-token").value="";
-    $("token-state").textContent="Operator access verified. You can now start evaluations.";
+    $("token-state").textContent="Operator access verified.";
   }catch(error){operatorToken="";$("token-state").textContent=error.message;}
   finally{$("save-token").disabled=false;}
 });
 async function init(){
   config=await api("/api/config");
-  $("anthropic-status").textContent=config.anthropic_configured ? `Server key configured · ${config.model}. ${config.live_enabled ? "Live runs available with operator access." : "Set an operator token to enable live evaluations."} Workspace attempt budget: ${config.claude_attempts_used} / ${config.claude_attempts_limit}.` : "Not connected · offline demo ready.";
-  $("surreal-status").textContent=config.surreal_configured ? "Agent Memory configured. Run a memory evaluation to verify recall and storage." : "Not connected · local memory demo available.";
+  $("anthropic-status").textContent=config.anthropic_configured ? `Configured · ${config.model}. ${config.live_enabled ? "API evaluations enabled for authorized operators." : "API evaluations disabled: operator configuration required."} Attempts: ${config.claude_attempts_used} / ${config.claude_attempts_limit}.` : "Not configured · offline evaluations available.";
+  $("surreal-status").textContent=config.surreal_configured ? "Configured · hosted incident storage and retrieval. Per-decision results appear in memory provenance." : "Not configured · local demonstration memory available.";
   $("mode").options[1].disabled=!config.live_enabled;
   const runs=await history();
   if(runs.length){snapshot=await api(`/api/runs/${runs[0].id}`);render();}else{$("run-label").textContent="No evaluations yet";}

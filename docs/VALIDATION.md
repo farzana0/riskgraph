@@ -2,7 +2,7 @@
 
 ## Current automated checks
 
-**80 tests passed** locally on Python 3.9.6 (2.50 seconds), and [GitHub Actions passed on Ubuntu/Python 3.11](https://github.com/farzana0/riskgraph/actions/runs/39157732209). Tested and deployed application revision: `540d8c86674d0ea1b48ac118fd6cd3a9417f6862`. Subsequent evidence/documentation changes do not change the application code. CI also runs the reproducible 80-case offline evaluation. A container build has not been executed.
+**80 tests passed** on Python 3.9.6 and [Ubuntu/Python 3.11 in GitHub Actions](https://github.com/farzana0/riskgraph/actions/runs/39157732209). Provider-integration evidence below was recorded on revision `540d8c86674d0ea1b48ac118fd6cd3a9417f6862`. CI also runs a reproducible 80-case offline evaluation. Container execution is outside this validation record.
 
 Coverage includes:
 
@@ -34,7 +34,7 @@ Raw 40-case examples are in `docs/examples/`. Reproduce the 80-case fixture with
 
 ## Verified live integrations
 
-The [Render app](https://riskgraph-fa98.onrender.com) serves the tested code. The participant privately configured an explicit Anthropic workspace ID after a multi-workspace key rejected requests without its workspace header. No API key or operator token was retrieved by the agent or committed to source. Earlier rejected requests produced zero decisions and were excluded from observed sample sizes; they still consumed the app's attempt budget.
+The [Render application](https://riskgraph-fa98.onrender.com) completed Claude evaluations using explicit workspace selection. Authentication credentials remain server-side and are excluded from public evidence. Rejected provider requests produce no observations and are excluded from sample sizes while consuming the persisted attempt budget.
 
 | Evidence | Run ID | Result |
 | --- | --- | --- |
@@ -46,16 +46,16 @@ The [Render app](https://riskgraph-fa98.onrender.com) serves the tested code. Th
 
 Completed, public synthetic exports are saved as `docs/examples/claude-smoke.json`, `claude-memory.json`, `hosted-memory-write.json`, `hosted-memory-recall.json`, and `claude-evaluation-20.json`. They contain no provider credentials or private troubleshooting messages. The live smoke runs establish connectivity and the integration path; three cases per configuration cannot establish a production error rate or prove a benefit from memory.
 
-The fresh 20-case seed was chosen before that evaluation and was separate from the development/smoke seeds. Its two blocked decisions were high-value escalations carrying nonzero `amount_cents` (100,000 and 50,000), which violate the monitor's `non_refund_amount` contract. They were not unauthorized refund attempts: the monetary scoring function assigns zero loss to an escalation, and execution sends no payment. Report the protocol rejections separately from monetary harm; do not describe them as money saved.
+The fresh 20-case seed was chosen before that evaluation and was separate from the development/smoke seeds. Its two blocked decisions were high-value escalations carrying nonzero `amount_cents` (100,000 and 50,000), which violate the monitor's `non_refund_amount` contract. They were not unauthorized refund attempts: the monetary scoring function assigns zero loss to an escalation, and execution sends no payment. Protocol rejections are reported separately from monetary harm and prevented loss.
 
 For this 20-case sample, the residual posterior mean binned loss remains **$9.67 per decision**, with 95% credible interval **$0.0054–$57.86**, despite $0 observed loss. The separate conservative anytime upper bound is **$486.95** under its documented bounded/common-mean assumptions. These numbers are prior-sensitive synthetic estimates, not forecasts of business losses. No unnecessary abstentions were recorded by the demo's ground-truth metric. The three completed Claude runs account for 26 model decisions; the persisted budget records 31 attempts, including five earlier rejected requests.
 
 ## Browser and deployment checks
 
-The deployed health, dashboard, assets, audit/export, and unauthenticated mutation rejection were checked. The original 40-case run `4b986541db4d4808af699ceac169dd33` survived multiple code/environment redeploys, verifying persistence across those redeploys. Disaster recovery and the disk's dashboard settings have not been independently inspected.
+The deployed health, dashboard, assets, audit/export, and unauthenticated mutation rejection were checked. The original 40-case run `4b986541db4d4808af699ceac169dd33` remained available across multiple code and environment redeploys. Disaster recovery is outside the tested scope.
 
-Browser QA covered new/continue evaluation controls, history, full/blocked ledger, decision traces, methods, verified operator access, errors inside the run dialog, persistent failure messages, and evidence download. Desktop 1,440 × 1,000, the narrow preview, and mobile 390 × 844 layouts were checked; tables scroll inside their containers. Local QA servers were stopped afterward. Screenshots and exported integration evidence accompany the source delivery.
+Browser QA covered new/continue evaluation controls, history, full/blocked ledger, decision traces, methods, verified operator access, errors inside the run dialog, persistent failure messages, and evidence download. Desktop 1,440 × 1,000, the narrow preview, and mobile 390 × 844 layouts were checked; tables scroll inside their containers. Exported integration evidence is included in `docs/examples/`.
 
 ## Remaining limits
 
-All orders, customers, messages, and money are synthetic. No real payments or production-data operations were attempted. Sponsor credit balances and expiry are account-specific and have not been independently inspected. Eon Era is not integrated; no Devpost submission has been made. The incident-memory integration does not yet demonstrate policy supersession or sharing between two application agents. The monitor has explicit tested invariants; the complete AI system has not been formally proved in Lean or another prover.
+All orders, customers, messages, and money are synthetic. Validation covers simulated execution, tested policy invariants, and the documented provider integrations. Production payments, representative customer data, disaster recovery, policy-memory supersession, and shared memory between two application agents are outside the current scope. Policy tests do not constitute an end-to-end formal proof of the AI system.

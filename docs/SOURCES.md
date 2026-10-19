@@ -1,35 +1,32 @@
-# Verified sources and sponsor status
+# Technical references
 
-Checked October 18, 2026. Public documentation verification is distinct from account/credit verification.
+Documentation reviewed October 18, 2026. Integration evidence is recorded separately in [VALIDATION.md](VALIDATION.md).
 
-| Source | Verified use and implication |
+## Platform documentation
+
+| Source | Application |
 | --- | --- |
-| [Build North requirements](https://build-north.devpost.com/) | Submit by Oct 25 at 11:59 p.m. ET with public GitHub source, write-up, team, prior-work disclosure, and live link where applicable. Video is optional, ≤4 minutes. Partner awards require genuine platform use. SurrealDB category specifies Agent Memory; Eon specifies Era. Top teams demo Oct 29 in Toronto. |
-| [GitHub repository creation](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) | Verified public repository creation and leaving initialization options unset for an existing prepared project. |
-| [Detailed rules](https://build-north.devpost.com/rules) | Age 18+, Canada residence, teams ≤4, one submission. Build during Build Week and disclose AI tools/templates/prior work. Public code and demo; no misuse of private data. These detailed eligibility rules are narrower than the overview's generic summary. |
-| [Sponsor resources](https://build-north.devpost.com/resources) | Render $50 via linked form; SurrealDB $50 Agent Memory credit with code BUILDNORTH50; Era early access. These public offers are not proof that the participant's accounts have received them. |
-| [Render credits](https://render.com/docs/credits) | Review actual balance, applicability, and expiration in the account. The participant reports redeeming the Render promotion; the current balance/expiry has not been inspected. No billing agreement was accepted by the agent. |
-| [Render Blueprint reference](https://render.com/docs/blueprint-spec) | Current Python web-service configuration, disk, health path, generated secret, and current `0.5c-512mb` plan identifier. The live deployment and persistent evaluation state across redeploys are verified. |
-| [Render FastAPI guide](https://render.com/docs/deploy-fastapi) | Server starts with Uvicorn bound to host 0.0.0.0 and Render's PORT. |
-| [Render first deploy](https://render.com/docs/your-first-deploy) | Requires code repository/Git provider and a service; account access is not available in this session. |
-| [Anthropic models](https://platform.claude.com/docs/en/models/overview) | Default model ID `claude-sonnet-5-5` from the current official model table. Account availability must be checked before live calls. Model is configurable. |
-| [Sonnet 5.5 migration](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide), [strict schema limits](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) | Sonnet 5.5 rejects forced tool selection. Use `auto` and a strict tool schema; numerical/string bounds are described in the remote schema and enforced by the original local Pydantic model. Sonnet 5.5 uses `between_tools` with low effort for this single-decision adapter. Missing, multiple, incomplete, or invalid tool results do not execute. |
-| [Agent Memory OpenAPI](https://github.com/surrealdb/surrealdb.js/blob/main/packages/memory/spec/openapi.json) | `POST /api/v1/{context_id}/scopes` takes `path` and optional `displayName`, registers missing ancestors, and enforces existing `scope:create` grants. The adapter repairs only an explicitly reported missing configured scope, then repeats the same idempotent fact once. Other errors do not trigger registration or retries; grants and keys are never changed. |
-| [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing) | Current standard Sonnet 5.5 rates listed as $2/input million tokens and $10/output million tokens; the app records usage rather than pretending to know the organisation's remaining dollar credit. |
-| [Agent Memory reference](https://surrealdb.com/docs/agent-memory/reference/rest-api) | Context-host routes `/api/v1/{context_id}/facts` and `/query`; Bearer Context key. Writes use `scopes`, reads use `lens`, with explicit nested scope selectors. Write idempotency uses event IDs. Trace and turn identifiers retained. |
-| [Agent Memory hosted quickstart](https://surrealdb.com/docs/agent-memory/quickstarts/hosted) | Provision Context and key in Studio; register scope before use. Generic SurrealDB CRUD alone does not establish this integration. |
-| [SurrealDB sponsor resource pack](https://surrealdb.notion.site/Build-North-SurrealDB-participant-resources-pack-3edbfa44ae3e81a0a6ebd0b4fbb802d3) | Initial public fetch returned 404. The participant subsequently supplied the full pack in chat: prize emphasis includes typed/time-aware facts, supersession, source-traceable retrieval, and coherent shared memory across more than one agent. The current MVP has incident remember/recall; policy supersession and a second application agent are next-stage work, not completed features. |
-| [Eon Era announcement](https://www.eon.io/blog/era-build-and-test-ai-agents) | Realistic synthetic companies and simulated enterprise APIs/MCP for benchmarking; optional and unimplemented in this MVP. Linked organiser Drive setup guide could not be fetched. |
-| [Howard et al. confidence sequences](https://arxiv.org/abs/1810.08240) | Primary research background for time-uniform inference. This implementation uses a simpler Hoeffding union-bound construction with its own derivation. |
+| [Render Blueprint reference](https://render.com/docs/blueprint-spec) | Python web-service configuration, disk, health path, generated secret, and `0.5c-512mb` plan identifier |
+| [Render FastAPI guide](https://render.com/docs/deploy-fastapi) | Uvicorn bound to `0.0.0.0` and Render's `PORT` |
+| [Render deployment guide](https://render.com/docs/your-first-deploy) | Repository-based service creation and deployment |
+| [Anthropic models](https://platform.claude.com/docs/en/models/overview) | Configurable model selection; current default `claude-sonnet-5-5` |
+| [Sonnet 5.5 migration](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide) | Automatic tool selection and `between_tools` compatibility |
+| [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) | Strict remote tool schema; unsupported numerical/string bounds enforced by the complete local Pydantic model |
+| [Claude authentication](https://platform.claude.com/docs/en/manage-claude/authentication) | `anthropic-workspace-id` header for multi-workspace keys |
+| [List Workspaces](https://platform.claude.com/docs/en/api/beta/organization/workspaces/list) | Read-only lookup with `include_default=true` and limit 1000; only an unambiguous active Default workspace from a complete response is selected |
+| [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing) | Provider pricing reference; the application records token usage and limits attempts rather than estimating an account balance |
+| [Agent Memory REST reference](https://surrealdb.com/docs/agent-memory/reference/rest-api) | Context-host `/facts` and `/query` routes, Bearer authentication, nested `scopes`/`lens` selectors, idempotency, trace and turn identifiers |
+| [Agent Memory hosted quickstart](https://surrealdb.com/docs/agent-memory/quickstarts/hosted) | Context provisioning, scoped keys, and scope registration |
+| [Agent Memory OpenAPI](https://github.com/surrealdb/surrealdb.js/blob/main/packages/memory/spec/openapi.json) | Scope registration through `POST /api/v1/{context_id}/scopes` using existing `scope:create` grants |
 
-## Supplied conversation evidence
+The memory adapter registers only an explicitly reported missing configured scope, then repeats the identical idempotent fact once. Unrelated errors do not trigger registration, retries, key changes, or permission escalation.
 
-The earlier conversation's two text attachments contained Build North Discord announcements. They describe Anthropic $100 credits, application deadlines, and reported activation/error issues; they are historical participant-supplied material. The user states their credits expire October 21. Neither the current balance nor that account-specific expiry has been verified by signing into the console.
+## Statistical references
 
-The attachments also mention Eon office hours October 19 at 1–1:30 p.m. ET and SurrealDB October 21 at noon–12:30 p.m. ET. Treat those as copied announcements; check the current Discord event before attending. No calendar event or reminder has been created.
+Howard et al., [Time-uniform, nonparametric, nonasymptotic confidence sequences](https://arxiv.org/abs/1810.08240), provides primary research background for time-uniform inference. RiskGraph implements the simpler Hoeffding union-bound construction derived in [METHODS.md](METHODS.md), alongside standard Beta/Dirichlet inference and a betting e-process.
 
-## Evidence boundaries
+## Build North submission requirements
 
-The source is now published at https://github.com/farzana0/riskgraph (initial source commit 898b7215daac66e15b0b8ee10e1fb304b7cd845f), and [GitHub Actions passed](https://github.com/farzana0/riskgraph/actions/runs/39147467550). The participant reports creating the SurrealDB account, redeeming the promo, and completing Agent Memory context setup; account balances and dashboard settings have not been independently inspected. No live provider keys were present in the execution environment. Render deployment, Claude API decisions, hosted-memory writes, and later retrieval are now verified; see `docs/VALIDATION.md` and the completed synthetic exports. Devpost submission and account-specific credit balances/expiry remain unverified.
+[Overview](https://build-north.devpost.com/), [rules](https://build-north.devpost.com/rules), and [sponsor resources](https://build-north.devpost.com/resources) describe the competition requirements. The submission deadline is October 25, 2026 at 11:59 p.m. ET. Requirements include public source, project documentation, applicable live links, and disclosure of prior work and AI tooling. The rules specify Canadian residence, age 18 or older, teams of up to four, and one submission per team. An optional video is limited to four minutes.
 
-Workspace authentication: [Claude authentication](https://platform.claude.com/docs/en/manage-claude/authentication) requires `anthropic-workspace-id` for multi-workspace keys. [List Workspaces](https://platform.claude.com/docs/en/api/beta/organization/workspaces/list) accepts `include_default=true` and a page limit up to 1000. RiskGraph performs at most one read-only discovery per process, selects only an unambiguous active Default workspace from a complete response, and supports `ANTHROPIC_WORKSPACE_ID` as an explicit override. Lookup denial never triggers permission changes, additional model retries, or selection of another workspace.
+Sponsor recognition requires genuine platform use. The current implementation includes Render hosting, Claude API decisions, and SurrealDB Agent Memory storage and retrieval. Typed/time-aware policy supersession and shared memory between multiple application agents are extension targets, not current demonstrated capabilities. The validation record and public synthetic exports document completed integration behavior.

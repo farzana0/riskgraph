@@ -26,9 +26,9 @@ The bound deliberately remains broad with small n. It applies to actual loss, no
 
 Let X_t indicate positive proposed harm. Test H0: E[X_t | history]≤0.10 using E_0=1, E_t=Π[1+3(X_i−0.10)]. Factors are 0.7 or 3.7, nonnegative, and have conditional expected value at most one under H0. Ville's inequality bounds P(sup E_t≥20) by 0.05. The alert latches using the running maximum. It is per run; restarting repeatedly increases overall false-alarm opportunity. The baseline is chosen for demonstration, not estimated from the same run. This is an exceedance test against a reference rate, not a change-point localization method. An adversarial stress suite is expected to trigger it.
 
-## What is innovative here
+## Combined workflow
 
-The product combines sparse frequency/severity uncertainty, an independently valid sequential loss envelope, pre-execution policy enforcement, and recalled incident provenance in one reviewable refund workflow. Beta/Dirichlet inference, Hoeffding bounds, and e-processes are established mathematics; this project does not claim a new theorem. Independence, cap, priors, optional-stopping scope, and adaptation are explicitly exposed instead of concealed behind a risk score.
+The product combines sparse frequency/severity uncertainty, an independently valid sequential loss envelope, pre-execution policy enforcement, and recalled incident provenance in one reviewable refund workflow. Beta/Dirichlet inference, Hoeffding bounds, and e-processes are established mathematics; this project does not claim a new theorem. The interface reports independence assumptions, the loss cap, priors, optional-stopping scope, and adaptation alongside the risk estimates.
 
 ## Validation and future work
 

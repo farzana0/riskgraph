@@ -1,14 +1,27 @@
 # RiskGraph
 
-**Know the cost before it happens.**
+**Risk monitoring for AI refund agents.**
 
-A hackathon MVP for support operations teams evaluating AI refund agents. A synthetic agent proposes refunds, an independent monitor checks trusted order facts before simulated execution, and a dashboard shows frequency/severity risk with honest uncertainty from small samples.
+RiskGraph evaluates refund proposals before simulated execution and estimates monetary exposure from small samples. An independent policy monitor checks trusted order facts, while the dashboard reports proposed risk, residual risk, uncertainty intervals, and incident provenance.
 
-**Live demo:** https://riskgraph-fa98.onrender.com — deployed on Render. Public synthetic evidence is viewable; new evaluations require operator access. See [deployment verification](docs/DEPLOYMENT.md) for completed checks and remaining live-provider validation.
+[Live application](https://riskgraph-fa98.onrender.com) · [Source repository](https://github.com/farzana0/riskgraph) · [Validation record](docs/VALIDATION.md)
 
-## Try it locally
+## Capabilities
 
-No Mila cluster, GPU, or account is required for the offline demonstration. Python 3.9–3.11 works; deployment targets Python 3.11.
+- Reproducible ordinary, prompt-injection, expired, wrong-owner, duplicate, and high-value scenarios.
+- Strict action schemas and independent ownership, order, refund-window, balance, request, and approval checks.
+- Transactional execution ledger, ordered audit events, and replay protection.
+- Beta frequency × Dirichlet severity estimates with 95% posterior intervals and explicit priors.
+- Separate time-uniform loss upper bounds and a sequential reference-rate alarm.
+- Claude Messages API proposals and SurrealDB Agent Memory incident storage and retrieval.
+- Evaluation history, decision traces, memory provenance, and JSON evidence exports.
+- Render deployment configuration, persistent storage, and automated checks.
+
+All customers, orders, messages, and monetary outcomes are synthetic. The offline agent is a deliberately naive test fixture. Its results demonstrate policy enforcement; Claude performance is recorded in separate API evaluations.
+
+## Local development
+
+Python 3.9–3.11 is supported; deployment targets Python 3.11. The offline evaluation runs on a standard CPU without external services.
 
 ```sh
 python3 -m venv .venv
@@ -16,22 +29,9 @@ python3 -m venv .venv
 .venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8765
 ```
 
-Open http://127.0.0.1:8765. The first launch creates a 40-case offline evaluation. Choose **New evaluation** to run more cases. Inspect decisions, compare proposed and residual loss, and export JSON evidence. The offline agent is deliberately naive, not a simulated claim about Claude's capabilities.
+Open http://127.0.0.1:8765. On first launch, the application creates a 40-case offline evaluation. **New evaluation** creates a separate run; **Continue evaluation** resumes an unfinished run. The decision ledger provides policy checks, simulated outcomes, and exports.
 
-## Features
-
-- Seeded ordinary, prompt-injection, expired, wrong-owner, duplicate, and high-value refund scenarios.
-- Strict money/tool validation; independent ownership, order, window, balance, request, and approval checks.
-- Transactional execution ledger, ordered audit events, and replay protection.
-- Beta frequency × Dirichlet severity model with 95% posterior intervals and explicit priors.
-- Separate time-uniform loss upper bound and e-process reference-rate alarm.
-- Actual Claude Messages API and SurrealDB **Agent Memory** remember/recall adapters.
-- Responsive dashboard, provenance inspection, evaluation history, and evidence download.
-- Persistent Render deployment configuration, container definition, and GitHub Actions checks.
-
-## Architecture and reasoning
-
-See [architecture and implementation plan](docs/ARCHITECTURE.md), [statistical methods](docs/METHODS.md), [verified sources and sponsor requirements](docs/SOURCES.md), and [beginner setup guide](docs/SETUP_GUIDE.md).
+## Architecture
 
 ```text
 seeded case → agent proposal → independent monitor → sandbox ledger
@@ -41,20 +41,21 @@ seeded case → agent proposal → independent monitor → sandbox ledger
                                            risk estimates → dashboard
 ```
 
-All money and customers are synthetic. Customer text and recalled incidents never authorize refunds. Proposed and residual risk are separate; zero observed residual harm still produces nonzero Bayesian uncertainty. Stationary sequential bounds are disabled for adaptive-memory runs. The dashboard explains assumptions and limitations.
+Customer messages and recalled incidents provide context, never authorization. Only the independent monitor can allow a simulated refund. Proposed and residual losses are scored separately. Zero observed residual harm retains nonzero posterior uncertainty; adaptive-memory runs disable the stationary sequential bound.
 
-## Connect Claude and Agent Memory
+See [system architecture](docs/ARCHITECTURE.md), [statistical methods](docs/METHODS.md), [configuration guide](docs/SETUP_GUIDE.md), and [technical references](docs/SOURCES.md).
 
-Configure the variable names in `.env.example` as server environment variables. The application does not automatically load a `.env` file. Never commit live keys. Do not expose them in frontend code. Start a new server after changing configuration.
+## Provider configuration
 
-- Claude: set `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, and a long random `RISKGRAPH_ADMIN_TOKEN`. The model default follows the official model list checked October 18, 2026; verify availability in your account before the first run.
-- If your key can access multiple Anthropic workspaces, set `ANTHROPIC_WORKSPACE_ID` explicitly. Without it, the app makes one read-only lookup per server process and selects only a uniquely identified active Default workspace; a denied lookup leaves workspace-specific keys usable without a header. It never creates workspaces or changes permissions.
-- Live API calls require operator access, are limited to 40 cases/run, and reserve against a persisted 200-attempt workspace budget. Failures consume attempts too; there are no automatic retries. These controls are request limits, not a dollar billing guarantee.
-- Agent Memory: set `SURREAL_MEMORY_URL` to the HTTPS Context host, `SURREAL_MEMORY_CONTEXT`, and `SURREAL_MEMORY_API_KEY`. Register `SURREAL_MEMORY_SCOPE` (default `org/riskgraph/demo`) first. A generic SurrealDB database endpoint is not an Agent Memory Context.
-- In **Connections**, enter the operator token and click **Verify operator access**. The server checks it without calling a provider or creating an evaluation. Once verified, start an evaluation with Claude and optionally memory enabled. The token stays in tab memory and is sent only to your app server; provider keys remain server-side.
-- Hosted memory errors remain explicit in event evidence; the app does not silently claim a successful sponsor integration. Without a hosted Context, memory runs are labeled `local_demo`.
+Server environment variables are documented in [.env.example](.env.example). Environment changes require a server restart; the application does not automatically load `.env` files. Credentials remain server-side and outside version control.
 
-## Tests and evidence
+- **Claude:** `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, and `RISKGRAPH_ADMIN_TOKEN`. Multi-workspace keys can select a workspace through `ANTHROPIC_WORKSPACE_ID`; otherwise the adapter attempts one read-only lookup for a unique active Default workspace.
+- **Agent Memory:** `SURREAL_MEMORY_URL` (HTTPS Context host), `SURREAL_MEMORY_CONTEXT`, `SURREAL_MEMORY_API_KEY`, and `SURREAL_MEMORY_SCOPE`. A Context endpoint is required; a generic database endpoint is insufficient.
+- **Operator access:** verify the configured operator token in **Connections** before creating or advancing protected evaluations. The token is retained only in the current tab.
+
+Claude evaluations allow up to 40 cases per run and reserve against a persisted 200-attempt budget by default, including failed calls. Token usage is recorded. Hosted-memory errors appear explicitly in event evidence; local memory is labeled `local_demo`.
+
+## Validation
 
 ```sh
 .venv/bin/pip install -r requirements-dev.txt
@@ -62,24 +63,20 @@ Configure the variable names in `.env.example` as server environment variables. 
 .venv/bin/python scripts/evaluate.py --seed 42 --cases 80 --output evidence/offline.json
 ```
 
-Optional real API evaluation, only after configuring the environment:
+With provider credentials configured, an API evaluation can be run with:
 
 ```sh
-.venv/bin/python scripts/evaluate.py --mode claude --seed 20261018 --cases 20 --output evidence/claude-heldout.json
+.venv/bin/python scripts/evaluate.py --mode claude --seed 20261018 --cases 20 --output evidence/claude-evaluation.json
 ```
 
-The CLI and server share the configured database's attempt budget. Keep training/memory and held-out evaluation seeds separate. Export actual live results before credit expiry. Local fixtures and mocked contract tests do not verify account access.
+The CLI and server share the configured database's attempt budget. Evaluation seeds and settings are recorded for reproducibility. Development and memory-training seeds should remain separate from held-out evaluation seeds.
 
-## Deploy
+The validation suite contains 80 tests. Recorded API checks include 26 completed Claude decisions across three runs and successful hosted-memory storage and later retrieval. The fresh 20-case Claude evaluation blocked two protocol-invalid escalations and observed zero unauthorized monetary loss. These synthetic samples establish integration behavior, not production safety. Raw evidence is available in [docs/examples](docs/examples).
 
-Publish these source files at the root of a GitHub repository. In Render create a Blueprint from `render.yaml`, redeem the Build North credit first, and review costs. It defines one small paid web service and persistent disk. Optional provider environment values can be left unset until ready; never set only part of the Agent Memory trio. Add real values from Render's Environment page when connecting providers. Render generates the operator token.
+## Deployment
 
-Use a single worker/instance. The SQLite disk persists runs and live-attempt counters across restart; disk backup and production disaster recovery are outside this MVP. Public GET endpoints expose synthetic audit evidence only. Anyone visiting can inspect the demo, while operator access protects mutations on Render. The operator token is an internal demo control, not user authentication; no Clerk integration or category claim is made.
+The [Render deployment guide](docs/DEPLOYMENT.md) describes the Blueprint, persistent disk, environment variables, and release checks. The service runs one Python worker with SQLite on a persistent disk. Public read endpoints expose synthetic evidence; an operator token protects mutations. Production deployment requires additional identity, isolation, and recovery controls.
 
-Verify `/healthz`, the dashboard, a new run with the operator token, export, a blocked injection trace, and persistence after a restart. The exact URL must come from a successful Render deployment, not this README. See [setup guide](docs/SETUP_GUIDE.md).
+## Development attribution
 
-## Build North disclosure
-
-Prepared during Build Week starting October 18, 2026, with AI coding assistance in Codex. Architecture, statistical choices, application code, UI, synthetic scenarios, tests, and deployment scaffolding were prepared in this chat. No pre-existing RiskGraph repository was provided. Established mathematical methods and third-party libraries are credited in `docs/METHODS.md` and `docs/SOURCES.md`. No external UI template or third-party customer dataset was used. Participants must review this disclosure and add any other work or tools they used before submission.
-
-**Current delivery boundary:** the offline MVP and contract-tested adapters are published at [farzana0/riskgraph](https://github.com/farzana0/riskgraph), and the [Render demo is live](https://riskgraph-fa98.onrender.com). [GitHub's automated checks passed](https://github.com/farzana0/riskgraph/actions/runs/39157732209). Both provider configurations are detected by the deployed app. Hosted Agent Memory storage and later retrieval are verified with source, turn, and trace IDs. Claude completed a three-case API check, a three-case hosted-memory check, and a fresh 20-case evaluation. The latter blocked two inconsistent escalations and observed zero unauthorized monetary loss; raw results and token usage are included in `docs/examples/`. The original evaluation survived code/environment redeploys. All 80 automated tests pass. These synthetic smoke checks establish working integrations, not production safety. Devpost submission remains to be completed.
+RiskGraph was developed for Build North 2026 with AI coding assistance from Codex. Statistical methods and third-party dependencies are credited in [methods](docs/METHODS.md) and [references](docs/SOURCES.md). The interface and synthetic scenarios are project-specific; no external UI template or customer dataset is used.

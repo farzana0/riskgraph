@@ -1,12 +1,8 @@
-# RiskGraph architecture and implementation plan
+# System architecture
 
-Prepared October 18, 2026. Submission target October 25, 2026, 11:59 p.m. America/Toronto.
+RiskGraph combines pre-execution policy enforcement, low-sample monetary risk estimates, and incident provenance in a synthetic refund workflow.
 
-## Product and scope
-
-For a support operations lead evaluating an AI refund agent: show how often it proposes harmful actions, how costly those actions could be, what the independent monitor prevents, and how uncertain estimates remain with little evidence. This MVP operates on synthetic orders and simulated dollars only.
-
-## System
+## Data flow
 
 ```mermaid
 flowchart LR
@@ -24,50 +20,49 @@ flowchart LR
   E --> D
 ```
 
-One FastAPI process serves an HTML/CSS/JavaScript dashboard and JSON API. NumPy/SciPy provide posterior inference. SQLite stores ordered decisions and the execution ledger, with a Render persistent disk. This is an appropriate single-instance MVP, with 30 runs maximum per workspace. It is not a horizontally scaled payment service. SurrealDB Agent Memory is the incident memory tier; its extracted graph and retrieval traces complement the exact local audit records.
+A FastAPI process serves the dashboard and JSON API. NumPy and SciPy provide posterior inference. SQLite stores evaluations, decisions, execution records, and provider-attempt reservations. Render supplies the persistent disk. SurrealDB Agent Memory provides the incident-memory tier, including retrieval traces and extracted facts.
 
-Trusted boundaries: authenticated customer identity and order facts come from the synthetic world. Customer messages, model reasons, and recalled incidents cannot override policy. Agent tool inputs are strictly validated. The model never gets a payment-execution tool. Policy checks gate every simulated refund. Event insertion and ledger writes share one transaction. Sequence checks and a uniqueness constraint prevent replays from executing a refund twice.
+## Components
 
-## Implemented modules
+| Module | Responsibility |
+| --- | --- |
+| `app/domain.py` | Seeded scenarios, strict action schemas, policy monitor, independent loss scoring |
+| `app/risk.py` | Frequency/severity posterior, interval simulation, sequential upper bound, e-process |
+| `app/providers.py` | Claude Messages API and Agent Memory REST adapters |
+| `app/store.py` | Evaluation/event/ledger transactions and persisted attempt budget |
+| `app/engine.py` | Ordered orchestration, provider errors, memory provenance |
+| `app/main.py` | API, operator verification, same-origin mutation checks, public synthetic reads |
+| `app/static/` | Overview, decision ledger, methodology, connections, export controls |
+| `tests/` | Policy invariants, numerical checks, trajectory simulations, provider contracts, API flows |
 
-- `app/domain.py`: seeded cases, strict proposals, independent monitor, ground-truth scoring.
-- `app/risk.py`: frequency/severity posterior, interval simulation, time-uniform bound, e-process.
-- `app/providers.py`: Claude Messages tool proposal and SurrealDB Agent Memory REST adapters.
-- `app/store.py`: durable run/event/ledger transactions and persisted Claude attempt budget.
-- `app/engine.py`: one-case orchestration, explicit provider errors, memory provenance.
-- `app/main.py`: API, same-origin mutations, optional operator token, public synthetic reads.
-- `app/static/`: responsive dashboard, run controls, inspection, methods, connections, export.
-- `tests/`: policy invariants, numerical checks, simulated coverage, HTTP contracts, API flows.
-- `render.yaml`, `Dockerfile`, GitHub Actions workflow: deployment and checks.
+## Authorization and execution
 
-## Delivery sequence
+Authenticated customer identity and trusted order facts come from the synthetic scenario. Customer text, model explanations, and recalled incidents cannot override policy. The model receives a proposal tool and has no payment-execution tool.
 
-| Toronto date | Work | Exit evidence |
-| --- | --- | --- |
-| Oct 18 | Implement local vertical slice and full offline demo | Automated tests, browser checks, reproducible JSON |
-| Oct 19 | GitHub repository and Render/SurrealDB account setup | Public source and provisioned accounts; credits visible |
-| Oct 19–20 | Connect Claude; evaluate fixed seeds before credit expiry | Raw API-run exports, usage counts, provider/model identifiers |
-| Oct 20 | Connect Agent Memory and compare memory off/on with separate seeds | Successful remember/recall traces, observed decision changes |
-| Oct 21–23 | Deploy on Render; smoke test restart persistence and operator access | Actual live URL and health response |
-| Oct 24 | Record up to four-minute demo; revise submission with measured results | Public video, write-up, limitations, disclosure |
-| Oct 25 | Final submission before 11:59 p.m. ET | Devpost page with public repo and live link |
+Every proposal passes local schema validation and independent checks for order identity, ownership, refund age, remaining balance, requested amount, and the automatic approval cap. Non-refund actions must carry a zero monetary amount. Only allowed refunds enter the sandbox ledger. Event insertion and ledger writes share a transaction; sequence checks and unique ledger entries prevent duplicate execution.
 
-No ongoing scheduled work has been created. These are milestones, not a claim that later work has happened. The user's Anthropic credit expiry is October 21; the exact time and usable balance must be checked in their console. Finish paid evaluation by October 20 if possible.
+## Risk and monitoring
 
-## Resource plan
+Proposed loss measures exposure before the monitor; residual loss measures unauthorized loss after execution. The Bayesian model separates harmful-proposal frequency from positive-loss severity. Its priors and bin endpoints are explicit, and zero observed harm retains uncertainty.
 
-- No Mila cluster, GPU, model training, Node installation, or Kubernetes needed. The agent uses Anthropic's API; the host serves a small Python service.
-- Anthropic: one request per case, 700 output-token maximum, 40 cases/run, 200 attempted calls per database by default, no automatic retries. Set provider-console spending controls as well. The attempt count is not a dollar balance and cannot account for other applications sharing the API key.
-- Render: one `0.5c-512mb` web service and 1 GB persistent disk. Redeem the $50 before deploying, review the displayed service and disk price, and check remaining credits. Do not assume a monthly spending cap or unlimited hosting.
-- SurrealDB: redeem BUILDNORTH50, then provision the Agent Memory Context and narrowly scoped read/write key. Only enable memory during deliberate comparison runs. Memory extraction and recall may consume credits separately from Anthropic.
-- Eon Era: optional until account access and its hackathon setup guide are available. Local synthetic evaluation is not claimed as an Era integration.
+A separate Hoeffding-based time-uniform upper bound applies under bounded, common-mean assumptions. Adaptive-memory runs disable that bound. A betting e-process tracks proposed harm against a fixed 10% reference rate. Full definitions and guarantees are documented in [METHODS.md](METHODS.md).
 
-## Deployment status boundary
+## Provider contracts
 
-Local implementation can be tested without accounts. Actual publication requires a GitHub repository and authorized Render account. Claude live verification requires the user's key configured outside chat. Hosted Agent Memory verification requires a Context endpoint, Context ID, scope, and key. No simulated test result is presented as a successful call to an unconfigured sponsor.
+Claude uses automatic strict tool selection, `between_tools`, and low effort. Unsupported remote schema bounds are expressed in descriptions and enforced by the complete local Pydantic model. Exactly one valid `propose_refund` result is required. Invalid or failed responses produce no observation or execution.
 
-## Sponsor pack follow-up
+Workspace selection uses an explicit `ANTHROPIC_WORKSPACE_ID` when configured. Otherwise, one read-only lookup per process can select a uniquely identified active Default workspace from a complete response. Lookup denial does not change permissions or create workspaces.
 
-The participant supplied the complete SurrealDB pack after the initial implementation. Its prize emphasis adds clear targets: superseding typed/time-aware facts, source-traceable retrieval, and coherent memory shared across more than one agent. Next-stage application work should add a risk-review agent sharing incident evidence with the refund agent, plus a versioned synthetic policy-fact demonstration with trace inspection. These are application roles; no claim of an implemented second agent or demonstrated hosted supersession is made in the current MVP. Trusted refund authorization must continue to use the independent policy monitor rather than recalled text.
+Agent Memory writes blocked incidents through `/facts` and retrieves prior context through `/query`. Event IDs supply write idempotency. Scope selectors, source IDs, retrieval trace IDs, and memory turn IDs are retained. An explicitly missing configured scope can be registered using existing grants, followed by one identical idempotent write retry. Other failures remain visible.
 
-Provider compatibility: Sonnet 5.5 uses automatic strict tool selection, not forced tool use, with `between_tools` and low effort. Remote schema bounds are described rather than sent as unsupported grammar constraints; the full original model validates every result before monitoring. If a hosted memory write explicitly reports an unregistered configured scope, the adapter registers that path with existing permissions and repeats the identical idempotent fact once. Other failures remain visible without automatic retries or permission changes.
+## Deployment and resource boundaries
+
+The application uses one Python worker and one persistent SQLite database. The current workspace supports up to 30 runs. Claude evaluations allow 40 cases per run, a 700-output-token request ceiling, and a persisted 200-attempt budget by default. Failed calls consume attempts; automatic model retries are disabled.
+
+The Render Blueprint specifies a `0.5c-512mb` web service and a 1 GB disk mounted at `/var/data`. Credentials are server-side configuration. The operator token protects evaluation mutations; public endpoints expose synthetic evidence. This single-instance evaluation architecture requires additional authorization, storage, and recovery controls before production use.
+
+## Extension points
+
+A risk-review agent could share incident evidence with the refund agent, while versioned policy facts could demonstrate typed, time-aware supersession and source tracing. These capabilities are future extensions. Trusted authorization remains independent of recalled text.
+
+Further verification can add independently checked authorization evidence and bounded arithmetic policy-model proofs. Current validation covers tested policy invariants and provider contracts; it does not constitute an end-to-end proof of an AI system.

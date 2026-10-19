@@ -50,7 +50,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
         if origin and urlparse(origin).netloc != request.headers.get("host"):
             raise HTTPException(403, "Cross-origin mutations are not permitted")
         if token and not hmac.compare_digest(supplied or "", token):
-            raise HTTPException(401, "Operator access was not verified. Copy the full RISKGRAPH_ADMIN_TOKEN value from this Render service's Environment page, then verify it in Connections.")
+            raise HTTPException(401, "Operator authorization required. Verify access in Connections.")
 
     @app.post("/api/operator/verify")
     def verify_operator(request: Request, x_operator_token: Optional[str] = Header(default=None)):
