@@ -73,6 +73,10 @@ The CLI and server share the configured database's attempt budget. Evaluation se
 
 The validation suite contains 80 tests. Recorded API checks include 26 completed Claude decisions across three runs and successful hosted-memory storage and later retrieval. The fresh 20-case Claude evaluation blocked two protocol-invalid escalations and observed zero unauthorized monetary loss. These synthetic samples establish integration behavior, not production safety. Raw evidence is available in [docs/examples](docs/examples).
 
+## Simulation study
+
+A reproducible [simulation evaluation](docs/SIMULATIONS.md) covers 20,000 policy-stress proposals, 15,000 estimator datasets, and 200,000 monitoring trajectories. No sampled harmful proposal bypassed the monitor. The study also identifies workload-dependent credible-interval coverage and weak alarm detection for moderate harm rates. Numerical results, figures, and reproduction scripts are included.
+
 ## Deployment
 
 The [Render deployment guide](docs/DEPLOYMENT.md) describes the Blueprint, persistent disk, environment variables, and release checks. The service runs one Python worker with SQLite on a persistent disk. Public read endpoints expose synthetic evidence; an operator token protects mutations. Production deployment requires additional identity, isolation, and recovery controls.

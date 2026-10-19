@@ -56,6 +56,10 @@ The deployed health, dashboard, assets, audit/export, and unauthenticated mutati
 
 Browser QA covered new/continue evaluation controls, history, full/blocked ledger, decision traces, methods, verified operator access, errors inside the run dialog, persistent failure messages, and evidence download. Desktop 1,440 × 1,000, the narrow preview, and mobile 390 × 844 layouts were checked; tables scroll inside their containers. Exported integration evidence is included in `docs/examples/`.
 
+## Broader synthetic simulations
+
+The [simulation study](SIMULATIONS.md) adds 20,000 varied policy proposals, 1,600 end-to-end offline decisions, 15,000 estimator datasets, and 200,000 monitoring trajectories. No sampled harmful proposal passed the monitor. The study measures prior-sensitive credible-interval coverage, conservative sequential bounds, dependence-assumption failures, and limited alarm power for moderate harm rates. Raw results and the reproducible harness are included; the simulations make no provider requests.
+
 ## Remaining limits
 
 All orders, customers, messages, and money are synthetic. Validation covers simulated execution, tested policy invariants, and the documented provider integrations. Production payments, representative customer data, disaster recovery, policy-memory supersession, and shared memory between two application agents are outside the current scope. Policy tests do not constitute an end-to-end formal proof of the AI system.
