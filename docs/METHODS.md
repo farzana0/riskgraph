@@ -71,3 +71,7 @@ The [framework comparison](FRAMEWORK_V2.md) includes paired alarm trajectories, 
 Before production, validation requires representative held-out workloads, appropriate handling of customer clusters, nonmonetary harms, cap adequacy, decision utility, operational drift, multitenant authorization, and robust storage and recovery.
 
 Primary research background: Howard et al., [Time-uniform, nonparametric, nonasymptotic confidence sequences](https://arxiv.org/abs/1810.08240) and [Time-uniform Chernoff bounds via nonnegative supermartingales](https://arxiv.org/abs/1808.03204). The loss-tail decomposition and precommitted alarm mixture above describe this implementation; the underlying inference methods are established mathematics.
+
+## Alarm scope under diverse failures
+
+The [additional stress study](MONITORING_STRESS.md) separates frequency deterioration from severity-only changes, rare catastrophic loss, persistent clusters, and service-only errors. The current frequency alarm does not test a dollar-denominated loss appetite. A quiet frequency signal cannot establish low financial exposure.

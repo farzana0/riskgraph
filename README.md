@@ -56,7 +56,7 @@ Server environment variables are documented in [.env.example](.env.example). Env
 - **Agent Memory:** `SURREAL_MEMORY_URL` (HTTPS Context host), `SURREAL_MEMORY_CONTEXT`, `SURREAL_MEMORY_API_KEY`, and `SURREAL_MEMORY_SCOPE`. A Context endpoint is required; a generic database endpoint is insufficient.
 - **Operator access:** verify the configured operator token in **Connections** before creating or advancing protected evaluations. The token is retained only in the current tab.
 
-Claude evaluations allow up to 40 cases per run and reserve against a persisted 200-attempt budget by default, including failed calls. Token usage is recorded. Hosted-memory errors appear explicitly in event evidence; local memory is labeled `local_demo`.
+Claude evaluations allow up to 40 cases per run and reserve against a persisted 500-attempt budget by default, including failed calls. Token usage is recorded. Hosted-memory errors appear explicitly in event evidence; local memory is labeled `local_demo`.
 
 ## Validation
 
@@ -74,7 +74,9 @@ With provider credentials configured, an API evaluation can be run with:
 
 The CLI and server share the configured database's attempt budget. Evaluation seeds and settings are recorded for reproducibility. Development and memory-training seeds should remain separate from held-out evaluation seeds.
 
-The validation suite contains 120 tests. The revised workflow completed 80 hosted Claude decisions, including 40 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
+The validation suite contains 125 tests. The revised workflow completed 136 hosted Claude decisions, including 68 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
+
+The [featured control demonstration](docs/CONTROL_DEMO.md) includes $6,914.98 in unauthorized proposed payments across 56 decisions. All 48 harmful proposals are blocked; eight valid payments execute. Injected failures are explicitly separated from real Claude evaluations.
 
 ## Simulation study
 
@@ -85,6 +87,8 @@ The [mathematical framework comparison](docs/FRAMEWORK_V2.md) includes 50,000 po
 .venv/bin/python scripts/evaluate_v2.py --output evidence/framework-v2.json
 .venv/bin/python scripts/stress_campaign.py --output evidence/failure-campaign.json
 ```
+
+The [monitoring stress study](docs/MONITORING_STRESS.md) adds 100,000 trajectories across ten failure patterns, including severity-only shifts and rare catastrophic errors that a frequency alarm need not detect.
 
 The [original study](docs/SIMULATIONS.md) remains available as historical evidence, including workload-dependent Bayesian interval coverage. Current bounds and alarm guarantees are derived in [METHODS.md](docs/METHODS.md). Synthetic measurements do not establish production safety or a causal Claude memory benefit.
 

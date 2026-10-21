@@ -22,7 +22,7 @@ Sparse frequency/severity estimates, sequential monitoring, pre-execution policy
 
 ## Validation
 
-The automated suite contains 120 tests covering policy invariants, confidence-sequence inversion, sequential error control, review verification, scenario generation, provider contracts, replay protection, storage, and access controls.
+The automated suite contains 125 tests covering policy invariants, confidence-sequence inversion, sequential error control, review verification, scenario generation, provider contracts, replay protection, storage, and access controls.
 
 The 40-case offline fixture produced 26 harmful proposals. The monitor blocked all 26, preventing $2,800 of unauthorized synthetic loss with zero observed residual loss. This deliberately naive fixture demonstrates policy enforcement and is separate from model evaluation.
 

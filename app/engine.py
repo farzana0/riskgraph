@@ -4,7 +4,7 @@ from uuid import uuid4
 import os
 import httpx
 from .domain import generate, inspect, score, authorization
-from .providers import Agent, AgentMemory, ProviderError, failure_details, PROMPT_VERSION
+from .providers import Agent, AgentMemory, ProviderError, failure_details, PROMPT_VERSION, EXTENDED_FIXTURE_VERSION
 from .risk import estimate, drift
 from .review import review_proposal, verify_review
 from .scenarios import EXTENDED_SUITES
@@ -12,6 +12,10 @@ from .scenarios import EXTENDED_SUITES
 
 def now():
     return datetime.now(timezone.utc).isoformat()
+
+
+def proposal_version(mode, suite):
+    return PROMPT_VERSION if mode == "claude" else EXTENDED_FIXTURE_VERSION if suite in EXTENDED_SUITES else "fixture-v1"
 
 
 class Busy(Exception):
@@ -35,7 +39,7 @@ class Engine:
                "created_at": now(), "status": "ready", "error": None,
                "policy_version": "refund-v1", "generator_version": "cases-v3" if suite in EXTENDED_SUITES else "cases-v1" if suite == "baseline" else "cases-v2",
                "suite": suite, "framework": "proposal_review_gate_v2",
-               "prompt_version": PROMPT_VERSION if mode == "claude" else "fixture-v1"}
+               "prompt_version": proposal_version(mode, suite)}
         self.store.put_run(run)
         return run
 
@@ -51,9 +55,9 @@ class Engine:
                 raise Busy("This case was already processed. Refresh the run.")
             if len(events) >= run["count"]:
                 return self.snapshot(run_id)
-            if run.get("framework") != "proposal_review_gate_v2" or (run["mode"] == "claude" and run.get("prompt_version") != PROMPT_VERSION):
+            if run.get("framework") != "proposal_review_gate_v2" or run.get("prompt_version") != proposal_version(run["mode"],run.get("suite","baseline")):
                 raise Busy("This evaluation uses an earlier workflow or prompt. Start a new evaluation; existing evidence remains available.")
-            if run["mode"] == "claude" and not self.store.reserve_attempt(int(os.getenv("MAX_CLAUDE_CASES", "200"))):
+            if run["mode"] == "claude" and not self.store.reserve_attempt(int(os.getenv("MAX_CLAUDE_CASES", "500"))):
                 raise BudgetExceeded("Workspace Claude attempt budget exhausted")
             case = generate(run["seed"], run["count"], suite=run.get("suite", "baseline"))[len(events)]
             recalled, memory_status, trace = [], "disabled", None
@@ -139,6 +143,7 @@ class Engine:
                 risk["hoeffding_upper_usd"] = None
                 risk["bound_assumption"] = "Unavailable: adaptive memory or a nonstationary/dependent suite invalidates fixed-tail assumptions. Bayesian intervals are descriptive approximations."
         return {"run": run, "events": events, "gross": gross, "residual": residual,
+                "resume_supported": run.get("framework") == "proposal_review_gate_v2" and run.get("prompt_version") == proposal_version(run["mode"],run.get("suite","baseline")),
                 "prevented_usd": sum(e["prevented_loss_cents"] for e in events) / 100,
                 "executed_usd": sum(e["executed_cents"] for e in events) / 100,
                 "blocked": sum(not e["monitor"]["allowed"] for e in events),

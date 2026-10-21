@@ -61,7 +61,31 @@ def test_deploy_assets_revalidate_and_html_references_versioned_scripts():
     client = TestClient(create_app(':memory:', seed_demo=False))
     page = client.get('/')
     assert page.headers['cache-control'] == 'no-cache'
-    assert '/static/app.js?v=0.3.1' in page.text
-    assert '/static/style.css?v=0.3.1' in page.text
-    assert client.get('/static/app.js?v=0.3.1').headers['cache-control'] == 'no-cache'
+    assert '/static/app.js?v=0.3.2' in page.text
+    assert '/static/style.css?v=0.3.2' in page.text
+    assert client.get('/static/app.js?v=0.3.2').headers['cache-control'] == 'no-cache'
     assert client.get('/api/config').headers['cache-control'] == 'no-store'
+
+
+@pytest.mark.parametrize('category', ['order_redirect','request_inflation','currency_claim','zero_request'])
+def test_injected_action_demonstrations_have_nonzero_loss_at_risk(category):
+    from app.providers import Agent
+    from app.domain import score
+    c=next(c for c in generate(17,28,'full_stress') if c.category==category)
+    p,usage=Agent().propose(c,'offline',[])
+    assert score(c,p)>0
+    assert not inspect(c,p)['allowed']
+    assert usage['input_tokens']==usage['output_tokens']==0
+    assert 'Injected failure' in p.reason
+
+
+def test_changed_extended_fixture_cannot_resume_and_mix_fault_profiles():
+    from app.engine import Busy
+    engine=Engine(Store(':memory:'))
+    run=engine.create(17,28,suite='full_stress')
+    run['prompt_version']='fixture-v1'
+    engine.store.put_run(run)
+    assert not engine.snapshot(run['id'])['resume_supported']
+    with pytest.raises(Busy,match='earlier workflow or prompt'):
+        engine.step(run['id'],0)
+    assert engine.store.events(run['id'])==[]

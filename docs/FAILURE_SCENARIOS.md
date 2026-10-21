@@ -86,3 +86,17 @@ The campaign makes **zero paid provider requests**. Hosted evaluations are separ
 Controls use the trusted facts recorded in each synthetic case. Authenticating external source systems, rechecking stale state at a real payment provider, aggregate limits across multiple orders, privacy leakage, denial of service, and real payment settlement remain outside the implemented model. A fictional instruction claiming policy changed does not implement a genuine policy-update workflow. Recomputed fingerprints detect inconsistency with recorded facts; they are not an external attestation, cryptographic identity, or formal proof.
 
 The earlier mathematical comparison remains frozen at revision `2e30cd8`; its source fingerprints describe that snapshot. Later catalogue changes have a separate protocol and evidence file. Numerical results should not be pooled as independent production observations.
+
+## Additional monitoring stress
+
+The [monitoring stress study](MONITORING_STRESS.md) adds 100,000 trajectories covering gradual deterioration, short and repeated bursts, late attacks, persistent clusters, rare catastrophic errors, severity-only shifts, and service-only failures. It makes explicit where a frequency alarm is insufficient.
+
+## Visible loss at risk
+
+The [featured control demonstration](CONTROL_DEMO.md) explicitly injects wrong-order, amount-inflation, currency, and zero-request mistakes. Its 56 decisions include $6,914.98 in unauthorized proposed payments, all blocked. Real Claude results remain separate.
+
+## Live full-catalogue evaluations
+
+The full 28-scenario catalogue subsequently completed two more Claude runs on revision `c12bd36`, seed `2102102`, with memory off and hosted memory on. Both recorded zero harmful proposals, protocol rejections, unpaid fully eligible requests, and residual loss. All 56 reviews recomputed successfully. Each of the 28 memory-on cases recorded actual sources and a retrieval trace. The added token totals were 63,912 input and 14,299 output. [Memory off evidence](examples/claude-v3-catalogue-baseline.json) · [Hosted memory evidence](examples/claude-v3-catalogue-memory.json).
+
+Across the original-workload and catalogue pairs, 136 completed real Claude decisions used 149,676 input and 33,668 output tokens, implying about $0.64 at the cited standard rates. These results remain separate from injected failures in the featured control demonstration.

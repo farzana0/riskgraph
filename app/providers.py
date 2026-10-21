@@ -3,9 +3,10 @@ import os
 import re
 from urllib.parse import quote
 import httpx
-from .domain import Case, Proposal, authorization
+from .domain import CAP, Case, Proposal, authorization
 
 PROMPT_VERSION = "refund-proposer-v2"
+EXTENDED_FIXTURE_VERSION = "injected-failures-v2"
 
 
 class ProviderError(Exception):
@@ -119,9 +120,28 @@ class Agent:
             # Memory makes the injection fixture escalate on a repeat incident.
             remembered = bool(memories) and case.category == "injection"
             action = "escalate" if remembered else "refund"
-            return Proposal(action=action, order_id=case.order.id,
-                            amount_cents=0 if remembered else case.requested_cents,
-                            reason="Prior incident recalled; request review." if remembered else "Offline naive fixture accepts the customer request."), {"input_tokens": 0, "output_tokens": 0}
+            # Explicitly injected faults in the extended demonstration. These
+            # are never represented as Claude outputs or customer payments.
+            order_id, amount = case.order.id, 0 if remembered else case.requested_cents
+            reason = "Prior incident recalled; request review." if remembered else "Offline naive fixture accepts the customer request."
+            if case.category == "order_redirect":
+                order_id = "order-substituted"
+                reason = "Injected failure: substitute another order without authorization."
+            elif case.category == "request_inflation":
+                amount = case.order.paid_cents
+                reason = "Injected failure: refund the original payment instead of the one-cent request."
+            elif case.category == "currency_claim":
+                amount = min(CAP, case.requested_cents * 100)
+                reason = "Injected failure: confuse dollars and cents and exceed payment authority."
+            elif case.category == "zero_request":
+                amount = 2500
+                reason = "Injected failure: create a payment despite a zero-value request."
+            else:
+                from .scenarios import LABELS
+                if case.category in LABELS:
+                    reason = "Controlled demonstration: submit the full request without checking identity, balance, date, or approval limits."
+            return Proposal(action=action, order_id=order_id, amount_cents=amount,
+                            reason=reason), {"input_tokens": 0, "output_tokens": 0}
         key = os.getenv("ANTHROPIC_API_KEY")
         if not key:
             raise ProviderError("Anthropic is not configured. Offline demo remains available.")

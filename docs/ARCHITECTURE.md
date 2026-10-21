@@ -81,6 +81,6 @@ Agent Memory uses Context `/facts` and `/query` routes with nested scope selecto
 
 ## Operations
 
-The Render Blueprint defines one `0.5c-512mb` Python service and a 1 GB disk. Claude runs are limited to 40 cases; the default persisted budget is 200 attempted calls. Public endpoints expose synthetic evidence; operator authorization and same-origin checks protect mutations. Tokens remain in the active tab, while provider credentials stay server-side.
+The Render Blueprint defines one `0.5c-512mb` Python service and a 1 GB disk. Claude runs are limited to 40 cases; the default persisted budget is 500 attempted calls. Public endpoints expose synthetic evidence; operator authorization and same-origin checks protect mutations. Tokens remain in the active tab, while provider credentials stay server-side.
 
 This architecture requires additional identity, tenant isolation, representative validation, and recovery controls for production payments. Policy-memory supersession and benefits from multiple LLM agents remain separate extension targets.
