@@ -13,6 +13,7 @@ from .providers import ProviderError
 from .store import Store
 from .domain import SUITES
 from .review import verify_review
+from .scenarios import DESCRIPTIONS, LABELS
 
 STATIC = Path(__file__).parent / "static"
 
@@ -23,7 +24,7 @@ class RunRequest(BaseModel):
     count: int = Field(default=40, ge=1, le=200)
     mode: Literal["offline", "claude"] = "offline"
     use_memory: bool = False
-    suite: Literal["baseline", "balanced", "adversarial", "boundary", "heavy_tail", "drift", "correlated"] = "baseline"
+    suite: Literal["baseline", "balanced", "adversarial", "boundary", "heavy_tail", "drift", "correlated", "full_stress", "identity", "manipulation", "payment_edges", "compound"] = "baseline"
 
 
 class StepRequest(BaseModel):
@@ -32,7 +33,7 @@ class StepRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.2.0")
+    app = FastAPI(title="RiskGraph", version="0.3.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -64,7 +65,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.2.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.3.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/api/config")
     def config():
@@ -75,7 +76,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
                 "operator_token_required": bool(token),
                 "live_enabled": bool(token and os.getenv("ANTHROPIC_API_KEY")),
                 "live_max_cases": 40, "synthetic_only": True, "suites": SUITES,
-                "framework_version": "risk_v2",
+                "framework_version": "risk_v2", "suite_descriptions": DESCRIPTIONS, "scenario_labels": LABELS,
                 "claude_attempts_used": store.attempts(),
                 "claude_attempts_limit": int(os.getenv("MAX_CLAUDE_CASES", "200"))}
 
@@ -89,6 +90,11 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     @app.get("/api/runs")
     def runs():
         return store.runs()
+
+    @app.get("/api/stress")
+    def stress_results():
+        path = STATIC.parents[1] / "docs" / "examples" / "failure-campaign.json"
+        return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
 
     @app.post("/api/runs", status_code=201)
     def new_run(body: RunRequest, request: Request, x_operator_token: Optional[str] = Header(default=None)):

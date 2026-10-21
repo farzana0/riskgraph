@@ -12,7 +12,7 @@ At 15% harmful proposals, the alarm triggered within 500 decisions in **80.19%**
 
 The numerical study uses seed `20261021`, 10,000 trajectories per alarm or bound scenario, a 500-observation horizon, 50,000 sampled policy proposals, and 3,440 end-to-end workflow decisions. There are 80,000 paired alarm trajectories and 40,000 bound trajectories. Both alarm versions receive identical outcomes within each scenario. The generator, betting grid, restart prior, and error allocations were fixed before this recorded comparison. The suite is a synthetic model comparison, not a representative population estimate.
 
-[Raw results](examples/framework-v2.json) record counts, exact binomial 95% Monte Carlo intervals, the harness fingerprint, and application-source fingerprints. The study makes no provider requests. Earlier hosted Claude and Agent Memory checks are recorded separately in [VALIDATION.md](VALIDATION.md); they do not substitute for a fresh hosted evaluation of this upgraded workflow.
+[Raw results](examples/framework-v2.json) record counts, exact binomial 95% Monte Carlo intervals, the harness fingerprint, and application-source fingerprints. The study makes no provider requests. Hosted Claude and Agent Memory checks are recorded separately in [VALIDATION.md](VALIDATION.md). The revised workflow subsequently completed two 40-case hosted evaluations, as documented in [FAILURE_SCENARIOS.md](FAILURE_SCENARIOS.md). This mathematical comparison remains a frozen record of revision `2e30cd8`; its source fingerprints describe that snapshot.
 
 ## Alarm sensitivity and tradeoffs
 

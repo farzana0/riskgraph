@@ -115,7 +115,8 @@ class PoisonedMemory:
 
 def workflow_study():
     rows=[]
-    for suite in SUITES:
+    # Frozen comparison protocol; subsequent catalogue additions are evaluated separately.
+    for suite in ['baseline','balanced','adversarial','boundary','heavy_tail','drift','correlated']:
         for seed in [21001,21002,21003]:
             for memory in [False,True]:
                 store=Store(':memory:')

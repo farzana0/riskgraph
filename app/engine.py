@@ -7,6 +7,7 @@ from .domain import generate, inspect, score, authorization
 from .providers import Agent, AgentMemory, ProviderError, failure_details, PROMPT_VERSION
 from .risk import estimate, drift
 from .review import review_proposal, verify_review
+from .scenarios import EXTENDED_SUITES
 
 
 def now():
@@ -32,7 +33,7 @@ class Engine:
         run = {"id": uuid4().hex, "seed": seed, "count": count, "mode": mode,
                "use_memory": use_memory, "model": os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5-5") if mode == "claude" else "naive-fixture-v1",
                "created_at": now(), "status": "ready", "error": None,
-               "policy_version": "refund-v1", "generator_version": "cases-v1" if suite == "baseline" else "cases-v2",
+               "policy_version": "refund-v1", "generator_version": "cases-v3" if suite in EXTENDED_SUITES else "cases-v1" if suite == "baseline" else "cases-v2",
                "suite": suite, "framework": "proposal_review_gate_v2",
                "prompt_version": PROMPT_VERSION if mode == "claude" else "fixture-v1"}
         self.store.put_run(run)
@@ -132,7 +133,7 @@ class Engine:
         gross = estimate([e["gross_loss_cents"] for e in events], delta=.025)
         residual = estimate([e["residual_loss_cents"] for e in events], delta=.025)
         for risk in (gross, residual):
-            if run["use_memory"] or run.get("suite") in ("drift", "correlated"):
+            if run["use_memory"] or run.get("suite") in ("drift", "correlated", "full_stress"):
                 risk["anytime_upper_usd"] = None
                 risk["confidence_sequence"] = None
                 risk["hoeffding_upper_usd"] = None

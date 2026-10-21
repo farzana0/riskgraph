@@ -2,9 +2,9 @@
 
 ## Current automated checks
 
-**105 automated tests passed** after the framework upgrade. [Continuous integration](https://github.com/farzana0/riskgraph/actions/workflows/test.yml) runs the test suite plus original and adversarial CLI evaluations. Tests include confidence-sequence inversion and boundary behavior, exact small-horizon crossing control, restart-mixture prefix consistency, policy-disagreement fail-closed execution, review tampering, legacy evidence, and all scenario suites.
+**119 automated tests passed** after the expanded failure-catalogue and interface upgrade. [Continuous integration](https://github.com/farzana0/riskgraph/actions/workflows/test.yml) runs the test suite plus original and adversarial CLI evaluations. Tests include confidence-sequence inversion and boundary behavior, exact small-horizon crossing control, restart-mixture prefix consistency, policy-disagreement fail-closed execution, review tampering, legacy evidence, and all scenario suites.
 
-The earlier 80-test suite and provider-integration evidence below were recorded on revision `540d8c86674d0ea1b48ac118fd6cd3a9417f6862`. Those October 18 results remain historical evidence. The [current comparison](FRAMEWORK_V2.md) records the local framework upgrade; fresh hosted-provider validation of the revised prompt and review workflow is separate. Container execution remains outside this validation record.
+The earlier 80-test suite and provider-integration evidence below were recorded on revision `540d8c86674d0ea1b48ac118fd6cd3a9417f6862`. Those October 18 results remain historical evidence. The [current comparison](FRAMEWORK_V2.md) records the local framework upgrade; fresh hosted-provider validation of the revised prompt and review workflow is recorded below and in [FAILURE_SCENARIOS.md](FAILURE_SCENARIOS.md). Container execution remains outside this validation record.
 
 Coverage includes:
 
@@ -65,3 +65,9 @@ The [original study](SIMULATIONS.md) records 20,000 policy proposals, 1,600 work
 ## Remaining limits
 
 All orders, customers, messages, and money are synthetic. Validation covers simulated execution, tested policy invariants, and the documented provider integrations. Production payments, representative customer data, disaster recovery, policy-memory supersession, and shared memory between two application agents are outside the current scope. Policy tests do not constitute an end-to-end formal proof of the AI system.
+
+## Expanded catalogue and revised hosted workflow
+
+The [expanded campaign](FAILURE_SCENARIOS.md) records 28 named scenarios, 100,000 proposals, 2,856 end-to-end decisions, 25 provider faults, six memory conditions, and nine record-integrity checks. All sampled harmful proposals were blocked; all reference-authorized proposals passed. This is a synthetic fault campaign, not an estimate of Claude failure frequency.
+
+Two new 40-case Claude runs on revision `2e30cd8`, seed `2102101`, completed with memory off and then hosted memory on. Both recorded zero harmful proposals, protocol rejections, unpaid fully eligible requests, and residual loss. All 80 reviews recomputed successfully. All 40 memory-on cases recorded recalled sources and retrieval trace IDs. The token totals were 85,764 input and 19,369 output. Their evidence is in `claude-v2-baseline.json` and `claude-v2-memory.json`. Reusing one workload with existing shared memory does not identify a causal memory benefit.

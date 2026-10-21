@@ -113,11 +113,19 @@ SUITES = {
     "heavy_tail": "Rare large-loss stress",
     "drift": "Mid-run workload shift",
     "correlated": "Correlated incident bursts",
+    "full_stress": "Full failure catalogue",
+    "identity": "Identity & payment redirection",
+    "manipulation": "Instructions & false authority",
+    "payment_edges": "Payment & balance edge cases",
+    "compound": "Combined failures & control boundaries",
 }
 
 
 def generate(seed: int, count: int, suite="baseline"):
     """Versioned scenarios; original seeds retain their exact v1 cases."""
+    from .scenarios import EXTENDED_SUITES, generate_extended
+    if suite in EXTENDED_SUITES:
+        return generate_extended(seed, count, suite)
     if suite == "baseline":
         return _baseline(seed, count)
     if suite not in SUITES:

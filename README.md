@@ -8,7 +8,7 @@ RiskGraph evaluates refund proposals through a proposal–review–execution wor
 
 ## Capabilities
 
-- Seven reproducible suites covering policy boundaries, partial refunds, adversarial text, rare large losses, workload shifts, and correlated bursts.
+- Twelve reproducible suites, including 28 explicit identity, manipulation, payment, and combined-failure scenarios.
 - Strict action schemas and independent ownership, order, refund-window, balance, request, and approval checks.
 - Transactional execution ledger, ordered audit events, and replay protection.
 - Beta frequency × Dirichlet severity estimates with 95% posterior intervals and explicit priors.
@@ -16,7 +16,7 @@ RiskGraph evaluates refund proposals through a proposal–review–execution wor
 - A multi-rate, precommitted restart-mixture alarm for conditional harm exceedance.
 - Read-only policy reviews, fail-closed consistency checks, and recomputable evidence.
 - Claude Messages API proposals and SurrealDB Agent Memory incident storage and retrieval.
-- Evaluation presets, searchable decision ledger, review verification, memory provenance, and JSON exports.
+- A plain-language risk review with consistent icons, observed outcomes, conservative exposure estimates, searchable decisions, and optional statistical detail.
 - A validation view comparing current and earlier methods on recorded simulations.
 - Render deployment configuration, persistent storage, and automated checks.
 
@@ -44,7 +44,7 @@ scenario suite → agent proposal → policy review → execution gate → sandb
                                               confidence bounds + estimates + alarm
 ```
 
-Customer messages and recalled incidents provide context, never authorization. The independent monitor gates execution; disagreements with the deterministic reviewer pause the evaluation. Proposed and residual losses are scored separately. Zero observed harm retains uncertainty. Adaptive-memory, drift, and correlated suites disable stationary confidence bounds.
+Customer messages and recalled incidents provide context, never authorization. The independent monitor gates execution; disagreements with the deterministic reviewer pause the evaluation. Proposed and residual losses are scored separately. Zero observed harm retains uncertainty. Adaptive-memory, designed catalogue, drift, and correlated suites disable stationary confidence bounds.
 
 See [system architecture](docs/ARCHITECTURE.md), [statistical methods](docs/METHODS.md), [configuration guide](docs/SETUP_GUIDE.md), and [technical references](docs/SOURCES.md).
 
@@ -74,15 +74,16 @@ With provider credentials configured, an API evaluation can be run with:
 
 The CLI and server share the configured database's attempt budget. Evaluation seeds and settings are recorded for reproducibility. Development and memory-training seeds should remain separate from held-out evaluation seeds.
 
-The validation suite contains 105 tests. Recorded API checks include 26 completed Claude decisions and successful hosted-memory storage and later retrieval on the earlier application revision. A 20-case Claude evaluation blocked two protocol-invalid escalations with zero unauthorized monetary loss observed. These historical API checks are distinct from the current local framework simulations. Raw evidence is available in [docs/examples](docs/examples).
+The validation suite contains 119 tests. The revised workflow completed 80 hosted Claude decisions, including 40 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
 
 ## Simulation study
 
-The [current framework comparison](docs/FRAMEWORK_V2.md) includes 50,000 policy-stress proposals, 3,440 workflow decisions, and 120,000 monitoring trajectories. At a 15% harm rate, the mixture alarm detected 80.19% of trajectories within 500 cases, compared with 17.34% for the original alarm. The current null false-alarm rate was 2.31% in the recorded simulation. No sampled harmful proposal bypassed the policy checks.
+The [mathematical framework comparison](docs/FRAMEWORK_V2.md) includes 50,000 policy-stress proposals, 3,440 workflow decisions, and 120,000 monitoring trajectories. At a 15% harm rate, the mixture alarm detected 80.19% of trajectories within 500 cases, compared with 17.34% for the original alarm. The current null false-alarm rate was 2.31% in the recorded simulation. No sampled harmful proposal bypassed the policy checks.
 
 ```sh
 .venv/bin/python scripts/evaluate.py --suite adversarial --seed 21031 --cases 40 --output evidence/adversarial.json
 .venv/bin/python scripts/evaluate_v2.py --output evidence/framework-v2.json
+.venv/bin/python scripts/stress_campaign.py --output evidence/failure-campaign.json
 ```
 
 The [original study](docs/SIMULATIONS.md) remains available as historical evidence, including workload-dependent Bayesian interval coverage. Current bounds and alarm guarantees are derived in [METHODS.md](docs/METHODS.md). Synthetic measurements do not establish production safety or a causal Claude memory benefit.

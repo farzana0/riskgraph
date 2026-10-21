@@ -34,7 +34,7 @@ Public read endpoints expose synthetic evaluations and exports. Evaluation mutat
 6. Verify new and historical evaluations remain available after a redeploy. Historical events without review records must remain labeled legacy.
 7. When provider configuration changes, complete a small API check and inspect memory write/recall evidence as applicable.
 
-Provider calls consume the configured attempt budget. Interface-only releases can be checked without new paid API calls. Framework releases should distinguish local simulation evidence from fresh provider checks. Release v0.2 reports health version `0.2.0`; the deployed source revision identifies the active release.
+Provider calls consume the configured attempt budget. Interface-only releases can be checked without new paid API calls. Framework releases should distinguish local simulation evidence from fresh provider checks. Release v0.3 reports health version `0.3.0`; the deployed source revision identifies the active release.
 
 ## Recorded integration evidence
 
