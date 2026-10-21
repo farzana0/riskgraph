@@ -22,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.domain import CAP, Case, Order, Proposal, inspect, score
 from app.engine import Engine
 from app.providers import Agent
-from app.risk import anytime_upper, drift, estimate
+from app.risk import anytime_upper, legacy_drift as drift, estimate
 from app.store import Store
 
 

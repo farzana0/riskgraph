@@ -1,8 +1,10 @@
-# Validation record — October 18, 2026
+# Validation record
 
 ## Current automated checks
 
-**80 tests passed** on Python 3.9.6 and [Ubuntu/Python 3.11 in GitHub Actions](https://github.com/farzana0/riskgraph/actions/runs/39157732209). Provider-integration evidence below was recorded on revision `540d8c86674d0ea1b48ac118fd6cd3a9417f6862`. CI also runs a reproducible 80-case offline evaluation. Container execution is outside this validation record.
+**105 automated tests passed** after the framework upgrade. [Continuous integration](https://github.com/farzana0/riskgraph/actions/workflows/test.yml) runs the test suite plus original and adversarial CLI evaluations. Tests include confidence-sequence inversion and boundary behavior, exact small-horizon crossing control, restart-mixture prefix consistency, policy-disagreement fail-closed execution, review tampering, legacy evidence, and all scenario suites.
+
+The earlier 80-test suite and provider-integration evidence below were recorded on revision `540d8c86674d0ea1b48ac118fd6cd3a9417f6862`. Those October 18 results remain historical evidence. The [current comparison](FRAMEWORK_V2.md) records the local framework upgrade; fresh hosted-provider validation of the revised prompt and review workflow is separate. Container execution remains outside this validation record.
 
 Coverage includes:
 
@@ -58,7 +60,7 @@ Browser QA covered new/continue evaluation controls, history, full/blocked ledge
 
 ## Broader synthetic simulations
 
-The [simulation study](SIMULATIONS.md) adds 20,000 varied policy proposals, 1,600 end-to-end offline decisions, 15,000 estimator datasets, and 200,000 monitoring trajectories. No sampled harmful proposal passed the monitor. The study measures prior-sensitive credible-interval coverage, conservative sequential bounds, dependence-assumption failures, and limited alarm power for moderate harm rates. Raw results and the reproducible harness are included; the simulations make no provider requests.
+The [original study](SIMULATIONS.md) records 20,000 policy proposals, 1,600 workflow decisions, 15,000 estimator datasets, and 200,000 trajectories. Its coverage and alarm-power findings motivated the upgrade. The [current framework study](FRAMEWORK_V2.md) adds 50,000 policy proposals, 3,440 workflow decisions, 80,000 paired alarm trajectories, and 40,000 bound trajectories. It verifies tighter bounds, stronger moderate-rate detection, explicit tradeoffs, and policy enforcement. Both studies are reproducible and make no provider requests.
 
 ## Remaining limits
 

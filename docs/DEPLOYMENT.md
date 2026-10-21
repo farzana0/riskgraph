@@ -30,11 +30,11 @@ Public read endpoints expose synthetic evaluations and exports. Evaluation mutat
 2. Load the overview, decision ledger, methodology, and Connections views.
 3. Confirm JavaScript and CSS load successfully and the evaluation history is available.
 4. Verify an unauthenticated mutation returns HTTP 401 without creating a run.
-5. With operator access, complete a small offline evaluation, inspect a blocked decision, and download its JSON export.
-6. Verify the new evaluation remains available after a redeploy.
+5. With operator access, complete a small evaluation from a new scenario suite, inspect its policy review, verify decision evidence, and download its JSON export.
+6. Verify new and historical evaluations remain available after a redeploy. Historical events without review records must remain labeled legacy.
 7. When provider configuration changes, complete a small API check and inspect memory write/recall evidence as applicable.
 
-Provider calls consume the configured attempt budget. Copy-only releases can be checked without new paid API calls by inspecting existing evidence.
+Provider calls consume the configured attempt budget. Interface-only releases can be checked without new paid API calls. Framework releases should distinguish local simulation evidence from fresh provider checks. Release v0.2 reports health version `0.2.0`; the deployed source revision identifies the active release.
 
 ## Recorded integration evidence
 

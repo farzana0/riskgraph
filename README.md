@@ -2,19 +2,22 @@
 
 **Risk monitoring for AI refund agents.**
 
-RiskGraph evaluates refund proposals before simulated execution and estimates monetary exposure from small samples. An independent policy monitor checks trusted order facts, while the dashboard reports proposed risk, residual risk, uncertainty intervals, and incident provenance.
+RiskGraph evaluates refund proposals through a proposal–review–execution workflow and measures monetary exposure from small samples. Independent policy checks gate simulated execution. The dashboard distinguishes observed loss, time-uniform confidence bounds, Bayesian estimates, and incident provenance.
 
 [Live application](https://riskgraph-fa98.onrender.com) · [Source repository](https://github.com/farzana0/riskgraph) · [Validation record](docs/VALIDATION.md)
 
 ## Capabilities
 
-- Reproducible ordinary, prompt-injection, expired, wrong-owner, duplicate, and high-value scenarios.
+- Seven reproducible suites covering policy boundaries, partial refunds, adversarial text, rare large losses, workload shifts, and correlated bursts.
 - Strict action schemas and independent ownership, order, refund-window, balance, request, and approval checks.
 - Transactional execution ledger, ordered audit events, and replay protection.
 - Beta frequency × Dirichlet severity estimates with 95% posterior intervals and explicit priors.
-- Separate time-uniform loss upper bounds and a sequential reference-rate alarm.
+- Beta-mixture loss-tail confidence sequences with a shared risk error budget.
+- A multi-rate, precommitted restart-mixture alarm for conditional harm exceedance.
+- Read-only policy reviews, fail-closed consistency checks, and recomputable evidence.
 - Claude Messages API proposals and SurrealDB Agent Memory incident storage and retrieval.
-- Evaluation history, decision traces, memory provenance, and JSON evidence exports.
+- Evaluation presets, searchable decision ledger, review verification, memory provenance, and JSON exports.
+- A validation view comparing current and earlier methods on recorded simulations.
 - Render deployment configuration, persistent storage, and automated checks.
 
 All customers, orders, messages, and monetary outcomes are synthetic. The offline agent is a deliberately naive test fixture. Its results demonstrate policy enforcement; Claude performance is recorded in separate API evaluations.
@@ -34,14 +37,14 @@ Open http://127.0.0.1:8765. On first launch, the application creates a 40-case o
 ## Architecture
 
 ```text
-seeded case → agent proposal → independent monitor → sandbox ledger
-                    ↑                 ↓                 ↓
-              prior incidents ← Agent Memory      scored losses
-                                                       ↓
-                                           risk estimates → dashboard
+scenario suite → agent proposal → policy review → execution gate → sandbox ledger
+                     ↑                ↑                ↓                ↓
+                     └──── incident memory ───── blocked evidence    scored loss
+                                                                        ↓
+                                              confidence bounds + estimates + alarm
 ```
 
-Customer messages and recalled incidents provide context, never authorization. Only the independent monitor can allow a simulated refund. Proposed and residual losses are scored separately. Zero observed residual harm retains nonzero posterior uncertainty; adaptive-memory runs disable the stationary sequential bound.
+Customer messages and recalled incidents provide context, never authorization. The independent monitor gates execution; disagreements with the deterministic reviewer pause the evaluation. Proposed and residual losses are scored separately. Zero observed harm retains uncertainty. Adaptive-memory, drift, and correlated suites disable stationary confidence bounds.
 
 See [system architecture](docs/ARCHITECTURE.md), [statistical methods](docs/METHODS.md), [configuration guide](docs/SETUP_GUIDE.md), and [technical references](docs/SOURCES.md).
 
@@ -71,11 +74,18 @@ With provider credentials configured, an API evaluation can be run with:
 
 The CLI and server share the configured database's attempt budget. Evaluation seeds and settings are recorded for reproducibility. Development and memory-training seeds should remain separate from held-out evaluation seeds.
 
-The validation suite contains 80 tests. Recorded API checks include 26 completed Claude decisions across three runs and successful hosted-memory storage and later retrieval. The fresh 20-case Claude evaluation blocked two protocol-invalid escalations and observed zero unauthorized monetary loss. These synthetic samples establish integration behavior, not production safety. Raw evidence is available in [docs/examples](docs/examples).
+The validation suite contains 105 tests. Recorded API checks include 26 completed Claude decisions and successful hosted-memory storage and later retrieval on the earlier application revision. A 20-case Claude evaluation blocked two protocol-invalid escalations with zero unauthorized monetary loss observed. These historical API checks are distinct from the current local framework simulations. Raw evidence is available in [docs/examples](docs/examples).
 
 ## Simulation study
 
-A reproducible [simulation evaluation](docs/SIMULATIONS.md) covers 20,000 policy-stress proposals, 15,000 estimator datasets, and 200,000 monitoring trajectories. No sampled harmful proposal bypassed the monitor. The study also identifies workload-dependent credible-interval coverage and weak alarm detection for moderate harm rates. Numerical results, figures, and reproduction scripts are included.
+The [current framework comparison](docs/FRAMEWORK_V2.md) includes 50,000 policy-stress proposals, 3,440 workflow decisions, and 120,000 monitoring trajectories. At a 15% harm rate, the mixture alarm detected 80.19% of trajectories within 500 cases, compared with 17.34% for the original alarm. The current null false-alarm rate was 2.31% in the recorded simulation. No sampled harmful proposal bypassed the policy checks.
+
+```sh
+.venv/bin/python scripts/evaluate.py --suite adversarial --seed 21031 --cases 40 --output evidence/adversarial.json
+.venv/bin/python scripts/evaluate_v2.py --output evidence/framework-v2.json
+```
+
+The [original study](docs/SIMULATIONS.md) remains available as historical evidence, including workload-dependent Bayesian interval coverage. Current bounds and alarm guarantees are derived in [METHODS.md](docs/METHODS.md). Synthetic measurements do not establish production safety or a causal Claude memory benefit.
 
 ## Deployment
 

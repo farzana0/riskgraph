@@ -1,68 +1,86 @@
 # System architecture
 
-RiskGraph combines pre-execution policy enforcement, low-sample monetary risk estimates, and incident provenance in a synthetic refund workflow.
+RiskGraph is a controlled proposal–review–execution workflow for synthetic refund evaluation. Mathematical monitoring and execution authorization have separate responsibilities.
 
 ## Data flow
 
 ```mermaid
 flowchart LR
-  S[Seeded synthetic cases] --> A[Offline fixture or Claude proposal]
-  M[SurrealDB Agent Memory recall] --> A
-  O[Trusted order state] --> P[Independent policy monitor]
-  A --> P
-  P -->|Allowed| L[Transactional sandbox ledger]
-  P -->|Blocked incident| M
-  A --> G[Ground truth scoring]
-  L --> G
-  G --> R[Frequency and severity estimator]
-  G --> E[Sequential e-process]
-  R --> D[Dashboard and JSON evidence]
-  E --> D
+  S[Versioned scenario suite] --> A[Refund proposer]
+  O[Trusted order facts] --> A
+  M[Incident memory] --> A
+  A --> R[Read-only policy reviewer]
+  O --> R
+  M --> R
+  O --> G[Independent execution gate]
+  R --> G
+  A --> G
+  G -->|Allowed refund| L[Transactional sandbox ledger]
+  G -->|Blocked incident| M
+  G --> E[Audit event and review evidence]
+  L --> E
+  E --> C[Time-uniform loss bounds]
+  E --> B[Bayesian frequency and severity]
+  E --> Q[Mixture e-process alarm]
+  C --> D[Dashboard and evidence export]
+  B --> D
+  Q --> D
 ```
 
-A FastAPI process serves the dashboard and JSON API. NumPy and SciPy provide posterior inference. SQLite stores evaluations, decisions, execution records, and provider-attempt reservations. Render supplies the persistent disk. SurrealDB Agent Memory provides the incident-memory tier, including retrieval traces and extracted facts.
+A single FastAPI worker serves the dashboard and JSON API. SQLite stores runs, ordered events, the execution ledger, and attempted provider-call reservations on a Render persistent disk. NumPy and SciPy provide inference. SurrealDB Agent Memory stores and retrieves incident context with provenance.
 
-## Components
+## Workflow roles
+
+1. **Memory retriever:** obtains scoped prior incidents, retaining source and trace identifiers. Missing hosted configuration uses explicitly labeled local memory; hosted failures remain visible.
+2. **Refund proposer:** a deliberately naive offline fixture or one Claude Messages API request proposes a schema-validated action. It has no payment execution tool.
+3. **Policy reviewer:** a deterministic, read-only role independently evaluates explicit policy predicates and records the same memory source IDs supplied to the proposer. It produces a recommendation, case authorization limit, check results, and evidence fingerprint.
+4. **Execution gate:** the independent monitor checks trusted facts. Any disagreement with the reviewer pauses the evaluation before execution. Only allowed refunds enter the sandbox ledger.
+5. **Evidence and monitoring:** events retain proposals, review checks, verdicts, simulated outcomes, memory status, and usage. Separate risk estimators and an e-process summarize the accumulated observations.
+
+The reviewer is not a second LLM or an autonomous payment authority. Memory is context for both roles and never a policy source. A fingerprint detects inconsistency with recorded inputs; it is not a digital signature or an assertion that those inputs came from an authenticated external system.
+
+## Policy and storage
+
+Required refund checks cover order identity, ownership, the 30-day window, remaining paid balance, requested amount, the $200 automatic approval cap, and positive integer cents. Decline and escalation require zero monetary amounts. Customer text and recalled policy-override claims cannot authorize execution.
+
+Event persistence and ledger execution share a transaction. Expected-sequence checks and unique ledger records prevent a replay from executing the same refund twice. Provider failures and policy disagreements produce no decision observation. Failed Claude requests still consume the persisted attempt budget.
+
+## Versioned scenarios
+
+The original `baseline` suite preserves existing seeds and cases. New suites cover balanced policies, adversarial text, partial refunds and boundary amounts, rare large requests, mid-run workload shifts, and correlated incident bursts. Run records preserve suite, generator, model, policy, seed, and memory settings.
+
+Stationary confidence bounds are disabled for memory, drift, and correlated suites. Their Bayesian summaries remain descriptive. Historical events remain readable and are marked as lacking review evidence rather than receiving fabricated reviews. Incomplete earlier-workflow runs and runs with a changed prompt version cannot resume under new behavior; a new evaluation is required. Current runs record an explicit prompt version.
+
+## Mathematical monitoring
+
+The primary loss bound uses four beta-mixture tail confidence sequences with explicit error allocation. Proposed and residual streams each receive 2.5% error, giving at least 95% family coverage under fixed conditional tail probabilities. A separate Beta/Dirichlet model reports posterior risk, credible intervals, and sensitivity to prior strengths.
+
+The alarm combines betting rates and precommitted restart times into one e-process. It has its own 5% per-evaluation false-alarm budget against the conditional 10% harm reference. [METHODS.md](METHODS.md) derives the guarantees, assumptions, and scope.
+
+## Implementation
 
 | Module | Responsibility |
 | --- | --- |
-| `app/domain.py` | Seeded scenarios, strict action schemas, policy monitor, independent loss scoring |
-| `app/risk.py` | Frequency/severity posterior, interval simulation, sequential upper bound, e-process |
-| `app/providers.py` | Claude Messages API and Agent Memory REST adapters |
-| `app/store.py` | Evaluation/event/ledger transactions and persisted attempt budget |
-| `app/engine.py` | Ordered orchestration, provider errors, memory provenance |
-| `app/main.py` | API, operator verification, same-origin mutation checks, public synthetic reads |
-| `app/static/` | Overview, decision ledger, methodology, connections, export controls |
-| `tests/` | Policy invariants, numerical checks, trajectory simulations, provider contracts, API flows |
-
-## Authorization and execution
-
-Authenticated customer identity and trusted order facts come from the synthetic scenario. Customer text, model explanations, and recalled incidents cannot override policy. The model receives a proposal tool and has no payment-execution tool.
-
-Every proposal passes local schema validation and independent checks for order identity, ownership, refund age, remaining balance, requested amount, and the automatic approval cap. Non-refund actions must carry a zero monetary amount. Only allowed refunds enter the sandbox ledger. Event insertion and ledger writes share a transaction; sequence checks and unique ledger entries prevent duplicate execution.
-
-## Risk and monitoring
-
-Proposed loss measures exposure before the monitor; residual loss measures unauthorized loss after execution. The Bayesian model separates harmful-proposal frequency from positive-loss severity. Its priors and bin endpoints are explicit, and zero observed harm retains uncertainty.
-
-A separate Hoeffding-based time-uniform upper bound applies under bounded, common-mean assumptions. Adaptive-memory runs disable that bound. A betting e-process tracks proposed harm against a fixed 10% reference rate. Full definitions and guarantees are documented in [METHODS.md](METHODS.md).
+| `app/domain.py` | Scenario suites, action schemas, policy monitor, independent monetary scoring |
+| `app/review.py` | Read-only review, evidence fingerprint, recomputation |
+| `app/risk.py` | Tail confidence sequences, Bayesian summaries, mixture alarm, legacy references |
+| `app/providers.py` | Claude and scoped Agent Memory adapters |
+| `app/store.py` | Transactional persistence, execution ledger, attempt reservations |
+| `app/engine.py` | Ordered orchestration and fail-closed policy consistency |
+| `app/main.py` | API, operator authorization, verification, published benchmarks |
+| `app/static/` | Evaluation controls, ledger search, traces, methodology, validation, integrations |
+| `scripts/evaluate_v2.py` | Reproducible comparison and scenario validation |
 
 ## Provider contracts
 
-Claude uses automatic strict tool selection, `between_tools`, and low effort. Unsupported remote schema bounds are expressed in descriptions and enforced by the complete local Pydantic model. Exactly one valid `propose_refund` result is required. Invalid or failed responses produce no observation or execution.
+Claude uses automatic strict tool selection and local Pydantic validation. Non-refund actions explicitly require zero cents in the instruction. Unsupported remote schema bounds remain local constraints. Invalid, incomplete, or multiple tool results never execute.
 
-Workspace selection uses an explicit `ANTHROPIC_WORKSPACE_ID` when configured. Otherwise, one read-only lookup per process can select a uniquely identified active Default workspace from a complete response. Lookup denial does not change permissions or create workspaces.
+Multi-workspace authentication supports an explicit workspace header and one read-only discovery of a unique active Default workspace. No workspace, key, or grant changes occur.
 
-Agent Memory writes blocked incidents through `/facts` and retrieves prior context through `/query`. Event IDs supply write idempotency. Scope selectors, source IDs, retrieval trace IDs, and memory turn IDs are retained. An explicitly missing configured scope can be registered using existing grants, followed by one identical idempotent write retry. Other failures remain visible.
+Agent Memory uses Context `/facts` and `/query` routes with nested scope selectors. Event IDs provide write idempotency. Only an explicitly missing configured scope triggers registration using existing grants and one identical write retry. Other failures remain explicit.
 
-## Deployment and resource boundaries
+## Operations
 
-The application uses one Python worker and one persistent SQLite database. The current workspace supports up to 30 runs. Claude evaluations allow 40 cases per run, a 700-output-token request ceiling, and a persisted 200-attempt budget by default. Failed calls consume attempts; automatic model retries are disabled.
+The Render Blueprint defines one `0.5c-512mb` Python service and a 1 GB disk. Claude runs are limited to 40 cases; the default persisted budget is 200 attempted calls. Public endpoints expose synthetic evidence; operator authorization and same-origin checks protect mutations. Tokens remain in the active tab, while provider credentials stay server-side.
 
-The Render Blueprint specifies a `0.5c-512mb` web service and a 1 GB disk mounted at `/var/data`. Credentials are server-side configuration. The operator token protects evaluation mutations; public endpoints expose synthetic evidence. This single-instance evaluation architecture requires additional authorization, storage, and recovery controls before production use.
-
-## Extension points
-
-A risk-review agent could share incident evidence with the refund agent, while versioned policy facts could demonstrate typed, time-aware supersession and source tracing. These capabilities are future extensions. Trusted authorization remains independent of recalled text.
-
-Further verification can add independently checked authorization evidence and bounded arithmetic policy-model proofs. Current validation covers tested policy invariants and provider contracts; it does not constitute an end-to-end proof of an AI system.
+This architecture requires additional identity, tenant isolation, representative validation, and recovery controls for production payments. Policy-memory supersession and benefits from multiple LLM agents remain separate extension targets.

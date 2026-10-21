@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from app.domain import SUITES
 from app.engine import Engine
 from app.store import Store
 
@@ -16,6 +17,7 @@ def main():
     parser.add_argument("--cases",type=int,default=40)
     parser.add_argument("--mode",choices=["offline","claude"],default="offline")
     parser.add_argument("--memory",action="store_true")
+    parser.add_argument("--suite",choices=list(SUITES),default="baseline")
     parser.add_argument("--output",default="evidence/evaluation.json")
     args=parser.parse_args()
     if not 1<=args.cases<=200 or not 0<=args.seed<2**31:
@@ -25,7 +27,7 @@ def main():
     # Live attempts must persist across CLI runs, too.
     store=Store(os.getenv("DATABASE_PATH","data/riskgraph.sqlite3") if args.mode=="claude" else ":memory:")
     engine=Engine(store)
-    run=engine.create(args.seed,args.cases,args.mode,args.memory)
+    run=engine.create(args.seed,args.cases,args.mode,args.memory,suite=args.suite)
     for i in range(args.cases):
         engine.step(run["id"],i)
     result=engine.snapshot(run["id"])

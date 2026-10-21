@@ -1,3 +1,4 @@
+import json
 import hmac
 import os
 from pathlib import Path
@@ -10,6 +11,8 @@ from pydantic import BaseModel, ConfigDict, Field
 from .engine import Engine, Busy, BudgetExceeded
 from .providers import ProviderError
 from .store import Store
+from .domain import SUITES
+from .review import verify_review
 
 STATIC = Path(__file__).parent / "static"
 
@@ -20,6 +23,7 @@ class RunRequest(BaseModel):
     count: int = Field(default=40, ge=1, le=200)
     mode: Literal["offline", "claude"] = "offline"
     use_memory: bool = False
+    suite: Literal["baseline", "balanced", "adversarial", "boundary", "heavy_tail", "drift", "correlated"] = "baseline"
 
 
 class StepRequest(BaseModel):
@@ -28,7 +32,7 @@ class StepRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.1.0")
+    app = FastAPI(title="RiskGraph", version="0.2.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -60,7 +64,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.1.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.2.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/api/config")
     def config():
@@ -70,9 +74,17 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
                 "surreal_configured": engine.memory.configured,
                 "operator_token_required": bool(token),
                 "live_enabled": bool(token and os.getenv("ANTHROPIC_API_KEY")),
-                "live_max_cases": 40, "synthetic_only": True,
+                "live_max_cases": 40, "synthetic_only": True, "suites": SUITES,
+                "framework_version": "risk_v2",
                 "claude_attempts_used": store.attempts(),
                 "claude_attempts_limit": int(os.getenv("MAX_CLAUDE_CASES", "200"))}
+
+    @app.get("/api/benchmarks")
+    def benchmarks():
+        path = STATIC.parents[1] / "docs" / "examples" / "framework-v2.json"
+        if not path.is_file():
+            return {"available": False}
+        return {"available": True, "study": json.loads(path.read_text())}
 
     @app.get("/api/runs")
     def runs():
@@ -90,7 +102,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
                 raise HTTPException(422, "Claude runs are capped at 40 cases per run")
         if len(store.runs()) >= 30:
             raise HTTPException(409, "This demo workspace has reached its 30-run limit. Export evidence and use a fresh database for another workspace.")
-        run = engine.create(body.seed, body.count, body.mode, body.use_memory)
+        run = engine.create(body.seed, body.count, body.mode, body.use_memory, suite=body.suite)
         return engine.snapshot(run["id"])
 
     @app.get("/api/runs/{run_id}")
@@ -116,6 +128,27 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
             if token and exc.operator_message:
                 detail += " Provider detail (operator only): " + exc.operator_message
             raise HTTPException(502, detail)
+
+    @app.get("/api/runs/{run_id}/verify")
+    def verify_evidence(run_id: str):
+        if store.run(run_id) is None:
+            raise HTTPException(404, "Run not found")
+        events = store.events(run_id)
+        results = []
+        for event in events:
+            if "review" not in event:
+                results.append({"event_id": event["id"], "status": "legacy_without_review"})
+                continue
+            try:
+                valid = verify_review(event)
+            except (ValueError, KeyError, TypeError):
+                valid = False
+            results.append({"event_id": event["id"], "status": "verified" if valid else "mismatch"})
+        return {"run_id": run_id, "verified": sum(r["status"] == "verified" for r in results),
+                "mismatches": sum(r["status"] == "mismatch" for r in results),
+                "legacy": sum(r["status"] == "legacy_without_review" for r in results),
+                "events": results,
+                "scope": "Recomputed policy checks and evidence digest; no cryptographic identity or end-to-end formal proof"}
 
     @app.get("/api/runs/{run_id}/export")
     def export(run_id: str):

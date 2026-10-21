@@ -12,3 +12,4 @@ jobs:
       - run: pip install -r requirements-dev.txt
       - run: pytest -q
       - run: python scripts/evaluate.py --cases 80 --output evidence/ci.json
+      - run: python scripts/evaluate.py --suite adversarial --seed 21031 --cases 40 --output evidence/adversarial-ci.json

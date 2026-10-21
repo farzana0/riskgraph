@@ -1,4 +1,6 @@
-# Synthetic simulation evaluation
+# Original synthetic simulation evaluation
+
+This is the recorded v1 study. The [framework v2 comparison](FRAMEWORK_V2.md) documents the subsequent methods, scenario suites, workflow, and interface improvements.
 
 ## Scope
 

@@ -53,10 +53,12 @@ Saving environment changes requires a deployment before they take effect. If a s
 
 ## Evaluation workflow
 
-1. Select **New evaluation** and choose the agent, case count, seed, and memory mode.
+1. Select **New evaluation** and choose the agent, scenario suite, case count, and memory mode. The recorded seed can be adjusted under **Reproducibility settings**.
 2. Start the run; **Continue evaluation** resumes unfinished cases.
 3. Inspect monitor verdicts and proposed versus residual loss in the ledger.
-4. Review uncertainty intervals and their assumptions under **Risk methodology**.
+4. Review uncertainty intervals and their assumptions under **Methodology**. Proposed and residual upper bounds are separate from Bayesian estimates.
 5. Export JSON evidence before changing evaluation settings. New models, prompts, or policies require a separate run.
+
+The **Validation** view compares recorded framework simulations. **Decision ledger → Verify decision evidence** recomputes the policy review for current-workflow events.
 
 The [validation record](VALIDATION.md) distinguishes offline fixtures, API evaluations, hosted-memory evidence, and production limitations.
