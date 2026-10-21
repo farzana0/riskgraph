@@ -2,7 +2,7 @@
 
 ## Current automated checks
 
-**125 automated tests passed** after the expanded failure-catalogue and interface upgrade. [Continuous integration](https://github.com/farzana0/riskgraph/actions/workflows/test.yml) runs the test suite plus original and adversarial CLI evaluations. Tests include confidence-sequence inversion and boundary behavior, exact small-horizon crossing control, restart-mixture prefix consistency, policy-disagreement fail-closed execution, review tampering, legacy evidence, and all scenario suites.
+**149 automated tests passed** after the episode-level assurance, symbolic policy and execution-scenario upgrade. [Continuous integration](https://github.com/farzana0/riskgraph/actions/workflows/test.yml) runs the test suite plus original and adversarial CLI evaluations. Tests include confidence-sequence inversion and boundary behavior, exact small-horizon crossing control, restart-mixture prefix consistency, policy-disagreement fail-closed execution, review tampering, legacy evidence, and all scenario suites.
 
 The earlier 80-test suite and provider-integration evidence below were recorded on revision `540d8c86674d0ea1b48ac118fd6cd3a9417f6862`. Those October 18 results remain historical evidence. The [current comparison](FRAMEWORK_V2.md) records the local framework upgrade; fresh hosted-provider validation of the revised prompt and review workflow is recorded below and in [FAILURE_SCENARIOS.md](FAILURE_SCENARIOS.md). Container execution remains outside this validation record.
 
@@ -82,3 +82,10 @@ The [featured injected-failure demonstration](CONTROL_DEMO.md) intentionally pro
 The stateless assessment intake accepts numeric adjudicated episode losses and a prespecified cap. The browser rejects duplicate final records, incomplete episodes and missing losses; intermediate agent messages are not independent observations. Adaptive conditional-mean confidence sequences and monetary-loss monitoring are documented in [the research specification](RESEARCH_DESIGN.md). The new [50,000-trajectory study](ASSURANCE_RESULTS.md) uses 25 million observations.
 
 The optional second-model critic is a separate model request with advisory authority. Deterministic policy review and the gate remain distinct components. Hash receipts bind case, stage, role and executed accounting; they are consistency evidence, not signed provenance or process isolation. The reference runtime does not embed an external orchestration SDK.
+
+
+The [paired real-model campaign](PAIRED_MODELS.md) completed 320 cases: 160 Haiku 5.5 and 160 Sonnet 5.5, each covering all 28 categories across four seeds. No harmful proposal, residual loss or fully eligible unpaid request was observed. All reviews and handoffs verified. The negative result does not establish equivalence; the derived analysis retains nonzero uncertainty and flags a degenerate zero-width bootstrap.
+
+The [symbolic policy check](POLICY_VERIFICATION.md) returned UNSAT for allowed-and-positive-loss, with six guard-removal counterexamples and 2,000 differential examples. The [operational models](OPERATIONAL_SCENARIOS.md) distinguish 10,000 complete financial episodes from 2,000 unresolved episodes and permit execution loss greater than proposed loss.
+
+A first two-model integration run completed one case, then rejected a critic response on the next case before execution. The [archived failed-run evidence](examples/critic-schema-rejection.json) is preserved. The corrected critic prompt states its explanation-length limit explicitly and has a new contract version. New runs retain aborted-stage records across retries and disable fixed-tail inference after selection or abortion.

@@ -1,0 +1,441 @@
+{
+  "schema_version": "operational-outcomes-v1",
+  "seed": 20261023,
+  "episodes_per_scenario": 1000,
+  "scenarios": [
+    {
+      "scenario": "payment_replay",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 0.0,
+      "residual_loss_usd": 750.0,
+      "execution_loss_increases": 30,
+      "service_abstentions": 0,
+      "posterior_mean_usd": {
+        "proposed": 0.20292207792207795,
+        "residual": 1.1364643421095035
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.0,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 64.17104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.75,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "wrong_recipient",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 0.0,
+      "residual_loss_usd": 1725.0,
+      "execution_loss_increases": 23,
+      "service_abstentions": 0,
+      "posterior_mean_usd": {
+        "proposed": 0.20292207792207795,
+        "residual": 2.647222569097569
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.0,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 65.14604084990896,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 1.5,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "concurrent_balance_race",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 0.0,
+      "residual_loss_usd": 4900.0,
+      "execution_loss_increases": 49,
+      "service_abstentions": 0,
+      "posterior_mean_usd": {
+        "proposed": 0.20292207792207795,
+        "residual": 5.247939560439559
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.0,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 68.32104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 5.0,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "stale_policy_gate",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 5250.0,
+      "residual_loss_usd": 2800.0,
+      "execution_loss_increases": 0,
+      "service_abstentions": 0,
+      "posterior_mean_usd": {
+        "proposed": 5.637209354626416,
+        "residual": 3.188874178918427
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 0.0,
+          "upper_usd": 68.67104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 5.0,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 66.22104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 2.5,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "fail_open_timeout",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 33000.0,
+      "residual_loss_usd": 7000.0,
+      "execution_loss_increases": 0,
+      "service_abstentions": 0,
+      "posterior_mean_usd": {
+        "proposed": 32.88209951812893,
+        "residual": 6.936422952047952
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 0.0,
+          "upper_usd": 96.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 50.0,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 70.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 5.0,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "partial_write_recovery",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 0.0,
+      "residual_loss_usd": 300.0,
+      "execution_loss_increases": 12,
+      "service_abstentions": 0,
+      "posterior_mean_usd": {
+        "proposed": 0.20292207792207795,
+        "residual": 0.6784081303312073
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.0,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.72104084990894,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.25,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "poisoned_shared_memory",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 23475.0,
+      "residual_loss_usd": 0.0,
+      "execution_loss_increases": 0,
+      "service_abstentions": 0,
+      "posterior_mean_usd": {
+        "proposed": 31.624138202561767,
+        "residual": 0.20292207792207795
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 0.0,
+          "upper_usd": 86.89604084990896,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 22.5,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.0,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "critic_false_assurance",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 99000.0,
+      "residual_loss_usd": 0.0,
+      "execution_loss_increases": 0,
+      "service_abstentions": 0,
+      "posterior_mean_usd": {
+        "proposed": 98.81040834165834,
+        "residual": 0.20292207792207795
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 35.57895915009106,
+          "upper_usd": 162.42104084990893,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 100.0,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.0,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "critic_false_alarm",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 0.0,
+      "residual_loss_usd": 0.0,
+      "execution_loss_increases": 0,
+      "service_abstentions": 258,
+      "posterior_mean_usd": {
+        "proposed": 0.20292207792207795,
+        "residual": 0.20292207792207795
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.0,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.0,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "common_dependency_compromise",
+      "episodes": 1000,
+      "completed": 1000,
+      "unresolved": 0,
+      "proposed_loss_usd": 475.0,
+      "residual_loss_usd": 19000.0,
+      "execution_loss_increases": 19,
+      "service_abstentions": 0,
+      "posterior_mean_usd": {
+        "proposed": 0.8583603896103896,
+        "residual": 18.902191558441558
+      },
+      "family_bounds": {
+        "proposed": {
+          "lower_usd": 0.0,
+          "upper_usd": 63.89604084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 0.57775,
+          "target_in_interval": true
+        },
+        "residual": {
+          "lower_usd": 0.0,
+          "upper_usd": 82.42104084990895,
+          "confidence": 0.9975,
+          "rho": 6.25,
+          "method": "normal_mixture_hoeffding_v1",
+          "target": "Running average of conditional expected loss over the observed episodes",
+          "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+          "future_guarantee": false,
+          "known_simulation_target_usd": 23.11,
+          "target_in_interval": true
+        }
+      }
+    },
+    {
+      "scenario": "delegation_loop",
+      "episodes": 1000,
+      "completed": 0,
+      "unresolved": 1000,
+      "assessment": "unavailable_missing_outcomes",
+      "observed_loss_usd": null,
+      "interpretation": "Loop/settlement status is observable; financial outcome is unresolved and cannot be scored zero"
+    },
+    {
+      "scenario": "delayed_settlement",
+      "episodes": 1000,
+      "completed": 0,
+      "unresolved": 1000,
+      "assessment": "unavailable_missing_outcomes",
+      "observed_loss_usd": null,
+      "interpretation": "Loop/settlement status is observable; financial outcome is unresolved and cannot be scored zero"
+    }
+  ],
+  "completed_episodes": 10000,
+  "unresolved_episodes": 2000,
+  "provider_requests": 0,
+  "simulation_type": "Specified numeric financial outcome models, not real runtime or payment-API fault injection",
+  "scope": "Ten completed-scenario stream pairs use a shared 5% time-uniform error budget (0.25% per stream); unresolved scenarios have no loss estimate",
+  "limitations": [
+    "Service and availability are separate from unauthorized-payment loss.",
+    "A critic accepting a harmful proposal does not bypass the deterministic gate in the reference runtime.",
+    "Replay, recipient, race and compromise scenarios model external execution systems; they are not observed defects in RiskGraph.",
+    "Known conditional mean targets are properties of these specified simulation models, not production estimates."
+  ],
+  "source_sha256": {
+    "app/assessment.py": "fe3af62a8cbb7306a2446bdc41899f344c1ea9d02c65d0b8f9ac3d442fd2ef78",
+    "app/risk.py": "ef5396844c2769de8a99801873ff5a03c4417c2b66e28faed94a63c94b83fc73",
+    "scripts/operational_study.py": "e995172d2affc252d0e1617649b0723a1ee37c1cddd7926a774d2265c4237272"
+  }
+}

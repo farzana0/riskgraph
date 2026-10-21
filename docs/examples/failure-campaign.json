@@ -1233,14 +1233,14 @@
   "source_sha256": {
     "app/domain.py": "8197d67a9287330cf41a1591f6354e61cbf7b40b6b6c5ff8368fee3012896a0c",
     "app/scenarios.py": "23e5b012a1f7d9d6aa66f6a2d6ae3e42b321bf2443def96fbb8bf1082c6dec7a",
-    "app/providers.py": "f2d8280a91e196fe428443bb6c6fda1d219db6358ea682ae4fecf7178145d854",
-    "app/engine.py": "0f2ef6da7f21e34378429b3bbc95c51d5ff4b980e516451bf4087c233c319571",
+    "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d",
+    "app/engine.py": "485de00ae071620f411f3ac08a270ba10933a82cdbac21f662b51b919db1ee35",
     "app/review.py": "c9fa51d5a047c2726209e53d898cf97a27689c0c53d9059ab8884576b662d020",
     "app/store.py": "687bf948f49b1adb8467139eef311f3f6c4330c85539d4913332859cc4f4d462",
     "app/risk.py": "ef5396844c2769de8a99801873ff5a03c4417c2b66e28faed94a63c94b83fc73",
     "scripts/stress_campaign.py": "0ccd217d5cea00fb9e67eeca1ce3dd0cd2c1b7ceaa55aeb9ae9a062e9c386dae"
   },
-  "elapsed_seconds": 30.935,
+  "elapsed_seconds": 29.679,
   "limitations": [
     "Injected faults and synthetic messages are controlled tests, not measured Claude error rates.",
     "The catalogue cycles through cases; stationary confidence bounds are disabled.",

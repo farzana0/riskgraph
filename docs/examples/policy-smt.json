@@ -1,0 +1,131 @@
+{
+  "schema_version": "policy-smt-v1",
+  "solver": "4.15.3",
+  "result": "unsat",
+  "property": "No schema-valid action allowed by the encoded current gate has positive specified monetary loss",
+  "translation": "Restricted AST translation of app.domain.inspect, with independently encoded authorization/loss specification",
+  "rules": [
+    "order_mismatch",
+    "ownership",
+    "return_window",
+    "duplicate_or_excess_refund",
+    "exceeds_request",
+    "human_approval_required",
+    "empty_refund",
+    "non_refund_amount"
+  ],
+  "differential_examples": 2000,
+  "negative_controls": [
+    {
+      "removed_rule": "order_mismatch",
+      "result": "sat_counterexample",
+      "witness": {
+        "paid": 20001,
+        "refunded": 0,
+        "requested": 20000,
+        "amount": 20000,
+        "age": 0,
+        "action": 0,
+        "order": 1,
+        "proposed_order": 0,
+        "owner": 0,
+        "customer": 0
+      },
+      "loss_cents": 20000
+    },
+    {
+      "removed_rule": "ownership",
+      "result": "sat_counterexample",
+      "witness": {
+        "paid": 20001,
+        "refunded": 0,
+        "requested": 20000,
+        "amount": 1,
+        "age": 0,
+        "action": 0,
+        "order": 0,
+        "proposed_order": 0,
+        "owner": 1,
+        "customer": 0
+      },
+      "loss_cents": 1
+    },
+    {
+      "removed_rule": "return_window",
+      "result": "sat_counterexample",
+      "witness": {
+        "paid": 20001,
+        "refunded": 0,
+        "requested": 20000,
+        "amount": 1,
+        "age": 31,
+        "action": 0,
+        "order": 0,
+        "proposed_order": 0,
+        "owner": 0,
+        "customer": 0
+      },
+      "loss_cents": 1
+    },
+    {
+      "removed_rule": "duplicate_or_excess_refund",
+      "result": "sat_counterexample",
+      "witness": {
+        "paid": 0,
+        "refunded": 0,
+        "requested": 1,
+        "amount": 1,
+        "age": 0,
+        "action": 0,
+        "order": 0,
+        "proposed_order": 0,
+        "owner": 0,
+        "customer": 0
+      },
+      "loss_cents": 1
+    },
+    {
+      "removed_rule": "exceeds_request",
+      "result": "sat_counterexample",
+      "witness": {
+        "paid": 1,
+        "refunded": 0,
+        "requested": 0,
+        "amount": 1,
+        "age": 0,
+        "action": 0,
+        "order": 0,
+        "proposed_order": 0,
+        "owner": 0,
+        "customer": 0
+      },
+      "loss_cents": 1
+    },
+    {
+      "removed_rule": "human_approval_required",
+      "result": "sat_counterexample",
+      "witness": {
+        "paid": 20001,
+        "refunded": 0,
+        "requested": 20001,
+        "amount": 20001,
+        "age": 0,
+        "action": 0,
+        "order": 0,
+        "proposed_order": 0,
+        "owner": 0,
+        "customer": 0
+      },
+      "loss_cents": 1
+    }
+  ],
+  "scope": [
+    "Trusted state, schema validity, policy specification, translator and solver are assumptions.",
+    "No end-to-end proof of Python runtime, providers, state authenticity, concurrency or payment execution.",
+    "SMT-LIB and source hashes permit reproduction; no independently checked proof certificate is claimed."
+  ],
+  "source_sha256": {
+    "app/domain.py": "8197d67a9287330cf41a1591f6354e61cbf7b40b6b6c5ff8368fee3012896a0c",
+    "scripts/verify_policy.py": "432950409c490d8d47e3ca2fddac4d073ba80b5a48e73d906c486b4f7842cf3c"
+  }
+}

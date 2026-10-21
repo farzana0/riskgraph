@@ -84,3 +84,8 @@ Agent Memory uses Context `/facts` and `/query` routes with nested scope selecto
 The Render Blueprint defines one `0.5c-512mb` Python service and a 1 GB disk. Claude runs are limited to 40 cases; the default persisted budget is 500 attempted calls. Public endpoints expose synthetic evidence; operator authorization and same-origin checks protect mutations. Tokens remain in the active tab, while provider credentials stay server-side.
 
 This architecture requires additional identity, tenant isolation, representative validation, and recovery controls for production payments. Policy-memory supersession and benefits from multiple LLM agents remain separate extension targets.
+
+
+## Episode-level assessment and optional critic
+
+The current extension is specified in [RESEARCH_DESIGN.md](RESEARCH_DESIGN.md). A second model may critique proposals with advisory authority; the deterministic reviewer remains a separate component. Directed handoff receipts bind case and execution accounting. Imported numeric outcome assessments are stateless and group all agents by completed business episode. Their proposed and residual streams are bounded separately, so execution failures can introduce loss even after a correct proposal.

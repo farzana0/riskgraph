@@ -4,7 +4,7 @@ from uuid import uuid4
 import os
 import httpx
 from .domain import generate, inspect, score, authorization
-from .providers import Agent, AgentMemory, ProviderError, failure_details, PROMPT_VERSION, EXTENDED_FIXTURE_VERSION
+from .providers import Agent, AgentMemory, ProviderError, failure_details, PROMPT_VERSION, EXTENDED_FIXTURE_VERSION, CRITIC_VERSION
 from .risk import estimate, drift, conditional_mean_sequence, severity_alarm
 from .review import review_proposal, verify_review
 from .protocol import handoff_receipts, verify_handoffs
@@ -38,6 +38,8 @@ class Engine:
         run = {"id": uuid4().hex, "seed": seed, "count": count, "mode": mode,
                "use_memory": use_memory, "model": (model or os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5-5")) if mode == "claude" else "naive-fixture-v1",
                "advisory_critic": advisory_critic, "critic_model": "claude-sonnet-5-5" if advisory_critic else None,
+               "critic_version": CRITIC_VERSION if advisory_critic else None,
+               "aborted_attempts": [],
                "created_at": now(), "status": "ready", "error": None,
                "policy_version": "refund-v1", "generator_version": "cases-v3" if suite in EXTENDED_SUITES else "cases-v1" if suite == "baseline" else "cases-v2",
                "suite": suite, "framework": "proposal_review_gate_v2",
@@ -57,7 +59,7 @@ class Engine:
                 raise Busy("This case was already processed. Refresh the run.")
             if len(events) >= run["count"]:
                 return self.snapshot(run_id)
-            if run.get("framework") != "proposal_review_gate_v2" or run.get("prompt_version") != proposal_version(run["mode"],run.get("suite","baseline")):
+            if run.get("framework") != "proposal_review_gate_v2" or run.get("prompt_version") != proposal_version(run["mode"],run.get("suite","baseline")) or (run.get("advisory_critic") and run.get("critic_version") != CRITIC_VERSION):
                 raise Busy("This evaluation uses an earlier workflow or prompt. Start a new evaluation; existing evidence remains available.")
             if run["mode"] == "claude" and not self.store.reserve_attempt(int(os.getenv("MAX_CLAUDE_CASES", "500"))):
                 raise BudgetExceeded("Workspace Claude attempt budget exhausted")
@@ -78,6 +80,7 @@ class Engine:
                 else:
                     recalled = self.store.local_memories(case.category, run["mode"])
                     memory_status = "local_demo"
+            provider_stage = "refund_proposer"
             try:
                 if isinstance(self.agent, Agent):
                     proposal, usage = self.agent.propose(case, run["mode"], recalled, model=run["model"])
@@ -85,11 +88,14 @@ class Engine:
                     proposal, usage = self.agent.propose(case, run["mode"], recalled)
                 critique = None
                 if run.get("advisory_critic"):
+                    provider_stage = "advisory_critic"
                     if not self.store.reserve_attempt(int(os.getenv("MAX_CLAUDE_CASES", "500"))):
                         raise BudgetExceeded("Workspace Claude attempt budget exhausted before critique; no case executed")
                     critique, critic_usage = self.agent.critique(case, proposal, recalled, model=run["critic_model"])
                     usage = {k: usage.get(k,0)+critic_usage.get(k,0) for k in ("input_tokens", "output_tokens")}
             except ProviderError as exc:
+                run.setdefault("aborted_attempts", []).append({"seq": len(events), "at": now(), "stage": provider_stage,
+                                                              "code": exc.diagnostic["code"], "outcome": "not_scored_no_execution"})
                 run["status"], run["error"] = "provider_error", exc.diagnostic["message"] + " No case executed."
                 run["error_detail"] = exc.diagnostic
                 self.store.put_run(run)
@@ -100,6 +106,8 @@ class Engine:
                 diagnostic = {"provider": "workflow", "code": "policy_disagreement", "http_status": None,
                               "message": "Independent policy checks disagreed. Evaluation paused."}
                 run["status"], run["error"], run["error_detail"] = "policy_error", diagnostic["message"], diagnostic
+                run.setdefault("aborted_attempts", []).append({"seq": len(events), "at": now(), "stage": "policy_review",
+                                                              "code": "policy_disagreement", "outcome": "not_scored_no_execution"})
                 self.store.put_run(run)
                 raise ProviderError(diagnostic["message"], diagnostic)
             gross = score(case, proposal)
@@ -154,15 +162,15 @@ class Engine:
         gross = estimate([e["gross_loss_cents"] for e in events], delta=.025)
         residual = estimate([e["residual_loss_cents"] for e in events], delta=.025)
         for risk in (gross, residual):
-            if run["use_memory"] or run.get("suite") in ("drift", "correlated", "full_stress"):
+            if run["use_memory"] or run.get("aborted_attempts") or run.get("status") in ("provider_error", "policy_error") or run.get("suite") in ("drift", "correlated", "full_stress"):
                 risk["anytime_upper_usd"] = None
                 risk["confidence_sequence"] = None
                 risk["hoeffding_upper_usd"] = None
-                risk["bound_assumption"] = "Unavailable: adaptive memory or a nonstationary/dependent suite invalidates fixed-tail assumptions. Bayesian intervals are descriptive approximations."
+                risk["bound_assumption"] = "Unavailable: adaptation, designed/dependent workload, or aborted/selected outcomes. Bayesian intervals are descriptive approximations."
         for name, risk in (("gross", gross), ("residual", residual)):
             risk["conditional_mean_sequence"] = conditional_mean_sequence([e[name+"_loss_cents"] for e in events])
         return {"run": run, "events": events, "gross": gross, "residual": residual,
-                "resume_supported": run.get("framework") == "proposal_review_gate_v2" and run.get("prompt_version") == proposal_version(run["mode"],run.get("suite","baseline")),
+                "resume_supported": run.get("framework") == "proposal_review_gate_v2" and run.get("prompt_version") == proposal_version(run["mode"],run.get("suite","baseline")) and (not run.get("advisory_critic") or run.get("critic_version") == CRITIC_VERSION),
                 "prevented_usd": sum(e["prevented_loss_cents"] for e in events) / 100,
                 "executed_usd": sum(e["executed_cents"] for e in events) / 100,
                 "blocked": sum(not e["monitor"]["allowed"] for e in events),
@@ -170,12 +178,15 @@ class Engine:
                 "drift": drift([e["gross_loss_cents"] > 0 for e in events]),
                 "severity_monitor": severity_alarm([e["gross_loss_cents"] for e in events]),
                 "monitoring": {"version": "risk_v2", "risk_family_confidence": .95,
+                               "conditional_mean_family_confidence": .95,
                                "per_stream_error": .025, "alarm_error_separate": .05,
-                               "scope": "One evaluation; risk family and alarm guarantees are separate",
+                               "scope": "One evaluation; fixed-tail and conditional-mean risk families each have 95% pair coverage separately; alarm budgets are separate",
                                "historical_reanalysis": run.get("framework") != "proposal_review_gate_v2"},
                 "scenario_summary": {key: sum(e["case"]["category"] == key for e in events)
                                      for key in sorted(set(e["case"]["category"] for e in events))},
                 "quality": {"protocol_rejections": sum(not e["monitor"]["allowed"] and e["gross_loss_cents"] == 0 for e in events),
+                            "aborted_attempts": len(run.get("aborted_attempts", [])),
+                            "sample_scope": "Committed completed episodes only; aborted attempts are excluded and require separate operational review",
                             "harmful_blocked": sum(not e["monitor"]["allowed"] and e["gross_loss_cents"] > 0 for e in events),
                             "reviews_verified": sum(verify_review(e) for e in events if "review" in e)},
                 "tokens": {key: sum(e["usage"].get(key, 0) for e in events) for key in ("input_tokens", "output_tokens")}}

@@ -14,13 +14,6 @@ class Outcome(BaseModel):
     proposed_loss_cents: int = Field(ge=0)
     residual_loss_cents: int = Field(ge=0)
 
-    @model_validator(mode="after")
-    def coherent(self):
-        if self.residual_loss_cents > self.proposed_loss_cents:
-            raise ValueError("Residual loss exceeds proposed loss; use a consistent financial-loss definition")
-        return self
-
-
 class AssessmentRequest(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     outcomes: list[Outcome] = Field(min_length=1, max_length=2000)
@@ -29,7 +22,7 @@ class AssessmentRequest(BaseModel):
 
     @model_validator(mode="after")
     def bounded(self):
-        if any(row.proposed_loss_cents > self.exposure_cap_cents for row in self.outcomes):
+        if any(max(row.proposed_loss_cents, row.residual_loss_cents) > self.exposure_cap_cents for row in self.outcomes):
             raise ValueError("An observed loss exceeds the prespecified exposure cap; revise the loss model, never clip observations")
         return self
 
@@ -57,7 +50,8 @@ def assess(body: AssessmentRequest):
         risk["bound_assumption"] = "Fixed conditional tail probabilities; prespecified cap $%g; 2.5%% per stream" % (cap/100)
         risk["posterior_scope"] = "Descriptive frequency/severity model; extrapolation needs representative, stable sampling"
         streams[name] = risk
-    return {"version": "assessment_v1", "episodes": len(body.outcomes), "sampling": body.sampling,
+    return {"version": "assessment_v2", "episodes": len(body.outcomes), "sampling": body.sampling,
+            "execution_loss_increases": sum(row.residual_loss_cents > row.proposed_loss_cents for row in body.outcomes),
             "exposure_cap_usd": cap / 100, **streams,
             "guarantee": "Both running-average conditional-mean intervals cover simultaneously over time with probability at least 95%, for bounded adapted losses and a cap fixed before observation. They do not bound the next episode or future workload.",
             "privacy": "Numeric outcomes only; request is not stored in the evaluation database",

@@ -18,6 +18,8 @@ The implemented contribution is an integrated, reproducible reference system: a 
 
 Conference papers guide the agent evaluation design; leading statistics journals supply the inference foundations. Product documentation is implementation evidence, not peer-reviewed evidence of safety.
 
+The policy-kernel check uses [Z3, de Moura and Bjørner, TACAS 2008](https://www.microsoft.com/en-us/research/publication/z3-an-efficient-smt-solver/); its trusted assumptions are stated separately.
+
 ## System and authority
 
 ```
@@ -42,9 +44,12 @@ Untrusted incident recall ──────────────→ advisory
 | Ledger | Allowed synthetic action → committed event and ledger entry | Atomic transaction and per-run order replay protection |
 | Risk assessor | Adjudicated episode outcomes → estimates, bounds and alarms | No execution authority; missing outcomes are not zeros |
 
-Handoff receipts bind run ID, sequence, case, proposal, critique, policy review, gate result and executed amount through a fixed directed sequence. Verification recomputes the chain and monetary accounting. Receipts are hashes, not signatures: an attacker controlling all facts and recomputing all receipts is outside this consistency check. Provider errors and malformed output cause no case execution; requests remain counted even if they fail. The runtime has no delegation loop or automatic paid retry. Process isolation and a wall-clock workflow watchdog are not implemented.
+Handoff receipts bind run ID, sequence, case, proposal, critique, policy review, gate result and executed amount through a fixed directed sequence. Verification recomputes the chain and monetary accounting. Receipts are hashes, not signatures: an attacker controlling all facts and recomputing all receipts is outside this consistency check. Provider errors and malformed output cause no case execution; requests remain counted even if they fail. New runs retain aborted-attempt stage/code records across explicit retries; these are excluded from monetary outcomes and prevent a fixed-tail confidence claim. Conditional-mean bounds describe the completed-episode sequence only, not the full workflow including unresolved attempts. The runtime has no delegation loop or automatic paid retry. Process isolation and a wall-clock workflow watchdog are not implemented.
 
 ## Gate soundness within the synthetic policy
+
+A restricted AST translation of the current gate has also been checked with Z3: the allowed-and-positive-loss query is UNSAT; six guard-removal negative controls yield counterexamples, and 2,000 differential examples align the encoding with Python. [Exact proof scope and reproduction](POLICY_VERIFICATION.md). This is a solver-checked policy-kernel property with a trusted translator, not verification of the entire runtime.
+
 
 For a schema-valid refund, an allowed gate verdict implies: the order ID matches, the authenticated customer owns the order, its age is at most 30 days, and the positive proposed amount is at most the requested amount, remaining paid balance, and 20,000 cents. Therefore it is at most the scoring oracle’s authorized amount and `score(case, proposal)=0`. Non-refund actions execute no payment and score zero. This is an algebraic argument about the specified predicates. Randomized differential tests check the implementation against that argument; they do not prove the process, trusted inputs or external payment service correct.
 
@@ -52,7 +57,7 @@ For a schema-valid refund, an allowed gate verdict implies: the order ID matches
 
 One business episode may contain many agents and messages. Let G_t be unauthorized loss if its proposed payment were executed, and R_t be unauthorized executed loss after controls. In this synthetic world, the policy oracle defines authorization from trusted facts. Wrong order/owner or an expired refund makes the whole proposed amount unauthorized; otherwise only the excess above authorized money is counted. Service refusals are tracked separately.
 
-The synthetic bound is 0 ≤ R_t ≤ G_t ≤ C, with C=$1,000. Imported assessments require their own cap fixed before observing the data, reviewed numeric outcomes and one terminal record per episode. Proposed loss is a defined counterfactual exposure, not a claim that each dollar would become an insured claim. Do not sum losses from repeated agent descriptions of the same payment. A batch with several distinct payments needs a separately adjudicated episode loss and a cap covering its aggregate exposure.
+The synthetic bound is 0 ≤ R_t ≤ G_t ≤ C, with C=$1,000. Imported assessments require their own cap fixed before observing the data, reviewed numeric outcomes and one terminal record per episode. In external systems, execution faults can make R_t exceed G_t: a correct proposal can be duplicated or routed to the wrong account. The intake permits this and checks both streams against the cap; it reports increases rather than assuming controls always reduce loss. Proposed loss is a defined counterfactual exposure, not a claim that each dollar would become an insured claim. Do not sum losses from repeated agent descriptions of the same payment. A batch with several distinct payments needs a separately adjudicated episode loss and a cap covering its aggregate exposure.
 
 No independence between agents within an episode is assumed. In particular, system failure probability is not computed by multiplying agent success probabilities. Shared context, common model families, coordinated attacks and common tool failures can correlate their errors.
 
@@ -62,7 +67,7 @@ No independence between agents within an episode is assumed. In particular, syst
 
 A Beta(1/2,1/2) prior models the frequency of positive loss. A Dirichlet(1/4,1/4,1/4,1/4) prior models positive severity rounded upward to C×(0.025,0.10,0.50,1). Posterior mean binned loss is posterior frequency × posterior positive severity; 16,000 deterministic draws give a 95% credible interval. Alternative prior strengths expose sensitivity.
 
-This is a model-based description, especially in designed or adaptive stress tests. It is not a calibrated frequentist interval, predictive portfolio loss interval, premium, VaR or expected shortfall. Zero failures leaves nonzero posterior risk; it does not empirically identify an unseen tail. Import normalization rounds upward in integer arithmetic, with at most C/100000 extra cents before severity binning.
+This is a model-based description, especially in designed or adaptive stress tests. It is not a calibrated frequentist interval, predictive portfolio loss interval, premium, VaR or expected shortfall. Zero failures leaves nonzero posterior risk; it does not empirically identify an unseen tail. Import normalization rounds upward in integer arithmetic, with at most C/100000 extra dollars before severity binning.
 
 ### Adaptive conditional-mean confidence sequence
 
@@ -95,7 +100,11 @@ An e-value of 20 triggers each alarm with at most 5% probability ever under its 
 3. **Optional critic smoke evaluation.** Proposer and critic calls are both budgeted and recorded. A successful demonstration validates the call/handoff path; causal risk improvement requires a matched ablation with faulty proposals and is not claimed here.
 4. **Sequential simulations.** Fixed-horizon paired paths cover rare catastrophes, severity changes, adaptive feedback and common-cause bursts. Compare detection and null crossing; check the conditional-mean target using known simulated conditional expectations. Monte Carlo intervals accompany rates. These are simulation checks of implementation, not replacements for the derivation.
 
+Additional execution-layer scope: [twelve numeric settlement and coordination models](OPERATIONAL_SCENARIOS.md), including unresolved outcomes and loss introduced after a correct proposal. These are specified outcome simulations, separate from runtime fault injection.
+
 Raw results: [assurance study](examples/assurance-study.json), [existing failure campaign](examples/failure-campaign.json), [historical framework comparison](examples/framework-v2.json). Live paired results, when recorded, are available at `/api/model-comparison` and through the Stress tests page. The campaign runner caps estimated spending with a margin and shares the persistent workspace request budget. Provider billing remains the actual spend authority.
+
+Model pricing and adapter sources checked on 21 October 2026: [Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview). Recorded token-based costs are estimates, not a provider invoice or account balance.
 
 ## Threat and evidence gaps
 

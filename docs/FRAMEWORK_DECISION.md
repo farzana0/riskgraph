@@ -6,11 +6,11 @@ RiskGraph is an assurance layer with a bounded refund workflow as its reference 
 
 | Candidate | Official scope relevant to this project | Decision |
 |---|---|---|
-| [Hermes Agent](https://github.com/NousResearch/hermes-agent) | Persistent assistant with skills, memory, tools and gateway interfaces | Evaluate as a future system under test through episode exports; no dependency in the reference runtime |
+| [Hermes Agent](https://github.com/NousResearch/hermes-agent) | Persistent assistant with skills, memory, tools, delegation, trajectory export and gateway interfaces | Evaluate as a future system under test through episode exports; no dependency in the reference runtime |
 | [OpenClaw](https://docs.openclaw.ai/concepts/multi-agent) | Multi-agent routing with per-agent workspaces and session state; documentation distinguishes workspaces from hard sandboxing | Evaluate as a future system under test. Require explicit sandbox and tool-permission configuration before any execution integration |
 | [openJiuwen agent-core](https://github.com/openJiuwen-ai/agent-core) | Python SDK for agent/workflow orchestration, runtime, checkpointing and model/tool integration | Closest candidate for an optional orchestration adapter after version-pinned integration tests; no SDK dependency added in this release |
 
-“OpenJewel” is provisionally interpreted as openJiuwen. Framework selection is based on fit to the Python workflow and evaluation needs, not a measured safety ranking. No comparative security experiment across these three frameworks has been performed.
+The third candidate is openJiuwen. Framework selection is based on fit to the Python workflow and evaluation needs, not a measured safety ranking. No comparative security experiment across these three frameworks has been performed.
 
 ## Integration boundary
 

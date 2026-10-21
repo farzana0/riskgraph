@@ -1,0 +1,7002 @@
+[
+  {
+    "episode_id": "replay-0",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-1",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-2",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-3",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-4",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-5",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-6",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-7",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-8",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-9",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-10",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-11",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-12",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-13",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-14",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-15",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-16",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-17",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-18",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-19",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-20",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-21",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-22",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-23",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-24",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-25",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-26",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-27",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-28",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-29",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-30",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-31",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-32",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-33",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-34",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-35",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-36",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-37",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-38",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-39",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-40",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-41",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-42",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-43",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-44",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-45",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-46",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-47",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-48",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-49",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-50",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-51",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-52",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-53",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-54",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-55",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-56",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-57",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-58",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-59",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-60",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-61",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-62",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-63",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-64",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-65",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-66",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-67",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-68",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-69",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-70",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-71",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-72",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-73",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-74",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-75",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-76",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-77",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-78",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-79",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-80",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-81",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-82",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-83",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-84",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-85",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-86",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-87",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-88",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-89",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-90",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-91",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-92",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-93",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-94",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-95",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-96",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-97",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-98",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-99",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-100",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-101",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-102",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-103",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-104",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-105",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-106",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-107",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-108",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-109",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-110",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-111",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-112",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-113",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-114",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-115",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-116",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-117",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-118",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-119",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-120",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-121",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-122",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-123",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-124",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-125",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-126",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-127",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-128",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-129",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-130",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-131",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-132",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-133",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-134",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-135",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-136",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-137",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-138",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-139",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-140",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-141",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-142",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-143",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-144",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-145",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-146",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-147",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-148",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-149",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-150",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-151",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-152",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-153",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-154",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-155",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-156",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-157",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-158",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-159",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-160",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-161",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-162",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-163",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-164",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-165",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-166",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-167",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-168",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-169",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-170",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-171",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-172",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-173",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-174",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-175",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-176",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-177",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-178",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-179",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-180",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-181",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-182",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-183",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-184",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-185",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-186",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-187",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-188",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-189",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-190",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-191",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-192",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-193",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-194",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-195",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-196",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-197",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-198",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-199",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-200",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-201",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-202",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-203",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-204",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-205",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-206",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-207",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-208",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-209",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-210",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-211",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-212",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-213",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-214",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-215",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-216",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-217",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-218",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-219",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-220",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-221",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-222",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-223",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-224",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-225",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-226",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-227",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-228",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-229",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-230",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-231",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-232",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-233",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-234",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-235",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-236",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-237",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-238",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-239",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-240",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-241",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-242",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-243",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-244",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-245",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-246",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-247",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-248",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-249",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-250",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-251",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-252",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-253",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-254",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-255",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-256",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-257",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-258",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-259",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-260",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-261",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-262",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-263",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-264",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-265",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-266",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-267",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-268",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-269",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-270",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-271",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-272",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-273",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-274",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-275",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-276",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-277",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-278",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-279",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-280",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-281",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-282",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-283",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-284",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-285",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-286",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-287",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-288",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-289",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-290",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-291",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-292",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-293",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-294",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-295",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-296",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-297",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-298",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-299",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-300",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-301",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-302",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-303",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-304",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-305",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-306",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-307",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-308",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-309",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-310",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-311",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-312",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-313",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-314",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-315",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-316",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-317",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-318",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-319",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-320",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-321",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-322",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-323",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-324",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-325",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-326",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-327",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-328",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-329",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-330",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-331",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-332",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-333",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-334",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-335",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-336",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-337",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-338",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-339",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-340",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-341",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-342",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-343",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-344",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-345",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-346",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-347",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-348",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-349",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-350",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-351",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-352",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-353",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-354",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-355",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-356",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-357",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-358",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-359",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-360",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-361",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-362",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-363",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-364",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-365",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-366",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-367",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-368",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-369",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-370",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-371",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-372",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-373",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-374",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-375",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-376",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-377",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-378",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-379",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-380",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-381",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-382",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-383",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-384",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-385",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-386",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-387",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-388",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-389",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-390",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-391",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-392",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-393",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-394",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-395",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-396",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-397",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-398",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-399",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-400",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-401",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-402",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-403",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-404",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-405",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-406",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-407",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-408",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-409",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-410",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-411",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-412",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-413",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-414",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-415",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-416",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-417",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-418",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-419",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-420",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-421",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-422",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-423",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-424",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-425",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-426",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-427",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-428",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-429",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-430",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-431",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-432",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-433",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-434",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-435",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-436",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-437",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-438",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-439",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-440",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-441",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-442",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-443",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-444",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-445",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-446",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-447",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-448",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-449",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-450",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-451",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-452",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-453",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-454",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-455",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-456",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-457",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-458",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-459",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-460",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-461",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-462",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-463",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-464",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-465",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-466",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-467",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-468",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-469",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-470",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-471",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-472",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-473",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-474",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-475",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-476",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-477",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-478",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-479",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-480",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-481",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-482",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-483",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-484",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-485",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-486",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-487",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-488",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-489",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-490",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-491",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-492",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-493",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-494",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-495",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-496",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-497",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-498",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-499",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-500",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-501",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-502",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-503",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-504",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-505",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-506",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-507",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-508",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-509",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-510",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-511",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-512",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-513",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-514",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-515",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-516",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-517",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-518",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-519",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-520",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-521",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-522",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-523",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-524",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-525",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-526",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-527",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-528",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-529",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-530",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-531",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-532",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-533",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-534",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-535",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-536",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-537",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-538",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-539",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-540",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-541",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-542",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-543",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-544",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-545",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-546",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-547",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-548",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-549",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-550",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-551",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-552",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-553",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-554",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-555",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-556",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-557",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-558",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-559",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-560",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-561",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-562",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-563",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-564",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-565",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-566",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-567",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-568",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-569",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-570",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-571",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-572",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-573",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-574",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-575",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-576",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-577",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-578",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-579",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-580",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-581",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-582",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-583",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-584",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-585",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-586",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-587",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-588",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-589",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-590",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-591",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-592",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-593",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-594",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-595",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-596",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-597",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-598",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-599",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-600",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-601",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-602",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-603",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-604",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-605",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-606",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-607",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-608",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-609",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-610",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-611",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-612",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-613",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-614",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-615",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-616",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-617",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-618",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-619",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-620",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-621",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-622",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-623",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-624",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-625",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-626",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-627",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-628",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-629",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-630",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-631",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-632",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-633",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-634",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-635",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-636",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-637",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-638",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-639",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-640",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-641",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-642",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-643",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-644",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-645",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-646",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-647",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-648",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-649",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-650",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-651",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-652",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-653",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-654",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-655",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-656",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-657",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-658",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-659",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-660",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-661",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-662",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-663",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-664",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-665",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-666",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-667",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-668",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-669",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-670",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-671",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-672",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-673",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-674",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-675",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-676",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-677",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-678",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-679",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-680",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-681",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-682",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-683",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-684",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-685",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-686",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-687",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-688",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-689",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-690",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-691",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-692",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-693",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-694",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-695",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-696",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-697",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-698",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-699",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-700",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-701",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-702",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-703",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-704",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-705",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-706",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-707",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-708",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-709",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-710",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-711",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-712",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-713",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-714",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-715",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-716",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-717",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-718",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-719",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-720",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-721",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-722",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-723",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-724",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-725",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-726",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-727",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-728",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-729",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-730",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-731",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-732",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-733",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-734",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-735",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-736",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-737",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-738",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-739",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-740",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-741",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-742",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-743",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-744",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-745",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-746",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-747",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-748",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-749",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-750",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-751",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-752",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-753",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-754",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-755",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-756",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-757",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-758",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-759",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-760",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-761",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-762",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-763",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-764",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-765",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-766",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-767",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-768",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-769",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-770",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-771",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-772",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-773",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-774",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-775",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-776",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-777",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-778",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-779",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-780",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-781",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-782",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-783",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-784",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-785",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-786",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-787",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-788",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-789",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-790",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-791",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-792",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-793",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-794",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-795",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-796",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-797",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-798",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-799",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-800",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-801",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-802",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-803",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-804",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-805",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-806",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-807",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-808",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-809",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-810",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-811",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-812",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-813",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-814",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-815",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-816",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-817",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-818",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-819",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-820",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-821",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-822",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-823",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-824",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-825",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-826",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-827",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-828",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-829",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-830",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-831",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-832",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-833",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-834",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-835",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-836",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-837",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-838",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-839",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-840",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-841",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-842",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-843",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-844",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-845",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-846",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-847",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-848",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-849",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-850",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-851",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-852",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-853",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-854",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-855",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-856",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-857",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-858",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-859",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-860",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-861",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-862",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-863",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-864",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-865",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-866",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-867",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-868",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-869",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-870",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-871",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-872",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-873",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-874",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-875",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-876",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-877",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-878",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-879",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-880",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-881",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-882",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-883",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-884",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-885",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-886",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-887",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-888",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-889",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-890",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-891",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-892",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-893",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-894",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-895",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-896",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-897",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-898",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-899",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-900",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-901",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-902",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-903",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-904",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-905",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-906",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-907",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-908",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-909",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-910",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-911",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-912",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-913",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-914",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-915",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-916",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-917",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-918",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-919",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-920",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-921",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-922",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-923",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-924",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-925",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-926",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-927",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-928",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-929",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-930",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-931",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-932",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-933",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-934",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-935",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-936",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-937",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-938",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-939",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-940",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-941",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-942",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-943",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-944",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-945",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-946",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-947",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-948",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-949",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-950",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-951",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-952",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-953",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-954",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-955",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-956",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-957",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-958",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-959",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-960",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-961",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-962",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-963",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-964",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-965",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-966",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-967",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-968",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-969",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-970",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-971",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-972",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-973",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-974",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-975",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-976",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-977",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-978",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-979",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-980",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-981",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-982",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-983",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-984",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-985",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 2500
+  },
+  {
+    "episode_id": "replay-986",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-987",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-988",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-989",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-990",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-991",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-992",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-993",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-994",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-995",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-996",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-997",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-998",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  },
+  {
+    "episode_id": "replay-999",
+    "terminal": true,
+    "adjudicated": true,
+    "proposed_loss_cents": 0,
+    "residual_loss_cents": 0
+  }
+]

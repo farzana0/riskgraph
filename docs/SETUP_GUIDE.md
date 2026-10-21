@@ -21,7 +21,7 @@ Configuration is read from the server environment. The application does not auto
 6. In the application, open **Connections**, enter the operator token, and choose **Verify operator access**.
 7. Start a small **Claude · real API evaluation**, inspect the decision traces and token usage, then export the evidence.
 
-Each case makes one model request. The application limits live runs to 40 cases and reserves against a persisted attempt budget, including failed calls. Provider-side spending controls are separate from this request limit.
+Each case makes one proposer request, or two model requests when the optional advisory critic is enabled. The application limits live runs to 40 cases and reserves against a persisted attempt budget, including failed calls. Provider-side spending controls are separate from this request limit.
 
 ## SurrealDB Agent Memory
 

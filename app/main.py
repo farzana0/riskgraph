@@ -37,7 +37,7 @@ class StepRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.4.0")
+    app = FastAPI(title="RiskGraph", version="0.4.1")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -71,7 +71,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.4.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.4.1", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/api/config")
     def config():
@@ -105,11 +105,35 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     @app.get("/api/model-comparison")
     def comparison():
         path = Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "model-comparison.json"
-        return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
+        if not path.is_file():
+            path = STATIC.parents[1] / "docs" / "examples" / "paired-models.json"
+        if not path.is_file():
+            return {"available": False}
+        study = json.loads(path.read_text())
+        analysis_path = STATIC.parents[1] / "docs" / "examples" / "paired-model-analysis.json"
+        analysis = json.loads(analysis_path.read_text()) if analysis_path.is_file() else None
+        if analysis and set(analysis["run_ids"]) != {cell["run_id"] for cell in study["cells"]}:
+            analysis = None
+        return {"available": True, "study": study, "analysis": analysis}
 
     @app.get("/api/assurance")
     def assurance_study():
         path = STATIC.parents[1] / "docs" / "examples" / "assurance-study.json"
+        return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
+
+    @app.get("/api/operational")
+    def operational_study():
+        path = STATIC.parents[1] / "docs" / "examples" / "operational-outcomes.json"
+        return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
+
+    @app.get("/api/operational/example")
+    def operational_example():
+        path = STATIC.parents[1] / "docs" / "examples" / "execution-fault-episodes.json"
+        return json.loads(path.read_text()) if path.is_file() else []
+
+    @app.get("/api/policy-proof")
+    def policy_proof():
+        path = STATIC.parents[1] / "docs" / "examples" / "policy-smt.json"
         return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
 
     @app.get("/api/stress")

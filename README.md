@@ -10,6 +10,13 @@ RiskGraph evaluates refund proposals through a proposal–review–execution wor
 
 [Live application](https://riskgraph-fa98.onrender.com) · [Source repository](https://github.com/farzana0/riskgraph) · [Validation record](docs/VALIDATION.md)
 
+## Research evidence
+
+- [Matched Haiku–Sonnet comparison](docs/PAIRED_MODELS.md): 320 real-model cases, explicit uncertainty and no unsupported superiority claim.
+- [Adaptive financial monitoring study](docs/ASSURANCE_RESULTS.md): 50,000 trajectories and 25 million observations.
+- [Symbolic gate verification](docs/POLICY_VERIFICATION.md): solver-checked policy predicates, six negative controls and a reproducible SMT-LIB query.
+- [Execution and coordination scenarios](docs/OPERATIONAL_SCENARIOS.md): settlement faults, common dependencies and unresolved outcomes.
+
 ## Capabilities
 
 - Thirteen reproducible suites, including 28 explicit identity, manipulation, payment, and combined-failure scenarios.
@@ -78,7 +85,7 @@ With provider credentials configured, an API evaluation can be run with:
 
 The CLI and server share the configured database's attempt budget. Evaluation seeds and settings are recorded for reproducibility. Development and memory-training seeds should remain separate from held-out evaluation seeds.
 
-The validation suite contains 125 tests. The revised workflow completed 136 hosted Claude decisions, including 68 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
+The validation suite contains 149 tests. An earlier revised-workflow campaign completed 136 hosted Claude decisions, including 68 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. A subsequent paired comparison adds 320 Haiku/Sonnet cases; both models record zero harmful proposals on this workload. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
 
 The [featured control demonstration](docs/CONTROL_DEMO.md) includes $6,914.98 in unauthorized proposed payments across 56 decisions. All 48 harmful proposals are blocked; eight valid payments execute. Injected failures are explicitly separated from real Claude evaluations.
 
