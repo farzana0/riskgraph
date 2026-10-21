@@ -64,7 +64,7 @@ The [original study](SIMULATIONS.md) records 20,000 policy proposals, 1,600 work
 
 ## Remaining limits
 
-All orders, customers, messages, and money are synthetic. Validation covers simulated execution, tested policy invariants, and the documented provider integrations. Production payments, representative customer data, disaster recovery, policy-memory supersession, and shared memory between two application agents are outside the current scope. Policy tests do not constitute an end-to-end formal proof of the AI system.
+All orders, customers, messages, and money are synthetic. Validation covers simulated execution, tested policy invariants, and the documented provider integrations. Production payments, representative customer data, disaster recovery, and policy-memory supersession are outside the current scope. The two-model memory integration below checks shared retrieved context, not coherent concurrent writes by autonomous agents. Policy tests do not constitute an end-to-end formal proof of the AI system.
 
 ## Expanded catalogue and revised hosted workflow
 
@@ -89,3 +89,11 @@ The [paired real-model campaign](PAIRED_MODELS.md) completed 320 cases: 160 Haik
 The [symbolic policy check](POLICY_VERIFICATION.md) returned UNSAT for allowed-and-positive-loss, with six guard-removal counterexamples and 2,000 differential examples. The [operational models](OPERATIONAL_SCENARIOS.md) distinguish 10,000 complete financial episodes from 2,000 unresolved episodes and permit execution loss greater than proposed loss.
 
 A first two-model integration run completed one case, then rejected a critic response on the next case before execution. The [archived failed-run evidence](examples/critic-schema-rejection.json) is preserved. The corrected critic prompt states its explanation-length limit explicitly and has a new contract version. New runs retain aborted-stage records across retries and disable fixed-tail inference after selection or abortion.
+
+## Corrected two-model and hosted-memory smoke test
+
+On deployed revision `6e4293b` (v0.4.1), seed `2102122` completed three episodes with Haiku 5.5 proposing and Sonnet 5.5 making a separate advisory model request. Both models received the same retrieved context; the critic also received the proposal. All three episodes recorded `surreal_recalled`, three source hits and a retrieval trace ID. Policy reviews and handoff receipts verified both through the live endpoint and by local recomputation of the archived export. No aborted attempt, harmful proposal or residual financial loss was observed.
+
+The six model calls consumed 7,642 input and 2,057 output tokens in total. The persistent attempt counter increased from 491 to 497, including both proposer and critic calls. This is a connectivity and contract test, not an estimate of critic effectiveness or a causal memory benefit. The earlier rejected run remains part of the evidence rather than being replaced by the successful result. [Completed export](examples/two-model-memory-smoke.json) · [verification](examples/two-model-memory-verification.json).
+
+[Release CI](https://github.com/farzana0/riskgraph/actions/runs/39683118297) passed all 149 tests, the symbolic gate check and three CLI evaluations. Hosted checks confirmed v0.4.1, the paired-model analysis, policy artifact and operational/monitoring studies. Browser checks on the released page confirmed the refund example, the payment-replay assessment with $750 execution loss, and a 390 × 844 viewport without horizontal page overflow.

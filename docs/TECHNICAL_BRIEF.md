@@ -19,6 +19,7 @@ Z3 establishes a restricted policy-kernel property: no action allowed by the enc
 
 ## Recorded findings
 
+- **Two-model integration:** a three-episode hosted smoke test completed with Haiku proposals, Sonnet advisory reviews and actual SurrealDB retrieval. All reviews and handoffs verified. This establishes the integration path, not the critic's effectiveness.
 - **320 matched-case model decisions:** Haiku and Sonnet each process 160 cases across all 28 scenario categories. Both produce zero harmful proposals in this experiment. No superiority or equivalence conclusion follows.
 - **Uncertainty after zero losses:** each model retains a $1.26 posterior mean binned loss per episode under the same prior. A separate bounded interval for the matched conditional mean loss difference spans approximately −$240.34 to $240.34. The conservative width exposes the evidence limit.
 - **50,000 monitoring trajectories:** a severity-only shift triggers the monetary alarm on 100% of paths versus 2.66% for the frequency alarm. Rare 2%-frequency $1,000 losses trigger the monetary alarm only 28.38% by episode 500, a clear power limitation.

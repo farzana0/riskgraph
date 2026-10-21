@@ -1,0 +1,21 @@
+{
+  "run_id": "12d5d25ce240487dbf3d83da89a7b273",
+  "verified": 3,
+  "mismatches": 0,
+  "legacy": 0,
+  "events": [
+    {
+      "event_id": "a2839076e14045a9b82386e32ff1dfe0",
+      "status": "verified"
+    },
+    {
+      "event_id": "db784ff1236449398425b66c442096da",
+      "status": "verified"
+    },
+    {
+      "event_id": "7c43e177b291441e8f6b8438d6eb4d6f",
+      "status": "verified"
+    }
+  ],
+  "scope": "Recomputed policy checks and evidence digest; no cryptographic identity or end-to-end formal proof"
+}
