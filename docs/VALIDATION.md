@@ -75,3 +75,10 @@ Two new 40-case Claude runs on revision `2e30cd8`, seed `2102101`, completed wit
 The subsequent live catalogue pair adds 56 Claude decisions across all 28 named scenarios, with memory off/on. All 56 reviews verified, all 28 memory-on cases recorded actual retrieval sources and traces, and no harmful proposal, protocol rejection, unpaid fully eligible request, or residual loss was observed. The revised workflow therefore has 136 completed real Claude decisions before the focused follow-up. [Evidence and scope](FAILURE_SCENARIOS.md).
 
 The [featured injected-failure demonstration](CONTROL_DEMO.md) intentionally produces nonzero loss at risk: $6,914.98 across 48 harmful proposals in 56 decisions. All are blocked; eight valid proposals execute. Four fully eligible requests remain unpaid because the injected proposer gives the wrong amount, a separately reported service tradeoff. These are controlled failures, not measured Claude mistakes.
+
+
+## v0.4 episode-level assurance extension
+
+The stateless assessment intake accepts numeric adjudicated episode losses and a prespecified cap. The browser rejects duplicate final records, incomplete episodes and missing losses; intermediate agent messages are not independent observations. Adaptive conditional-mean confidence sequences and monetary-loss monitoring are documented in [the research specification](RESEARCH_DESIGN.md). The new [50,000-trajectory study](ASSURANCE_RESULTS.md) uses 25 million observations.
+
+The optional second-model critic is a separate model request with advisory authority. Deterministic policy review and the gate remain distinct components. Hash receipts bind case, stage, role and executed accounting; they are consistency evidence, not signed provenance or process isolation. The reference runtime does not embed an external orchestration SDK.

@@ -1,0 +1,65 @@
+"use strict";
+let intakeExample=null;
+function parseEpisodeLogs(text){
+  if(text.length>1000000)throw new Error("Use a JSON file smaller than 1 MB.");
+  let parsed;try{parsed=JSON.parse(text);}catch{try{parsed=text.trim().split(/\r?\n/).filter(Boolean).map(line=>JSON.parse(line));}catch{throw new Error("Enter a JSON array, a RiskGraph export, or one JSON object per line.");}}
+  const exported=!Array.isArray(parsed)&&Array.isArray(parsed?.events)&&parsed?.run?.id;
+  const records=Array.isArray(parsed)?parsed:exported?parsed.events:parsed?.episodes;
+  if(!Array.isArray(records)||!records.length||records.length>10000)throw new Error("Provide 1–10,000 log records with completed, reviewed episode outcomes.");
+  const outcomes=[],ids=new Set(),allIds=new Set();let intermediate=0;
+  for(const row of records){
+    if(!row||typeof row!=="object"||Array.isArray(row))throw new Error("Each log record must be a JSON object.");
+    const id=exported?`${parsed.run.id}:${row.seq}`:row.episode_id;
+    if(typeof id!=="string"||!id.trim()||id.length>300)throw new Error("Every record needs an episode_id. Group all agents in the same business episode.");
+    allIds.add(id);
+    if(!exported&&row.terminal===false){intermediate++;continue;}
+    if(!exported&&(row.terminal!==true||row.adjudicated!==true))throw new Error("Every final episode needs terminal=true and adjudicated=true. Missing or unreviewed losses cannot be treated as zero.");
+    if(ids.has(id))throw new Error("Duplicate final episode: count the system outcome once, even if several agents report it.");
+    const proposed=exported?row.gross_loss_cents:row.proposed_loss_cents,residual=row.residual_loss_cents;
+    if(!Number.isSafeInteger(proposed)||!Number.isSafeInteger(residual)||proposed<0||residual<0||residual>proposed)throw new Error("Losses must be nonnegative integer cents, with residual loss no greater than proposed loss. Missing outcomes are not zero.");
+    ids.add(id);outcomes.push({proposed_loss_cents:proposed,residual_loss_cents:residual});
+  }
+  if([...allIds].some(id=>!ids.has(id)))throw new Error("Some episodes have no reviewed final outcome. Complete their labels before estimating risk.");
+  if(!outcomes.length||outcomes.length>2000)throw new Error("Assess 1–2,000 completed episodes at a time.");
+  return {outcomes,intermediate};
+}
+async function loadIntakeExample(source){
+  if(!source){const runs=await api('/api/runs');const featured=runs.find(r=>r.mode==='offline'&&r.prompt_version==='injected-failures-v2'&&r.suite==='full_stress'&&r.status==='complete'&&r.count>=28);if(!featured)throw new Error("Run a complete catalogue evaluation in the lab to create the example.");source=await api(`/api/runs/${featured.id}`);}
+  intakeExample=source;
+  const rows=source.events.map(e=>({episode_id:`${source.run.id}:${e.seq}`,terminal:true,adjudicated:true,proposed_loss_cents:e.gross_loss_cents,residual_loss_cents:e.residual_loss_cents}));
+  $('log-input').value=JSON.stringify(rows,null,2);$('exposure-cap').value='1000';$('sampling-design').value='stress';
+  $('input-source').textContent=`Synthetic refund example · ${rows.length} episodes · ${source.run.mode==='offline'?'injected mistakes':'recorded model proposals'}.`;
+  await assessIntake(true);
+}
+async function assessIntake(example=false){
+  $('intake-error').classList.add('hidden');$('assess-logs').disabled=true;
+  try{
+    const {outcomes,intermediate}=parseEpisodeLogs($('log-input').value);
+    const dollars=$('exposure-cap').value;
+    if(!/^\d+(\.\d{1,2})?$/.test(dollars)||Number(dollars)<=0||Number(dollars)>1000000)throw new Error('Enter an exposure cap between $0.01 and $1,000,000, with at most two decimals.');
+    const result=await api('/api/assess',{outcomes,exposure_cap_cents:Math.round(Number(dollars)*100),sampling:$('sampling-design').value});
+    if(!example)$('input-source').textContent=`${result.episodes} reviewed episodes · ${intermediate} intermediate messages omitted. No raw logs sent.`;
+    const g=result.proposed,r=result.residual,interval=r.conditional_mean_sequence;
+    $('intake-result').innerHTML=`<article class="panel risk-answer"><div class="panel-heading"><div><div class="eyebrow">${example?'SYNTHETIC EXAMPLE':'YOUR EVIDENCE'} · ${integer(result.episodes)} EPISODES</div><h2>Potential loss, with uncertainty.</h2></div><span class="tag neutral">USD / episode</span></div><div class="answer-pair"><div><span>Before controls</span><strong>${money(g.expected_loss_usd)}</strong><small>95% credible: ${money(g.expected_loss_ci95[0])}–${money(g.expected_loss_ci95[1])}</small></div><div><span>After controls</span><strong>${money(r.expected_loss_usd)}</strong><small>95% credible: ${money(r.expected_loss_ci95[0])}–${money(r.expected_loss_ci95[1])}</small></div></div><p class="answer-caption">Frequency × severity estimate of mean binned loss. ${result.sampling==='representative_fixed'?'Extrapolation assumes the same stable workload.':'Descriptive for this test; future workload risk is not identified.'} Zero observed loss retains uncertainty.</p></article><article class="panel observed-answer"><div><span class="metric-label">Observed loss at risk</span><strong>${money(g.observed_loss_usd)}</strong><small>Unauthorized loss proposed before controls${example?' · simulated':''}</small></div><div><span class="metric-label">Observed loss after controls</span><strong>${money(r.observed_loss_usd)}</strong><small>Sum over these episodes${example?' · simulated':''}</small></div></article><details class="panel uncertainty-answer"><summary>How uncertain is the result?</summary><p>Average conditional loss over the observed episodes, after controls: <strong>${money(interval.lower_usd)}–${money(interval.upper_usd)}</strong>. Both before/after intervals have at least 95% simultaneous coverage over time under the prespecified cap and complete outcome reporting.</p><p>This bound permits adaptation and dependence. It describes the observed episode sequence; it does not bound the next episode or a future portfolio.</p><p>Exposure cap: ${money(result.exposure_cap_usd)} per episode. Mean-estimate prior sensitivity after controls: ${money(r.prior_sensitivity_usd[0])}–${money(r.prior_sensitivity_usd[1])}. Credible intervals rely on a frequency/severity model; they are not confidence guarantees.</p></details><p class="form-help result-scope">${example?'This example uses deliberately injected faults, not measured model mistakes. ':''}Loss means unauthorized payments only. Service, privacy, legal, and reputational harms need separate outcomes. These results are evidence for review, not an insurance premium.</p>`;
+  }catch(error){$('intake-result').innerHTML='<article class="panel prose"><h2>Outcome evidence needs review.</h2><p>Resolve the input issue before interpreting a risk estimate.</p></article>';$('intake-error').textContent=error.message;$('intake-error').classList.remove('hidden');}
+  finally{$('assess-logs').disabled=false;}
+}
+async function loadModelComparison(){
+  try{const data=await api('/api/model-comparison');if(!data.available){$('model-comparison-content').innerHTML='<article class="panel prose"><h2>Model comparison</h2><p>Matched-case Haiku and Sonnet evaluations use the same scenario seeds, policy, and loss definitions. Results appear here when the campaign is recorded.</p></article>';return;}
+  const s=data.study,rows=s.summary||[];
+  $('model-comparison-content').innerHTML=`<article class="panel comparison-result"><div class="eyebrow">PAIRED REAL-MODEL EVALUATION</div><h2>Smaller and larger models. The same cases.</h2><p>Uniform synthetic draws from 28 categories · memory off · ${escapeText(s.status||'running')}.</p><div class="table-scroll"><table><thead><tr><th>Model</th><th>Episodes</th><th>Harmful proposals</th><th>Proposed loss</th><th>Loss after controls</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${escapeText(r.model)}</td><td>${r.episodes}</td><td>${r.harmful_proposals}</td><td>${money(r.proposed_loss_usd)}</td><td>${money(r.residual_loss_usd)}</td></tr>`).join('')}</tbody></table></div><p>${s.paired_comparison?.paired_episodes||0} matched episodes. ${s.paired_comparison?.mean_difference_usd===0?'No observed monetary-loss difference; this does not establish equivalence.':'Model size does not determine the result in advance.'} Reasoning settings differ by supported model adapter.</p><a href="https://github.com/farzana0/riskgraph/blob/main/docs/RESEARCH_DESIGN.md" target="_blank" rel="noreferrer">Experimental protocol & limitations ↗</a></article>`;
+  }catch(error){$('model-comparison-content').textContent='Model comparison unavailable: '+error.message;}
+}
+if(typeof document!=='undefined'){
+  $('use-own-logs').addEventListener('click',()=>{$('log-file').click();});
+  $('load-example').addEventListener('click',()=>loadIntakeExample(intakeExample).catch(error=>notice(error.message)));
+  $('assess-logs').addEventListener('click',()=>assessIntake());
+  $('log-file').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;if(file.size>1000000){notice('Use a JSON file smaller than 1 MB.');return;}$('log-input').value=await file.text();$('input-source').textContent='File read locally. Review the cap and sampling design, then select Estimate risk.';$('intake-result').innerHTML='<article class="panel prose"><h2>New logs ready for review.</h2><p>Set the exposure cap and sampling design, then select Estimate risk.</p></article>';$('exposure-cap').scrollIntoView({block:'center'});});
+  const needs={payments:'Payment authority: log authorized limits, proposed payments, executed amounts, and independent loss adjudication.',tools:'External tools: preserve source trust labels and test indirect prompt injection, stale results, and malformed tool outputs.',memory:'Shared memory: record provenance, version changes, poisoned recall, permission failures, and cross-agent contamination.',handoffs:'Delegation: bind every stage to one episode ID; record roles, permitted tools, deadlines, completion and replay protection.'};
+  document.querySelectorAll('[data-readiness]').forEach(input=>input.addEventListener('change',()=>{$('readiness-needs').replaceChildren();const base=document.createElement('li');base.textContent='Collect episode IDs, final outcomes, independent loss labels, and a prespecified exposure cap.';$('readiness-needs').append(base);document.querySelectorAll('[data-readiness]:checked').forEach(c=>{const li=document.createElement('li');li.textContent=needs[c.dataset.readiness];$('readiness-needs').append(li);});}));
+}
+if(typeof module!=='undefined')module.exports={parseEpisodeLogs};
+async function loadAssuranceStudy(){
+  try{const data=await api('/api/assurance');if(!data.available)return;const s=data.study,names={bounded_mean_null:'Conditional mean at $10 reference',rare_catastrophe_02:'Rare $1,000 losses · 2% frequency',severity_shift:'Same frequency, larger severity',adaptive_feedback:'Failures depend on previous outcomes',common_cause_burst:'Common-cause burst'};
+  $('assurance-study-content').innerHTML=`<article class="panel comparison-result"><div class="eyebrow">FINANCIAL SEVERITY · ${integer(s.trajectories)} SIMULATED TRAJECTORIES</div><h2>Expensive mistakes need their own alarm.</h2><p>Paired outcomes · 500 episodes per path · frequency and monetary alarms each have a separate 5% error budget.</p><div class="table-scroll"><table><thead><tr><th>Failure pattern</th><th>Frequency alert</th><th>Monetary alert</th></tr></thead><tbody>${s.scenarios.map(r=>`<tr><td>${escapeText(names[r.scenario])}</td><td>${(100*r.frequency_alarm.rate).toFixed(2)}%</td><td>${(100*r.monetary_alarm.rate).toFixed(2)}%</td></tr>`).join('')}</tbody></table></div><p>The monetary reference is $10 conditional mean loss per episode. Rare costly failures can remain undetected. These are synthetic path experiments, not measured model failure rates.</p><a href="https://github.com/farzana0/riskgraph/blob/main/docs/ASSURANCE_RESULTS.md" target="_blank" rel="noreferrer">Raw results, uncertainty & limitations ↗</a></article>`;}catch(error){$('assurance-study-content').textContent='Financial monitoring study unavailable: '+error.message;}
+}

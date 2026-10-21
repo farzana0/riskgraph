@@ -1,3 +1,7 @@
+# Current adaptive-system extension
+
+The release adds a normal-mixture Hoeffding confidence sequence for average conditional expected loss and a separate monetary-loss e-process. The explicit derivation, targets, error budgets, episode unit and limitations are in [RESEARCH_DESIGN.md](RESEARCH_DESIGN.md). Existing beta-mixture tail bounds retain their stronger fixed-tail assumptions; the Bayesian frequency/severity model remains a descriptive model.
+
 # Statistical framework
 
 RiskGraph separates three quantities: observed outcomes, a model-based estimate, and a time-uniform upper bound. Each has a different interpretation. The current implementation is `risk_v2`; the [original simulation study](SIMULATIONS.md) records the earlier framework.

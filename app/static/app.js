@@ -27,8 +27,8 @@ function accessState(){
 function showView(view){
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("hidden",v.id!==`view-${view}`));
   document.querySelectorAll(".nav-item").forEach(v=>{v.classList.toggle("active",v.dataset.view===view);if(v.dataset.view===view)v.setAttribute("aria-current","page");else v.removeAttribute("aria-current");});
-  $("crumb").textContent={overview:"Risk overview",events:"Decisions",validation:"Stress tests",methods:"How it works",connections:"Connections"}[view];
-  if(view==="validation"&&!benchmarksLoaded){loadBenchmarks();loadStress();}
+  $("crumb").textContent={assess:"Assess risk",overview:"Evaluation lab",events:"Decisions",validation:"Stress tests",methods:"How it works",connections:"Connections"}[view];
+  if(view==="validation"&&!benchmarksLoaded){loadBenchmarks();loadStress();loadModelComparison();loadAssuranceStudy();}
 }
 document.querySelectorAll("[data-view]").forEach(button=>button.addEventListener("click",()=>showView(button.dataset.view)));
 function chart(gross,residual){
@@ -71,7 +71,7 @@ function render(){
   $("failures-label").textContent=`${g.failures} proposed payments could cause loss`;
   $("sample-tag").textContent=g.n===0?"Awaiting evidence":g.n<100?"Limited evidence":"Synthetic evidence";
   $("quality-label").textContent=g.n<100?"Small sample":"Scenario-specific results";
-  $("run-label").textContent=s.run.mode==="offline"?(s.run.prompt_version==="injected-failures-v2"?"Stress agent · injected failures":"Demo agent · deliberately naive"):"Claude · live AI evaluation";
+  $("run-label").textContent=s.run.mode==="offline"?(s.run.prompt_version==="injected-failures-v2"?"Stress agent · injected failures":"Demo agent · deliberately naive"):`${s.run.model} · live AI evaluation${s.run.advisory_critic?" · second-model review":""}`;
   $("run-meta").textContent=`Seed ${s.run.seed} · memory ${s.run.use_memory?"on":"off"}${s.run.mode==="claude"?` · ${integer(s.tokens.input_tokens)} input / ${integer(s.tokens.output_tokens)} output tokens`:""}`;
   $("run-status").textContent=archived?"Archived":running?"Running":s.run.status==="running"?"Paused":title(s.run.status);
   $("run-progress").max=s.run.count;$("run-progress").value=g.n;$("progress-label").textContent=`${g.n} of ${s.run.count} assessed`;
@@ -105,6 +105,7 @@ function render(){
   $("observed-loss").textContent=money(r.observed_loss_usd);$("harmful-blocked").textContent=s.quality?.harmful_blocked??s.events.filter(e=>!e.monitor.allowed&&e.gross_loss_cents>0).length;
   $("protocol-blocked").textContent=s.quality?.protocol_rejections??s.events.filter(e=>!e.monitor.allowed&&!e.gross_loss_cents).length;
   $("estimate-details").innerHTML=[["Proposed",g],["Residual",r]].map(([label,risk])=>`<p><strong>${label} mean: ${money(risk.expected_loss_usd)}</strong><br>95% credible: ${money(risk.expected_loss_ci95[0])}–${money(risk.expected_loss_ci95[1])}${risk.prior_sensitivity_usd?`<br>Prior sensitivity of the mean: ${money(risk.prior_sensitivity_usd[0])}–${money(risk.prior_sensitivity_usd[1])}`:""}</p>`).join("");
+  if(s.severity_monitor){const m=s.severity_monitor;$("drift-status").textContent+=m.alert?" Monetary alert: evidence against the $10 conditional mean loss reference.":" No monetary-loss alert ($10 conditional mean reference).";}
   chart(g,r);renderRows();
 }
 function eventDetail(id){
@@ -113,6 +114,8 @@ function eventDetail(id){
   const review=e.review;
   const checks=review?`<div class="detail-card"><h3>Policy review · recomputable evidence</h3><ul class="check-list">${review.checks.map(c=>`<li class="${!c.required?"not-required":c.passed?"passed":"failed"}"><span>${!c.required?"—":c.passed?"✓":"×"}</span>${escapeText(title(c.name))}${!c.required?" · not required":""}</li>`).join("")}</ul><p>Authorized refund limit: <strong>${money(review.authorized_limit_cents/100)}</strong>. The reviewer is read-only; the independent monitor controls execution.</p><details class="audit-identity"><summary>Evidence fingerprint and context sources</summary><code>${escapeText(review.evidence_sha256)}</code><p>Memory sources: ${review.memory_source_ids.map(escapeText).join(", ")||"None"}</p></details></div>`:"";
   $("event-detail").innerHTML=`<div class="trace-verdict"><span class="tag ${e.monitor.allowed?"green":"orange"}">${e.monitor.allowed?"Allowed":"Blocked"}</span><span>${e.gross_loss_cents?`${money(e.gross_loss_cents/100)} unauthorized proposed loss`:!e.monitor.allowed?"Protocol or policy rejection · no monetary harm scored":"No unauthorized monetary loss scored"}</span></div>${e.workflow?`<div class="trace-stages">${e.workflow.map(stage=>`<span>${escapeText(title(stage.role))} · ${escapeText(title(stage.status))}</span>`).join("")}</div>`:""}<div class="detail-card"><h3>Trusted order state</h3><div class="detail-grid"><div>Paid<strong>${money(e.case.order.paid_cents/100)}</strong></div><div>Age<strong>${e.case.order.age_days} days</strong></div><div>Requested<strong>${money(e.case.requested_cents/100)}</strong></div><div>Customer<strong>${escapeText(e.case.customer)}</strong></div><div>Owner<strong>${escapeText(e.case.order.owner)}</strong></div><div>Previously refunded<strong>${money(e.case.order.refunded_cents/100)}</strong></div></div></div><div class="detail-card"><h3>Untrusted customer message</h3>${escapeText(e.case.message)}</div><div class="detail-card"><h3>Agent proposal</h3><strong>${escapeText(title(e.proposal.action))} · ${money(e.proposal.amount_cents/100)}</strong><p>${escapeText(e.proposal.reason)}</p></div>${checks}<div class="detail-card"><h3>Independent monitor & execution</h3><p>${e.monitor.rules.length?e.monitor.rules.map(rule=>escapeText(title(rule))).join(" · "):"All required policy checks passed"}</p><div class="detail-grid"><div>Executed<strong>${money(e.executed_cents/100)}</strong></div><div>Residual harm<strong>${money(e.residual_loss_cents/100)}</strong></div><div>Prevented harm<strong>${money(e.prevented_loss_cents/100)}</strong></div></div></div><div class="detail-card"><h3>Incident memory</h3><p>${escapeText(title(e.memory.status))} · ${e.memory.hits.length} recalled sources</p>${e.memory.write_status?`<p>Storage: ${escapeText(title(e.memory.write_status))}</p>`:""}${e.memory.hits.map(hit=>`<p>${escapeText(hit.text)}</p>`).join("")}${e.memory.recall_error?`<p>${escapeText(e.memory.recall_error.message)}</p>`:""}${e.memory.write_error?`<p>${escapeText(e.memory.write_error.message)}</p>`:""}<details class="audit-identity"><summary>Memory provenance</summary><p>Retrieval trace: ${escapeText(e.memory.recall_trace_id||"None")}</p><p>Storage turn: ${escapeText(e.memory.turn_id||"None")}</p></details></div><details class="audit-identity"><summary>Audit identity</summary><code>${escapeText(e.id)}<br>${escapeText(e.at)}<br>Policy: ${escapeText(e.monitor.policy_version)}</code></details>`;
+  if(e.critique){const c=document.createElement("div");c.className="detail-card";const h=document.createElement("h3");h.textContent="Second-model review · advisory";const p=document.createElement("p");p.textContent=`${e.critique.model}: ${e.critique.recommendation}. ${e.critique.reason}`;c.append(h,p);$("event-detail").append(c);}
+  if(e.handoffs){const p=document.createElement("p");p.className="form-help";p.textContent=`Case-bound handoffs: ${e.handoffs.map(h=>title(h.role)).join(" → ")}. Receipts verify recorded consistency, not source authenticity.`;$("event-detail").append(p);}
   $("event-dialog").showModal();
 }
 document.addEventListener("click",event=>{const button=event.target.closest("[data-event]");if(button)eventDetail(button.dataset.event);});
@@ -150,6 +153,7 @@ $("continue-run").addEventListener("click",()=>{if(running){pauseRequested=true;
 $("open-run").addEventListener("click",()=>{$("run-error").classList.add("hidden");$("authorize-from-run").classList.add("hidden");const seed=new Uint32Array(1);crypto.getRandomValues(seed);$("seed").value=seed[0]%2147483648;updateRunSettings();$("run-dialog").showModal();});
 function updateRunSettings(){
   const live=$("mode").value==="claude",max=live?40:200;
+  $("model-settings").classList.toggle("hidden",!live);
   $("count").max=max;if(Number($("count").value)>max)$("count").value=max;
   document.querySelectorAll("[data-count]").forEach(button=>{button.disabled=Number(button.dataset.count)>max;button.classList.toggle("selected",Number(button.dataset.count)===Number($("count").value));});
   const suite=$("suite").value;
@@ -162,7 +166,7 @@ $("authorize-from-run").addEventListener("click",()=>{$("run-dialog").close();sh
 $("run-form").addEventListener("submit",async event=>{
   event.preventDefault();if(!requireAccess()){$("authorize-from-run").classList.remove("hidden");return;}
   const submit=event.submitter||document.querySelector('#run-form button[type="submit"]');submit.disabled=true;
-  try{snapshot=await api("/api/runs",{seed:Number($("seed").value),count:Number($("count").value),mode:$("mode").value,use_memory:$("use-memory").checked,suite:$("suite").value});$("run-dialog").close();$("verification-result").textContent="";showView("overview");render();await history();await advance();}
+  try{snapshot=await api("/api/runs",{seed:Number($("seed").value),count:Number($("count").value),mode:$("mode").value,use_memory:$("use-memory").checked,suite:$("suite").value,model:$("mode").value==="claude"?$("model-choice").value:null,advisory_critic:$("mode").value==="claude"&&$("advisory-critic").checked});$("run-dialog").close();$("verification-result").textContent="";showView("overview");render();await history();await advance();}
   catch(error){notice(error.message);}finally{submit.disabled=false;}
 });
 $("export").addEventListener("click",()=>{if(snapshot)window.location.href=`/api/runs/${snapshot.run.id}/export`;});
@@ -213,7 +217,7 @@ async function init(){
   await refreshConfig();
   const runs=await history();if(runs.length){
     const featured=runs.find(run=>run.mode==="offline"&&run.suite==="full_stress"&&run.prompt_version==="injected-failures-v2"&&run.status==="complete"&&run.count>=28)||runs[0];
-    snapshot=await api(`/api/runs/${featured.id}`);$("run-select").value=featured.id;render();
+    snapshot=await api(`/api/runs/${featured.id}`);$("run-select").value=featured.id;render();await loadIntakeExample(snapshot);
   }else{$("run-label").textContent="No evaluations yet";$("assessment-title").textContent="Ready to evaluate";$("assessment-description").textContent="Choose New evaluation to collect synthetic decision evidence.";}
 }
 init().catch(error=>notice(`Could not load dashboard: ${error.message}`));

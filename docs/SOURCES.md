@@ -39,3 +39,8 @@ Sponsor recognition requires genuine platform use. The current implementation in
 - [W3C target-size guidance](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) informs control sizing, spacing, and mobile navigation.
 
 These references inform design choices; measured task-time improvements or complete accessibility conformance are not claimed.
+
+
+## Multi-agent assurance and adaptive-loss extension
+
+Verified primary-source bibliography and venue attribution: [RESEARCH_DESIGN.md](RESEARCH_DESIGN.md#research-foundations). Framework documentation and integration decision: [FRAMEWORK_DECISION.md](FRAMEWORK_DECISION.md). Published constructions underpin the implementation; local tests are not benchmark reproductions or a peer-reviewed validation of RiskGraph.

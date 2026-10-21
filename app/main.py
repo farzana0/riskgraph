@@ -9,7 +9,9 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from .engine import Engine, Busy, BudgetExceeded
-from .providers import ProviderError
+from .providers import ProviderError, MODELS
+from .assessment import AssessmentRequest, assess
+from .protocol import verify_handoffs
 from .store import Store
 from .domain import SUITES
 from .review import verify_review
@@ -24,7 +26,9 @@ class RunRequest(BaseModel):
     count: int = Field(default=40, ge=1, le=200)
     mode: Literal["offline", "claude"] = "offline"
     use_memory: bool = False
-    suite: Literal["baseline", "balanced", "adversarial", "boundary", "heavy_tail", "drift", "correlated", "full_stress", "identity", "manipulation", "payment_edges", "compound"] = "baseline"
+    model: Optional[Literal["claude-haiku-5-5", "claude-sonnet-5-5"]] = None
+    advisory_critic: bool = False
+    suite: Literal["baseline", "balanced", "adversarial", "boundary", "heavy_tail", "drift", "correlated", "full_stress", "random_stress", "identity", "manipulation", "payment_edges", "compound"] = "baseline"
 
 
 class StepRequest(BaseModel):
@@ -33,7 +37,7 @@ class StepRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.3.2")
+    app = FastAPI(title="RiskGraph", version="0.4.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -67,12 +71,13 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.3.2", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.4.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/api/config")
     def config():
         return {"anthropic_configured": bool(os.getenv("ANTHROPIC_API_KEY")),
                 "model": os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5-5"),
+                "models": MODELS,
                 "anthropic_workspace_selection": getattr(engine.agent, "workspace_source", "unselected"),
                 "surreal_configured": engine.memory.configured,
                 "operator_token_required": bool(token),
@@ -93,6 +98,20 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     def runs():
         return store.runs()
 
+    @app.post("/api/assess")
+    def assessment(body: AssessmentRequest):
+        return assess(body)
+
+    @app.get("/api/model-comparison")
+    def comparison():
+        path = Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "model-comparison.json"
+        return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
+
+    @app.get("/api/assurance")
+    def assurance_study():
+        path = STATIC.parents[1] / "docs" / "examples" / "assurance-study.json"
+        return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
+
     @app.get("/api/stress")
     def stress_results():
         path = STATIC.parents[1] / "docs" / "examples" / "failure-campaign.json"
@@ -101,6 +120,8 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     @app.post("/api/runs", status_code=201)
     def new_run(body: RunRequest, request: Request, x_operator_token: Optional[str] = Header(default=None)):
         authorize(request, x_operator_token)
+        if body.advisory_critic and body.mode != "claude":
+            raise HTTPException(422, "The second model reviewer requires Claude mode")
         if body.use_memory and engine.memory.configured and not token:
             raise HTTPException(503, "Hosted Agent Memory runs require a server operator token")
         if body.mode == "claude":
@@ -110,7 +131,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
                 raise HTTPException(422, "Claude runs are capped at 40 cases per run")
         if len(store.runs()) >= 30:
             raise HTTPException(409, "This demo workspace has reached its 30-run limit. Export evidence and use a fresh database for another workspace.")
-        run = engine.create(body.seed, body.count, body.mode, body.use_memory, suite=body.suite)
+        run = engine.create(body.seed, body.count, body.mode, body.use_memory, suite=body.suite, model=body.model, advisory_critic=body.advisory_critic)
         return engine.snapshot(run["id"])
 
     @app.get("/api/runs/{run_id}")
@@ -148,7 +169,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
                 results.append({"event_id": event["id"], "status": "legacy_without_review"})
                 continue
             try:
-                valid = verify_review(event)
+                valid = verify_review(event) and ("handoffs" not in event or verify_handoffs(event))
             except (ValueError, KeyError, TypeError):
                 valid = False
             results.append({"event_id": event["id"], "status": "verified" if valid else "mismatch"})

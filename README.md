@@ -1,5 +1,9 @@
 # RiskGraph
 
+Assess reviewed agent outcomes, separate proposed exposure from executed loss, and quantify uncertainty at the business-episode level. The assessment homepage accepts JSON/JSONL or a synthetic example; numeric analysis is stateless. The evaluation lab contains reproducible refund-agent scenarios and optional paired model reviews.
+
+Research specification: [methods, authority model, experiments and limitations](docs/RESEARCH_DESIGN.md). Framework choice: [Hermes, OpenClaw and openJiuwen](docs/FRAMEWORK_DECISION.md). The current runtime is a framework-neutral typed workflow; none of those SDKs is embedded.
+
 **Risk monitoring for AI refund agents.**
 
 RiskGraph evaluates refund proposals through a proposal–review–execution workflow and measures monetary exposure from small samples. Independent policy checks gate simulated execution. The dashboard distinguishes observed loss, time-uniform confidence bounds, Bayesian estimates, and incident provenance.
@@ -8,7 +12,7 @@ RiskGraph evaluates refund proposals through a proposal–review–execution wor
 
 ## Capabilities
 
-- Twelve reproducible suites, including 28 explicit identity, manipulation, payment, and combined-failure scenarios.
+- Thirteen reproducible suites, including 28 explicit identity, manipulation, payment, and combined-failure scenarios.
 - Strict action schemas and independent ownership, order, refund-window, balance, request, and approval checks.
 - Transactional execution ledger, ordered audit events, and replay protection.
 - Beta frequency × Dirichlet severity estimates with 95% posterior intervals and explicit priors.

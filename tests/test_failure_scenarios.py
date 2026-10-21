@@ -61,9 +61,9 @@ def test_deploy_assets_revalidate_and_html_references_versioned_scripts():
     client = TestClient(create_app(':memory:', seed_demo=False))
     page = client.get('/')
     assert page.headers['cache-control'] == 'no-cache'
-    assert '/static/app.js?v=0.3.2' in page.text
-    assert '/static/style.css?v=0.3.2' in page.text
-    assert client.get('/static/app.js?v=0.3.2').headers['cache-control'] == 'no-cache'
+    assert '/static/app.js?v=0.4.0' in page.text
+    assert '/static/style.css?v=0.4.0' in page.text
+    assert client.get('/static/app.js?v=0.4.0').headers['cache-control'] == 'no-cache'
     assert client.get('/api/config').headers['cache-control'] == 'no-store'
 
 

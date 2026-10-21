@@ -1,0 +1,5 @@
+[
+  {"episode_id":"episode-1","agent_id":"proposer","terminal":false},
+  {"episode_id":"episode-1","agent_id":"executor","terminal":true,"adjudicated":true,"proposed_loss_cents":2500,"residual_loss_cents":0},
+  {"episode_id":"episode-2","agent_id":"executor","terminal":true,"adjudicated":true,"proposed_loss_cents":0,"residual_loss_cents":0}
+]

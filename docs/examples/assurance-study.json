@@ -1,0 +1,197 @@
+{
+  "schema_version": "assurance-study-v1",
+  "seed": 20261021,
+  "trajectories": 50000,
+  "observations": 25000000,
+  "provider_requests": 0,
+  "money_reference_usd": 10,
+  "frequency_reference": 0.1,
+  "each_alarm_error": 0.05,
+  "per_stream_cs_error": 0.025,
+  "rho": 6.25,
+  "cap_usd": 1000,
+  "scenarios": [
+    {
+      "scenario": "bounded_mean_null",
+      "trajectories": 10000,
+      "horizon": 500,
+      "frequency_alarm": {
+        "count": 0,
+        "total": 10000,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0003688199146187622
+        ]
+      },
+      "monetary_alarm": {
+        "count": 207,
+        "total": 10000,
+        "rate": 0.0207,
+        "ci95": [
+          0.017999710662619982,
+          0.023684225025915554
+        ]
+      },
+      "adaptive_cs_anytime_miss": {
+        "count": 0,
+        "total": 10000,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0003688199146187622
+        ]
+      },
+      "observed_mean_loss_usd": 9.9206,
+      "money_null_holds": true
+    },
+    {
+      "scenario": "rare_catastrophe_02",
+      "trajectories": 10000,
+      "horizon": 500,
+      "frequency_alarm": {
+        "count": 0,
+        "total": 10000,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0003688199146187622
+        ]
+      },
+      "monetary_alarm": {
+        "count": 2838,
+        "total": 10000,
+        "rate": 0.2838,
+        "ci95": [
+          0.27497766618168584,
+          0.29274840248761413
+        ]
+      },
+      "adaptive_cs_anytime_miss": {
+        "count": 0,
+        "total": 10000,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0003688199146187622
+        ]
+      },
+      "observed_mean_loss_usd": 20.082,
+      "money_null_holds": false
+    },
+    {
+      "scenario": "severity_shift",
+      "trajectories": 10000,
+      "horizon": 500,
+      "frequency_alarm": {
+        "count": 266,
+        "total": 10000,
+        "rate": 0.0266,
+        "ci95": [
+          0.02353467531923792,
+          0.02994503018149744
+        ]
+      },
+      "monetary_alarm": {
+        "count": 10000,
+        "total": 10000,
+        "rate": 1.0,
+        "ci95": [
+          0.9996311800853812,
+          1.0
+        ]
+      },
+      "adaptive_cs_anytime_miss": {
+        "count": 0,
+        "total": 10000,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0003688199146187622
+        ]
+      },
+      "observed_mean_loss_usd": 80.27376000000001,
+      "money_null_holds": false
+    },
+    {
+      "scenario": "adaptive_feedback",
+      "trajectories": 10000,
+      "horizon": 500,
+      "frequency_alarm": {
+        "count": 3816,
+        "total": 10000,
+        "rate": 0.3816,
+        "ci95": [
+          0.3720645343336925,
+          0.3912044692625642
+        ]
+      },
+      "monetary_alarm": {
+        "count": 9827,
+        "total": 10000,
+        "rate": 0.9827,
+        "ci95": [
+          0.9799492455938847,
+          0.9851642076451217
+        ]
+      },
+      "adaptive_cs_anytime_miss": {
+        "count": 0,
+        "total": 10000,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0003688199146187622
+        ]
+      },
+      "observed_mean_loss_usd": 62.3638,
+      "money_null_holds": false
+    },
+    {
+      "scenario": "common_cause_burst",
+      "trajectories": 10000,
+      "horizon": 500,
+      "frequency_alarm": {
+        "count": 10000,
+        "total": 10000,
+        "rate": 1.0,
+        "ci95": [
+          0.9996311800853812,
+          1.0
+        ]
+      },
+      "monetary_alarm": {
+        "count": 10000,
+        "total": 10000,
+        "rate": 1.0,
+        "ci95": [
+          0.9996311800853812,
+          1.0
+        ]
+      },
+      "adaptive_cs_anytime_miss": {
+        "count": 0,
+        "total": 10000,
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.0003688199146187622
+        ]
+      },
+      "observed_mean_loss_usd": 44.8354,
+      "money_null_holds": false
+    }
+  ],
+  "interpretation": [
+    "Both alarms use the same simulated losses; differences are paired descriptive results.",
+    "The new CS targets average conditional expected loss, even with adaptive dependence, not future workload risk.",
+    "Each alarm has a separate 5% budget; either-alarm null crossing is bounded by 10% when both nulls hold.",
+    "Monte Carlo supports implementation checks; the guarantee follows from assumptions and the martingale derivation.",
+    "Monetary reference and mixture settings are prespecified; sensitivity is not guaranteed for every alternative."
+  ],
+  "source_sha256": {
+    "app/risk.py": "ef5396844c2769de8a99801873ff5a03c4417c2b66e28faed94a63c94b83fc73",
+    "scripts/assurance_study.py": "c45b50d568e410a32b6b12495ae1bf219e3a4876ae3f68124fbe4e145457d86c"
+  },
+  "horizon": 500
+}

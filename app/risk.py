@@ -194,3 +194,61 @@ def drift(failures, baseline=0.10):
             "alert": peak >= math.log(20), "threshold": 20, "baseline": baseline,
             "method": "multi_bet_restart_mixture_v2", "false_alarm_budget": .05,
             "label": "Sequential evidence against the 10% conditional harm reference"}
+
+
+def conditional_mean_sequence(losses, cap=CAP, delta=.025, rho=6.25):
+    """Normal-mixture Hoeffding CS for average predictable conditional means.
+
+    For X_t=L_t/cap and m_t=E[X_t|F_(t-1)], Hoeffding's lemma gives
+    exp(lambda sum(X-m)-lambda^2*n/8) a supermartingale. Mixing lambda
+    ~N(0,1/rho) yields sqrt(rho/(rho+n/4))*exp(S^2/(2*(rho+n/4))).
+    Ville inversion bounds |S| at all n. m_t may vary and agents may depend
+    on history. rho is fixed in advance. Never intersect different n targets.
+    """
+    if cap <= 0 or not math.isfinite(cap) or not 0 < delta < 1 or rho <= 0:
+        raise ValueError("Invalid conditional-mean bound configuration")
+    if any(not math.isfinite(v) or v < 0 or v > cap for v in losses):
+        raise ValueError("Loss outside prespecified bound")
+    n = len(losses)
+    mean = sum(losses) / n / cap if n else 0
+    variance = rho + n / 4
+    width = math.sqrt(variance * math.log(variance / (rho * delta**2))) / n if n else 1
+    return {"lower_usd": max(0, mean-width)*cap/100,
+            "upper_usd": min(1, mean+width)*cap/100,
+            "confidence": 1-delta, "rho": rho, "method": "normal_mixture_hoeffding_v1",
+            "target": "Running average of conditional expected loss over the observed episodes",
+            "assumption": "Adapted bounded outcomes; cap and rho fixed before observation; all completed episodes included",
+            "future_guarantee": False}
+
+
+def severity_alarm(losses, reference_cents=1000, cap=CAP, delta=.05):
+    """Anytime mean-loss e-process, valid under E[L_t|past] <= reference.
+
+    Normalize by the cap and mix fixed nonnegative linear bets and start times.
+    This complements, rather than silently replaces, the binary harm alarm.
+    """
+    if not 0 < reference_cents < cap or not 0 < delta < 1:
+        raise ValueError("Invalid severity reference")
+    x = np.asarray(losses, dtype=float) / cap
+    if np.any(~np.isfinite(x)) or np.any((x < 0) | (x > 1)):
+        raise ValueError("Loss outside prespecified bound")
+    n, baseline = len(x), reference_cents / cap
+    bets = BET_GRID * .1 / baseline
+    terms, used = [], 0.0
+    if n:
+        prefixes = np.vstack([np.zeros(len(bets)), np.cumsum(np.log1p((x[:,None]-baseline)*bets), axis=0)])
+        for start, weight in alarm_starts(n):
+            component = np.zeros(n)
+            component[start:] = logsumexp(prefixes[start+1:]-prefixes[start], axis=1)-math.log(len(bets))
+            terms.append(math.log(weight)+component)
+            used += weight
+        terms.append(np.full(n, math.log(max(1-used, 1e-300))))
+        path = logsumexp(np.array(terms), axis=0)
+        total, peak = float(path[-1]), max(0, float(np.max(path)))
+    else:
+        total = peak = 0.0
+    return {"e_value": math.exp(min(total,700)), "max_e_value": math.exp(min(peak,700)),
+            "alert": peak >= math.log(1/delta), "threshold": 1/delta,
+            "reference_usd": reference_cents/100, "false_alarm_budget": delta,
+            "method": "bounded_loss_restart_mixture_v1",
+            "null": "Every conditional mean proposed loss is at or below the reference"}

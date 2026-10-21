@@ -5,8 +5,9 @@ import os
 import httpx
 from .domain import generate, inspect, score, authorization
 from .providers import Agent, AgentMemory, ProviderError, failure_details, PROMPT_VERSION, EXTENDED_FIXTURE_VERSION
-from .risk import estimate, drift
+from .risk import estimate, drift, conditional_mean_sequence, severity_alarm
 from .review import review_proposal, verify_review
+from .protocol import handoff_receipts, verify_handoffs
 from .scenarios import EXTENDED_SUITES
 
 
@@ -33,9 +34,10 @@ class Engine:
         self.memory = memory or AgentMemory()
         self.step_lock = Lock()
 
-    def create(self, seed, count, mode="offline", use_memory=False, suite="baseline"):
+    def create(self, seed, count, mode="offline", use_memory=False, suite="baseline", model=None, advisory_critic=False):
         run = {"id": uuid4().hex, "seed": seed, "count": count, "mode": mode,
-               "use_memory": use_memory, "model": os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5-5") if mode == "claude" else "naive-fixture-v1",
+               "use_memory": use_memory, "model": (model or os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5-5")) if mode == "claude" else "naive-fixture-v1",
+               "advisory_critic": advisory_critic, "critic_model": "claude-sonnet-5-5" if advisory_critic else None,
                "created_at": now(), "status": "ready", "error": None,
                "policy_version": "refund-v1", "generator_version": "cases-v3" if suite in EXTENDED_SUITES else "cases-v1" if suite == "baseline" else "cases-v2",
                "suite": suite, "framework": "proposal_review_gate_v2",
@@ -77,7 +79,16 @@ class Engine:
                     recalled = self.store.local_memories(case.category, run["mode"])
                     memory_status = "local_demo"
             try:
-                proposal, usage = self.agent.propose(case, run["mode"], recalled)
+                if isinstance(self.agent, Agent):
+                    proposal, usage = self.agent.propose(case, run["mode"], recalled, model=run["model"])
+                else:
+                    proposal, usage = self.agent.propose(case, run["mode"], recalled)
+                critique = None
+                if run.get("advisory_critic"):
+                    if not self.store.reserve_attempt(int(os.getenv("MAX_CLAUDE_CASES", "500"))):
+                        raise BudgetExceeded("Workspace Claude attempt budget exhausted before critique; no case executed")
+                    critique, critic_usage = self.agent.critique(case, proposal, recalled, model=run["critic_model"])
+                    usage = {k: usage.get(k,0)+critic_usage.get(k,0) for k in ("input_tokens", "output_tokens")}
             except ProviderError as exc:
                 run["status"], run["error"] = "provider_error", exc.diagnostic["message"] + " No case executed."
                 run["error_detail"] = exc.diagnostic
@@ -108,6 +119,12 @@ class Engine:
                      "memory": {"status": memory_status, "hits": recalled, "recall_trace_id": trace}}
             if memory_error:
                 event["memory"]["recall_error"] = memory_error
+            if critique is not None:
+                event["critique"] = critique
+                event["workflow"].insert(2, {"role": "advisory_critic", "status": "completed", "authority": "advisory_only"})
+            event["handoffs"] = handoff_receipts(event)
+            if not verify_handoffs(event):
+                raise ProviderError("Handoff verification failed; no case executed")
             self.store.commit_event(event)
             # Only trusted monitor observations are written as incident memories.
             if run["use_memory"] and self.memory.configured and not monitor["allowed"]:
@@ -142,6 +159,8 @@ class Engine:
                 risk["confidence_sequence"] = None
                 risk["hoeffding_upper_usd"] = None
                 risk["bound_assumption"] = "Unavailable: adaptive memory or a nonstationary/dependent suite invalidates fixed-tail assumptions. Bayesian intervals are descriptive approximations."
+        for name, risk in (("gross", gross), ("residual", residual)):
+            risk["conditional_mean_sequence"] = conditional_mean_sequence([e[name+"_loss_cents"] for e in events])
         return {"run": run, "events": events, "gross": gross, "residual": residual,
                 "resume_supported": run.get("framework") == "proposal_review_gate_v2" and run.get("prompt_version") == proposal_version(run["mode"],run.get("suite","baseline")),
                 "prevented_usd": sum(e["prevented_loss_cents"] for e in events) / 100,
@@ -149,6 +168,7 @@ class Engine:
                 "blocked": sum(not e["monitor"]["allowed"] for e in events),
                 "unnecessary_abstentions": sum(e["unnecessary_abstention"] for e in events),
                 "drift": drift([e["gross_loss_cents"] > 0 for e in events]),
+                "severity_monitor": severity_alarm([e["gross_loss_cents"] for e in events]),
                 "monitoring": {"version": "risk_v2", "risk_family_confidence": .95,
                                "per_stream_error": .025, "alarm_error_separate": .05,
                                "scope": "One evaluation; risk family and alarm guarantees are separate",
