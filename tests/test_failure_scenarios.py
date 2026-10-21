@@ -55,3 +55,13 @@ def test_operational_fault_campaign_is_offline_and_never_executes_bad_responses(
     assert all(r['payments_executed']==r['observations_created']==0 for r in adapters)
     assert all(row['detected'] for row in integrity_failures(11))
     assert all(row['residual_loss_usd']==0 for row in memory_failures(11))
+
+
+def test_deploy_assets_revalidate_and_html_references_versioned_scripts():
+    client = TestClient(create_app(':memory:', seed_demo=False))
+    page = client.get('/')
+    assert page.headers['cache-control'] == 'no-cache'
+    assert '/static/app.js?v=0.3.1' in page.text
+    assert '/static/style.css?v=0.3.1' in page.text
+    assert client.get('/static/app.js?v=0.3.1').headers['cache-control'] == 'no-cache'
+    assert client.get('/api/config').headers['cache-control'] == 'no-store'
