@@ -35,6 +35,6 @@ function renderHardRisk(){
     const rows=hardStudy.cells.filter(c=>c.model===arm.model&&c.memory===arm.memory).map(c=>({cell:c,result:c[arm.critic?'corrected_outcome':'initial_outcome']})).filter(x=>x.result.resolved).map(x=>({episode_id:hardStudy.design.version+':'+x.cell.case_id,terminal:true,adjudicated:true,proposed_loss_cents:x.result.proposed_loss_cents,residual_loss_cents:x.result.residual_loss_cents}));
     $('log-input').value=JSON.stringify(rows);$('exposure-cap').value='1000';$('sampling-design').value='stress';
     $('input-source').textContent=hardArmName(arm)+' · '+rows.length+' independently scored synthetic episodes. '+arm.unresolved_episodes+' unresolved outcomes excluded; the estimate describes completed outcomes only.';
-    showView('assess');await assessIntake('model');
+    showView('assess');await assessIntake('model');$('view-assess').scrollIntoView({block:'start'});
   };
 }
