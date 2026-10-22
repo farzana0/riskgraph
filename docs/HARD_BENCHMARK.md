@@ -104,3 +104,10 @@ For either baseline in the follow-up, one of 16 completed proposals is harmful. 
 After a configuration records zero harmful proposals in 16 cases, the same model still gives **$11.95**, with 95% posterior interval approximately **$0.0067–$71.71**. That is prior-sensitive descriptive uncertainty, not proof of a business loss at that rate. The separate bounded conditional-mean interval is much wider (up to roughly $694 in the zero-loss configuration with a $1,000 cap and family adjustment), making the limited evidence explicit. The website exposes the learning curve and assumptions instead of interpreting a zero-failure test as zero risk.
 
 [Raw follow-up report](examples/hard-benchmark-high-budget.json) · [offline recomputation](examples/hard-benchmark-high-budget-verification.json). All 128 stage outcomes, case/source fingerprints and paired analyses recomputed successfully. The registered source, fresh cases and frozen prior-memory snapshot match the completed report.
+
+
+## Interpretation and reproducibility details
+
+The seeded instances share eight procedural templates. In particular, elapsed-time date pairs repeat across instances; the follow-up changes case identifiers and monetary values without creating new temporal reasoning rules or held-out attack families. It tests additional response draws under a larger output allowance, not independent generalization to new failure mechanisms. Broader dates, temporal semantics and external workloads remain future validation needs.
+
+The [development report](examples/hard-benchmark-development.json) preserves all 64 contract-phase calls and stays excluded from comparative findings. Together with both main reports it accounts for all 443 research requests. From **Stress tests → How RiskGraph learns from these outcomes → Assess these outcomes**, a selected configuration can be loaded into the generic assessment page. Only completed, independently scored synthetic episodes are imported; unresolved counts remain explicit. This invokes numeric risk analysis and makes no additional model request.
