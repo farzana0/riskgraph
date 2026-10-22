@@ -28,7 +28,7 @@ function showView(view){
   document.querySelectorAll(".view").forEach(v=>v.classList.toggle("hidden",v.id!==`view-${view}`));
   document.querySelectorAll(".nav-item").forEach(v=>{v.classList.toggle("active",v.dataset.view===view);if(v.dataset.view===view)v.setAttribute("aria-current","page");else v.removeAttribute("aria-current");});
   $("crumb").textContent={assess:"Assess risk",overview:"Evaluation lab",events:"Decisions",validation:"Stress tests",methods:"How it works",connections:"Connections"}[view];
-  if(view==="validation"&&!benchmarksLoaded){loadBenchmarks();loadStress();loadModelComparison();loadAssuranceStudy();loadOperationalStudy();}
+  if(view==="validation"&&!benchmarksLoaded){loadBenchmarks();loadStress();loadModelComparison();loadAssuranceStudy();loadOperationalStudy();loadHardBenchmark();}
 }
 document.querySelectorAll("[data-view]").forEach(button=>button.addEventListener("click",()=>showView(button.dataset.view)));
 function chart(gross,residual){

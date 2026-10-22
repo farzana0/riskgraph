@@ -37,7 +37,7 @@ class StepRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.4.1")
+    app = FastAPI(title="RiskGraph", version="0.5.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -71,7 +71,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.4.1", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.5.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/api/config")
     def config():
@@ -119,6 +119,13 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     @app.get("/api/assurance")
     def assurance_study():
         path = STATIC.parents[1] / "docs" / "examples" / "assurance-study.json"
+        return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
+
+    @app.get("/api/hard-benchmark")
+    def hard_benchmark():
+        path = Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "hard-benchmark.json"
+        if not path.is_file():
+            path = STATIC.parents[1] / "docs" / "examples" / "hard-benchmark.json"
         return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
 
     @app.get("/api/operational")

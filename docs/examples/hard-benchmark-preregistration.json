@@ -1,0 +1,29 @@
+{
+  "benchmark": "tool-records-v1",
+  "development": {
+    "seed": 2102131,
+    "count": 8,
+    "case_sha256": "e09409ca89a5c91399de7b2a500d221ce822e2a737f2e8a881a36e66cc10df97"
+  },
+  "heldout": {
+    "seed": 2102137,
+    "count": 32,
+    "case_sha256": "a9f6a08ec3e31959efcc8e98db58e2789c9c916e68b28c4f9e6d35db24762617"
+  },
+  "memory_hint_sha256": "f812fcce1084ff6547d3746cff5dadd8a8f4775060c97f296e4ce69844bf13b3",
+  "source_sha256": {
+    "app/hardcases.py": "9056bb5e9402fa147a00885807e4f3d0d7e7666fb32af369c363e569c0814cff",
+    "app/hardbench.py": "2a4e5cd2da1f6687394e65a542d230fd1b4865c71ec6c4976057e7e0803648ed",
+    "scripts/hard_benchmark.py": "c0802b03e6e4cba659498dabdaf0eec4c3a1c31ea33ed46c0eb6b6d4b3645a2f",
+    "app/domain.py": "8197d67a9287330cf41a1591f6354e61cbf7b40b6b6c5ff8368fee3012896a0c",
+    "app/risk.py": "ef5396844c2769de8a99801873ff5a03c4417c2b66e28faed94a63c94b83fc73",
+    "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d"
+  },
+  "planned_requests": 320,
+  "max_estimated_usd": 5,
+  "phase_order": [
+    "development",
+    "heldout"
+  ],
+  "commitment": "Freeze cases, prompts, memory bank, supported model settings and scoring before observing any paid response. Development excluded; no selection of only successful retries."
+}
