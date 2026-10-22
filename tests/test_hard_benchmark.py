@@ -149,3 +149,6 @@ def test_public_study_selection_uses_fixed_paths_and_keeps_primary_available(tmp
     high['status']='complete';(tmp_path/'high-budget'/'hard-benchmark.json').write_text(json.dumps(high))
     assert client.get('/api/hard-benchmark').json()['selected']=='high_budget'
     assert client.get('/api/hard-benchmark?study=../../secrets').status_code==422
+    development={'phase':'development','status':'complete','cases':[{}]*8}
+    (tmp_path/'hard-benchmark-development.json').write_text(json.dumps(development))
+    assert client.get('/api/hard-benchmark/development').json()['study']['phase']=='development'

@@ -78,4 +78,29 @@ RiskGraph retains uncertainty. For example, the Sonnet-plus-memory-plus-critic c
 
 After observing primary response truncation, a follow-up was specified with 2,048 output tokens and 16 fresh cases (seed `2102147`, two per family). The policy, procedural memory and generation rules are unchanged. It adds at most 128 requests and uses only the remainder of the combined $5 model-usage estimate. The [follow-up registration](examples/hard-benchmark-high-budget-preregistration.json) is committed before its calls.
 
-This follow-up is reported separately. It is not pooled with the primary experiment and does not identify a causal effect of output allowance, because its cases and stochastic response draws differ. The website allows switching between both records. Follow-up results will be recorded after completion.
+This follow-up is reported separately. It is not pooled with the primary experiment and does not identify a causal effect of output allowance, because its cases and stochastic response draws differ. The website allows switching between both records. Error budgets apply separately within each report and statistical family; there is no single 95% simultaneous guarantee across both reports and both families.
+
+All 16 fresh cases completed in every configuration, with no invalid or truncated response and no retries. The follow-up used 128 model requests with a $0.8556 token-cost estimate; combined with primary/development usage this was **443 requests and approximately $2.8890**, below the $5 study allowance.
+
+| Model | Memory | Critic | Task errors / 16 | Harmful proposals | Observed proposed loss |
+|---|---|---|---:|---:|---:|
+| Haiku | Off | Off | 3 | 1 | $83.63 |
+| Haiku | Off | On | 1 | 0 | $0.00 |
+| Haiku | On | Off | 2 | 0 | $0.00 |
+| Haiku | On | On | 0 | 0 | $0.00 |
+| Sonnet | Off | Off | 1 | 1 | $83.63 |
+| Sonnet | Off | On | 0 | 0 | $0.00 |
+| Sonnet | On | Off | 0 | 0 | $0.00 |
+| Sonnet | On | On | 0 | 0 | $0.00 |
+
+The same elapsed-time case triggers both baseline models' unauthorized $83.63 proposals. Corrective review repairs them. Memory changes the initial decisions enough to avoid those unsafe proposals, while Haiku still has two service errors. Both interventions together produce no observed task errors in either model on this small follow-up. No executed unauthorized loss occurs after the independent gate. These are finite benchmark results, not evidence of universal memory/critic benefit: the primary study retains genuine regressions and all bounded comparison intervals remain broad.
+
+![Fresh-case higher-response comparison](images/hard-benchmark-high-budget.png)
+
+### Example risk calculation
+
+For either baseline in the follow-up, one of 16 completed proposals is harmful. Jeffreys frequency updating gives `E[p] = (1 + 0.5) / (16 + 1) = 0.08824`. The $83.63 observed severity is conservatively assigned to the $100 band. Updating the documented four-band Dirichlet prior gives `E[severity] = $253.125`, including uncertainty about unobserved high-severity loss. Their product is **$22.33 mean binned proposed loss per episode**, with 95% posterior interval approximately **$0.99–$95.76**. The exact empirical mean is only **$5.23**; binning and the sparse-data tail prior explain the gap.
+
+After a configuration records zero harmful proposals in 16 cases, the same model still gives **$11.95**, with 95% posterior interval approximately **$0.0067–$71.71**. That is prior-sensitive descriptive uncertainty, not proof of a business loss at that rate. The separate bounded conditional-mean interval is much wider (up to roughly $694 in the zero-loss configuration with a $1,000 cap and family adjustment), making the limited evidence explicit. The website exposes the learning curve and assumptions instead of interpreting a zero-failure test as zero risk.
+
+[Raw follow-up report](examples/hard-benchmark-high-budget.json) · [offline recomputation](examples/hard-benchmark-high-budget-verification.json). All 128 stage outcomes, case/source fingerprints and paired analyses recomputed successfully. The registered source, fresh cases and frozen prior-memory snapshot match the completed report.

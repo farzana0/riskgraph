@@ -37,7 +37,7 @@ class StepRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.5.1")
+    app = FastAPI(title="RiskGraph", version="0.5.2")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -71,7 +71,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.5.1", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.5.2", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/api/config")
     def config():
@@ -137,6 +137,13 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
             return {"available": False}
         return {"available": True, "study": studies[selected], "selected": selected,
                 "studies": [{"id":name,"status":s["status"],"cases":len(s["cases"]),"max_tokens":s["design"]["settings"]["max_tokens"]} for name,s in studies.items()]}
+
+    @app.get("/api/hard-benchmark/development")
+    def hard_development():
+        path = Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "hard-benchmark-development.json"
+        if not path.is_file():
+            path = STATIC.parents[1] / "docs" / "examples" / "hard-benchmark-development.json"
+        return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
 
     @app.get("/api/operational")
     def operational_study():

@@ -22,7 +22,7 @@ Sparse frequency/severity estimates, sequential monitoring, pre-execution policy
 
 ## Validation
 
-The automated suite contains 149 tests covering policy invariants, confidence-sequence inversion, sequential error control, review verification, scenario generation, provider contracts, replay protection, storage, and access controls.
+The automated suite contains 158 tests covering policy invariants, confidence-sequence inversion, sequential error control, review verification, scenario generation, provider contracts, replay protection, storage, and access controls.
 
 The 40-case offline fixture produced 26 harmful proposals. The monitor blocked all 26, preventing $2,800 of unauthorized synthetic loss with zero observed residual loss. This deliberately naive fixture demonstrates policy enforcement and is separate from model evaluation.
 
@@ -56,3 +56,8 @@ Developed for Build North 2026 with AI coding assistance from Codex. The interfa
 3. Compare observed loss, posterior uncertainty, and the conservative upper bound.
 4. Open a stored incident and a later memory recall with source and trace identifiers.
 5. Show a Claude evaluation, evidence export, and the documented validation scope.
+
+
+### Harder model comparison
+
+A frozen tool-record benchmark now exposes genuine model mistakes rather than only injected agent faults. Its 32-case primary experiment and separate 16-case higher-response follow-up compare Haiku/Sonnet, corrective critic and hosted memory. The follow-up completes every configuration without truncation: Haiku task errors are 3 with neither intervention, 1 with critic, 2 with memory, and 0 with both; Sonnet has 1 with neither and 0 with either or both. The primary study retains critic and memory regressions. These are small synthetic challenge sets with broad uncertainty, not general safety rankings.
