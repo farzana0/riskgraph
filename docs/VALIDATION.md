@@ -2,7 +2,7 @@
 
 ## Current automated checks
 
-**149 automated tests passed** after the episode-level assurance, symbolic policy and execution-scenario upgrade. [Continuous integration](https://github.com/farzana0/riskgraph/actions/workflows/test.yml) runs the test suite plus original and adversarial CLI evaluations. Tests include confidence-sequence inversion and boundary behavior, exact small-horizon crossing control, restart-mixture prefix consistency, policy-disagreement fail-closed execution, review tampering, legacy evidence, and all scenario suites.
+**158 automated tests passed** after the episode-level assurance, symbolic policy, execution-scenario and harder factorial benchmark upgrades. [Continuous integration](https://github.com/farzana0/riskgraph/actions/workflows/test.yml) runs the test suite plus original and adversarial CLI evaluations. Tests include confidence-sequence inversion and boundary behavior, exact small-horizon crossing control, restart-mixture prefix consistency, policy-disagreement fail-closed execution, review tampering, legacy evidence, and all scenario suites.
 
 The earlier 80-test suite and provider-integration evidence below were recorded on revision `540d8c86674d0ea1b48ac118fd6cd3a9417f6862`. Those October 18 results remain historical evidence. The [current comparison](FRAMEWORK_V2.md) records the local framework upgrade; fresh hosted-provider validation of the revised prompt and review workflow is recorded below and in [FAILURE_SCENARIOS.md](FAILURE_SCENARIOS.md). Container execution remains outside this validation record.
 
@@ -97,3 +97,8 @@ On deployed revision `6e4293b` (v0.4.1), seed `2102122` completed three episodes
 The six model calls consumed 7,642 input and 2,057 output tokens in total. The persistent attempt counter increased from 491 to 497, including both proposer and critic calls. This is a connectivity and contract test, not an estimate of critic effectiveness or a causal memory benefit. The earlier rejected run remains part of the evidence rather than being replaced by the successful result. [Completed export](examples/two-model-memory-smoke.json) · [verification](examples/two-model-memory-verification.json).
 
 [Release CI](https://github.com/farzana0/riskgraph/actions/runs/39683118297) passed all 149 tests, the symbolic gate check and three CLI evaluations. Hosted checks confirmed v0.4.1, the paired-model analysis, policy artifact and operational/monitoring studies. Browser checks on the released page confirmed the refund example, the payment-replay assessment with $750 execution loss, and a 390 × 844 viewport without horizontal page overflow.
+
+
+## Harder matched model and intervention experiment
+
+The [frozen tool-record benchmark](HARD_BENCHMARK.md) processes 32 held-out cases with Haiku/Sonnet, memory off/on and a separate corrective critic off/on. Real model outputs include unauthorized time-boundary refunds, underpayments and exhausted response budgets. All 256 stage outcomes and the full statistical analysis were recomputed offline. The primary study used 251 held-out requests plus 64 development requests, with no automatic retries. Its source fingerprints match revision `1337da3`. Completed monetary outcomes and operational non-completions remain separate. A higher-response-budget follow-up is registered separately and will not be pooled with these findings.

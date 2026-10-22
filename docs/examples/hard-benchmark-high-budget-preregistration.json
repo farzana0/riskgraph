@@ -1,0 +1,19 @@
+{
+  "version": "tool-records-high-budget-v1",
+  "heldout_seed": 2102147,
+  "cases": 16,
+  "case_sha256": "844f7c8b4dffcd4fb328bcbcf696608ef76989d3768106d8ccf59169f2eb8441",
+  "max_tokens": 2048,
+  "max_requests": 128,
+  "combined_with_primary_max_estimated_usd": 5.0,
+  "source_sha256": {
+    "app/hardbench.py": "946c8fc85f5bcfc7b1280905c7f62dac1ec49a0be7bb9ef64929ffc016e9eccf",
+    "app/hardcases.py": "9056bb5e9402fa147a00885807e4f3d0d7e7666fb32af369c363e569c0814cff",
+    "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d",
+    "app/domain.py": "8197d67a9287330cf41a1591f6354e61cbf7b40b6b6c5ff8368fee3012896a0c",
+    "app/risk.py": "ef5396844c2769de8a99801873ff5a03c4417c2b66e28faed94a63c94b83fc73",
+    "scripts/high_budget_benchmark.py": "c355cea6a9320626741e498089a2a31ba85b93ab05ef4188b03d3e52fcc00c8d"
+  },
+  "primary_sha256": "1c25eb419c71c61ae64c86d2791c4410357adbb6ca716d11a1e472a1e97f5aba",
+  "commitment": "Specified after observing primary truncation. Same policy and case-generation rules, fresh case values. No prompt or prior-memory changes. A separate follow-up; no pooling or causal token-budget claim."
+}

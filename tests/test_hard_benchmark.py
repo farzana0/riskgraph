@@ -105,6 +105,9 @@ def test_provider_requests_exclude_oracle_and_use_separate_review_call(tmp_path,
     assert len(requests)==2 and 'untrusted_initial_proposal' in requests[1]['messages'][0]['content']
     model_call(agent,budget,case['observation'],[],MODELS[0],key='proposer')
     assert len(requests)==2
+    model_call(agent,budget,case['observation'],[],MODELS[0],key='larger-budget',max_tokens=2048)
+    assert requests[-1]['max_tokens']==2048 and budget.totals()['requests_reserved']==3
+    with pytest.raises(ValueError):model_call(agent,budget,{},[],MODELS[0],max_tokens=1)
 
 
 def test_failed_provider_calls_are_charged_and_do_not_leak_response(tmp_path,monkeypatch):
@@ -130,3 +133,19 @@ def test_factorial_analysis_keeps_failed_attempts_and_nonzero_uncertainty():
     cells[0]['corrected_outcome']=outcome(case,{'status':'invalid_response'})
     result=summarize([case],cells)
     assert result['arms'][1]['unresolved_episodes']==1 and result['arms'][1]['task_failures']==1
+
+
+def test_public_study_selection_uses_fixed_paths_and_keeps_primary_available(tmp_path,monkeypatch):
+    from app.main import create_app
+    from fastapi.testclient import TestClient
+    monkeypatch.setenv('DATABASE_PATH',str(tmp_path/'app.sqlite3'))
+    primary={'status':'complete','cases':[{}]*32,'design':{'settings':{'max_tokens':900}}}
+    high={'status':'running','cases':[{}]*16,'design':{'settings':{'max_tokens':2048}}}
+    (tmp_path/'hard-benchmark.json').write_text(json.dumps(primary))
+    (tmp_path/'high-budget').mkdir();(tmp_path/'high-budget'/'hard-benchmark.json').write_text(json.dumps(high))
+    client=TestClient(create_app(':memory:',seed_demo=False))
+    assert client.get('/api/hard-benchmark').json()['selected']=='primary'
+    assert client.get('/api/hard-benchmark?study=high_budget').json()['study']['design']['settings']['max_tokens']==2048
+    high['status']='complete';(tmp_path/'high-budget'/'hard-benchmark.json').write_text(json.dumps(high))
+    assert client.get('/api/hard-benchmark').json()['selected']=='high_budget'
+    assert client.get('/api/hard-benchmark?study=../../secrets').status_code==422

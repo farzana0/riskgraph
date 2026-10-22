@@ -49,4 +49,33 @@ Arithmetic difficulty, instruction attacks and state interpretation are mixed in
 
 ## Results
 
-The protocol is committed before the paid experiment. Recorded results and failure examples will be added after completion, including negative or inconclusive findings.
+### Primary experiment: 32 cases, 900 output tokens
+
+The design was committed as `1337da3` before any paid response. All 32 cases finished processing. Five unavailable initial proposals skipped their corresponding critic request, so the held-out phase used 251 requests; the development phase used 64. Their combined token-cost estimate was $2.0335; held-out requests alone accounted for $1.6199. No request was retried to obtain a better outcome.
+
+| Model | Memory | Critic | Completed monetary outcomes / 32 | Task errors | Harmful proposals | Observed proposed loss |
+|---|---|---|---:|---:|---:|---:|
+| Haiku | Off | Off | 31 | 4 | 1 | $171.98 |
+| Haiku | Off | On | 30 | 2 | 0 | $0.00 |
+| Haiku | On | Off | 28 | 8 | 2 | $266.26 |
+| Haiku | On | On | 27 | 6 | 1 | $171.98 |
+| Sonnet | Off | Off | 32 | 1 | 1 | $94.28 |
+| Sonnet | Off | On | 31 | 2 | 1 | $171.98 |
+| Sonnet | On | Off | 32 | 1 | 1 | $171.98 |
+| Sonnet | On | On | 32 | 0 | 0 | $0.00 |
+
+Observed residual loss after the independent simulated gate was zero in every configuration. Unresolved proposals are excluded from the monetary totals and remain task errors; these totals do not assign them zero financial loss. The website also reports the empirical mean range obtained by assigning unresolved proposed loss anywhere in the prespecified $0–$1,000 range. This missing-outcome sensitivity calculation is not a confidence interval.
+
+Real failures include a Haiku memory-on proposal and a Sonnet memory-off proposal paying $94.28 on a 31-day-old order: both incorrectly computed 30 elapsed days. Their critics repaired the decisions. A different time-boundary case also exposed incorrect criticism. For Sonnet without memory, the critic fixed one task error but introduced two, including an unsafe proposal; with memory it fixed one and introduced none. For Haiku without memory it fixed three and introduced one. These are within-sample observations, not established general benefits.
+
+Memory did not uniformly improve performance: Haiku's memory-on configuration had more errors, including more non-completions. That difference cannot be assigned solely to memory reasoning: context length, stochastic response draws and the response limit are part of the intervention. The signed bounded intervals remain wide and do not establish a general model ranking or universal critic/memory benefit.
+
+RiskGraph retains uncertainty. For example, the Sonnet-plus-memory-plus-critic configuration has no observed harmful proposal yet a $6.16 posterior mean binned loss per completed episode under the documented prior. Haiku without memory or critic has a $21.24 posterior mean binned loss versus an exact empirical mean of about $5.55. Upward severity bands and a sparse-data tail prior explain the difference; neither posterior mean is a measured production loss.
+
+[Raw primary report](examples/hard-benchmark.json) · [offline recomputation](examples/hard-benchmark-verification.json). The verifier recomputes 256 stage outcomes and the full analysis, with exact counts and a documented `1e-10` floating-point tolerance across platforms. Source fingerprints match the original `1337da3` revision; subsequent response-budget support does not retroactively change that experiment. Reproducing its exact contract requires that revision.
+
+### Separate higher-response-budget follow-up
+
+After observing primary response truncation, a follow-up was specified with 2,048 output tokens and 16 fresh cases (seed `2102147`, two per family). The policy, procedural memory and generation rules are unchanged. It adds at most 128 requests and uses only the remainder of the combined $5 model-usage estimate. The [follow-up registration](examples/hard-benchmark-high-budget-preregistration.json) is committed before its calls.
+
+This follow-up is reported separately. It is not pooled with the primary experiment and does not identify a causal effect of output allowance, because its cases and stochastic response draws differ. The website allows switching between both records. Follow-up results will be recorded after completion.

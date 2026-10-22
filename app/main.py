@@ -37,7 +37,7 @@ class StepRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.5.0")
+    app = FastAPI(title="RiskGraph", version="0.5.1")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -71,7 +71,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.5.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.5.1", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/api/config")
     def config():
@@ -122,11 +122,21 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
         return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
 
     @app.get("/api/hard-benchmark")
-    def hard_benchmark():
-        path = Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "hard-benchmark.json"
-        if not path.is_file():
-            path = STATIC.parents[1] / "docs" / "examples" / "hard-benchmark.json"
-        return {"available": True, "study": json.loads(path.read_text())} if path.is_file() else {"available": False}
+    def hard_benchmark(study: Literal["latest", "primary", "high_budget"] = "latest"):
+        data = Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent
+        examples = STATIC.parents[1] / "docs" / "examples"
+        choices = {"primary": (data / "hard-benchmark.json", examples / "hard-benchmark.json"),
+                   "high_budget": (data / "high-budget" / "hard-benchmark.json", examples / "hard-benchmark-high-budget.json")}
+        studies = {}
+        for name, paths in choices.items():
+            path = next((p for p in paths if p.is_file()), None)
+            if path:
+                studies[name] = json.loads(path.read_text())
+        selected = ("high_budget" if studies.get("high_budget", {}).get("status") == "complete" else "primary") if study == "latest" else study
+        if selected not in studies:
+            return {"available": False}
+        return {"available": True, "study": studies[selected], "selected": selected,
+                "studies": [{"id":name,"status":s["status"],"cases":len(s["cases"]),"max_tokens":s["design"]["settings"]["max_tokens"]} for name,s in studies.items()]}
 
     @app.get("/api/operational")
     def operational_study():

@@ -71,7 +71,9 @@ def response_schema():
     return schema
 
 
-def model_call(agent, budget, observation, memories, model, original=None, key=""):
+def model_call(agent, budget, observation, memories, model, original=None, key="", max_tokens=900):
+    if type(max_tokens) is not int or not 900 <= max_tokens <= 4096:
+        raise ValueError("Unsupported research response allowance")
     content = {"task":observation,"recalled_prior_experience":memories}
     system = POLICY
     if original is not None:
@@ -79,7 +81,7 @@ def model_call(agent, budget, observation, memories, model, original=None, key="
         system += (" You are a corrective critic in a separate model request. Recompute the decision from the records. "
                    "Return the original action if correct, otherwise a corrected proposal or zero-amount escalation. "
                    "Do not assume the first agent's arithmetic or reasons are correct. Your output remains a proposal for the independent gate.")
-    payload = {"model":model,"max_tokens":900,"system":system,
+    payload = {"model":model,"max_tokens":max_tokens,"system":system,
                "messages":[{"role":"user","content":json.dumps(content,ensure_ascii=False)}],
                "tools":[{"name":"propose_refund","description":"One synthetic proposal; no payment authority","strict":True,"input_schema":response_schema()}],
                "tool_choice":{"type":"auto","disable_parallel_tool_use":True},
@@ -87,7 +89,7 @@ def model_call(agent, budget, observation, memories, model, original=None, key="
     # A deliberately conservative byte-based input allowance plus framing margin.
     # Failed/unmetered calls retain this full reserve instead of a zero cost.
     input_allowance = len(json.dumps(payload,ensure_ascii=False).encode())+2048
-    reserve = (input_allowance*PRICES[model][0]+900*PRICES[model][1])/1e6
+    reserve = (input_allowance*PRICES[model][0]+max_tokens*PRICES[model][1])/1e6
     call_key = digest({"key":key,"payload":payload})
     cached = budget.acquire(call_key,reserve)
     if cached is not None:
