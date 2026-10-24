@@ -60,7 +60,7 @@ class PairedAnalysisRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.11.0")
+    app = FastAPI(title="RiskGraph", version="0.12.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -94,7 +94,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.11.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.12.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/demo")
     def paired_demo():
@@ -180,6 +180,17 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     @app.get("/travel")
     def travel_demo():
         return FileResponse(STATIC / "travel.html")
+
+    @app.get("/travel/compare")
+    def travel_comparison():
+        return FileResponse(STATIC / "travel-compare.html")
+
+    @app.get("/api/travel-factorial")
+    def travel_factorial():
+        candidates = [Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "travel-factorial-v2" / "study.json",
+                      STATIC.parents[1] / "docs" / "examples" / "travel-factorial.json"]
+        path = next((p for p in candidates if p.is_file()), None)
+        return {"available": True, "study": json.loads(path.read_text())} if path else {"available": False}
 
     @app.get("/api/travel-study")
     def travel_study():

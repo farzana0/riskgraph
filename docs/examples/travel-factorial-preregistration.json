@@ -1,0 +1,48 @@
+{
+  "version": "travel-factorial-v2",
+  "seed": 20261024107,
+  "cases": 32,
+  "cases_sha256": "320d15b37a75872d533d4e0c10c321f63469103618570eec56ea320e866bd1dc",
+  "models": [
+    "claude-haiku-5-5",
+    "claude-sonnet-5-5"
+  ],
+  "critic_model": "claude-sonnet-5-5",
+  "memory_modes": [
+    "none",
+    "selected"
+  ],
+  "max_usd": 3.0,
+  "max_requests": 256,
+  "settings": {
+    "max_tokens": 1536,
+    "thinking": "adaptive",
+    "effort": "low",
+    "output": "one common JSON schema; no tools"
+  },
+  "bank_sha256": "ea987197033961e6027a83b96930e921e901e4708a25d64fa94b04511f10b2e3",
+  "ordering_seed": 20261024117,
+  "price_basis_usd_per_million": {
+    "claude-haiku-5-5": [
+      0.1,
+      0.5
+    ],
+    "claude-sonnet-5-5": [
+      2.0,
+      10.0
+    ]
+  },
+  "source_sha256": {
+    "app/travel_factorial.py": "ce0e887f00033d17389f986949cf9560514f6b86275a090340539033d53aaf12",
+    "app/travel_factorial_stats.py": "b9f3e3ba0a2cd677f364a15cd8d9cf2dca1f626ade64cdf9a0483f36fdd1a75e",
+    "scripts/travel_factorial.py": "2995f70514aa6b83e924e8366d3cfaa5cee2e2b397919d83c3793c55b7819658",
+    "app/travel.py": "966f29f702b8b97c894a250b3624be04aaf127035162bf7f771267fadd3e7a34",
+    "app/travel_calls.py": "f2f225305102604b0c69abd433b5177af56dcc9c7ee001e9f42fca02a25deb93",
+    "app/live_budget.py": "04ba0e4b5d70a440df266d1b6dbebe9a79d55f560c43ba1428f0042eb982b021",
+    "app/hardbench.py": "2f9c312b2fdf9bac89611cc4ce7d34801ccc3be8bdd8f83f1a63ead4c12067e3",
+    "app/hardcases.py": "9056bb5e9402fa147a00885807e4f3d0d7e7666fb32af369c363e569c0814cff",
+    "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d",
+    "app/research_stats.py": "83bb7f693a3cab03480612c12d362c97eb3dc06d9f70c8eeaf98aed991252002"
+  },
+  "scope": "32 fresh opaque-ID trips; four per eight families, including eight no-eligible-offer controls. All eight model/memory/critic configurations share cases, JSON schema, adaptive thinking, low effort and token limit. Critic off reuses the exact initial proposal. The separate reviewer is always Sonnet, sees the same memory condition, and gets no gate/oracle result. Bank is frozen before calls; no online memory updates. No paid retries or outcome-driven case selection. Incomplete output is an operational error and unknown financial loss. Fixed 32-case target or hard US$3 stop, never extended based on effects. No pooling with earlier studies."
+}
