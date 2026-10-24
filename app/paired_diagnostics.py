@@ -39,7 +39,8 @@ def sensitivity(cells, weights, selected_a, selected_b):
         for si, s in enumerate(SCENARIOS):
             c = cells[s]
             aa, bb = a + c['k'], b + c['n'] - c['k']
-            mean += weights[s] * aa / (aa + bb)
+            # Match the main projection's operation order at rounding ties.
+            mean += weights[s] * (aa / (aa + bb))
             rng = np.random.default_rng(np.random.SeedSequence([20261023, si]))
             samples += weights[s] * rng.beta(aa, bb, len(samples))
         results.append({'label': label, 'a': a, 'b': b, 'posterior_mean': mean,

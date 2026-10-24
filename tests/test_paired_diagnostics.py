@@ -59,7 +59,7 @@ def test_reference_differences_pairing_and_sensitivity_preserve_base_model():
         for cell in row['cells'].values():
             assert cell['n']==cell['avoided']+cell['introduced']+cell['both_harmful']+cell['neither_harmful']
         selected=result['prior_sensitivity'][cfg][0]
-        assert selected['posterior_mean']==pytest.approx(base['projections'][cfg]['posterior_mean'])
+        assert selected['posterior_mean']==base['projections'][cfg]['posterior_mean']
         assert selected['credible95']==base['projections'][cfg]['credible95']
     expected_variance=sum(w*w for w in WEIGHTS.values())*11/(12*12*13)
     assert result['posterior_moments']['rules']['variance']==pytest.approx(expected_variance)
