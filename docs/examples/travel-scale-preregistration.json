@@ -13,15 +13,15 @@
     "max_tokens": 512,
     "tool_choice": "forced propose_booking",
     "effort": "low",
-    "rate_per_second": 4,
-    "workers": 16
+    "rate_per_second": 8,
+    "workers": 24
   },
   "source_sha256": {
     "app/travel.py": "966f29f702b8b97c894a250b3624be04aaf127035162bf7f771267fadd3e7a34",
     "app/travel_calls.py": "f2f225305102604b0c69abd433b5177af56dcc9c7ee001e9f42fca02a25deb93",
     "app/scale_calls.py": "0403a1dc896898d8066598d34cec01f5ab5cdf4fa89911b116c8156feb6cc728",
     "app/travel_scale.py": "fa14614672ce77e1e7e54ce5c960bc563d8bdc414b7d81ccbd6a00c74c85482a",
-    "scripts/travel_scale.py": "8aaee6c72f1bd8c1597e4d3631bf059dbd07daf61f3e1dfd77c94597447b8bd4",
+    "scripts/travel_scale.py": "c3730c281de5a74406d35d0247a1de674681d60a0dcc480abf67aa49b0927c66",
     "app/hardbench.py": "2f9c312b2fdf9bac89611cc4ce7d34801ccc3be8bdd8f83f1a63ead4c12067e3",
     "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d",
     "app/risk.py": "ef5396844c2769de8a99801873ff5a03c4417c2b66e28faed94a63c94b83fc73",

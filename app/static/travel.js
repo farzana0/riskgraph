@@ -2,7 +2,7 @@
 (() => {
  const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
  const state={study:null,large:null,fixture:null,index:0,source:'real',model:'claude-haiku-5-5',critic:true,step:5,token:'',job:null,timer:null,focus:null};
- const money=v=>v==null?'Not adjudicated':(v/100).toLocaleString('en-US',{style:'currency',currency:'USD'}),pct=v=>v==null?'Not available':(v*100).toFixed(1)+'%',range=r=>r.map(pct).join(' to '),name=m=>m.includes('haiku')?'Haiku':'Sonnet',title=s=>s.replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
+ const money=v=>v==null?'Not adjudicated':(v/100).toLocaleString('en-US',{style:'currency',currency:'USD'}),pct=v=>v==null?'Not available':(v*100).toFixed(v>0&&v<.01?2:1)+'%',range=r=>r.map(pct).join(' to '),name=m=>m.includes('haiku')?'Haiku':'Sonnet',title=s=>s.replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
  const el=(t,a,p)=>{const n=document.createElement(t);Object.entries(a||{}).forEach(([k,v])=>k==='text'?n.textContent=v:n.setAttribute(k,v));if(p)p.append(n);return n;};
  const svg=(t,a,p)=>{const n=document.createElementNS(NS,t);Object.entries(a).forEach(([k,v])=>k==='text'?n.textContent=v:n.setAttribute(k,v));p.append(n);return n;};
  const table=(host,headers,rows)=>{host.replaceChildren();const t=el('table',{},host),h=el('tr',{},el('thead',{},t)),body=el('tbody',{},t);headers.forEach(text=>el('th',{text},h));rows.forEach(r=>{const row=el('tr',{},body);r.forEach(text=>el('td',{text},row));});};

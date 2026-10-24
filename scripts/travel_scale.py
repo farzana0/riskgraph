@@ -23,7 +23,7 @@ SOURCES=['app/travel.py','app/travel_calls.py','app/scale_calls.py','app/travel_
 
 def registration():
     cases=generate_scale()
-    return {'version':VERSION,'seed':2026102481,'per_family':688,'cases':5504,'cases_sha256':digest(cases),'model':MODELS[0],'max_usd':2.,'max_requests':5504,'reference_cases':0,'reference_registration_sha256':hashlib.sha256((ROOT/'docs/examples/travel-v1-preregistration.json').read_bytes()).hexdigest(),'settings':{'max_tokens':512,'tool_choice':'forced propose_booking','effort':'low','rate_per_second':4,'workers':16},'source_sha256':{p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in SOURCES},'scope':'5504 fresh Haiku-only episodes under the same task policy and generator, with a new seed and forced tool response format (512 tokens). No earlier responses are reused or pooled. Format control differs from the original matched study and is not a model-ranking intervention. No critic, no memory, no selection by observed effect. Equal eight-family weights. A new independent US$2 cap makes all new experiment allowances total at most US$8 (refund 4.8, travel/live 1.2, scale 2). Earlier counters remain intact. Unavailable results are never retried or assigned a fabricated proposal loss. This campaign cannot support an unmatched Sonnet comparison.'}
+    return {'version':VERSION,'seed':2026102481,'per_family':688,'cases':5504,'cases_sha256':digest(cases),'model':MODELS[0],'max_usd':2.,'max_requests':5504,'reference_cases':0,'reference_registration_sha256':hashlib.sha256((ROOT/'docs/examples/travel-v1-preregistration.json').read_bytes()).hexdigest(),'settings':{'max_tokens':512,'tool_choice':'forced propose_booking','effort':'low','rate_per_second':8,'workers':24},'source_sha256':{p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in SOURCES},'scope':'5504 fresh Haiku-only episodes under the same task policy and generator, with a new seed and forced tool response format (512 tokens). No earlier responses are reused or pooled. Format control differs from the original matched study and is not a model-ranking intervention. No critic, no memory, no selection by observed effect. Equal eight-family weights. A new independent US$2 cap makes all new experiment allowances total at most US$8 (refund 4.8, travel/live 1.2, scale 2). Earlier counters remain intact. Unavailable results are never retried or assigned a fabricated proposal loss. This campaign cannot support an unmatched Sonnet comparison.'}
 
 
 def run(directory):
@@ -42,7 +42,7 @@ def run(directory):
         with pacer:
             delay=max(0,next_time[0]-time.monotonic())
             if delay:time.sleep(delay)
-            next_time[0]=time.monotonic()+.25
+            next_time[0]=time.monotonic()+.125
         try:r=call(agent,budget,c['observation'],MODELS[0],VERSION+':'+c['id']+':initial')
         except RuntimeError:return None
         return {'case_id':c['id'],'family':c['family'],'model':MODELS[0],'initial':r,'initial_outcome':outcome(c,r),'source':'fresh-scale-request'}
@@ -55,9 +55,9 @@ def run(directory):
             data['responses_sha256']=hashlib.sha256(archive.read_bytes()).hexdigest()
         write(directory/'study.json',data)
     report('running');todo=[c for c in cases if c['id'] not in rows]
-    with ThreadPoolExecutor(16) as pool:
-        for start in range(0,len(todo),32):
-            batch=list(pool.map(evaluate,todo[start:start+32]));received=[r for r in batch if r is not None]
+    with ThreadPoolExecutor(24) as pool:
+        for start in range(0,len(todo),128):
+            batch=list(pool.map(evaluate,todo[start:start+128]));received=[r for r in batch if r is not None]
             with archive.open('a') as f:
                 for r in received:rows[r['case_id']]=r;f.write(json.dumps(r,separators=(',',':'))+'\n')
             status='provider_error' if any(r['initial']['status']=='provider_error' for r in received) else 'budget_limited' if len(received)<len(batch) else 'running'
