@@ -1,0 +1,11 @@
+{
+  "cases": 32,
+  "registered_commit": "8bfdb70",
+  "requests": 127,
+  "recorded_response_ids": 127,
+  "resolved_stage_outcomes": 126,
+  "unresolved_stage_outcomes": 2,
+  "estimated_cost_usd": 0.9534676,
+  "outcomes_and_total_probability_recomputed": true,
+  "study_sha256": "541e95972d3dca468b5f02241c36eb204fca408503a525d51d3ad631a715016b"
+}

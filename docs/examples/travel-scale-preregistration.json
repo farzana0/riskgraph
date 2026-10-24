@@ -1,0 +1,34 @@
+{
+  "version": "travel-haiku-scale-v1",
+  "seed": 2026102481,
+  "per_family": 688,
+  "cases": 5504,
+  "cases_sha256": "c81fb7ba7f8beaf289031e58bec219dbcc7790b68b062b85dd662c52642a016c",
+  "model": "claude-haiku-5-5",
+  "max_usd": 2.0,
+  "max_requests": 5504,
+  "reference_cases": 0,
+  "reference_registration_sha256": "3ceab8157234ad8cb3dc3a6aeb81334d74a5e14a369e3a1d0639067b86ef269c",
+  "settings": {
+    "max_tokens": 512,
+    "tool_choice": "forced propose_booking",
+    "effort": "low",
+    "rate_per_second": 4,
+    "workers": 16
+  },
+  "source_sha256": {
+    "app/travel.py": "966f29f702b8b97c894a250b3624be04aaf127035162bf7f771267fadd3e7a34",
+    "app/travel_calls.py": "f2f225305102604b0c69abd433b5177af56dcc9c7ee001e9f42fca02a25deb93",
+    "app/scale_calls.py": "0403a1dc896898d8066598d34cec01f5ab5cdf4fa89911b116c8156feb6cc728",
+    "app/travel_scale.py": "fa14614672ce77e1e7e54ce5c960bc563d8bdc414b7d81ccbd6a00c74c85482a",
+    "scripts/travel_scale.py": "8aaee6c72f1bd8c1597e4d3631bf059dbd07daf61f3e1dfd77c94597447b8bd4",
+    "app/hardbench.py": "2f9c312b2fdf9bac89611cc4ce7d34801ccc3be8bdd8f83f1a63ead4c12067e3",
+    "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d",
+    "app/risk.py": "ef5396844c2769de8a99801873ff5a03c4417c2b66e28faed94a63c94b83fc73",
+    "app/research_stats.py": "83bb7f693a3cab03480612c12d362c97eb3dc06d9f70c8eeaf98aed991252002",
+    "app/hardcases.py": "9056bb5e9402fa147a00885807e4f3d0d7e7666fb32af369c363e569c0814cff",
+    "app/domain.py": "8197d67a9287330cf41a1591f6354e61cbf7b40b6b6c5ff8368fee3012896a0c",
+    "requirements.txt": "62da73c8bdde5dc7136c05715977f93033b613a3818823f57127319abf5b4ee4"
+  },
+  "scope": "5504 fresh Haiku-only episodes under the same task policy and generator, with a new seed and forced tool response format (512 tokens). No earlier responses are reused or pooled. Format control differs from the original matched study and is not a model-ranking intervention. No critic, no memory, no selection by observed effect. Equal eight-family weights. A new independent US$2 cap makes all new experiment allowances total at most US$8 (refund 4.8, travel/live 1.2, scale 2). Earlier counters remain intact. Unavailable results are never retried or assigned a fabricated proposal loss. This campaign cannot support an unmatched Sonnet comparison."
+}

@@ -44,3 +44,24 @@ def test_public_travel_routes_are_read_only_and_live_requires_operator(monkeypat
     assert client.post('/api/travel-live',json={}).status_code==401
     assert client.post('/api/travel-live',json={},headers={'X-Operator-Token':'private-test-token'}).status_code==409
     assert client.get('/api/travel-live?run=../invalid').status_code==404
+
+
+def test_large_haiku_tail_keeps_missing_adverse_endpoint_separate():
+    from app.travel_scale import analyze
+    c=generate();rows=[]
+    for case in c:
+        q=case['truth'];p={'action':'book','offer_id':q['valid_offer_id'],'traveller_id':case['observation']['authenticated_request']['traveller_id'],'quoted_total_cents':q['total_cents'],'reason':'Control'}
+        rows.append({'case_id':case['id'],'initial_outcome':outcome(case,{'status':'complete','proposal':p})})
+    rows[0]['initial_outcome']=outcome(c[0],{'status':'invalid_response'})
+    a=analyze(c,rows,True)['arms'][MODELS[0]+'|0'];assert a['unresolved']==1 and a['tail'][0]['exact_upper'] is None
+    assert 0<a['tail'][0]['adverse_or_unresolved_exact_upper']<1 and a['missing_loss_mean_range_usd']==[0,1000/32]
+
+
+def test_scale_cases_are_fresh_and_forced_format_is_separate():
+    from scripts.travel_scale import generate_scale
+    from app.scale_calls import payload as forced
+    cases=generate_scale();old=generate();assert len(cases)==5504
+    assert {c['id'] for c in cases}.isdisjoint(c['id'] for c in old)
+    assert {c['observation']['authenticated_request']['trip_id'] for c in cases}.isdisjoint(c['observation']['authenticated_request']['trip_id'] for c in old)
+    p=forced(cases[0]['observation'],MODELS[0]);q=payload(cases[0]['observation'],MODELS[0]);assert p['messages']==q['messages'] and p['system']==q['system']
+    assert p['tool_choice']['type']=='tool' and p['max_tokens']==512 and q['tool_choice']['type']=='auto'

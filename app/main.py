@@ -187,6 +187,22 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     def travel_stress():
         return json.loads((STATIC.parents[1] / "docs" / "examples" / "travel-stress.json").read_text())
 
+    @app.get("/api/travel-scale")
+    def travel_scale():
+        candidates = [Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "travel-scale" / "study.json",
+                      STATIC.parents[1] / "docs" / "examples" / "travel-scale.json"]
+        path = next((p for p in candidates if p.is_file()), None)
+        return {"available": True, "study": json.loads(path.read_text())} if path else {"available": False}
+
+    @app.get("/api/travel-scale/responses")
+    def travel_scale_archive():
+        candidates = [Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "travel-scale" / "responses.jsonl.gz",
+                      STATIC.parents[1] / "docs" / "examples" / "travel-scale-responses.jsonl.gz"]
+        path = next((p for p in candidates if p.is_file()), None)
+        if path is None:
+            raise HTTPException(404, "The response archive is preparing")
+        return FileResponse(path, media_type="application/gzip", filename="riskgraph-travel-responses.jsonl.gz")
+
     @app.post("/api/travel-live", status_code=202)
     def travel_start(body: TravelLiveRequest, request: Request, tasks: BackgroundTasks, x_operator_token: Optional[str] = Header(default=None)):
         if not token:
