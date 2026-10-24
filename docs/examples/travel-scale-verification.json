@@ -1,0 +1,13 @@
+{
+  "registered_commit": "644d35d",
+  "cases": 5504,
+  "fresh_unique_requests": 5504,
+  "recorded_response_ids": 5504,
+  "resolved_outcomes": 4783,
+  "unresolved_outcomes": 721,
+  "estimated_cost_usd": 1.9442617999999983,
+  "request_inputs_outcomes_tail_model_and_prefixes_recomputed": true,
+  "summary_sha256": "b18bdad95c7e84d05fa52c7defbc50864256c81fee87442397e102e0e2a1e4d4",
+  "responses_sha256": "45f831b8094f0f9d6a8174dd621a9989d5b15220ceafff9ae76d371e9e41c950",
+  "scope": "Audits stored response identities, source snapshots, original request hashes, scoring and interval calculations; provider identities are provenance, not external certification."
+}

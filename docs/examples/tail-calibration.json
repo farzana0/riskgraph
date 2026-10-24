@@ -1,0 +1,188 @@
+{
+  "version": "tail-uncertainty-audit-v1",
+  "datasets": 40000,
+  "posterior_draws_per_dataset": 1024,
+  "records": [
+    {
+      "per_family": 4,
+      "cases": 32,
+      "true_probability": 0.001,
+      "bayesian_credible_coverage": 0.0,
+      "bayesian_mean_interval_width": 0.16625727793489664,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 4,
+      "cases": 32,
+      "true_probability": 0.01,
+      "bayesian_credible_coverage": 0.0,
+      "bayesian_mean_interval_width": 0.16991675169021306,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 4,
+      "cases": 32,
+      "true_probability": 0.05,
+      "bayesian_credible_coverage": 0.5165,
+      "bayesian_mean_interval_width": 0.1853988601616305,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 4,
+      "cases": 32,
+      "true_probability": 0.2,
+      "bayesian_credible_coverage": 0.837,
+      "bayesian_mean_interval_width": 0.2284238025074482,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 16,
+      "cases": 128,
+      "true_probability": 0.001,
+      "bayesian_credible_coverage": 0.0,
+      "bayesian_mean_interval_width": 0.05462817351971272,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 16,
+      "cases": 128,
+      "true_probability": 0.01,
+      "bayesian_credible_coverage": 0.2775,
+      "bayesian_mean_interval_width": 0.061042385580340815,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 16,
+      "cases": 128,
+      "true_probability": 0.05,
+      "bayesian_credible_coverage": 0.7985,
+      "bayesian_mean_interval_width": 0.08390992357994781,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 16,
+      "cases": 128,
+      "true_probability": 0.2,
+      "bayesian_credible_coverage": 0.9105,
+      "bayesian_mean_interval_width": 0.13034252236969507,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 64,
+      "cases": 512,
+      "true_probability": 0.001,
+      "bayesian_credible_coverage": 0.0,
+      "bayesian_mean_interval_width": 0.015414017516770684,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 64,
+      "cases": 512,
+      "true_probability": 0.01,
+      "bayesian_credible_coverage": 0.754,
+      "bayesian_mean_interval_width": 0.021787297184806848,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 64,
+      "cases": 512,
+      "true_probability": 0.05,
+      "bayesian_credible_coverage": 0.903,
+      "bayesian_mean_interval_width": 0.03886035091427462,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 64,
+      "cases": 512,
+      "true_probability": 0.2,
+      "bayesian_credible_coverage": 0.945,
+      "bayesian_mean_interval_width": 0.06779864807805601,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 256,
+      "cases": 2048,
+      "true_probability": 0.001,
+      "bayesian_credible_coverage": 0.395,
+      "bayesian_mean_interval_width": 0.004560727128481755,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 256,
+      "cases": 2048,
+      "true_probability": 0.01,
+      "bayesian_credible_coverage": 0.8995,
+      "bayesian_mean_interval_width": 0.009228328444842757,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 256,
+      "cases": 2048,
+      "true_probability": 0.05,
+      "bayesian_credible_coverage": 0.9455,
+      "bayesian_mean_interval_width": 0.01897206329722028,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 256,
+      "cases": 2048,
+      "true_probability": 0.2,
+      "bayesian_credible_coverage": 0.9585,
+      "bayesian_mean_interval_width": 0.03434439769979378,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 688,
+      "cases": 5504,
+      "true_probability": 0.001,
+      "bayesian_credible_coverage": 0.739,
+      "bayesian_mean_interval_width": 0.002142413852054829,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 688,
+      "cases": 5504,
+      "true_probability": 0.01,
+      "bayesian_credible_coverage": 0.926,
+      "bayesian_mean_interval_width": 0.005385649043132407,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 688,
+      "cases": 5504,
+      "true_probability": 0.05,
+      "bayesian_credible_coverage": 0.944,
+      "bayesian_mean_interval_width": 0.011509759757450997,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    },
+    {
+      "per_family": 688,
+      "cases": 5504,
+      "true_probability": 0.2,
+      "bayesian_credible_coverage": 0.9385,
+      "bayesian_mean_interval_width": 0.021000710535032354,
+      "exact_upper_coverage": 1.0,
+      "replicates": 2000
+    }
+  ],
+  "scope": "40,000 independent simulated binary datasets across twenty fixed-probability/sample-size regimes, eight equal-weight families. This is a fixed-truth stress audit of the existing marginal Jeffreys model and conservative CP upper bound; it is not a model error-rate estimate or a proof of Bayesian frequentist calibration. Exact weighted bounds are conservative. Monte Carlo intervals are not used to tune the registered priors."
+}

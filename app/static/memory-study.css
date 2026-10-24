@@ -21,3 +21,5 @@
 }
 
 .memory-page .study-setup-cards{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+
+.memory-page .effect-line.uncertain{stroke:#849188}.memory-page .effect-dot.uncertain{fill:#68796c}.memory-page .effect-line.harm{stroke:var(--bad)}.memory-page .effect-dot.harm{fill:var(--bad)}

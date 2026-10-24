@@ -1,6 +1,12 @@
 # RiskGraph
 
-**[Real Haiku/Sonnet memory investigation](https://riskgraph-fa98.onrender.com/study).** A registered 36-case experiment compares raw memory, capability-selected guidance, current-record calculations and a separate corrective critic. Inspect actual SurrealDB sources, rejected retrieval hits, calculation provenance, model errors and matched uncertainty intervals. It used 575 real model requests, approximately $5.85 in tokens. Improvements and regressions are both retained. [Protocol, results and limits](docs/MEMORY_INVESTIGATION.md). The [earlier 48-case study](https://riskgraph-fa98.onrender.com/study?experiment=original) remains separate.
+**[Open RiskGraph](https://riskgraph-fa98.onrender.com).** A minimal starting page links to the [travel-booking agent demo](https://riskgraph-fa98.onrender.com/travel), [matched model/memory/critic evidence](https://riskgraph-fa98.onrender.com/study), and the [agent-log assessment workspace](https://riskgraph-fa98.onrender.com/workspace).
+
+The latest registered experiments contain **6,012 new real model requests**: a fresh 48-case refund replication (381 requests), a matched 32-case travel study (127), and 5,504 fresh format-controlled Haiku travel cases. Estimated study token cost is **US$7.4663**. An additional offline campaign tests 6,000 injected failures and 6,000 valid controls. These sources remain separate. Live discretionary reviews and replay never enter the registered risk estimates.
+
+Inspect quote/ledger records, initial decisions, separate Sonnet corrections, and independent gate outcomes. The large Haiku study exposes 2,247 harmful adjudicated proposals and 721 unresolved proposals; its response controls differ from the matched study and cannot support a pooled model ranking. Its conditional positive-loss credible interval narrows about 90% from the 32-case prefix to the full batch. Conservative bounds and missing outcomes remain explicit. [Fresh memory/critic results](docs/FRESH_FOLLOWUP.md) · [Travel model comparison](docs/TRAVEL_DEMO.md) · [Large tail-probability study](docs/TRAVEL_SCALE.md) · [Calibration limits](docs/TAIL_CALIBRATION.md).
+
+The earlier [36-case memory investigation](https://riskgraph-fa98.onrender.com/study?experiment=memory-v3) and [48-case development study](https://riskgraph-fa98.onrender.com/study?experiment=original) remain available without pooling.
 
 **[Interactive agent topology demo](https://riskgraph-fa98.onrender.com/demo).** Inspect saved agent decisions through four monitoring setups, then explore a separate Beta–Binomial frequency model, editable traffic assumptions, and fixed-sample exact upper bounds. Start locally with `./scripts/start-demo.sh` and open `http://127.0.0.1:8765/demo`. [Design, assumptions, and three-minute demo script](docs/PAIRED_DEMO.md). [Paired statistical model and calibration audit](docs/MODEL_AUDIT.md).
 
@@ -47,7 +53,7 @@ python3 -m venv .venv
 .venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8765
 ```
 
-Open http://127.0.0.1:8765. On first launch, the application creates a 40-case offline evaluation. **New evaluation** creates a separate run; **Continue evaluation** resumes an unfinished run. The decision ledger provides policy checks, simulated outcomes, and exports.
+Open http://127.0.0.1:8765 and choose a demo, evidence, or log assessment. The evaluation lab is under `/workspace`. On first launch, the application creates a 40-case offline evaluation. **New evaluation** creates a separate run; **Continue evaluation** resumes an unfinished run. The decision ledger provides policy checks, simulated outcomes, and exports.
 
 ## Architecture
 
@@ -89,7 +95,7 @@ With provider credentials configured, an API evaluation can be run with:
 
 The CLI and server share the configured database's attempt budget. Evaluation seeds and settings are recorded for reproducibility. Development and memory-training seeds should remain separate from held-out evaluation seeds.
 
-The validation suite contains 186 tests. An earlier revised-workflow campaign completed 136 hosted Claude decisions, including 68 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. A subsequent paired comparison adds 320 Haiku/Sonnet cases; both models record zero harmful proposals on this workload. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
+The validation suite contains 196 tests. An earlier revised-workflow campaign completed 136 hosted Claude decisions, including 68 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. A subsequent paired comparison adds 320 Haiku/Sonnet cases; both models record zero harmful proposals on this workload. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
 
 The [featured control demonstration](docs/CONTROL_DEMO.md) includes $6,914.98 in unauthorized proposed payments across 56 decisions. All 48 harmful proposals are blocked; eight valid payments execute. Injected failures are explicitly separated from real Claude evaluations.
 

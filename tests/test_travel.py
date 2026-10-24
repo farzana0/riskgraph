@@ -65,3 +65,26 @@ def test_scale_cases_are_fresh_and_forced_format_is_separate():
     assert {c['observation']['authenticated_request']['trip_id'] for c in cases}.isdisjoint(c['observation']['authenticated_request']['trip_id'] for c in old)
     p=forced(cases[0]['observation'],MODELS[0]);q=payload(cases[0]['observation'],MODELS[0]);assert p['messages']==q['messages'] and p['system']==q['system']
     assert p['tool_choice']['type']=='tool' and p['max_tokens']==512 and q['tool_choice']['type']=='auto'
+
+
+def test_saved_review_requires_operator_and_uses_server_side_case(monkeypatch,tmp_path):
+    from fastapi.testclient import TestClient
+    from app.main import create_app
+    from app import travel_live
+    monkeypatch.setenv('RISKGRAPH_ADMIN_TOKEN','operator-test');monkeypatch.setenv('DATABASE_PATH',str(tmp_path/'app.sqlite3'))
+    seen=[]
+    def reject(case_id):seen.append(case_id);raise ValueError('Evidence preparing')
+    monkeypatch.setattr(travel_live,'start_review',reject)
+    client=TestClient(create_app(':memory:',seed_demo=False));body={'case_id':'scale-travel-wrong_date-1'}
+    assert client.post('/api/travel-review',json=body).status_code==401 and not seen
+    assert client.post('/api/travel-review',json={**body,'proposal':{}},headers={'X-Operator-Token':'operator-test'}).status_code==422 and not seen
+    assert client.post('/api/travel-review',json=body,headers={'X-Operator-Token':'operator-test'}).status_code==409 and seen==[body['case_id']]
+
+
+def test_live_case_opaque_ids_preserve_quote_and_ledger_contract():
+    from app.travel_live import live_case
+    for family in FAMILIES:
+        c=live_case(family,2026102499);assert c==live_case(family,2026102499)
+        q=c['truth'];assert all(len(x['offer_id'])==22 for x in c['observation']['quotes'])
+        p={'action':'book','offer_id':q['valid_offer_id'],'traveller_id':c['observation']['authenticated_request']['traveller_id'],'quoted_total_cents':q['total_cents'],'reason':'Opaque-ID control'}
+        assert checks(c['observation'],p)['allowed']

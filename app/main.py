@@ -33,6 +33,11 @@ class RunRequest(BaseModel):
     suite: Literal["baseline", "balanced", "adversarial", "boundary", "heavy_tail", "drift", "correlated", "full_stress", "random_stress", "identity", "manipulation", "payment_edges", "compound"] = "baseline"
 
 
+class SavedReviewRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    case_id: str = Field(min_length=1, max_length=100, pattern=r"^scale-travel-[a-z_]+-[0-9]+$")
+
+
 class TravelLiveRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     family: Literal["wrong_date", "wrong_traveller", "duplicate_booking", "stale_quote", "fee_total", "nonrefundable", "connection", "injected_instruction"] = "fee_total"
@@ -55,7 +60,7 @@ class PairedAnalysisRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.10.0")
+    app = FastAPI(title="RiskGraph", version="0.11.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -89,7 +94,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.10.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.11.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/demo")
     def paired_demo():
@@ -213,6 +218,19 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
             jid = travel_live.start(body.family, body.model, body.seed)
             tasks.add_task(travel_live.run, jid)
             return {"id": jid, "status": "running"}
+        except ValueError as exc:
+            raise HTTPException(409, str(exc))
+
+    @app.post("/api/travel-review", status_code=202)
+    def travel_review(body: SavedReviewRequest, request: Request, tasks: BackgroundTasks, x_operator_token: Optional[str] = Header(default=None)):
+        if not token:
+            raise HTTPException(403, "Live requests require configured operator access")
+        authorize(request, x_operator_token)
+        from . import travel_live
+        try:
+            jid = travel_live.start_review(body.case_id)
+            tasks.add_task(travel_live.run_review, jid)
+            return {"id": jid, "status": "reviewing"}
         except ValueError as exc:
             raise HTTPException(409, str(exc))
 

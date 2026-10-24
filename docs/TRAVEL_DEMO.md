@@ -17,3 +17,10 @@ Live evaluation is operator-only, uses the same policy and schema, and receives 
 The 32-case study completed 127 actual requests for US$0.9534676. Haiku's initial arm has 15 task errors (one unresolved response), zero observed harmful proposals among 31 adjudicated proposals, and no synthetic executed loss. Its Sonnet review corrects all 14 resolved task errors; the initial unavailable response and skipped critic remain unresolved. Sonnet's initial and reviewed arms complete all 32 cases correctly. All matched financial contrasts remain uncertain and cross zero; zero harm is not zero estimated risk. These are real model observations, not the 6,000 injected failures.
 
 The subsequent [large Haiku campaign](TRAVEL_SCALE.md) changes the response interface to forced tool output and uses a new seed. Its observations are not pooled with these matched-model results. It has a separate US$2 cap, raising the prespecified combined experiment allowance to US$8.
+
+
+## Generator limitation and live-case identities
+
+The frozen v1 study uses three candidate-role suffixes, with the eligible candidate consistently created in role 2 before display shuffling. This is a benchmark artifact that a strategy could exploit; the experiment is stateless and supplies no cross-case feedback, but it does not establish robustness against such shortcuts or out-of-distribution travel records. Scenario family labels describe the designed challenge, not necessarily the cause of the observed error (for example, a date challenge can fail through price arithmetic). The archives are preserved unchanged.
+
+New discretionary live requests relabel candidate offer and flight IDs with seeded opaque identifiers, preserving quote revisions, source records and ledger relationships. Saved-proposal reviews retain the original identifiers so they review the actual recorded decision. This improves the live demo without silently changing the registered dataset or relabeling its results as a counterbalanced benchmark.
