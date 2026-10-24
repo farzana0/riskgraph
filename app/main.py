@@ -14,6 +14,7 @@ from .assessment import AssessmentRequest, assess
 from .protocol import verify_handoffs
 from .store import Store
 from .domain import SUITES
+from .paired_demo import load_bundle, analyze as analyze_paired
 from .review import verify_review
 from .scenarios import DESCRIPTIONS, LABELS
 
@@ -36,8 +37,17 @@ class StepRequest(BaseModel):
     expected_seq: int = Field(ge=0, le=200)
 
 
+class PairedAnalysisRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    admitted_ids: list[str] = Field(default_factory=list, max_length=240)
+    weights: dict[str, float]
+    a: float = Field(default=1, gt=0, le=100)
+    b: float = Field(default=1, gt=0, le=100)
+    split: Literal["heldout", "development", "recorded", "walkthrough"] = "heldout"
+
+
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.5.3")
+    app = FastAPI(title="RiskGraph", version="0.6.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -71,7 +81,22 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.5.3", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.6.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+
+    @app.get("/demo")
+    def paired_demo():
+        return FileResponse(STATIC / "demo.html")
+
+    @app.get("/api/paired-demo")
+    def paired_bundle():
+        return load_bundle()
+
+    @app.post("/api/paired-demo/analyze")
+    def paired_analysis(body: PairedAnalysisRequest):
+        try:
+            return analyze_paired(load_bundle(), body.admitted_ids, body.weights, body.a, body.b, body.split)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc))
 
     @app.get("/api/config")
     def config():

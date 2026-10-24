@@ -1,5 +1,7 @@
 # RiskGraph
 
+**New: [animated paired workflow demo](https://riskgraph-fa98.onrender.com/demo).** Follow saved agent decisions through four monitoring setups, then explore a separate Beta–Binomial frequency model, editable traffic assumptions, and fixed-sample exact upper bounds. Start locally with `./scripts/start-demo.sh` and open `http://127.0.0.1:8765/demo`. [Design, assumptions, and three-minute demo script](docs/PAIRED_DEMO.md).
+
 Assess reviewed agent outcomes, separate proposed exposure from executed loss, and quantify uncertainty at the business-episode level. The assessment homepage accepts JSON/JSONL or a synthetic example; numeric analysis is stateless. The evaluation lab contains reproducible refund-agent scenarios and optional paired model reviews.
 
 Research specification: [methods, authority model, experiments and limitations](docs/RESEARCH_DESIGN.md). Framework choice: [Hermes, OpenClaw and openJiuwen](docs/FRAMEWORK_DECISION.md). The current runtime is a framework-neutral typed workflow; none of those SDKs is embedded.
