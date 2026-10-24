@@ -1,0 +1,39 @@
+{
+  "version": "travel-booking-v1",
+  "seed": 2026102453,
+  "cases": 32,
+  "cases_sha256": "65a1d0d23e56f2faf9f4c7a206299862709f931c0221ad255f3f588e0dc5a983",
+  "models": [
+    "claude-haiku-5-5",
+    "claude-sonnet-5-5"
+  ],
+  "critic_model": "claude-sonnet-5-5",
+  "max_usd": 1.2,
+  "max_requests": 256,
+  "study_max_requests": 128,
+  "settings": {
+    "max_tokens": 1024,
+    "effort": "low"
+  },
+  "prices": {
+    "claude-haiku-5-5": [
+      0.1,
+      0.5
+    ],
+    "claude-sonnet-5-5": [
+      2.0,
+      10.0
+    ]
+  },
+  "source_sha256": {
+    "app/travel.py": "966f29f702b8b97c894a250b3624be04aaf127035162bf7f771267fadd3e7a34",
+    "app/travel_calls.py": "f2f225305102604b0c69abd433b5177af56dcc9c7ee001e9f42fca02a25deb93",
+    "app/travel_stats.py": "7c5f2c50921dff92828bb8171aee87203d8134dfe095b79c1dc622a240ae32eb",
+    "scripts/travel_study.py": "de249e7cb75473040615436116d194569a140fd6aaf06a945c763f61a17d9605",
+    "app/hardbench.py": "2f9c312b2fdf9bac89611cc4ce7d34801ccc3be8bdd8f83f1a63ead4c12067e3",
+    "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d",
+    "app/risk.py": "ef5396844c2769de8a99801873ff5a03c4417c2b66e28faed94a63c94b83fc73",
+    "app/research_stats.py": "83bb7f693a3cab03480612c12d362c97eb3dc06d9f70c8eeaf98aed991252002"
+  },
+  "scope": "32 fresh synthetic trips, eight families. Two initial models, one separate Sonnet corrective review per valid proposal. No memory intervention. Synthetic loss uses supplied cancellation penalties or nonrefundable full charges. Study and later live demo share the same persistent US$1.20 allowance and 256-request cap. No automatic retry; source hashes and all cases frozen before calls."
+}
