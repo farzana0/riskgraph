@@ -92,7 +92,7 @@ def run(repetitions=2000,seed=20261024,posterior_draws=1000):
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--repetitions',type=int,default=2000);parser.add_argument('--seed',type=int,default=20261024);parser.add_argument('--posterior-draws',type=int,default=1000);parser.add_argument('--output',default='docs/examples/paired-model-calibration.json');args=parser.parse_args()
     if args.repetitions<100:parser.error('Use at least 100 independent repetitions per setting')
-    
+
     if args.posterior_draws<200:parser.error('Use at least 200 posterior draws')
     report=run(args.repetitions,args.seed,args.posterior_draws);path=Path(args.output);path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(report,indent=2)+'\n')
     print('Saved',report['independent_datasets'],'known-truth datasets to',path)
