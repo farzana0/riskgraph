@@ -41,12 +41,12 @@
     const g=$('research-graph');clear(g);const phone=innerWidth<=750;g.setAttribute('viewBox',phone?'0 0 370 650':'0 0 1000 365');
     const p=phone?{input:[65,65],records:[290,65],memory:[65,190],actor:[245,190],critic:[245,330],gate:[245,465],payment:[65,465],score:[65,590]}:{input:[75,175],records:[75,65],memory:[285,55],actor:[285,175],critic:[495,175],gate:[680,175],payment:[875,90],score:[875,275]};
     const initial=cell?.initial,final=call;
-    edge(g,p.input,p.actor,'request');edge(g,p.records,p.actor,phone?'':'authenticated records',false,true);edge(g,p.memory,p.actor,memory?'source hits':'memory off',!memory,true);
+    edge(g,p.input,p.actor,'request');edge(g,p.records,p.actor,'',false,true);edge(g,p.memory,p.actor,'',!memory,true);
     edge(g,p.actor,p.critic,critic?'proposal':phone?'':'critic off',!critic);
     if(critic)edge(g,p.critic,p.gate,'revision');
     else{svg('path',{class:'study-edge',d:phone?'M245 210 C365 220 365 445 245 445':'M305 175 C380 105 600 105 660 175'},g);svg('text',{class:'edge-label',x:phone?295:440,y:phone?390:112,text:'initial proposal'},g);}
     const allowed=!!out?.resolved&&out.gate.allowed&&final?.proposal?.action==='refund';
-    edge(g,p.gate,p.payment,allowed?usd(out.executed_cents/100):'not paid',!allowed);edge(g,allowed?p.payment:p.gate,p.score,'score');
+    edge(g,p.gate,p.payment,'',!allowed);edge(g,allowed?p.payment:p.gate,p.score,'score');
     const memoryFact=s.memory?.families[c.family];
     node(g,'input',...p.input,'Request',usd(c.truth.requested_cents/100)+' requested','?', 'input','',()=>showDetails('Customer request',[['Supplied request',c.observation.authenticated_request],['Untrusted note',c.observation.untrusted_customer_note||c.observation.untrusted_customer_message]]));
     node(g,'records',...p.records,'Connector records','Authenticated source','≡','input','',()=>showDetails('Records supplied to the model',[['Connector records',c.observation.authenticated_connector_records],['Scoring boundary','The canonical scoring state is withheld from all model calls.']]));
@@ -56,7 +56,7 @@
     node(g,'critic',...p.critic,'Sonnet critic',critic?describe(call):'Disabled','●','agent',critic?(out?.proposed_loss_cents>0?'bad':''):'disabled',()=>showDetails('Corrective critic',[['Role','A separate Sonnet call may revise the original proposal. It cannot authorize payment.'],['Recorded response',critic?cell?.corrected||{status:'not_processed'}:{status:'disabled'}],['Scored revision',critic?out||{status:'not_processed'}:{status:'disabled'}]]));
     node(g,'gate',...p.gate,'Policy gate',out?.resolved?(out.gate.allowed?'Passes policy':'Stops proposal'):'No valid proposal','§','tool',out?.resolved&&!out.gate.allowed?'bad':'',()=>showDetails('Independent policy gate',[['Checks',out?.gate||{status:'unresolved'}],['Canonical scoring state (not given to models)',c.truth]]));
     node(g,'payment',...p.payment,'Simulated payment',out?.resolved?usd(out.executed_cents/100)+' executed':'Unavailable','$','tool','',()=>showDetails('Simulated ledger outcome',[['Settlement',out||{status:'not_processed'}],['Scope','Only synthetic balances change. No external payment service is called.']]));
-    node(g,'score',...p.score,'Evaluator',out?.resolved?usd(out.proposed_loss_cents/100)+' proposed harm':'Unavailable','Δ','tool',out?.proposed_loss_cents>0?'bad':'ok',()=>showDetails('Independent scoring',[['Financial and task outcome',out||{status:'not_processed'}],['Expected refund',usd(c.expected_refund_cents/100)+' under the benchmark policy. Zero may indicate decline or required escalation.']]));
+    node(g,'score',...p.score,'Evaluator',out?.resolved?usd(out.proposed_loss_cents/100)+' proposed harm':'Unavailable','Δ','tool',out?.resolved?(out.proposed_loss_cents>0?'bad':'ok'):'',()=>showDetails('Independent scoring',[['Financial and task outcome',out||{status:'not_processed'}],['Expected refund',usd(c.expected_refund_cents/100)+' under the benchmark policy. Zero may indicate decline or required escalation.']]));
     const cards=$('research-cards');clear(cards);
     for(const [setup,label] of Object.entries(labels)){
       const cc=s.cells.find(x=>x.case_id===c.id&&x.model===state.model&&x.memory===['memory','both'].includes(setup));const r=cc?.[['critic','both'].includes(setup)?'corrected_outcome':'initial_outcome'];
