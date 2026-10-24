@@ -23,3 +23,41 @@ Separate frequentist checks remain available. Exact one-sided Clopper–Pearson 
 Adaptation-tolerant normal-mixture Hoeffding confidence sequences additionally bound conditional mean dollar loss and signed paired dollar reduction. Sixteen arm/stream intervals share another 5% family; twelve dollar contrasts another 5% family. Signed differences are shifted from [−$1,000,$1,000] to [0,$2,000]. These targets describe conditional averages over completed observed episodes, not arbitrary future traffic. The four frequentist families together are **not** a joint 95% guarantee (union bound at least 80%). The derivation is in [METHODS.md](METHODS.md); see [Howard et al., Annals of Statistics 2021](https://doi.org/10.1214/20-AOS1991).
 
 An interval crossing zero is inconclusive, regardless of the observed improvement. Every report retains harmful proposals avoided and introduced, task errors fixed and introduced, incomplete pairs, actual recorded source evidence, token usage and estimated costs. No result is assumed to favor memory, the critic or the larger model.
+
+## Completed results · October 24, 2026
+
+The registered design was published as `59e57b8` before calls. All 48 cases completed in all configurations: 192 model/memory cells, 384 unique model calls and 384 adjudicated stage outcomes, with no provider error, invalid response, truncation or paid retry. Twelve actual SurrealDB retrieval snapshots contain matching source IDs and trace IDs. The token-cost estimate is **$2.9592**, below the $5 allowance.
+
+| Model | Memory | Critic | Harmful proposals / 48 | Task errors / 48 | Proposed unauthorized loss |
+|---|---|---|---:|---:|---:|
+| Haiku | Off | Off | 2 | 7 | $114.08 |
+| Haiku | Off | On | 0 | 1 | $0.00 |
+| Haiku | On | Off | 4 | 9 | $511.03 |
+| Haiku | On | On | 0 | 0 | $0.00 |
+| Sonnet | Off | Off | 3 | 3 | $599.97 |
+| Sonnet | Off | On | 0 | 0 | $0.00 |
+| Sonnet | On | Off | 0 | 0 | $0.00 |
+| Sonnet | On | On | 0 | 0 | $0.00 |
+
+All observed residual losses after the fixed independent simulated gate were zero. That does not turn proposed harm, service errors or future execution risk into zero.
+
+| Intervention | Model / context | Observed frequency reduction | Joint posterior reduction [95% credible], percentage points | Harm avoided / introduced |
+|---|---|---:|---:|---:|
+| Critic | Haiku, memory off | +4.17 pp | +3.33 [-4.97, +11.65] | 2 / 0 |
+| Critic | Haiku, memory on | +8.33 pp | +6.67 [-2.20, +15.53] | 4 / 0 |
+| Memory | Haiku, critic off | -4.17 pp | -3.33 [-12.40, +5.62] | 1 / 3 |
+| Memory | Haiku, critic on | +0.00 pp | +0.00 [-7.37, +7.29] | 0 / 0 |
+| Critic | Sonnet, memory off | +6.25 pp | +5.00 [-3.32, +12.87] | 3 / 0 |
+| Critic | Sonnet, memory on | +0.00 pp | +0.00 [-7.37, +7.29] | 0 / 0 |
+| Memory | Sonnet, critic off | +6.25 pp | +5.00 [-3.32, +12.87] | 3 / 0 |
+| Memory | Sonnet, critic on | +0.00 pp | +0.00 [-7.37, +7.29] | 0 / 0 |
+
+Every paired Bayesian credible interval crosses zero; all conservative frequentist contrast intervals also include zero. The sample therefore does not establish a general memory/critic benefit or a model ranking. Observed reductions remain valid descriptions of this finite challenge set.
+
+Sonnet without either intervention proposed three unauthorized $199.99 refunds on expired temporal-identity cases. Both memory-enabled initial requests and corrective review avoided these proposals. The graph can expose the specific prior hint (highest-sequence identity binding plus UTC elapsed-time calculation), source chunk ID and retrieval trace beside each saved decision.
+
+Haiku illustrates the opposite outcome: memory fixed one harmful case and introduced three, increasing harmful proposals from 2 to 4 and proposed loss from $114.08 to $511.03. Its mistakes include a $4.32 nested-reversal overpayment without memory, $1.29 overpayment with memory, and time-window violations. Without memory its critic fixed seven task errors but introduced one new service error. With memory the critic fixed all nine task errors and introduced none. This prevents the interface from presenting memory or criticism as uniformly effective.
+
+The zero-harm configurations retain a 10.0% weighted posterior frequency mean with a 95% credible interval of approximately 4.2–17.8%: only four observations support each of twelve independent family posteriors. The corresponding $40.63 mean binned loss per case is strongly prior-influenced, with upward severity bands and an unobserved severity distribution. It is not measured dollar loss. Conservative bounds remain much wider.
+
+[Raw frozen report](examples/research-v2.json) · [independent recomputation](examples/research-v2-verification.json). Reproduce verification with `python scripts/verify_research.py docs/examples/research-v2.json --output evidence/research-v2-verification.json`. No provider request is made by the verifier or the public graph views. Historical studies remain separately accessible in the evaluation workspace.

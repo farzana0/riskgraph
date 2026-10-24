@@ -89,7 +89,9 @@ def test_matching_fixes_regressions_and_unresolved_are_preserved():
 
 def test_research_endpoint_reads_only_public_synthetic_report(tmp_path,monkeypatch):
     monkeypatch.setenv('DATABASE_PATH',str(tmp_path/'app.sqlite3'))
+    monkeypatch.setenv('RISKGRAPH_ADMIN_TOKEN','research-test-private-token')
     c=TestClient(create_app(':memory:',seed_demo=False))
-    assert c.get('/api/research-study').json()=={'available':False}
+    first=c.get('/api/research-study')
+    assert first.status_code==200 and 'research-test-private-token' not in first.text
     d=tmp_path/'research-v2';d.mkdir();(d/'study.json').write_text(json.dumps({'status':'running','cells':[]}))
     assert c.get('/api/research-study').json()['study']['status']=='running'

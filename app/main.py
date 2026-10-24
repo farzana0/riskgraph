@@ -48,7 +48,7 @@ class PairedAnalysisRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.7.0")
+    app = FastAPI(title="RiskGraph", version="0.8.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -82,7 +82,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.7.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.8.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/demo")
     def paired_demo():
@@ -282,6 +282,10 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     @app.get("/workspace")
     def assessment_workspace():
         return FileResponse(STATIC / "index.html")
+
+    @app.get("/study")
+    def real_model_graphs():
+        return FileResponse(STATIC / "research.html")
 
     app.mount("/static", StaticFiles(directory=STATIC), name="static")
     if seed_demo and not store.runs():

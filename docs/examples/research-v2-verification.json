@@ -1,0 +1,18 @@
+{
+  "schema_version": "real-memory-study-verification-v2",
+  "registered_commit": "59e57b8",
+  "cases": 48,
+  "model_memory_cells": 192,
+  "recomputed_stage_outcomes": 384,
+  "unique_model_requests": 384,
+  "recorded_unique_response_ids": 384,
+  "surreal_families_with_sources_and_traces": 12,
+  "estimated_token_cost_usd": 2.9592297999999997,
+  "study_sha256": "6bea2be03d37ebc61579e1bca42a6e8f141c15eaaeca9ad07e0908fe5770a0b7",
+  "analysis_recomputed": true,
+  "floating_point_tolerance": {
+    "relative": 1e-10,
+    "absolute": 1e-10
+  },
+  "scope": "Verifies archived synthetic scoring, case matching, request uniqueness, usage accounting, pinned source fingerprints and statistical recomputation. Response IDs are recorded provenance, not independent certification by the provider."
+}

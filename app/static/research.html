@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RiskGraph · Real-model study</title><meta name="description" content="Matched Haiku and Sonnet evaluations with recorded SurrealDB memory and corrective critic interventions.">
+<link rel="stylesheet" href="/static/demo.css?v=0.8.0"><link rel="stylesheet" href="/static/research.css?v=0.8.0">
+<script src="/static/research.js?v=0.8.0" defer></script></head>
+<body class="research-page"><a class="skip-link" href="#main">Skip to study</a>
+<header class="topbar"><a class="brand" href="/">RiskGraph</a><div class="viewtabs" role="tablist" aria-label="Study view">
+<button role="tab" id="research-workflow-tab" aria-selected="true" aria-controls="research-workflow">Request topology</button>
+<button role="tab" id="research-risk-tab" aria-selected="false" aria-controls="research-risk" tabindex="-1">Risk model</button></div>
+<div class="controls"><label class="field"><span class="field-label">Model</span><select id="research-model" aria-label="Model" disabled><option value="claude-haiku-5-5">Haiku 5.5</option><option value="claude-sonnet-5-5">Sonnet 5.5</option></select></label>
+<label class="field case-field"><span class="field-label">Request</span><select id="research-case" aria-label="Study request" disabled></select></label>
+<label class="field"><span class="field-label">Setup</span><select id="research-setup" aria-label="Study setup" disabled><option value="agent">Agent only</option><option value="critic">Critic</option><option value="memory">Memory</option><option value="both">Memory + critic</option></select></label></div>
+<div class="topbar-end"><a class="text-btn workspace-link" href="/">Synthetic demo</a><a class="text-btn workspace-link" href="/workspace">Assess logs ↗</a><button class="text-btn" id="research-methods">Methods</button><button class="text-btn" id="research-refresh">Refresh</button></div></header>
+<div class="study-status" id="research-status" role="status">Loading recorded real-model evidence…</div>
+<main id="main"><section id="research-workflow" role="tabpanel" aria-labelledby="research-workflow-tab">
+<div class="study-heading"><div><p class="kicker">REAL MODEL OUTPUTS · SYNTHETIC RECORDS & MONEY</p><h1 id="research-title">Memory and critic interventions</h1><p id="research-caption" class="fine"></p></div><span class="source-pill" id="research-outcome"></span></div>
+<div class="study-canvas"><svg id="research-graph" role="group" aria-label="Recorded request topology"></svg><p class="fine study-legend">○ Agent &nbsp; □ Deterministic step &nbsp; ◇ Input &nbsp; Solid: used &nbsp; Dashed: disabled. Select a node for saved evidence.</p></div>
+<div class="study-setup-cards" id="research-cards" aria-label="Same case under each intervention"></div>
+<div class="study-examples"><button class="text-btn" id="research-memory-example">Inspect a memory change</button><button class="text-btn" id="research-critic-example">Inspect a critic change</button></div>
+<p class="study-note" id="research-case-note"></p>
+</section>
+<section id="research-risk" role="tabpanel" aria-labelledby="research-risk-tab" hidden>
+<div class="study-heading"><div><p class="kicker">ALL CASES · FIXED EQUAL FAMILY WEIGHTS</p><h1>What changed the risk?</h1><p class="fine">Proposed unauthorized loss is scored before the independent gate. Critic and memory benefits are measured on matched cases.</p></div></div>
+<div class="research-risk-grid"><div><svg id="research-risk-graph" role="img" aria-label="Stratified frequency and severity model"></svg>
+<section class="research-contrasts"><h2>Critic and memory effects</h2><p class="fine">Positive reduction means fewer harmful proposals. Lines show marginal 95% joint Bayesian intervals. A line crossing zero is inconclusive under this model.</p><svg id="research-effects" role="img" aria-label="Matched intervention reductions with uncertainty"></svg><div id="research-effect-detail"></div></section></div>
+<aside class="research-projection" aria-label="Selected configuration risk"><h2 id="research-arm-name"></h2><div id="research-metrics"></div><button class="btn ghost" id="research-bounds">Conservative bounds & missing outcomes</button><button class="btn ghost" id="research-all-arms">Compare Haiku and Sonnet</button></aside></div>
+<details class="study-note"><summary>Scenario evidence and assumptions</summary><p class="fine">Each family receives weight 1/12. Frequency has a separate Jeffreys prior per family. Small samples leave prior influence; these are challenge-set projections.</p><div class="table-scroll" id="research-scenarios"></div></details>
+</section></main>
+<dialog id="research-dialog" aria-labelledby="research-dialog-title"><div class="study-dialog-head"><h2 id="research-dialog-title"></h2><button class="icon-btn" id="research-dialog-close" aria-label="Close details">×</button></div><div id="research-dialog-body"></div></dialog>
+</body></html>
