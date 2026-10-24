@@ -1,0 +1,60 @@
+{
+  "version": "memory-regression-followup-v4",
+  "seed": 2026102441,
+  "per_family": 16,
+  "cases": 48,
+  "cases_sha256": "429db7655f77c158516c0b751884790e9ddd09bb875cc4f174aa293dd8515e01",
+  "families": [
+    "elapsed_time",
+    "nested_reversals",
+    "approval_boundary"
+  ],
+  "memory_modes": [
+    "none",
+    "selected"
+  ],
+  "models": [
+    "claude-haiku-5-5",
+    "claude-sonnet-5-5"
+  ],
+  "critic_model": "claude-sonnet-5-5",
+  "max_usd": 4.8,
+  "max_requests": 384,
+  "settings": {
+    "max_tokens": 2048,
+    "effort": "low",
+    "haiku_thinking": "disabled",
+    "sonnet_thinking": "between_tools"
+  },
+  "ordering_seed": 2026102443,
+  "price_basis_usd_per_million": {
+    "claude-haiku-5-5": [
+      0.1,
+      0.5
+    ],
+    "claude-sonnet-5-5": [
+      2.0,
+      10.0
+    ]
+  },
+  "previous_study_sha256": "6f1c884185a6541579c68a89152e17d62dfb6fbae44d8dfe69a2f16c357d5f69",
+  "retrieved_memory_sha256": "91efebc65a7f03fb397792648185754a07a6d6637f0460552955fa398c08a2e7",
+  "bank_sha256": "bfed774cba3d0ccb2cd2fbcedde16cc9fbd19ff7fcb4dd7d23f1cbe5941a87d7",
+  "use_contract_sha256": "aca73faec0f5393879e201b9ca7aa2df6e1ec8f447475b3c7716f414b75beddf",
+  "source_sha256": {
+    "app/followup_cases.py": "aefac93e2b7e30f5362cc9015276081605f4444c66e344e707441e3a6d4fda1b",
+    "app/followup_stats.py": "87aa5598b5f37166924ed2241acc706632c5daecc81be4c428094fc39bde024e",
+    "scripts/followup_study.py": "f08089b2e669501656921c05fa91a612debaa797d4d37b360887363cf84c0c59",
+    "app/memory_cases.py": "a2786be8837eba70bcc9dc2cd7f104dbd189ac682e86126e69d729ba018ba791",
+    "app/memory_workflow.py": "bdb7b1f31c8fd8a4c5e772d0741a8c3287aaf4df284d620251de1ccf9bdd62c0",
+    "app/record_tools.py": "119c7402f42688a46bc9271df3d392119480febff9aba82b30bba8c54c3d30a7",
+    "app/memory_calls.py": "d8aa4708f3c6323603595570b2d4c3376d4a7e11999bf44ad03c298672401cb2",
+    "app/hardbench.py": "2f9c312b2fdf9bac89611cc4ce7d34801ccc3be8bdd8f83f1a63ead4c12067e3",
+    "app/hardcases.py": "9056bb5e9402fa147a00885807e4f3d0d7e7666fb32af369c363e569c0814cff",
+    "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d",
+    "app/domain.py": "8197d67a9287330cf41a1591f6354e61cbf7b40b6b6c5ff8368fee3012896a0c",
+    "app/research_stats.py": "83bb7f693a3cab03480612c12d362c97eb3dc06d9f70c8eeaf98aed991252002",
+    "app/risk.py": "ef5396844c2769de8a99801873ff5a03c4417c2b66e28faed94a63c94b83fc73"
+  },
+  "scope": "Fresh independent draws from the unchanged hardest UTC, reversal-chain and approval-total generator families. Regression enrichment chosen from the earlier study, not a representative workload. Two strategies (none, selected memory), two models, separate Sonnet critic on/off. No arithmetic support in model inputs. The actual SurrealDB snapshot and prompts are held fixed; no fresh retrieval or memory writes. Earlier observations are excluded. Fixed sample and spending allowance registered before responses; incomplete cases and any provider failure remain explicit. No paid retries."
+}
