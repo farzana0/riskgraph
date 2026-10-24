@@ -18,6 +18,7 @@ from .paired_demo import load_bundle, analyze as analyze_paired
 from .paired_diagnostics import diagnostics as paired_diagnostics
 from .review import verify_review
 from .scenarios import DESCRIPTIONS, LABELS
+from .evidence import EvidenceBatch, ProjectionRequest
 
 STATIC = Path(__file__).parent / "static"
 
@@ -119,10 +120,48 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
         path = next((p for p in candidates if p.is_file()), None)
         return {"available": True, "study": json.loads(path.read_text())} if path else {"available": False}
 
+    @app.get("/api/travel-v3/record-view/{case_id}")
+    def travel_record_view(case_id: str):
+        from .travel_v3 import record_view
+        evidence = travel_grounded_study()
+        case = next((c for c in evidence.get("study", {}).get("cases", []) if c["id"] == case_id), None)
+        if case is None:
+            raise HTTPException(404, "Unknown synthetic case")
+        return record_view(case["observation"])
+
     @app.get("/api/travel-error-audit")
     def travel_error_audit():
         path = STATIC.parents[1] / "docs/examples/travel-error-audit.json"
         return json.loads(path.read_text()) if path.is_file() else {"available": False}
+
+    @app.post("/api/evidence", status_code=201)
+    def import_evidence(body: EvidenceBatch, request: Request, x_operator_token: Optional[str] = Header(default=None)):
+        authorize(request, x_operator_token)
+        from .evidence import save
+        return save(body)
+
+    @app.get("/api/evidence/{batch_id}")
+    def private_evidence(batch_id: str, request: Request, x_operator_token: Optional[str] = Header(default=None)):
+        authorize(request, x_operator_token)
+        from .evidence import read, summarize
+        try:
+            batch = read(batch_id)
+            return {"id": batch_id, "summary": summarize(batch), "batch": batch}
+        except ValueError as exc:
+            raise HTTPException(404, str(exc)) from exc
+
+    @app.post("/api/risk-projection")
+    def source_projection(body: ProjectionRequest, request: Request, x_operator_token: Optional[str] = Header(default=None)):
+        from .evidence import read, project
+        if body.batch_id:
+            authorize(request, x_operator_token)
+        evidence = travel_grounded_study()
+        if not evidence["available"]:
+            raise HTTPException(409, "The registered simulation is preparing")
+        try:
+            return project(evidence["study"], body, read(body.batch_id) if body.batch_id else None)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
 
     @app.get("/demo")
     def paired_demo():

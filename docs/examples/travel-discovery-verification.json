@@ -1,0 +1,13 @@
+{
+  "development_cases": 4,
+  "scout_calls": 8,
+  "discovery_calls": 2,
+  "estimated_cost_usd": 0.120098,
+  "candidate_labels": {
+    "Observed trace cited": 2,
+    "Untested hypothesis": 10
+  },
+  "request_usage_source_citations_and_labels_rebuilt": true,
+  "excluded_from_heldout_sample": true,
+  "study_sha256": "5c7da19065b629303a3e355deb8903bd6bd3f159064728f57ef7f94e926593d2"
+}

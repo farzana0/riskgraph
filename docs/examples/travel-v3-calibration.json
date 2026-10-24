@@ -1,0 +1,19 @@
+{
+  "repetitions": 5000,
+  "episodes_per_replication": 32,
+  "arms": 16,
+  "paired_contrasts": 32,
+  "simultaneous_intervals": 240,
+  "joint_misses": 1,
+  "observed_joint_coverage": 0.9998,
+  "monte_carlo_95_coverage_interval": [
+    0.9990515822299956,
+    0.9999897413937423
+  ],
+  "zero_width_negative_control_misses": 5000,
+  "probability_radius": 0.37851515775163996,
+  "paired_probability_radius": 0.7570303155032799,
+  "dollar_radius": 378.51515775163995,
+  "seed": 20261024211,
+  "scope": "Offline known-truth implementation audit with independent heterogeneous trips, strongly dependent configurations, and unresolved financial labels. All 240 intervals must cover together. This is not measured model performance, a proof, or production calibration. Wide Hoeffding bounds can be very conservative; zero observed misses does not establish exact 100% coverage."
+}

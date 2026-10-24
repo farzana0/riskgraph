@@ -1,0 +1,13 @@
+{
+  "cases": 32,
+  "configurations": 16,
+  "unique_requests": 503,
+  "response_ids": 503,
+  "estimated_cost_usd": 4.7298038,
+  "registered_commit": "56504f0160f7e1fde5573ea437fff3ee72d6ffb9",
+  "same_settings_and_output_schema": true,
+  "independent_gate_loss_and_eligibility_rebuilt": true,
+  "memory_sources_and_context_digests_rebuilt": true,
+  "all_paired_posteriors_and_240_simultaneous_bounds_rebuilt": true,
+  "study_sha256": "55d08bec4a1ffe53d425a410ad9d15bc08b849e235fa83c6f5635f680f480165"
+}

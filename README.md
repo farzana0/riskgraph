@@ -1,8 +1,10 @@
 # RiskGraph
 
-**[Open RiskGraph](https://riskgraph-fa98.onrender.com).** A minimal starting page links to the [travel-booking agent demo](https://riskgraph-fa98.onrender.com/travel), [matched travel model/memory/critic evidence](https://riskgraph-fa98.onrender.com/travel/compare), and the [agent-log assessment workspace](https://riskgraph-fa98.onrender.com/workspace).
+**[Open RiskGraph](https://riskgraph-fa98.onrender.com).** Follow one clear step per page: [discover candidate failures](https://riskgraph-fa98.onrender.com/discover), [import private trace evidence](https://riskgraph-fa98.onrender.com/evidence), [inspect an agent decision](https://riskgraph-fa98.onrender.com/challenge), [compare safeguards](https://riskgraph-fa98.onrender.com/compare), and [project loss-tail risk](https://riskgraph-fa98.onrender.com/risk).
 
-The latest [matched travel comparison](docs/TRAVEL_FACTORIAL.md) uses **32 identical fresh trips across eight model/memory/critic configurations**, with the same JSON schema, adaptive thinking and response allowance for both models. All **256 real requests** completed for **US$1.9156** under a separate US$3 cap. Financial and task errors, paired credible intervals, missing-outcome sensitivity and a separate simultaneous independent-episode uncertainty audit are shown together. The results do not establish a financial-risk reduction from memory or review; both corrections and regressions are preserved.
+The latest [record-grounded replication](docs/TRAVEL_V3.md) compares the original and revised workflows on **32 fresh harder trips across 16 model/memory/critic configurations**. Both models use the same output schema, adaptive thinking, low effort and 1,536-token allowance. The study completed 503 real requests plus ten discovery requests for **US$4.8499**. The revised package removes the observed adjudicated errors on this batch, with two initial Haiku/no-memory responses still unresolved; incremental memory and critic benefits remain uncertain. A separate small development pass enumerates candidate failures with source citations; its suggestions never count as held-out incidents. [Private trace format and explicit source-transfer assumptions](docs/TRACE_EVIDENCE.md).
+
+The prior [matched travel comparison](docs/TRAVEL_FACTORIAL.md) contains 32 identical trips across eight configurations and 256 real requests, costing US$1.9156. Its [mistake audit](docs/examples/travel-error-audit.json) identifies unnecessary escalations and deadline-reading errors rather than a general model ranking. All earlier archives remain separate and immutable.
 
 The preceding registered experiments contain **6,012 real model requests**: a fresh 48-case refund replication (381 requests), a matched 32-case travel study (127), and 5,504 fresh format-controlled Haiku travel cases. Estimated study token cost is **US$7.4663**. An additional offline campaign tests 6,000 injected failures and 6,000 valid controls. These sources remain separate. Live discretionary reviews and replay never enter the registered risk estimates.
 
@@ -43,7 +45,7 @@ RiskGraph evaluates refund proposals through a proposal–review–execution wor
 - A validation view comparing current and earlier methods on recorded simulations.
 - Render deployment configuration, persistent storage, and automated checks.
 
-All customers, orders, messages, and monetary outcomes are synthetic. The offline agent is a deliberately naive test fixture. Its results demonstrate policy enforcement; Claude performance is recorded in separate API evaluations.
+All public demo customers, orders, messages, and monetary outcomes are synthetic. Operator-imported observations stay private and retain their source. The offline agent is a deliberately naive test fixture. Its results demonstrate policy enforcement; Claude performance is recorded in separate API evaluations.
 
 ## Local development
 
@@ -97,7 +99,7 @@ With provider credentials configured, an API evaluation can be run with:
 
 The CLI and server share the configured database's attempt budget. Evaluation seeds and settings are recorded for reproducibility. Development and memory-training seeds should remain separate from held-out evaluation seeds.
 
-The validation suite contains 196 tests. An earlier revised-workflow campaign completed 136 hosted Claude decisions, including 68 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. A subsequent paired comparison adds 320 Haiku/Sonnet cases; both models record zero harmful proposals on this workload. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
+The validation suite contains 211 tests. An earlier revised-workflow campaign completed 136 hosted Claude decisions, including 68 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. A subsequent paired comparison adds 320 Haiku/Sonnet cases; both models record zero harmful proposals on this workload. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
 
 The [featured control demonstration](docs/CONTROL_DEMO.md) includes $6,914.98 in unauthorized proposed payments across 56 decisions. All 48 harmful proposals are blocked; eight valid payments execute. Injected failures are explicitly separated from real Claude evaluations.
 

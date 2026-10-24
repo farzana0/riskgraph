@@ -1,0 +1,41 @@
+{
+  "schema_version": "trace-evidence-v1",
+  "source": "illustration",
+  "system_version": "format-example-only",
+  "reference_configuration": "claude-haiku-5-5|none|0",
+  "loss_cap_cents": 100000,
+  "episodes": [
+    {
+      "episode_id": "illustration-episode-1",
+      "scenario": "arrival_deadline",
+      "reviewed": true,
+      "review_ref": "illustration-not-an-actual-incident",
+      "potential_loss_cents": 2500,
+      "executed_loss_cents": 0,
+      "events": [
+        {
+          "event_id": "proposal",
+          "parent_ids": [],
+          "actor": "booking-agent",
+          "action": "Propose a booking"
+        },
+        {
+          "event_id": "review",
+          "parent_ids": [
+            "proposal"
+          ],
+          "actor": "reviewer",
+          "action": "Check the proposal"
+        },
+        {
+          "event_id": "gate",
+          "parent_ids": [
+            "review"
+          ],
+          "actor": "gate",
+          "action": "Block an after-deadline booking"
+        }
+      ]
+    }
+  ]
+}

@@ -47,3 +47,29 @@ def test_discovery_development_cases_are_separate_and_never_count_as_holdout():
     assert {c['observation']['authenticated_request']['trip_id'] for c in scout}.isdisjoint(c['observation']['authenticated_request']['trip_id'] for c in heldout)
     p = request_for([], MODELS[0]); assert p['max_tokens'] == 3072 and p['thinking']['type'] == 'adaptive'
     assert 'frequency' not in p['output_config']['format']['schema']['properties']
+
+
+def test_joint_workflow_bounds_keep_pairing_missingness_and_fixed_batch_scope():
+    import copy
+    from tests.test_travel_factorial import fixture
+    from app.travel_v3_stats import analyze
+    s = fixture()
+    s['cells'] = [{**copy.deepcopy(row), 'workflow': w} for w in ('legacy', 'grounded') for row in s['cells']]
+    a = analyze(s)
+    assert a['robust_analysis']['intervals'] == 240 and len(a['workflow_comparisons']) == 8
+    import math
+    radius = math.sqrt(math.log(2 * 240 / .05) / (2 * 32))
+    first = next(iter(a['robust_analysis']['arms'].values()))
+    assert abs(first['harm']['simultaneous95'][1] - radius) < 1e-12
+    assert abs(a['robust_analysis']['comparisons'][0]['metrics']['harm']['simultaneous95'][1] - 2 * radius) < 1e-12
+    for c in a['workflow_comparisons']:
+        assert c['metrics']['harm']['avoided'] == c['metrics']['harm']['introduced'] == 0
+        assert c['metrics']['harm']['credible95'][0] < 0 < c['metrics']['harm']['credible95'][1]
+    r = s['cells'][0]
+    r['initial_outcome'] = outcome(s['cases'][0], {'status': 'invalid_response'})
+    audit = analyze(s)['robust_analysis']
+    key = 'legacy:' + r['model'] + '|' + r['memory_mode'] + '|0'
+    assert audit['arms'][key]['harm']['empirical_missing_range'] == [0, 1 / 32]
+    assert audit['arms'][key]['dollars']['empirical_missing_range'] == [0, 1000 / 32]
+    s['status'] = 'running'
+    assert all(x['harm']['simultaneous95'] is None for x in analyze(s)['robust_analysis']['arms'].values())
