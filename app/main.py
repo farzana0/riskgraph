@@ -190,7 +190,12 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
         candidates = [Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "travel-factorial-v2" / "study.json",
                       STATIC.parents[1] / "docs" / "examples" / "travel-factorial.json"]
         path = next((p for p in candidates if p.is_file()), None)
-        return {"available": True, "study": json.loads(path.read_text())} if path else {"available": False}
+        if path is None:
+            return {"available": False}
+        study = json.loads(path.read_text())
+        from .travel_factorial_bounds import independent_bounds
+        study["robust_analysis"] = independent_bounds(study)
+        return {"available": True, "study": study}
 
     @app.get("/api/travel-study")
     def travel_study():

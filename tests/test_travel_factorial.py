@@ -128,3 +128,29 @@ def test_matched_routes_are_public_read_only_with_no_provider_calls(monkeypatch,
     assert client.get('/api/travel-factorial').status_code == 200
     assert client.post('/api/travel-factorial', json={}).status_code == 405
     assert 'script-src' in page.headers['content-security-policy']
+
+
+def test_non_iid_quota_bounds_cover_pairs_and_preserve_unknown_ranges():
+    from app.travel_factorial_bounds import independent_bounds
+    s = fixture()
+    b = independent_bounds(s)
+    assert b['intervals'] == 100 and b['joint_confidence'] == .95
+    arm = key(MODELS[0], 'none', False)
+    assert b['arms'][arm]['harm']['empirical_missing_range'] == [0, 0]
+    assert b['arms'][arm]['harm']['simultaneous95'][0] == 0
+    assert all(r['metrics']['harm']['simultaneous95'][0] < 0 < r['metrics']['harm']['simultaneous95'][1] for r in b['comparisons'])
+    s['cells'][0]['initial_outcome'] = outcome(s['cases'][0], {'status': 'invalid_response'})
+    b = independent_bounds(s)
+    assert b['arms'][arm]['harm']['empirical_missing_range'] == [0, 1 / 32]
+    assert b['arms'][arm]['dollars']['empirical_missing_range'] == [0, 1000 / 32]
+    s['status'] = 'running'
+    assert independent_bounds(s)['arms'][arm]['harm']['simultaneous95'] is None
+
+
+def test_committed_real_study_reconstructs_without_any_provider_call():
+    from pathlib import Path
+    from scripts.verify_travel_factorial import verify
+    root = Path(__file__).resolve().parents[1]
+    report = verify(root / 'docs/examples/travel-factorial.json')
+    expected = json.loads((root / 'docs/examples/travel-factorial-verification.json').read_text())
+    assert report == expected and report['unique_requests'] == 256

@@ -1,0 +1,14 @@
+{
+  "cases": 32,
+  "configurations": 8,
+  "unique_requests": 256,
+  "response_ids": 256,
+  "estimated_cost_usd": 1.915568900000002,
+  "memory_sources_and_traces_verified": true,
+  "registered_commit": "6fb2178116a4561a8298b4c5452b8ec63ae94253",
+  "identical_model_output_format_and_settings": true,
+  "outcomes_and_paired_intervals_recomputed": true,
+  "independent_timestamp_join_arithmetic_and_loss_oracle_verified": true,
+  "non_iid_simultaneous_100_interval_audit_recomputed": true,
+  "study_sha256": "d90ec4e04f8d745ee547ccd1d04cf07c8b0cdf37e0953bb3fba8f2fe61481a1a"
+}
