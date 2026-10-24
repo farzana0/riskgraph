@@ -1,0 +1,1381 @@
+{
+  "version": "known-truth-calibration-v1",
+  "seed": 20261024,
+  "repetitions_per_setting": 2000,
+  "joint_projection_draws_per_dataset": 1000,
+  "production_joint_draws": 12000,
+  "independent_datasets": 12000,
+  "probabilities": [
+    [
+      0.02,
+      0.01,
+      0.03,
+      0.005
+    ],
+    [
+      0.75,
+      0.02,
+      0.2,
+      0.01
+    ],
+    [
+      0.7,
+      0.01,
+      0.25,
+      0.005
+    ],
+    [
+      0.65,
+      0.015,
+      0.3,
+      0.01
+    ],
+    [
+      0.8,
+      0.02,
+      0.35,
+      0.01
+    ],
+    [
+      0.8,
+      0.025,
+      0.4,
+      0.015
+    ]
+  ],
+  "scenario_order": [
+    "normal",
+    "duplicate_refund",
+    "wrong_owner",
+    "expired_request",
+    "above_approval_limit",
+    "prompt_injection"
+  ],
+  "configuration_order": [
+    "synthetic_A",
+    "synthetic_B",
+    "synthetic_C",
+    "synthetic_D"
+  ],
+  "weights": {
+    "normal": 0.7,
+    "duplicate_refund": 0.08,
+    "wrong_owner": 0.06,
+    "expired_request": 0.07,
+    "above_approval_limit": 0.04,
+    "prompt_injection": 0.05
+  },
+  "results": [
+    {
+      "cases_per_scenario": 10,
+      "total_paired_cases": 60,
+      "shared_latent_fraction": 0.0,
+      "exact_frequency_family_coverage": {
+        "fraction": 0.998,
+        "successes": 1996,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9948871913946538,
+          0.999454806874789
+        ]
+      },
+      "hoeffding_frequency_family_coverage": {
+        "fraction": 0.9995,
+        "successes": 1999,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.997217360165341,
+          0.9999873411761314
+        ]
+      },
+      "paired_difference_family_coverage": {
+        "fraction": 0.9985,
+        "successes": 1997,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9956226798954704,
+          0.9996905570506877
+        ]
+      },
+      "exact_projected_upper_mean": [
+        0.6286582367719981,
+        0.47604549086719394,
+        0.5703782070971287,
+        0.46970247113448915
+      ],
+      "hoeffding_projected_upper_mean": [
+        0.7009330862255275,
+        0.567678650820438,
+        0.6570137148656549,
+        0.5626856508204373
+      ],
+      "true_projected_probabilities": [
+        0.2335,
+        0.0123,
+        0.107,
+        0.006449999999999999
+      ],
+      "joint_bayesian_reduction_sampling_coverage": [
+        {
+          "fraction": 0.9995,
+          "successes": 1999,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.997217360165341,
+            0.9999873411761314
+          ]
+        },
+        {
+          "fraction": 0.9985,
+          "successes": 1997,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9956226798954704,
+            0.9996905570506877
+          ]
+        },
+        {
+          "fraction": 0.9995,
+          "successes": 1999,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.997217360165341,
+            0.9999873411761314
+          ]
+        }
+      ],
+      "joint_bayesian_reduction_mean_interval_width": [
+        0.2749245665285623,
+        0.29092403981107184,
+        0.2720682448758096
+      ],
+      "credible_interval_cellwise_sampling_coverage": {
+        "Beta(0.5,0.5)": {
+          "cellwise_coverage": [
+            [
+              0.985,
+              0.904,
+              0.9675,
+              0.943
+            ],
+            [
+              0.9175,
+              0.988,
+              0.968,
+              0.906
+            ],
+            [
+              0.93,
+              0.9065,
+              0.923,
+              0.9375
+            ],
+            [
+              0.954,
+              0.9915,
+              0.9255,
+              0.9065
+            ],
+            [
+              0.965,
+              0.9855,
+              0.9595,
+              0.9085
+            ],
+            [
+              0.9665,
+              0.978,
+              0.9475,
+              0.9925
+            ]
+          ],
+          "range_across_24_cells": [
+            0.904,
+            0.9925
+          ]
+        },
+        "Beta(1,1)": {
+          "cellwise_coverage": [
+            [
+              0.8325,
+              0.904,
+              0.9675,
+              0.943
+            ],
+            [
+              0.9785,
+              0.831,
+              0.968,
+              0.906
+            ],
+            [
+              0.93,
+              0.9065,
+              0.9795,
+              0.9375
+            ],
+            [
+              0.954,
+              0.857,
+              0.9255,
+              0.9065
+            ],
+            [
+              0.965,
+              0.829,
+              0.9595,
+              0.9085
+            ],
+            [
+              0.9665,
+              0.978,
+              0.982,
+              0.8635
+            ]
+          ],
+          "range_across_24_cells": [
+            0.829,
+            0.982
+          ]
+        },
+        "Beta(2,2)": {
+          "cellwise_coverage": [
+            [
+              0.8325,
+              0.0,
+              0.7465,
+              0.0
+            ],
+            [
+              0.9265,
+              0.831,
+              0.968,
+              0.0
+            ],
+            [
+              0.9545,
+              0.0,
+              0.917,
+              0.0
+            ],
+            [
+              0.9695,
+              0.0,
+              0.9435,
+              0.0
+            ],
+            [
+              0.965,
+              0.829,
+              0.9735,
+              0.0
+            ],
+            [
+              0.9665,
+              0.763,
+              0.982,
+              0.0
+            ]
+          ],
+          "range_across_24_cells": [
+            0.0,
+            0.982
+          ]
+        }
+      }
+    },
+    {
+      "cases_per_scenario": 10,
+      "total_paired_cases": 60,
+      "shared_latent_fraction": 0.8,
+      "exact_frequency_family_coverage": {
+        "fraction": 0.9945,
+        "successes": 1989,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9901803370101006,
+          0.9972513181853675
+        ]
+      },
+      "hoeffding_frequency_family_coverage": {
+        "fraction": 1.0,
+        "successes": 2000,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.998157260206594,
+          1
+        ]
+      },
+      "paired_difference_family_coverage": {
+        "fraction": 0.9975,
+        "successes": 1995,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9941755546654815,
+          0.9991877740248061
+        ]
+      },
+      "exact_projected_upper_mean": [
+        0.6290829927215924,
+        0.475877669750053,
+        0.5700075720141199,
+        0.468234113470528
+      ],
+      "hoeffding_projected_upper_mean": [
+        0.7013148829894632,
+        0.5676011508204379,
+        0.6566035085853934,
+        0.5615541508204361
+      ],
+      "true_projected_probabilities": [
+        0.2335,
+        0.0123,
+        0.107,
+        0.006449999999999999
+      ],
+      "joint_bayesian_reduction_sampling_coverage": [
+        {
+          "fraction": 1.0,
+          "successes": 2000,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.998157260206594,
+            1
+          ]
+        },
+        {
+          "fraction": 1.0,
+          "successes": 2000,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.998157260206594,
+            1
+          ]
+        },
+        {
+          "fraction": 0.9995,
+          "successes": 1999,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.997217360165341,
+            0.9999873411761314
+          ]
+        }
+      ],
+      "joint_bayesian_reduction_mean_interval_width": [
+        0.2640504632894205,
+        0.2669867632072543,
+        0.2668536329493958
+      ],
+      "credible_interval_cellwise_sampling_coverage": {
+        "Beta(0.5,0.5)": {
+          "cellwise_coverage": [
+            [
+              0.9865,
+              0.908,
+              0.9725,
+              0.959
+            ],
+            [
+              0.924,
+              0.9855,
+              0.966,
+              0.907
+            ],
+            [
+              0.92,
+              0.902,
+              0.9205,
+              0.9515
+            ],
+            [
+              0.957,
+              0.9905,
+              0.913,
+              0.9025
+            ],
+            [
+              0.969,
+              0.9875,
+              0.9575,
+              0.91
+            ],
+            [
+              0.9695,
+              0.9745,
+              0.937,
+              0.9875
+            ]
+          ],
+          "range_across_24_cells": [
+            0.902,
+            0.9905
+          ]
+        },
+        "Beta(1,1)": {
+          "cellwise_coverage": [
+            [
+              0.8235,
+              0.908,
+              0.9725,
+              0.959
+            ],
+            [
+              0.9765,
+              0.826,
+              0.966,
+              0.907
+            ],
+            [
+              0.92,
+              0.902,
+              0.982,
+              0.9515
+            ],
+            [
+              0.957,
+              0.859,
+              0.913,
+              0.9025
+            ],
+            [
+              0.969,
+              0.826,
+              0.9575,
+              0.91
+            ],
+            [
+              0.9695,
+              0.9745,
+              0.982,
+              0.857
+            ]
+          ],
+          "range_across_24_cells": [
+            0.8235,
+            0.982
+          ]
+        },
+        "Beta(2,2)": {
+          "cellwise_coverage": [
+            [
+              0.8235,
+              0.0,
+              0.7475,
+              0.0
+            ],
+            [
+              0.929,
+              0.826,
+              0.966,
+              0.0
+            ],
+            [
+              0.943,
+              0.0,
+              0.925,
+              0.0
+            ],
+            [
+              0.971,
+              0.0,
+              0.9485,
+              0.0
+            ],
+            [
+              0.969,
+              0.826,
+              0.9725,
+              0.0
+            ],
+            [
+              0.9695,
+              0.7765,
+              0.982,
+              0.0
+            ]
+          ],
+          "range_across_24_cells": [
+            0.0,
+            0.982
+          ]
+        }
+      }
+    },
+    {
+      "cases_per_scenario": 10,
+      "total_paired_cases": 60,
+      "shared_latent_fraction": 1.0,
+      "exact_frequency_family_coverage": {
+        "fraction": 0.996,
+        "successes": 1992,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9921336961714626,
+          0.9982715504265238
+        ]
+      },
+      "hoeffding_frequency_family_coverage": {
+        "fraction": 1.0,
+        "successes": 2000,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.998157260206594,
+          1
+        ]
+      },
+      "paired_difference_family_coverage": {
+        "fraction": 0.9985,
+        "successes": 1997,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9956226798954704,
+          0.9996905570506877
+        ]
+      },
+      "exact_projected_upper_mean": [
+        0.6309632767581627,
+        0.47661566942320377,
+        0.5717594432278199,
+        0.4690766441542044
+      ],
+      "hoeffding_projected_upper_mean": [
+        0.7027376981885439,
+        0.5681511508204384,
+        0.6581818061387036,
+        0.5621861508204369
+      ],
+      "true_projected_probabilities": [
+        0.2335,
+        0.0123,
+        0.107,
+        0.006449999999999999
+      ],
+      "joint_bayesian_reduction_sampling_coverage": [
+        {
+          "fraction": 1.0,
+          "successes": 2000,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.998157260206594,
+            1
+          ]
+        },
+        {
+          "fraction": 0.9995,
+          "successes": 1999,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.997217360165341,
+            0.9999873411761314
+          ]
+        },
+        {
+          "fraction": 1.0,
+          "successes": 2000,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.998157260206594,
+            1
+          ]
+        }
+      ],
+      "joint_bayesian_reduction_mean_interval_width": [
+        0.26310081862539453,
+        0.2614821542905002,
+        0.2665213240797053
+      ],
+      "credible_interval_cellwise_sampling_coverage": {
+        "Beta(0.5,0.5)": {
+          "cellwise_coverage": [
+            [
+              0.9855,
+              0.903,
+              0.97,
+              0.9495
+            ],
+            [
+              0.923,
+              0.984,
+              0.965,
+              0.9035
+            ],
+            [
+              0.9205,
+              0.905,
+              0.91,
+              0.951
+            ],
+            [
+              0.9625,
+              0.9935,
+              0.918,
+              0.9065
+            ],
+            [
+              0.9605,
+              0.979,
+              0.9615,
+              0.9
+            ],
+            [
+              0.967,
+              0.9755,
+              0.9385,
+              0.99
+            ]
+          ],
+          "range_across_24_cells": [
+            0.9,
+            0.9935
+          ]
+        },
+        "Beta(1,1)": {
+          "cellwise_coverage": [
+            [
+              0.8055,
+              0.903,
+              0.97,
+              0.9495
+            ],
+            [
+              0.979,
+              0.8055,
+              0.965,
+              0.9035
+            ],
+            [
+              0.9205,
+              0.905,
+              0.976,
+              0.951
+            ],
+            [
+              0.9625,
+              0.8625,
+              0.918,
+              0.9065
+            ],
+            [
+              0.9605,
+              0.8105,
+              0.9615,
+              0.9
+            ],
+            [
+              0.967,
+              0.9755,
+              0.975,
+              0.8545
+            ]
+          ],
+          "range_across_24_cells": [
+            0.8055,
+            0.979
+          ]
+        },
+        "Beta(2,2)": {
+          "cellwise_coverage": [
+            [
+              0.8055,
+              0.0,
+              0.735,
+              0.0
+            ],
+            [
+              0.918,
+              0.8055,
+              0.965,
+              0.0
+            ],
+            [
+              0.952,
+              0.0,
+              0.9185,
+              0.0
+            ],
+            [
+              0.977,
+              0.0,
+              0.948,
+              0.0
+            ],
+            [
+              0.9605,
+              0.8105,
+              0.9785,
+              0.0
+            ],
+            [
+              0.967,
+              0.757,
+              0.975,
+              0.0
+            ]
+          ],
+          "range_across_24_cells": [
+            0.0,
+            0.9785
+          ]
+        }
+      }
+    },
+    {
+      "cases_per_scenario": 60,
+      "total_paired_cases": 360,
+      "shared_latent_fraction": 0.0,
+      "exact_frequency_family_coverage": {
+        "fraction": 0.9845,
+        "successes": 1969,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9780706108103688,
+          0.9894448410800424
+        ]
+      },
+      "hoeffding_frequency_family_coverage": {
+        "fraction": 0.9995,
+        "successes": 1999,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.997217360165341,
+          0.9999873411761314
+        ]
+      },
+      "paired_difference_family_coverage": {
+        "fraction": 0.9965,
+        "successes": 1993,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.992802038285342,
+          0.9985916961674974
+        ]
+      },
+      "exact_projected_upper_mean": [
+        0.3567913804377776,
+        0.12097226738510994,
+        0.24812583302881996,
+        0.11149046461827723
+      ],
+      "hoeffding_projected_upper_mean": [
+        0.4559607405321894,
+        0.23877924525732883,
+        0.33330307859066266,
+        0.23372616192399648
+      ],
+      "true_projected_probabilities": [
+        0.2335,
+        0.0123,
+        0.107,
+        0.006449999999999999
+      ],
+      "joint_bayesian_reduction_sampling_coverage": [
+        {
+          "fraction": 0.952,
+          "successes": 1904,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9416975076588543,
+            0.9609496629444231
+          ]
+        },
+        {
+          "fraction": 0.957,
+          "successes": 1914,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9471655821709684,
+            0.965464195640264
+          ]
+        },
+        {
+          "fraction": 0.945,
+          "successes": 1890,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9340880218000128,
+            0.9545828470785102
+          ]
+        }
+      ],
+      "joint_bayesian_reduction_mean_interval_width": [
+        0.07995723121561366,
+        0.09616136059906463,
+        0.07684528449397397
+      ],
+      "credible_interval_cellwise_sampling_coverage": {
+        "Beta(0.5,0.5)": {
+          "cellwise_coverage": [
+            [
+              0.971,
+              0.9805,
+              0.964,
+              0.9565
+            ],
+            [
+              0.9525,
+              0.978,
+              0.9395,
+              0.979
+            ],
+            [
+              0.95,
+              0.979,
+              0.9445,
+              0.971
+            ],
+            [
+              0.9635,
+              0.9835,
+              0.9515,
+              0.98
+            ],
+            [
+              0.948,
+              0.9735,
+              0.9635,
+              0.9775
+            ],
+            [
+              0.9395,
+              0.9855,
+              0.954,
+              0.989
+            ]
+          ],
+          "range_across_24_cells": [
+            0.9395,
+            0.989
+          ]
+        },
+        "Beta(1,1)": {
+          "cellwise_coverage": [
+            [
+              0.971,
+              0.885,
+              0.964,
+              0.9565
+            ],
+            [
+              0.9525,
+              0.978,
+              0.962,
+              0.867
+            ],
+            [
+              0.934,
+              0.891,
+              0.9445,
+              0.971
+            ],
+            [
+              0.9635,
+              0.9415,
+              0.9355,
+              0.8915
+            ],
+            [
+              0.9675,
+              0.9735,
+              0.9635,
+              0.879
+            ],
+            [
+              0.9645,
+              0.9355,
+              0.954,
+              0.944
+            ]
+          ],
+          "range_across_24_cells": [
+            0.867,
+            0.978
+          ]
+        },
+        "Beta(2,2)": {
+          "cellwise_coverage": [
+            [
+              0.871,
+              0.885,
+              0.9035,
+              0.709
+            ],
+            [
+              0.9695,
+              0.887,
+              0.939,
+              0.867
+            ],
+            [
+              0.9505,
+              0.891,
+              0.9555,
+              0.7335
+            ],
+            [
+              0.9635,
+              0.7795,
+              0.9485,
+              0.8915
+            ],
+            [
+              0.9475,
+              0.879,
+              0.9635,
+              0.879
+            ],
+            [
+              0.9415,
+              0.8165,
+              0.954,
+              0.78
+            ]
+          ],
+          "range_across_24_cells": [
+            0.709,
+            0.9695
+          ]
+        }
+      }
+    },
+    {
+      "cases_per_scenario": 60,
+      "total_paired_cases": 360,
+      "shared_latent_fraction": 0.8,
+      "exact_frequency_family_coverage": {
+        "fraction": 0.9865,
+        "successes": 1973,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9804185964352804,
+          0.9910850720055737
+        ]
+      },
+      "hoeffding_frequency_family_coverage": {
+        "fraction": 0.999,
+        "successes": 1998,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9963923714301715,
+          0.9998788724094432
+        ]
+      },
+      "paired_difference_family_coverage": {
+        "fraction": 0.995,
+        "successes": 1990,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9908241049299802,
+          0.9975997802443343
+        ]
+      },
+      "exact_projected_upper_mean": [
+        0.35669394300485385,
+        0.12153264075368476,
+        0.248645952644661,
+        0.11015280394574016
+      ],
+      "hoeffding_projected_upper_mean": [
+        0.45590624826518333,
+        0.23907024525732895,
+        0.33356749525733054,
+        0.23305274525732986
+      ],
+      "true_projected_probabilities": [
+        0.2335,
+        0.0123,
+        0.107,
+        0.006449999999999999
+      ],
+      "joint_bayesian_reduction_sampling_coverage": [
+        {
+          "fraction": 0.9775,
+          "successes": 1955,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9700080674226915,
+            0.9835421317874048
+          ]
+        },
+        {
+          "fraction": 0.986,
+          "successes": 1972,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9798292487682052,
+            0.9906774799112164
+          ]
+        },
+        {
+          "fraction": 0.9675,
+          "successes": 1935,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9587618263959311,
+            0.9748294916739726
+          ]
+        }
+      ],
+      "joint_bayesian_reduction_mean_interval_width": [
+        0.06807534427146592,
+        0.07264781428189192,
+        0.07009909584602367
+      ],
+      "credible_interval_cellwise_sampling_coverage": {
+        "Beta(0.5,0.5)": {
+          "cellwise_coverage": [
+            [
+              0.9655,
+              0.9745,
+              0.9655,
+              0.966
+            ],
+            [
+              0.9505,
+              0.971,
+              0.9535,
+              0.976
+            ],
+            [
+              0.948,
+              0.976,
+              0.956,
+              0.966
+            ],
+            [
+              0.9595,
+              0.9925,
+              0.9475,
+              0.9815
+            ],
+            [
+              0.945,
+              0.968,
+              0.9575,
+              0.9705
+            ],
+            [
+              0.9455,
+              0.9835,
+              0.948,
+              0.988
+            ]
+          ],
+          "range_across_24_cells": [
+            0.945,
+            0.9925
+          ]
+        },
+        "Beta(1,1)": {
+          "cellwise_coverage": [
+            [
+              0.9655,
+              0.8885,
+              0.9655,
+              0.966
+            ],
+            [
+              0.9505,
+              0.971,
+              0.9715,
+              0.8745
+            ],
+            [
+              0.935,
+              0.8885,
+              0.956,
+              0.966
+            ],
+            [
+              0.9595,
+              0.9375,
+              0.9305,
+              0.8945
+            ],
+            [
+              0.964,
+              0.968,
+              0.9575,
+              0.8835
+            ],
+            [
+              0.9685,
+              0.941,
+              0.948,
+              0.941
+            ]
+          ],
+          "range_across_24_cells": [
+            0.8745,
+            0.9715
+          ]
+        },
+        "Beta(2,2)": {
+          "cellwise_coverage": [
+            [
+              0.891,
+              0.8885,
+              0.894,
+              0.7525
+            ],
+            [
+              0.964,
+              0.8855,
+              0.949,
+              0.8745
+            ],
+            [
+              0.9475,
+              0.8885,
+              0.9675,
+              0.7415
+            ],
+            [
+              0.9595,
+              0.7635,
+              0.946,
+              0.8945
+            ],
+            [
+              0.939,
+              0.887,
+              0.9575,
+              0.8835
+            ],
+            [
+              0.9455,
+              0.814,
+              0.948,
+              0.784
+            ]
+          ],
+          "range_across_24_cells": [
+            0.7415,
+            0.9675
+          ]
+        }
+      }
+    },
+    {
+      "cases_per_scenario": 60,
+      "total_paired_cases": 360,
+      "shared_latent_fraction": 1.0,
+      "exact_frequency_family_coverage": {
+        "fraction": 0.9855,
+        "successes": 1971,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.979241520698723,
+          0.9902681877092329
+        ]
+      },
+      "hoeffding_frequency_family_coverage": {
+        "fraction": 1.0,
+        "successes": 2000,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.998157260206594,
+          1
+        ]
+      },
+      "paired_difference_family_coverage": {
+        "fraction": 0.995,
+        "successes": 1990,
+        "repetitions": 2000,
+        "monte_carlo_exact95": [
+          0.9908241049299802,
+          0.9975997802443343
+        ]
+      },
+      "exact_projected_upper_mean": [
+        0.3568817857575171,
+        0.12143469972295716,
+        0.2492066972186821,
+        0.11075674781660565
+      ],
+      "hoeffding_projected_upper_mean": [
+        0.4560929866489749,
+        0.23904541192399595,
+        0.3339164952573295,
+        0.233365661923996
+      ],
+      "true_projected_probabilities": [
+        0.2335,
+        0.0123,
+        0.107,
+        0.006449999999999999
+      ],
+      "joint_bayesian_reduction_sampling_coverage": [
+        {
+          "fraction": 0.98,
+          "successes": 1960,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9728644227313417,
+            0.9856742130859331
+          ]
+        },
+        {
+          "fraction": 0.993,
+          "successes": 1986,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9882830542294679,
+            0.9961679060996261
+          ]
+        },
+        {
+          "fraction": 0.968,
+          "successes": 1936,
+          "repetitions": 2000,
+          "monte_carlo_exact95": [
+            0.9593186808413925,
+            0.9752707146218645
+          ]
+        }
+      ],
+      "joint_bayesian_reduction_mean_interval_width": [
+        0.06510256277026867,
+        0.06562530035702814,
+        0.06870992915544703
+      ],
+      "credible_interval_cellwise_sampling_coverage": {
+        "Beta(0.5,0.5)": {
+          "cellwise_coverage": [
+            [
+              0.967,
+              0.975,
+              0.9615,
+              0.961
+            ],
+            [
+              0.9475,
+              0.971,
+              0.9495,
+              0.9755
+            ],
+            [
+              0.954,
+              0.969,
+              0.943,
+              0.9655
+            ],
+            [
+              0.9635,
+              0.9905,
+              0.95,
+              0.9775
+            ],
+            [
+              0.948,
+              0.966,
+              0.9625,
+              0.9805
+            ],
+            [
+              0.948,
+              0.9895,
+              0.954,
+              0.9895
+            ]
+          ],
+          "range_across_24_cells": [
+            0.943,
+            0.9905
+          ]
+        },
+        "Beta(1,1)": {
+          "cellwise_coverage": [
+            [
+              0.967,
+              0.8775,
+              0.9615,
+              0.961
+            ],
+            [
+              0.9475,
+              0.971,
+              0.9715,
+              0.8765
+            ],
+            [
+              0.9365,
+              0.874,
+              0.943,
+              0.9655
+            ],
+            [
+              0.9635,
+              0.942,
+              0.9395,
+              0.8735
+            ],
+            [
+              0.9695,
+              0.966,
+              0.9625,
+              0.8715
+            ],
+            [
+              0.965,
+              0.9355,
+              0.954,
+              0.938
+            ]
+          ],
+          "range_across_24_cells": [
+            0.8715,
+            0.9715
+          ]
+        },
+        "Beta(2,2)": {
+          "cellwise_coverage": [
+            [
+              0.875,
+              0.8775,
+              0.8945,
+              0.732
+            ],
+            [
+              0.9595,
+              0.898,
+              0.9545,
+              0.8765
+            ],
+            [
+              0.9505,
+              0.874,
+              0.9565,
+              0.742
+            ],
+            [
+              0.9635,
+              0.7725,
+              0.955,
+              0.8735
+            ],
+            [
+              0.9525,
+              0.865,
+              0.9625,
+              0.8715
+            ],
+            [
+              0.944,
+              0.8105,
+              0.954,
+              0.777
+            ]
+          ],
+          "range_across_24_cells": [
+            0.732,
+            0.9635
+          ]
+        }
+      }
+    }
+  ],
+  "scope": "Estimator calibration under explicitly specified Bernoulli distributions. These configurations are statistical test labels, not measured agent/rule performance. Not pooled with the frozen refund dataset.",
+  "comparison": "Exact Clopper-Pearson and Hoeffding use identical cases, counts, 24-cell simultaneous target and error budget. Two sample sizes are reported separately. No claim of improved sample efficiency.",
+  "interpretation": "Coverage fractions have Monte Carlo uncertainty. Bayesian credible-interval coverage is reported descriptively per cell, not asserted to be 95%. The paired-difference 95% family and frequency 95% family are separate guarantees, not a joint 95% guarantee."
+}

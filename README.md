@@ -1,8 +1,8 @@
 # RiskGraph
 
-**New: [animated paired workflow demo](https://riskgraph-fa98.onrender.com/demo).** Follow saved agent decisions through four monitoring setups, then explore a separate Beta–Binomial frequency model, editable traffic assumptions, and fixed-sample exact upper bounds. Start locally with `./scripts/start-demo.sh` and open `http://127.0.0.1:8765/demo`. [Design, assumptions, and three-minute demo script](docs/PAIRED_DEMO.md).
+**[Interactive agent topology demo](https://riskgraph-fa98.onrender.com/demo).** Inspect saved agent decisions through four monitoring setups, then explore a separate Beta–Binomial frequency model, editable traffic assumptions, and fixed-sample exact upper bounds. Start locally with `./scripts/start-demo.sh` and open `http://127.0.0.1:8765/demo`. [Design, assumptions, and three-minute demo script](docs/PAIRED_DEMO.md). [Paired statistical model and calibration audit](docs/MODEL_AUDIT.md).
 
-Assess reviewed agent outcomes, separate proposed exposure from executed loss, and quantify uncertainty at the business-episode level. The assessment homepage accepts JSON/JSONL or a synthetic example; numeric analysis is stateless. The evaluation lab contains reproducible refund-agent scenarios and optional paired model reviews.
+Assess reviewed agent outcomes, separate proposed exposure from executed loss, and quantify uncertainty at the business-episode level. The [assessment workspace](https://riskgraph-fa98.onrender.com/workspace) accepts JSON/JSONL or a synthetic example; numeric analysis is stateless. The evaluation lab contains reproducible refund-agent scenarios and optional paired model reviews.
 
 Research specification: [methods, authority model, experiments and limitations](docs/RESEARCH_DESIGN.md). Framework choice: [Hermes, OpenClaw and openJiuwen](docs/FRAMEWORK_DECISION.md). The current runtime is a framework-neutral typed workflow; none of those SDKs is embedded.
 
@@ -87,7 +87,7 @@ With provider credentials configured, an API evaluation can be run with:
 
 The CLI and server share the configured database's attempt budget. Evaluation seeds and settings are recorded for reproducibility. Development and memory-training seeds should remain separate from held-out evaluation seeds.
 
-The validation suite contains 158 tests. An earlier revised-workflow campaign completed 136 hosted Claude decisions, including 68 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. A subsequent paired comparison adds 320 Haiku/Sonnet cases; both models record zero harmful proposals on this workload. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
+The validation suite contains 174 tests. An earlier revised-workflow campaign completed 136 hosted Claude decisions, including 68 with actual SurrealDB retrieval traces; all reviews recomputed successfully, with no observed harmful proposal, protocol rejection, or residual loss. A subsequent paired comparison adds 320 Haiku/Sonnet cases; both models record zero harmful proposals on this workload. Historical provider checks remain separate. The [expanded failure campaign](docs/FAILURE_SCENARIOS.md) adds 100,000 policy proposals, 2,856 workflow decisions, and operational fault injection. Raw evidence is available in [docs/examples](docs/examples).
 
 The [featured control demonstration](docs/CONTROL_DEMO.md) includes $6,914.98 in unauthorized proposed payments across 56 decisions. All 48 harmful proposals are blocked; eight valid payments execute. Injected failures are explicitly separated from real Claude evaluations.
 
@@ -111,7 +111,7 @@ The [Render deployment guide](docs/DEPLOYMENT.md) describes the Blueprint, persi
 
 ## Development attribution
 
-RiskGraph was developed for Build North 2026 with AI coding assistance from Codex. Statistical methods and third-party dependencies are credited in [methods](docs/METHODS.md) and [references](docs/SOURCES.md). The interface and synthetic scenarios are project-specific; no external UI template or customer dataset is used.
+RiskGraph was developed for Build North 2026 with AI coding assistance from Codex and Claude. The topology interface and editable SVG design assets were supplied through a Claude design handoff and integrated with the tested backend. Statistical methods and third-party dependencies are credited in [methods](docs/METHODS.md) and [references](docs/SOURCES.md). The interface and synthetic scenarios are project-specific; no external UI template or customer dataset is used.
 
 
 ## Harder real-model comparison

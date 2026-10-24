@@ -15,6 +15,7 @@ from .protocol import verify_handoffs
 from .store import Store
 from .domain import SUITES
 from .paired_demo import load_bundle, analyze as analyze_paired
+from .paired_diagnostics import diagnostics as paired_diagnostics
 from .review import verify_review
 from .scenarios import DESCRIPTIONS, LABELS
 
@@ -47,7 +48,7 @@ class PairedAnalysisRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.6.0")
+    app = FastAPI(title="RiskGraph", version="0.7.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -81,7 +82,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.6.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.7.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/demo")
     def paired_demo():
@@ -95,6 +96,13 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     def paired_analysis(body: PairedAnalysisRequest):
         try:
             return analyze_paired(load_bundle(), body.admitted_ids, body.weights, body.a, body.b, body.split)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc))
+
+    @app.post("/api/paired-demo/diagnostics")
+    def model_diagnostics(body: PairedAnalysisRequest):
+        try:
+            return paired_diagnostics(load_bundle(), body.admitted_ids, body.weights, body.a, body.b, body.split)
         except ValueError as exc:
             raise HTTPException(422, str(exc))
 
@@ -262,6 +270,10 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/")
     def index():
+        return FileResponse(STATIC / "demo.html")
+
+    @app.get("/workspace")
+    def assessment_workspace():
         return FileResponse(STATIC / "index.html")
 
     app.mount("/static", StaticFiles(directory=STATIC), name="static")

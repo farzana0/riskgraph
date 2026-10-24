@@ -74,17 +74,17 @@ Calculations use [SciPy's Beta distribution](https://docs.scipy.org/doc/scipy-1.
 
 ## Three-minute demonstration
 
-**0:00–0:35 — Follow a request.** Open `/demo`, note “Synthetic demonstration,” select **Unsafe request example**, and press **Play request**. Inspect the simulated-payment and evaluator nodes. The no-monitor arm executes the saved request with positive exposure. Select **Rules only** and replay: inspect the exact failing checks and the bypassed payment node.
+**0:00–0:40 — Request topology.** Open `/demo`. A saved unsafe path is already visible, with zero admitted outcomes. Inspect the payment node, then choose Rules only and inspect the exact stop. The four topology thumbnails compare the same request under fresh ledgers.
 
-**0:35–1:00 — Service tradeoff.** Choose **Curated service tradeoff**. Explicitly state that this is a separate teaching example, not held-out evidence. Its valid refund completes without monitoring but is unnecessarily escalated by the saved reviewer. Inspect the four outcomes. Select the timeout case to show an unresolved error is not a safe outcome.
+**0:40–1:00 — Replay and service.** Press Play and use the step rail to seek; seeking does not admit evidence. Open Requests → Curated service tradeoff to inspect an unnecessary reviewer escalation, explicitly separate from held-out evidence. The timeout case is unresolved, not zero exposure.
 
-**1:00–1:40 — Update the probability model.** In **Evaluation setup**, select the 60-case held-out dataset and Beta(1,1). Switch to **Estimate risk**. Show the prior-only density, then **Play batch** at 8×. Watch counts and posteriors update. Pause if desired. The fixed-sample aggregate bound remains unavailable until the whole batch resolves. **Admit complete batch** advances directly to all saved outcomes for a shorter presentation.
+**1:00–1:40 — Model walkthrough.** Evaluation setup → Held-out, Beta(1,1). Select Risk model and its guided walkthrough. The initial model is prior-only. Evidence → Admit all saved outcomes loads the completed saved batch; Play remaining requests replays incremental admission instead. Stop at the posterior step to inspect the selected scenario's k/n and density.
 
-**1:40–2:20 — Interpret uncertainty.** Compare empirical frequency, Bayesian projection, and the separate conservative frequentist upper bound. Zero failures with rules does not imply zero underlying risk. Show the clearly separate observed monetary exposure. All setups share the same 60 cases; there are 240 paired outcomes, not 240 independent cases.
+**1:40–2:20 — Risk and assumptions.** Compare weighted empirical frequency, Bayesian projection, the separate fixed-sample upper endpoint, and observed monetary exposure. Change the assumed traffic mix; counts and scenario posteriors stay fixed. Zero observed failures retains uncertainty.
 
-**2:20–2:50 — Change the traffic assumption.** Adjust normal traffic down and injection traffic up, keeping the total 100%, then apply. Show that counts and scenario density do not change, while contributions and aggregate projection do. The assumed mix is not estimated from the balanced evaluation batch.
+**2:20–2:50 — Model checks.** Open the on-demand panel. Show prior sensitivity and paired risk reduction against No monitor. The paired Bayesian contrast uses joint outcomes; the conservative frequentist contrast remains wide with ten cases per stratum. Their meanings and error budgets are distinct.
 
-**2:50–3:00 — Scope.** Synthetic fixtures demonstrate controls and uncertainty; three archived model outputs are separately replayable. Production risk needs representative evidence, broader loss definitions, authenticated inputs, and validated payment integration. No annual-loss or CVaR claim is made.
+**2:50–3:00 — Scope.** The source labels distinguish synthetic fixtures, curated examples, and the tiny archived real-model replay. The calibrated statistical simulations are separate from agent performance; production risk needs representative evidence and broader operational validation. [Derivations and calibration record](MODEL_AUDIT.md).
 
 ## Verification and remaining scope
 

@@ -1,24 +1,322 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>RiskGraph · Decisions into evidence</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23236b59'/%3E%3Cpath d='m8 16 5 5 11-12' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E"><meta name="description" content="Replay paired agent decisions, inspect payment controls, and explore uncertainty about unauthorized-payment frequency."><link rel="stylesheet" href="/static/demo.css?v=0.6.0"><script defer src="/static/demo.js?v=0.6.0"></script></head><body>
-<a class="skip" href="#main">Skip to demo</a><header class="site-header"><a class="brand" href="/demo" aria-label="RiskGraph demo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 5 7v9c0 7 11 13 11 13s11-6 11-13V7Z"/><path d="m10 16 4 4 8-9"/></svg>RiskGraph<span>RESEARCH PREVIEW</span></a><a href="/">Assessment workspace ↗</a></header>
-<main id="main"><div class="hero"><div><p class="eyebrow">AGENT DECISIONS → MEASURABLE EVIDENCE</p><h1>Follow the decision.<br>Understand the risk.</h1><p>One saved request, four monitoring setups.<br>See what gets paid—and what the evidence can tell us.</p></div><div class="hero-note"><span class="status-dot"></span><strong id="source-label">Synthetic demonstration</strong><p id="source-description">Scripted agents · simulated payments<br>No live model calls or real money</p></div></div>
-<div class="workspace-bar"><div class="view-tabs" role="tablist" aria-label="Demo view"><button id="workflow-tab" role="tab" aria-selected="true" aria-controls="workflow-panel">01 <span>Follow a request</span></button><button id="model-tab" role="tab" aria-selected="false" aria-controls="model-panel">02 <span>Estimate risk</span></button></div><button id="settings-button" class="quiet">Evaluation setup</button></div>
-<p id="error-banner" role="alert" hidden></p><p id="loading" role="status">Loading saved evidence…</p>
-<section id="workflow-panel" role="tabpanel" aria-labelledby="workflow-tab">
-<div class="selectors"><label>Request<select id="case-select"></select></label><label>Monitoring setup<select id="config-select"></select></label><div class="example-links"><button id="unsafe-example" class="quiet">Unsafe request example</button><button id="legit-example" class="quiet">Legitimate request example</button><button id="service-example" class="quiet">Curated service tradeoff ↗</button></div></div>
-<article class="card workflow-card"><div class="card-top"><div><p class="eyebrow" id="case-family">REQUEST WORKFLOW</p><h2 id="case-title">Saved decision trace</h2></div><span id="case-evidence" class="pill">Not yet admitted</span></div><p id="case-description" class="case-description"></p><div class="graph-scroll"><svg id="workflow-graph" viewBox="0 0 1120 255" role="group" aria-label="Operational workflow. Select a node for evidence."></svg></div><p class="graph-hint">Scroll the workflow sideways to inspect every component.</p><div class="graph-legend"><span>● Agent</span><span>◇ Deterministic component</span><span class="danger-text">● Unauthorized payment</span><span class="amber-text">● Blocked / escalated</span></div><div class="playback"><button id="play" class="primary">▶ Play request</button><button id="replay">↻ Replay</button><label for="speed">Speed</label><select id="speed"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="8">8×</option></select><span id="playback-status" role="status">Recorded decisions. Illustrative timing.</span></div></article>
-<div class="workflow-bottom"><article class="card"><div class="card-top"><div><p class="eyebrow">SAME PROPOSAL · FRESH LEDGER PER SETUP</p><h2>This request, four outcomes</h2></div></div><div id="case-comparison" class="table-scroll"></div></article><article class="card evidence-card"><div class="card-top"><div><p class="eyebrow">RECORDED EVIDENCE</p><h2 id="node-title">Select a workflow node</h2></div></div><p id="node-meta">Inspect saved inputs, decisions, and tool results.</p><div id="node-evidence"></div></article></div>
-<div class="recent-heading"><h3>Request library <span id="library-count"></span></h3><span>Each preview uses the selected setup</span></div><div id="recent-cases" class="recent-cases" aria-label="Request library"></div>
-</section>
-<section id="model-panel" role="tabpanel" aria-labelledby="model-tab" hidden>
-<div class="model-heading"><div><p class="eyebrow">FREQUENCY MODEL · UNPOOLED BETA–BINOMIAL</p><h2>Outcomes update belief.<br>Traffic assumptions set the projection.</h2></div><label>Monitoring setup<select id="model-config"></select></label></div>
-<article class="card dependency-card"><p class="eyebrow">STATISTICAL DEPENDENCY · SEPARATE FROM THE AGENT WORKFLOW</p><div class="dependency" aria-label="Prior, scenario probability, observations, posterior, then traffic-weighted projection"><span>Prior <strong id="prior-label">Beta(1, 1)</strong></span><b>→</b><span>Scenario probability <strong>p[s, m]</strong></span><b>→</b><span>Observed outcomes <strong id="dependency-count">k / n</strong></span><b>→</b><span>Updated posterior <strong id="posterior-label">Beta(a+k, b+n−k)</strong></span><b>→</b><span>Traffic projection <strong>Σ w[s] p[s, m]</strong></span></div><p class="small">Factorization: p(p, Y) = p(p) × ∏ p(Yᵢ | p). The posterior is a deterministic update from prior and observations; the last arrows show this calculation, not additional conditional-independence assumptions.</p></article>
-<div class="model-grid"><article class="card density-card"><div class="card-top"><div><p class="eyebrow">ONE SCENARIO · OBSERVED EVIDENCE</p><h2 id="cell-title">Scenario posterior</h2></div><label class="sr-only" for="scenario-select">Scenario</label><select id="scenario-select"></select></div><div class="cell-readout"><strong id="cell-count">0 / 0</strong><span id="cell-status">Prior only</span></div><svg id="density-chart" viewBox="0 0 600 245" role="img" aria-label="Prior and posterior probability density curves"></svg><div class="chart-legend"><span class="prior-key">– – Prior</span><span class="posterior-key">━━ Posterior</span></div><p id="cell-summary"></p><p class="small">95% equal-tailed Bayesian credible interval, conditional on the displayed prior and binomial model. Zero observed failures does not establish zero risk.</p><details><summary>Cell accounting & exact upper endpoint</summary><div id="cell-accounting"></div></details></article>
-<article class="card projection-card"><p class="eyebrow">PROJECTED FAILURE FREQUENCY · ASSUMED MIX</p><div class="projection-value" title="Weighted mean of the six scenario-specific posterior probabilities." id="projection-mean">50.0%</div><p id="projection-interval"></p><div class="metric-pair"><div><span>Weighted empirical rate</span><strong id="projection-empirical">Unavailable</strong></div><div><span>Observed exposure / request</span><strong id="projection-money">Unavailable</strong></div></div><p class="small">Money is weighted observed unauthorized-payment exposure, separate from probability. It has no interval here.</p><div class="bound"><strong>Fixed-sample frequentist upper bound</strong><div title="Sum of weights times one-sided Clopper–Pearson upper endpoints, with a 0.05/24 cell error budget." id="projection-bound">Unavailable</div><p id="bound-explanation" class="small"></p></div></article></div>
-<article class="card weights-card"><div class="card-top"><div><p class="eyebrow">ASSUMPTION · NOT MEASURED TRAFFIC</p><h2>Illustrative assumed traffic mix</h2><p>Change the mix to reweight projections. Observations and scenario posteriors stay fixed.</p></div><button id="reset-weights" class="quiet">Reset mix</button></div><div id="weight-rows"></div><div class="weight-actions"><span id="weight-total">Total 100%</span><button id="apply-weights">Apply traffic mix</button></div><p id="weight-error" role="alert"></p></article>
-<article class="card"><div class="card-top"><div><p class="eyebrow">PAIRED COMPARISON · ONE CASE PER REQUEST</p><h2>Safety and service, side by side</h2></div></div><div id="aggregate-comparison" class="table-scroll"></div><p class="small">Four setups reuse the same saved outputs; they are correlated comparisons. No probability of superiority is calculated. Legitimate completion is conditional on eligible requests; intervention is weighted blocking or escalation, including actor referrals.</p></article>
-</section>
-<aside class="batch-bar"><div><strong id="batch-progress">0 / 60 requests admitted</strong><p id="batch-status">Each completed replay admits all four saved paired outcomes.</p></div><div><button id="play-batch">▶ Play batch</button><button id="complete-batch" class="primary">Admit complete batch</button></div></aside>
-<details class="limits card"><summary>Assumptions, provenance & limits</summary><div id="provenance"></div><p>Each family is a narrow, frozen synthetic distribution with independent case-level random streams. The model assumes a constant Bernoulli failure probability within each scenario/setup. Independent scenario priors support weighted posterior draws; configurations remain paired. Fixed-sample bounds use 0.05 / 24 per cell and a union bound, without requiring independent setups. Guarantees are conditional on the sampling and policy assumptions; they do not validate the scripted agents as real models.</p><p>Weights describe an illustrative assumed traffic mix. These projections are not calibrated production risk, actual business loss, annual loss, or CVaR. Source authenticity and real payment infrastructure are outside this simulation. All times in the graph are illustrative replay timings.</p><p>Archived real-model outputs are displayed separately. Their four monitoring outcomes are counterfactual deterministic replays, not four new model evaluations. The original critic was advisory; mapping it to a gate is an explicit demo assumption.</p><p><a href="https://github.com/farzana0/riskgraph/blob/main/docs/PAIRED_DEMO.md">Methods & three-minute demo script ↗</a> · <a href="/api/paired-demo" download="riskgraph-paired-demo.json">Download saved trace bundle</a></p></details>
-<footer>RiskGraph · Decisions, controls, and uncertainty made visible.</footer></main>
-<dialog id="setup-dialog" aria-labelledby="setup-heading"><form id="setup-form"><div class="dialog-top"><h2 id="setup-heading">Evaluation setup</h2><button type="button" id="close-setup" aria-label="Close evaluation setup">×</button></div><p>Choose the evidence and prior before analysis. Applying a setup starts a fresh display of the saved batch; it makes no API calls.</p><label>Evidence<select id="dataset"><option value="heldout">Synthetic held-out · 60 cases</option><option value="development">Synthetic development · 12 separate cases</option><option value="walkthrough">Curated safety/service & tool failure · 3 examples</option><option value="recorded">Recorded real-model outputs · 3 designed cases</option></select></label><div class="prior-inputs"><label>Beta prior a<input id="prior-a" type="number" min="0.01" max="100" step="any" value="1" required></label><label>Beta prior b<input id="prior-b" type="number" min="0.01" max="100" step="any" value="1" required></label></div><p class="small">Default Beta(1,1) is uniform on probability. Positive parameters up to 100 are supported. Unobserved cells remain “prior only.” This is a separate frequency model from the assessment workspace’s severity model.</p><button class="primary" type="submit">Start analysis with these settings</button></form></dialog>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RiskGraph · Agent topology</title>
+  <meta name="description" content="Topology view of a synthetic refund agent under four monitoring configurations, with a separate probabilistic risk model.">
+  <link rel="stylesheet" href="/static/demo.css?v=0.7.0">
+  <script src="/static/graph.js?v=0.7.0" defer></script>
+  <script src="/static/demo.js?v=0.7.0" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to topology</a>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="RiskGraph home">RiskGraph</a>
+
+    <div class="viewtabs" role="tablist" aria-label="View">
+      <button role="tab" id="tab-workflow" aria-controls="view-workflow" aria-selected="true">Request topology</button>
+      <button role="tab" id="tab-model" aria-controls="view-model" aria-selected="false" tabindex="-1">Risk model</button>
+    </div>
+
+    <div class="controls">
+      <label class="field case-field">
+        <span class="field-label">Request</span>
+        <select id="case-select" aria-label="Request"></select>
+      </label>
+      <label class="field">
+        <span class="field-label">Monitoring</span>
+        <select id="config-select" aria-label="Monitoring setup"></select>
+      </label>
+      <div class="playback" role="group" aria-label="Replay">
+        <button id="play" class="icon-btn" aria-label="Play replay">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-play" d="M5 3.5 L12.5 8 L5 12.5 Z"/><path class="i-pause" d="M5 3.5 V12.5 M11 3.5 V12.5"/></svg>
+        </button>
+        <button id="replay" class="icon-btn" aria-label="Replay from start">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8 A4.5 4.5 0 1 0 5 4.6"/><path d="M3.2 2.6 V5.4 H6"/></svg>
+        </button>
+        <label class="speed"><span class="sr-only">Speed</span>
+          <select id="speed" aria-label="Replay speed">
+            <option value="0.5">0.5×</option>
+            <option value="1" selected>1×</option>
+            <option value="2">2×</option>
+            <option value="4">4×</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="topbar-end">
+      <a class="text-btn workspace-link" href="/workspace">Assess logs ↗</a>
+      <button id="library-btn" class="text-btn" aria-haspopup="dialog" aria-controls="library">Requests</button>
+      <button id="setup-btn" class="icon-btn" aria-label="Evaluation setup" aria-haspopup="dialog">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5 H9 M12 4.5 H13.5 M2.5 11.5 H4 M7 11.5 H13.5"/><circle cx="10.5" cy="4.5" r="1.6"/><circle cx="5.5" cy="11.5" r="1.6"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="banner" class="banner" role="alert" hidden></div>
+  <div id="loading" class="loading">Loading saved evidence…</div>
+
+  <main id="main">
+    <!-- Request topology -->
+    <section id="view-workflow" class="view view-workflow" role="tabpanel" aria-labelledby="tab-workflow">
+      <div class="canvas-wrap">
+        <div class="canvas-top">
+        <div class="canvas-head">
+          <div class="case-line">
+            <span id="case-kicker" class="kicker"></span>
+            <span id="case-amount" class="case-amount"></span>
+          </div>
+          <div id="outcome" class="outcome" aria-live="polite">
+            <svg class="outcome-glyph" viewBox="-6 -6 12 12" aria-hidden="true"><path id="outcome-glyph-path" d=""/></svg>
+            <span id="outcome-text"></span>
+            <span id="outcome-exposure" class="outcome-exposure"></span>
+          </div>
+        </div>
+        <div class="canvas-meta">
+          <span id="source-pill" class="source-pill"></span>
+          <span class="timing-note">Recorded decisions · illustrative replay timing</span>
+        </div>
+        </div>
+        <p id="step-caption" class="step-caption" aria-live="polite"></p>
+        <div id="topology" class="topology-host"></div>
+        <ol id="step-rail" class="step-rail" aria-label="Replay steps. Select a step to jump to it."></ol>
+        <div class="legend" aria-label="Legend">
+          <span class="lg"><svg viewBox="-9 -9 18 18" aria-hidden="true"><circle class="lg-agent" r="7"/></svg>Agent</span>
+          <span class="lg"><svg viewBox="-9 -9 18 18" aria-hidden="true"><rect class="lg-det" x="-7" y="-7" width="14" height="14" rx="2.5"/></svg>Deterministic</span>
+          <span class="lg"><svg viewBox="-9 -9 18 18" aria-hidden="true"><path class="lg-input" d="M0 -8 L8 0 L0 8 L-8 0 Z"/></svg>Input</span>
+          <span class="lg"><svg viewBox="0 0 26 10" aria-hidden="true"><path class="lg-exec" d="M1 5 H25"/></svg>Executed</span>
+          <span class="lg"><svg viewBox="0 0 26 10" aria-hidden="true"><path class="lg-struct" d="M1 5 H25"/></svg>Possible route</span>
+          <span class="lg"><svg viewBox="0 0 26 10" aria-hidden="true"><path class="lg-ref" d="M1 5 H25"/></svg>Data reference</span>
+          <span class="lg"><svg viewBox="-9 -9 18 18" aria-hidden="true"><circle class="lg-gate" r="7"/><path class="lg-gate-x" d="M-3 -3 L3 3 M3 -3 L-3 3"/></svg>Route not taken</span>
+          <span class="lg-hint">Select a node to inspect · arrow keys move between nodes</span>
+        </div>
+      </div>
+
+      <footer class="strip">
+        <div class="setups" role="group" aria-label="Same saved proposal under each monitoring setup">
+          <!-- four setup thumbnails rendered by app.js -->
+        </div>
+        <button id="evidence-btn" class="evidence-chip" aria-haspopup="dialog" aria-controls="evidence">
+          <span class="chip-label">Evidence</span>
+          <span id="evidence-count" class="chip-count"></span>
+        </button>
+      </footer>
+    </section>
+
+    <!-- Risk model -->
+    <section id="view-model" class="view view-model" role="tabpanel" aria-labelledby="tab-model" hidden>
+      <div class="model-wrap">
+        <div class="canvas-meta model-meta">
+          <span id="model-source" class="source-pill"></span>
+          <button id="walk-btn" type="button" class="walk-btn">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5 L12.5 8 L5 12.5 Z"/></svg>Walk through the model
+          </button>
+          <span id="model-config-label" class="timing-note"></span>
+        </div>
+        <div id="model" class="model-host"></div>
+        <div id="walk" class="walk-card" role="region" aria-label="Model walkthrough" hidden>
+          <div class="walk-top">
+            <span id="walk-count" class="kicker"></span>
+            <button id="walk-close" type="button" class="icon-btn" aria-label="Close walkthrough"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12"/></svg></button>
+          </div>
+          <h3 id="walk-title" class="walk-title" tabindex="-1"></h3>
+          <p id="walk-text" class="walk-text" aria-live="polite"></p>
+          <div class="walk-dots" id="walk-dots" aria-hidden="true"></div>
+          <div class="walk-nav">
+            <button id="walk-prev" type="button" class="btn ghost">Back</button>
+            <button id="walk-next" type="button" class="btn">Next</button>
+          </div>
+        </div>
+        <div class="legend" aria-label="Model legend">
+          <span class="lg"><svg viewBox="-9 -9 18 18" aria-hidden="true"><rect class="lg-param" x="-7" y="-7" width="14" height="14" rx="2"/></svg>Fixed parameter</span>
+          <span class="lg"><svg viewBox="-9 -9 18 18" aria-hidden="true"><circle class="lg-rv" r="7"/></svg>Unknown probability</span>
+          <span class="lg"><svg viewBox="-9 -9 18 18" aria-hidden="true"><circle class="lg-obs" r="7"/></svg>Observed</span>
+          <span class="lg"><svg viewBox="-12 -9 24 18" aria-hidden="true"><rect class="lg-calc-node" x="-11" y="-6" width="22" height="12" rx="6"/></svg>Calculated</span>
+          <span class="lg"><svg viewBox="-9 -9 18 18" aria-hidden="true"><path class="lg-assume" d="M0 -7 L7 0 L0 7 L-7 0 Z"/></svg>Assumption</span>
+          <span class="lg"><svg viewBox="0 0 26 10" aria-hidden="true"><path class="lg-model" d="M1 5 H25"/></svg>Model dependency</span>
+          <span class="lg"><svg viewBox="0 0 26 10" aria-hidden="true"><path class="lg-calc" d="M1 5 H25"/></svg>Calculation</span>
+        </div>
+      </div>
+
+      <aside class="projection" aria-labelledby="proj-title">
+        <div class="proj-head">
+          <h2 id="proj-title">Weighted projection</h2>
+          <span id="proj-config" class="proj-config"></span>
+        </div>
+        <p id="snapshot-note" class="snapshot-note"></p>
+
+        <div class="metric">
+          <div class="metric-label">Bayesian mean <span class="tag">Bayesian</span></div>
+          <div id="proj-mean" class="metric-value"></div>
+          <div id="proj-ci" class="metric-sub"></div>
+          <svg id="proj-ci-bar" class="ci-bar" viewBox="0 0 260 18" aria-hidden="true"></svg>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Exact upper endpoint <span class="tag tag-freq">Frequentist</span></div>
+          <div id="proj-upper" class="metric-value small"></div>
+          <div id="proj-bound" class="metric-sub"></div>
+        </div>
+        <div class="metric-pair">
+          <div class="metric">
+            <div class="metric-label">Weighted empirical</div>
+            <div id="proj-emp" class="metric-value small"></div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Exposure / request</div>
+            <div id="proj-money" class="metric-value small"></div>
+          </div>
+        </div>
+        <p class="fine">Weighted observed unauthorized-payment exposure in synthetic USD. Reported separately from frequency uncertainty.</p>
+        <div class="metric-pair">
+          <div class="metric">
+            <div class="metric-label">Legitimate completion</div>
+            <div id="proj-service" class="metric-value small"></div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Intervention rate</div>
+            <div id="proj-intervention" class="metric-value small"></div>
+            <div id="proj-intervention-sub" class="metric-sub"></div>
+          </div>
+        </div>
+
+        <div class="compare">
+          <div class="metric-label">All setups <span class="fine-inline">· mean, 95% credible, exact upper</span></div>
+          <svg id="intervals" class="intervals" viewBox="0 0 300 130"></svg>
+          <p class="fine">Marginal summaries. Setups are paired on the same cases, so overlapping or separated intervals are not a superiority test.</p>
+        </div>
+
+        <div class="batch">
+          <div id="batch-progress" class="batch-line"></div>
+          <div id="batch-status" class="fine"></div>
+        </div>
+
+        <div class="proj-actions">
+          <button id="model-evidence-btn" class="text-btn" aria-haspopup="dialog" aria-controls="evidence">Evidence</button>
+          <button id="weights-btn" class="text-btn" aria-haspopup="dialog">Assumed traffic mix</button>
+          <button id="table-btn" class="text-btn" aria-haspopup="dialog">Full comparison</button>
+          <button id="checks-btn" class="text-btn" aria-haspopup="dialog">Model checks</button>
+          <button id="methods-btn" class="text-btn" aria-haspopup="dialog">Methods</button>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Contextual inspector (node or scenario). Opens only on selection. -->
+    <aside id="inspector" class="inspector" aria-labelledby="insp-title" hidden>
+      <div class="insp-head">
+        <div>
+          <div id="insp-kicker" class="kicker"></div>
+          <h2 id="insp-title" tabindex="-1"></h2>
+        </div>
+        <button id="insp-close" class="icon-btn" aria-label="Close inspector">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12"/></svg>
+        </button>
+      </div>
+      <div id="insp-body" class="insp-body"></div>
+    </aside>
+  </main>
+
+  <!-- Evidence admission -->
+  <dialog id="evidence" class="sheet" aria-labelledby="evidence-title">
+    <form method="dialog" class="sheet-inner">
+      <div class="sheet-head"><h2 id="evidence-title">Evidence</h2><button class="icon-btn" value="close" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12"/></svg></button></div>
+      <p id="evidence-summary" class="sheet-lead"></p>
+      <p class="fine">A completed request replay admits its four saved paired outcomes, one per setup. Replays never add duplicate observations. Switching the displayed setup does not change evidence. Execution errors are admitted as unresolved records, never as safe outcomes.</p>
+      <div class="sheet-actions">
+        <button id="play-batch" type="button" class="btn">Play remaining requests</button>
+        <button id="complete-batch" type="button" class="btn ghost">Admit all saved outcomes</button>
+      </div>
+      <p id="evidence-bound" class="fine"></p>
+    </form>
+  </dialog>
+
+  <!-- Request library -->
+  <dialog id="library" class="sheet sheet-wide" aria-labelledby="library-title">
+    <form method="dialog" class="sheet-inner">
+      <div class="sheet-head"><h2 id="library-title">Requests</h2><button class="icon-btn" value="close" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12"/></svg></button></div>
+      <div class="shortcuts">
+        <button id="ex-unsafe" type="button" class="text-btn">Unsafe example</button>
+        <button id="ex-legit" type="button" class="text-btn">Legitimate example</button>
+        <button id="ex-service" type="button" class="text-btn">Curated service tradeoff</button>
+      </div>
+      <p id="library-note" class="fine"></p>
+      <ul id="library-list" class="library-list"></ul>
+    </form>
+  </dialog>
+
+  <!-- Setup: dataset + prior -->
+  <dialog id="setup" class="sheet" aria-labelledby="setup-title">
+    <form id="setup-form" class="sheet-inner">
+      <div class="sheet-head"><h2 id="setup-title">Evaluation setup</h2><button id="setup-close" type="button" class="icon-btn" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12"/></svg></button></div>
+      <label class="stack">
+        <span class="field-label">Evidence</span>
+        <select id="dataset">
+          <option value="heldout">Held-out · 60 synthetic cases</option>
+          <option value="development">Development · 12 synthetic cases</option>
+          <option value="walkthrough">Curated examples · 3, excluded from evaluation</option>
+          <option value="recorded">Recorded replay · 3 archived real-model outputs</option>
+        </select>
+      </label>
+      <fieldset class="prior">
+        <legend class="field-label">Prior Beta(a, b), fixed before analysis</legend>
+        <label>a <input id="prior-a" type="number" min="0.01" max="100" step="any" value="1" inputmode="decimal" required></label>
+        <label>b <input id="prior-b" type="number" min="0.01" max="100" step="any" value="1" inputmode="decimal" required></label>
+      </fieldset>
+      <p class="fine">Applying resets admitted evidence for a fresh evaluation.</p>
+      <p id="provenance" class="fine provenance"></p>
+      <div class="sheet-actions"><button type="submit" class="btn">Apply</button></div>
+    </form>
+  </dialog>
+
+  <!-- Assumed traffic mix -->
+  <dialog id="weights" class="sheet" aria-labelledby="weights-title">
+    <form id="weights-form" class="sheet-inner">
+      <div class="sheet-head"><h2 id="weights-title">Assumed traffic mix</h2><button id="weights-close" type="button" class="icon-btn" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12"/></svg></button></div>
+      <p class="fine">Illustrative assumption, not observed frequencies. Edits change the weighted projection only; evidence counts and scenario posteriors stay fixed.</p>
+      <div id="weight-rows" class="weight-rows"></div>
+      <p id="weight-total" class="fine"></p>
+      <p id="weight-error" class="error-text" role="alert"></p>
+      <div class="sheet-actions">
+        <button type="submit" class="btn">Apply mix</button>
+        <button id="weights-reset" type="button" class="btn ghost">Reset to default</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Full comparison table -->
+  <dialog id="table" class="sheet sheet-wide" aria-labelledby="table-title">
+    <form method="dialog" class="sheet-inner">
+      <div class="sheet-head"><h2 id="table-title">Full comparison</h2><button class="icon-btn" value="close" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12"/></svg></button></div>
+      <div class="table-scroll"><table id="compare-table"></table></div>
+      <p class="fine">Bayesian intervals are 95% equal-tailed credible intervals. Exact upper endpoints are one-sided Clopper–Pearson with per-cell α = 0.05/24. Exposure is reported separately from frequency uncertainty.</p>
+    </form>
+  </dialog>
+
+  <dialog id="model-checks" class="sheet sheet-wide" aria-labelledby="checks-title">
+    <form method="dialog" class="sheet-inner">
+      <div class="sheet-head"><h2 id="checks-title">Model checks</h2><button class="icon-btn" value="close" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12"/></svg></button></div>
+      <p id="checks-status" class="fine" role="status"></p>
+      <div id="checks-body"></div>
+    </form>
+  </dialog>
+
+  <!-- Methods -->
+  <dialog id="methods" class="sheet sheet-wide" aria-labelledby="methods-title">
+    <form method="dialog" class="sheet-inner">
+      <div class="sheet-head"><h2 id="methods-title">Methods</h2><button class="icon-btn" value="close" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4 L12 12 M12 4 L4 12"/></svg></button></div>
+      <div class="methods-body">
+        <p>For each scenario s and setup m, p[s, m] ~ Beta(a, b) and each completed outcome Y[i, s, m] | p ~ Bernoulli(p), so k | p ~ Binomial(n, p). Y = 1 when a simulated payment executes with positive unauthorized exposure. Errors do not enter n.</p>
+        <p>The posterior Beta(a + k, b + n − k) is a deterministic calculation from the prior and the observed counts. Its mean is (a + k) / (a + b + n); intervals are 95% equal-tailed Bayesian credible intervals. A cell with n = 0 is prior only and has no empirical rate.</p>
+        <p>The weighted projection Σ w[s] p[s, m] uses independent scenario priors and reproducible posterior draws. The weights are an illustrative assumed traffic mix that must sum to one.</p>
+        <p>The exact upper endpoint is a fixed-sample, one-sided Clopper–Pearson bound with α = 0.05/24 per cell, giving simultaneous 95% coverage across 24 cells under i.i.d. outcomes within each cell. The weighted endpoint Σ w U is shown only when every predetermined held-out outcome is complete and resolved. It is not an anytime bound.</p>
+        <p>The four setups replay the same saved proposals on fresh identical ledgers. Outcomes are paired, not independent, so no probability that one setup is superior is reported. The probability graph is separate from the agent topology and does not imply independence between workflow components.</p>
+        <p>Model checks report prior sensitivity, exact posterior variance under independent scenario priors, and conservative paired probability-difference bounds derived from discordant case pairs. The paired bounds have a separate 5% family error budget; together with the original frequency bounds, these are not a joint 95% guarantee. Known-truth simulation results and derivations are documented in <a href="https://github.com/farzana0/riskgraph/blob/main/docs/MODEL_AUDIT.md">the statistical audit</a>.</p>
+        <p>All orders and money are synthetic. Results are a demonstration, not calibrated production risk.</p>
+      </div>
+    </form>
+  </dialog>
+
+  <noscript><p class="noscript">RiskGraph requires JavaScript to replay saved evidence.</p></noscript>
+</body>
+</html>

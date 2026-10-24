@@ -59,11 +59,12 @@ def test_operational_fault_campaign_is_offline_and_never_executes_bad_responses(
 
 def test_deploy_assets_revalidate_and_html_references_versioned_scripts():
     client = TestClient(create_app(':memory:', seed_demo=False))
-    page = client.get('/')
-    assert page.headers['cache-control'] == 'no-cache'
     version=client.get('/healthz').json()['version']
-    assert f'/static/app.js?v={version}' in page.text
-    assert f'/static/style.css?v={version}' in page.text
+    for route, assets in [('/', ['demo.js', 'graph.js', 'demo.css']), ('/demo', ['demo.js', 'graph.js', 'demo.css']), ('/workspace', ['app.js', 'style.css'])]:
+        page = client.get(route)
+        assert page.headers['cache-control'] == 'no-cache'
+        for asset in assets:
+            assert f'/static/{asset}?v={version}' in page.text
     assert client.get('/static/app.js?v=0.4.0').headers['cache-control'] == 'no-cache'
     assert client.get('/api/config').headers['cache-control'] == 'no-store'
 
