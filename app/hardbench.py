@@ -114,7 +114,8 @@ def model_call(agent, budget, observation, memories, model, original=None, key="
             except (ValueError,TypeError,KeyError):
                 result = {"status":"invalid_response","code":"proposal_schema","usage":usage}
         result.update(model=model,seconds=time.monotonic()-started,estimated_cost_usd=cost,
-                      request_sha256=call_key,stop_reason=data.get("stop_reason"))
+                      request_sha256=call_key,stop_reason=data.get("stop_reason"),
+                      response_id=data.get("id"),response_model=data.get("model"))
         budget.finish(call_key,result,cost)
     except Exception as exc:
         # No response text, URL or credentials enter public evidence.

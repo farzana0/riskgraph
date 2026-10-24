@@ -1,0 +1,40 @@
+{
+  "version": "compound-memory-study-v2",
+  "seed": 2026102401,
+  "cases": 48,
+  "cases_sha256": "75cf2b29d7c80965d1469fcc26977212249ea6bcfdeffd65ab2b4c043259b32f",
+  "memory_hint_sha256": "c985a73e63e2c7004038f3f0531e79d327ed7d44a06ad96df40b554fb3efbe3b",
+  "models": [
+    "claude-haiku-5-5",
+    "claude-sonnet-5-5"
+  ],
+  "critic_model": "claude-sonnet-5-5",
+  "max_usd": 5.0,
+  "max_requests": 384,
+  "settings": {
+    "max_tokens": 2048,
+    "effort": "low",
+    "haiku_thinking": "disabled",
+    "sonnet_thinking": "between_tools"
+  },
+  "price_basis_usd_per_million": {
+    "claude-haiku-5-5": [
+      0.1,
+      0.5
+    ],
+    "claude-sonnet-5-5": [
+      2.0,
+      10.0
+    ]
+  },
+  "ordering_seed": 2026102403,
+  "source_sha256": {
+    "app/research_cases.py": "d8a43e84ed4639425dbd67f5d4b1a5f185da887c168bc3842fbf4d3e78eeb471",
+    "app/research_stats.py": "83bb7f693a3cab03480612c12d362c97eb3dc06d9f70c8eeaf98aed991252002",
+    "scripts/research_study.py": "b9902ca0f0556c4971b71b4d1c50cd070595a016954167604e69f4cfa2acba99",
+    "app/hardbench.py": "2f9c312b2fdf9bac89611cc4ce7d34801ccc3be8bdd8f83f1a63ead4c12067e3",
+    "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d",
+    "app/domain.py": "8197d67a9287330cf41a1591f6354e61cbf7b40b6b6c5ff8368fee3012896a0c"
+  },
+  "scope": "Fresh 48-case, 12-family balanced challenge; all cases, scoring rules, memory hints, prompts and analysis fixed before paid responses. Four model/memory cells per case; critic/no-critic share the exact initial proposal. No test-outcome writeback or result-dependent selection. Separate from historical experiments."
+}
