@@ -48,7 +48,7 @@ class PairedAnalysisRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.8.0")
+    app = FastAPI(title="RiskGraph", version="0.9.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -82,7 +82,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.8.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.9.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/demo")
     def paired_demo():
@@ -160,6 +160,10 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
                       STATIC.parents[1] / "docs" / "examples" / "memory-v3.json"]
         path = next((p for p in candidates if p.is_file()), None)
         return {"available": True, "study": json.loads(path.read_text())} if path else {"available": False}
+
+    @app.get("/api/memory-audit")
+    def memory_audit():
+        return json.loads((STATIC.parents[1] / "docs" / "examples" / "haiku-memory-autopsy.json").read_text())
 
     @app.get("/api/research-study")
     def research_study():
@@ -291,8 +295,8 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
         return FileResponse(STATIC / "index.html")
 
     @app.get("/study")
-    def real_model_graphs():
-        return FileResponse(STATIC / "research.html")
+    def real_model_graphs(experiment: Literal["latest", "original"] = "latest"):
+        return FileResponse(STATIC / ("research.html" if experiment == "original" else "memory-study.html"))
 
     app.mount("/static", StaticFiles(directory=STATIC), name="static")
     if seed_demo and not store.runs():

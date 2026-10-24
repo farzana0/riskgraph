@@ -1,0 +1,21 @@
+{
+  "schema_version": "memory-ablation-verification-v3",
+  "registered_commit": "97bc0c0",
+  "cases": 36,
+  "model_strategy_cells": 288,
+  "completed_stage_outcomes": 574,
+  "unresolved_stage_outcomes": 2,
+  "reconstructed_unique_requests": 575,
+  "recorded_response_ids": 575,
+  "verified_memory_skills": 7,
+  "rejected_retrieval_hits": 49,
+  "independently_recomputed_record_calculations": 36,
+  "analysis_recomputed": true,
+  "accounted_estimated_token_cost_usd": 5.847104399999997,
+  "study_sha256": "6f1c884185a6541579c68a89152e17d62dfb6fbae44d8dfe69a2f16c357d5f69",
+  "floating_tolerance": {
+    "relative": 1e-10,
+    "absolute": 1e-10
+  },
+  "scope": "Archive reconstruction verifies source selection, original request hashes, arithmetic from visible records, scoring and statistics. Recorded response IDs are provenance, not external provider certification. No provider calls are made."
+}
