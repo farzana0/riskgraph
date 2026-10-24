@@ -6,9 +6,9 @@
 .memory-page .controls{grid-column:1/-1;grid-row:2;display:flex;gap:18px;width:100%;padding-top:2px}
 .memory-page .controls .case-field{flex:1;max-width:390px}
 .memory-page .controls .case-field select{width:100%;max-width:290px}
-.memory-page #research-effects{height:300px}
+.memory-page #research-effects{height:auto}
 @media(max-width:750px){
- .memory-page #research-effects{height:385px}
+ .memory-page #research-effects{height:auto}
  .memory-page .topbar{display:flex;gap:8px}
  .memory-page .brand{order:0}
  .memory-page .topbar-end{order:1;flex-basis:100%;justify-content:flex-start}
@@ -19,3 +19,5 @@
  .memory-page .controls .field{flex-direction:column;align-items:stretch;gap:4px}
  .memory-page .controls .field-label{display:block}
 }
+
+.memory-page .study-setup-cards{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}

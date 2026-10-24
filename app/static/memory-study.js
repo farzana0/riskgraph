@@ -2,7 +2,7 @@
 (() => {
   const $ = id => document.getElementById(id), NS='http://www.w3.org/2000/svg';
   const labels={none:'No memory',raw:'Raw memory',selected:'Selected memory',grounded:'Memory + calculations'};
-  const state={study:null,model:'claude-haiku-5-5',setup:'grounded',critic:false,index:0,view:'workflow',returnFocus:null};
+  const state={study:null,model:'claude-haiku-5-5',setup:'selected',critic:false,index:0,view:'workflow',returnFocus:null};
   const title=s=>s.replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
   const pct=x=>x==null?'Unavailable':(x*100).toFixed(1)+'%';
   const pp=x=>x==null?'Unavailable':(x>0?'+':'')+(x*100).toFixed(1)+' pp';
@@ -38,7 +38,7 @@
   function renderWorkflow(){
     const s=state.study,c=s.cases[state.index],cell=selected(),out=outcomeFor(cell),current=callFor(cell),memory=state.setup!=='none',guided=['selected','grounded'].includes(state.setup),grounded=state.setup==='grounded',prep=s.prepared[c.id];
     $('research-title').textContent=title(c.family)+' · request '+(state.index+1);
-    $('research-caption').textContent=modelName(state.model)+' · '+labels[state.setup]+' · critic '+(state.critic?'on':'off')+'. Recorded calls; calculations are a separate deterministic preflight.';
+    $('research-caption').textContent=modelName(state.model)+' · '+labels[state.setup]+' · critic '+(state.critic?'on':'off')+'. Recorded real model calls; all business records and money are synthetic.';
     $('research-outcome').textContent=!out?'Not processed':!out.resolved?'Unresolved response':out.proposed_loss_cents>0?'Unsafe proposal · '+usd(out.proposed_loss_cents/100):out.task_failure?'Service / task error':'Task correct';
     const g=$('research-graph');clear(g);const phone=innerWidth<=750;g.setAttribute('viewBox',phone?'0 0 370 840':'0 0 1180 420');
     const p=phone?{input:[65,55],records:[290,55],memory:[65,205],calcs:[65,385],actor:[265,230],critic:[265,420],gate:[265,610],payment:[65,610],score:[65,770]}:{input:[75,185],records:[75,65],memory:[340,55],calcs:[340,335],actor:[340,185],critic:[610,185],gate:[830,185],payment:[1050,90],score:[1050,315]};
@@ -64,18 +64,18 @@
       const records=guided?Object.fromEntries(prep.plan.map(skill=>[skill,s.memory.skills[skill]])):s.memory.raw[c.family];
       showDetails('SurrealDB recall',[['Strategy',guided?'Current connector capabilities select at most three version/content/validity-checked skills. The compact selected context is shared with the critic when enabled.':'Legacy control: one raw family hint from the actual earlier SurrealDB bank.'],['Capability plan',guided?prep.plan:{control_family:c.family}],['Context supplied to models',guided?prep.selected_context:s.memory.raw[c.family].hits],['Retrieval traces and source evidence',records],['Interpretation',s.analysis.memory_interpretation]]);
     });
-    node(g,'calcs',...p.calcs,'Record calculations',grounded?prep.calculations.status:'Disabled','∑','tool',grounded?'':'disabled',()=>showDetails('Record calculations',[['Role','Deterministic preflight, run by the orchestrator from visible current records. It is not an LLM-invoked tool or a scoring oracle. Only the Memory + calculations strategy receives this report.'],['Report supplied to model',grounded?prep.calculations:{status:'disabled'}]]));
+    if(s.analysis.modes.includes('grounded'))node(g,'calcs',...p.calcs,'Record calculations',grounded?prep.calculations.status:'Disabled','∑','tool',grounded?'':'disabled',()=>showDetails('Record calculations',[['Role','Deterministic preflight, run by the orchestrator from visible current records. It is not an LLM-invoked tool or a scoring oracle. Only the Memory + calculations strategy receives this report.'],['Report supplied to model',grounded?prep.calculations:{status:'disabled'}]]));
     const describe=call=>call?.status==='complete'?title(call.proposal.action)+' '+usd(call.proposal.amount_cents/100):({invalid_response:'Incomplete response',provider_error:'Provider unavailable',not_started:'Not started'}[call?.status]||'Not processed');
     node(g,'actor',...p.actor,modelName(state.model)+' agent',describe(cell?.initial),'●','agent',cell?.initial_outcome?.proposed_loss_cents>0?'bad':'',()=>showCall('Initial proposal',cell?.initial,cell?.initial_outcome));
     node(g,'critic',...p.critic,'Sonnet critic',state.critic?describe(cell?.corrected):'Disabled','●','agent',state.critic?(out?.proposed_loss_cents>0?'bad':''):'disabled',()=>showCall('Corrective critic',state.critic?cell?.corrected:{status:'disabled'},state.critic?out:{status:'disabled'}));
     node(g,'gate',...p.gate,'Policy gate',out?.resolved?(out.gate.allowed?'Passes policy':'Stops proposal'):'No valid proposal','§','tool',out?.resolved&&!out.gate.allowed?'warn':'',()=>showDetails('Independent policy gate',[['Checks',out?.gate||{status:'unresolved'}],['Scoring state withheld from the agents',c.truth]]));
-    node(g,'payment',...p.payment,'Simulated payment',out?.resolved?usd(out.executed_cents/100)+' executed':'Unavailable','$','tool','',()=>showDetails('Synthetic settlement',[['Outcome',out||{status:'not_processed'}],['Scope','No external payment service is called.']]));
+    node(g,'payment',...p.payment,'Simulated payment',out?usd(out.executed_cents/100)+' executed':'Not processed','$','tool','',()=>showDetails('Synthetic settlement',[['Outcome',out||{status:'not_processed'}],['Scope','No external payment service is called.']]));
     node(g,'score',...p.score,'Evaluator',out?.resolved?usd(out.proposed_loss_cents/100)+' proposed harm':'Unavailable','Δ','tool',out?.resolved?(out.proposed_loss_cents>0?'bad':'ok'):'',()=>showDetails('Scored outcome',[['Financial and task outcome',out||{status:'not_processed'}],['Expected refund under the benchmark',usd(c.expected_refund_cents/100)]]));
     const cards=$('research-cards');clear(cards);
-    for(const [mode,label] of Object.entries(labels)){
+    for(const mode of s.analysis.modes){const label=labels[mode];
       const r=outcomeFor(rowFor(mode)),b=el('button',{'aria-pressed':String(mode===state.setup)},cards);el('strong',{text:label},b);el('span',{text:!r?'Not processed':!r.resolved?'Financial outcome unresolved':usd(r.proposed_loss_cents/100)+' proposed harm'},b);el('small',{text:!r?'Pending':r.task_failure?'Task error':'Task correct'},b);b.onclick=()=>{state.setup=mode;$('research-setup').value=mode;render();};
     }
-    $('research-case-note').textContent='One recorded example; aggregate estimates retain all 36 scheduled cases. Cards hold the model and critic setting fixed. Raw → selected changes retrieval and use; selected → calculations adds arithmetic support. The fixed gate is present in every strategy.';
+    $('research-case-note').textContent='One recorded example; aggregate estimates retain all '+s.cases.length+' scheduled cases. Cards hold model and critic fixed. '+s.analysis.memory_interpretation;
   }
   function renderRisk(){
     const a=arm();if(!a)return;
@@ -89,29 +89,31 @@
     metric('Observed loss after gate',usd(a.residual_loss_usd),'Conditional mean upper: '+usd(a.residual_conditional_bound.upper_usd)+' / completed case. Zero observations retain uncertainty.');
     const g=$('research-risk-graph');clear(g);const phone=innerWidth<=750;g.setAttribute('viewBox',phone?'0 0 370 350':'0 0 760 250');
     const boxes=phone?[[12,20,160,70],[198,20,160,70],[12,135,160,70],[198,135,160,70],[85,265,200,70]]:[[10,20,175,75],[235,20,175,75],[10,145,175,75],[235,145,175,75],[490,85,250,90]];
-    const content=[['Observed outcomes',a.resolved+' completed',a.harmful+' harmful · '+a.unresolved+' unresolved'],['Family posteriors',pct(a.frequency_mean),'6 × Beta(.5+k, .5+n−k)'],['Severity + prior','Four loss bands','$25 / 100 / 500 / 1000'],['Assumed mix','1/6 per family','Fixed challenge weights'],['Weighted binned risk',usd(a.binned_loss_mean_usd)+' / case','Σ weight × probability × severity']];
+    const content=[['Observed outcomes',a.resolved+' completed',a.harmful+' harmful · '+a.unresolved+' unresolved'],['Family posteriors',pct(a.frequency_mean),state.study.analysis.families.length+' × Beta(.5+k, .5+n−k)'],['Severity + prior','Four loss bands','$25 / 100 / 500 / 1000'],['Assumed mix','1/'+state.study.analysis.families.length+' per family','Fixed challenge weights'],['Weighted binned risk',usd(a.binned_loss_mean_usd)+' / case','Σ weight × probability × severity']];
     const connections=phone?[[[172,55],[198,55]],[[92,90],[92,135]],[[92,205],[150,265]],[[278,205],[245,265]]]:[[[185,57],[235,57]],[[97,95],[97,145]],[[410,57],[490,115]],[[185,182],[490,140]],[[410,182],[490,150]]];
     if(phone)svg('path',{class:'study-edge',d:'M278 90 C370 110 370 230 255 265'},g);
     connections.forEach(([p,q])=>edge(g,p,q,''));
     boxes.forEach(([x,y,w,h],i)=>{svg('rect',{class:'risk-model-box',x,y,width:w,height:h,rx:8},g);svg('text',{class:'risk-model-label',x:x+12,y:y+19,text:content[i][0]},g);svg('text',{class:'risk-model-value',x:x+12,y:y+41,text:content[i][1]},g);svg('text',{class:'risk-model-small',x:x+12,y:y+58,text:content[i][2]},g);});
-    const rows=state.study.analysis.comparisons.filter(c=>['raw_memory','retrieval_use','calculations','bundle'].includes(c.kind)&&c.before.startsWith(state.model+'|')&&c.before.endsWith('|'+Number(state.critic)));
+    const rows=state.study.analysis.comparisons.filter(c=>['memory','raw_memory','retrieval_use','calculations','bundle'].includes(c.kind)&&c.before.startsWith(state.model+'|')&&c.before.endsWith('|'+Number(state.critic)));
     const criticEffect=state.study.analysis.comparisons.find(c=>c.kind==='critic'&&c.before===state.model+'|'+state.setup+'|0');if(criticEffect)rows.push(criticEffect);
-    const effects=$('research-effects');clear(effects);effects.setAttribute('viewBox',phone?'0 0 370 385':'0 0 680 300');svg('title',{text:rows.map(r=>effectLabel(r)+': '+pp(r.posterior_frequency_reduction)+'; 95% credible '+range(r.credible95,pp)).join('. ')},effects);
+    const modelEffect=state.study.analysis.comparisons.find(c=>c.kind==='model'&&c.before.split('|')[1]===state.setup&&c.before.endsWith('|'+Number(state.critic)));if(modelEffect)rows.push(modelEffect);
+    const effects=$('research-effects');clear(effects);const effectHeight=rows.length*(phone?65:48)+60;effects.setAttribute('viewBox',(phone?'0 0 370 ':'0 0 680 ')+effectHeight);svg('title',{text:rows.map(r=>effectLabel(r)+': '+pp(r.posterior_frequency_reduction)+'; 95% credible '+range(r.credible95,pp)).join('. ')},effects);
     const extent=Math.min(1,Math.max(.1,Math.ceil(Math.max(...rows.flatMap(r=>r.credible95.map(Math.abs)))*20)/20));
     const X=p=>phone?140+(p/extent+1)*105:260+(p/extent+1)*195;
-    svg('line',{class:'effect-zero',x1:X(0),x2:X(0),y1:20,y2:phone?340:255},effects);
-    [-1,-.5,0,.5,1].forEach(p=>svg('text',{class:'effect-text',x:X(p*extent),y:phone?370:285,'text-anchor':'middle',text:Number((100*p*extent).toFixed(1))+' pp'},effects));
+    svg('line',{class:'effect-zero',x1:X(0),x2:X(0),y1:20,y2:effectHeight-40},effects);
+    [-1,-.5,0,.5,1].forEach(p=>svg('text',{class:'effect-text',x:X(p*extent),y:effectHeight-15,'text-anchor':'middle',text:Number((100*p*extent).toFixed(1))+' pp'},effects));
     rows.forEach((r,i)=>{const y=phone?42+i*65:38+i*48;svg('text',{class:'effect-text',x:5,y:phone?y-19:y+4,text:effectLabel(r)},effects);svg('line',{class:'effect-line',x1:X(r.credible95[0]),x2:X(r.credible95[1]),y1:y,y2:y},effects);svg('circle',{class:'effect-dot',cx:X(r.posterior_frequency_reduction),cy:y,r:4},effects);});
     const details=$('research-effect-detail');clear(details);
     rows.forEach(r=>{const d=el('div',{class:'effect-case'},details);el('strong',{text:effectLabel(r)+' · observed '+pp(r.observed_frequency_reduction)+' reduction'},d);el('div',{text:r.avoided+' harmful proposals avoided · '+r.introduced+' introduced · '+r.resolved_pairs+'/'+r.scheduled_pairs+' matched pairs'},d);el('small',{text:'Posterior reduction '+pp(r.posterior_frequency_reduction)+' [95% credible '+range(r.credible95,pp)+']. '+(r.credible95[0]<=0&&r.credible95[1]>=0?'Interval crosses zero.':'Conditional on stated priors and workload.')},d);el('small',{text:'Task errors fixed / introduced: '+r.task_errors_fixed+' / '+r.task_errors_introduced+'. Observed proposed-loss reduction: '+usd(r.observed_loss_reduction_usd)+' / matched case.'},d);});
+    const precision=$('research-precision');clear(precision);if(state.study.precision){table(precision,['Cases','Memory reduction · 95% credible','Interval width'],state.study.precision.map(p=>{const r=p.comparisons.find(c=>c.kind==='memory'&&c.before.startsWith(state.model+'|')&&c.before.endsWith('|'+Number(state.critic)));return [p.cases,pp(r.posterior_frequency_reduction)+' ['+range(r.credible95,pp)+']',((r.credible95[1]-r.credible95[0])*100).toFixed(1)+' pp'];}));}else el('p',{text:'A balanced-prefix analysis is available for the fresh targeted batch after collection finishes.'},precision);
     clear($('research-scenarios'));table($('research-scenarios'),['Family','Harm / resolved','Frequency mean','95% credible'],Object.entries(a.cells).map(([f,c])=>[title(f),c.k+' / '+c.n,pct(c.posterior_mean),range(c.credible95)]));
   }
-  const effectLabel=r=>({raw_memory:'Raw memory vs none',retrieval_use:'Selected vs raw memory',calculations:'Calculations vs selected',bundle:'Full bundle vs none',critic:'Critic on vs off',model:'Sonnet vs Haiku'}[r.kind]);
+  const effectLabel=r=>({memory:'Selected memory vs none',raw_memory:'Raw memory vs none',retrieval_use:'Selected vs raw memory',calculations:'Calculations vs selected',bundle:'Full bundle vs none',critic:'Critic on vs off',model:'Sonnet vs Haiku'}[r.kind]);
   function render(){if(!state.study?.analysis)return;renderWorkflow();renderRisk();}
   function changeView(view){state.view=view;for(const name of ['workflow','risk']){const active=name===view;$('research-'+name).hidden=!active;$('research-'+name+'-tab').setAttribute('aria-selected',String(active));$('research-'+name+'-tab').tabIndex=active?0:-1;}render();}
   function example(kind){
     if(!state.study)return;const changed=(a,b)=>a&&b&&(a.resolved!==b.resolved||a.task_failure!==b.task_failure||a.proposed_loss_cents!==b.proposed_loss_cents);
-    const candidates=state.study.cells.filter(c=>c.model===state.model).filter(c=>kind==='critic'?c.memory_mode===state.setup&&changed(c.initial_outcome,c.corrected_outcome):c.memory_mode===(kind==='calculation'?'selected':'raw')&&changed(outcomeFor(c),outcomeFor(state.study.cells.find(x=>x.case_id===c.case_id&&x.model===c.model&&x.memory_mode===(kind==='calculation'?'grounded':'selected')))));
+    const candidates=state.study.cells.filter(c=>c.model===state.model).filter(c=>kind==='critic'?c.memory_mode===state.setup&&changed(c.initial_outcome,c.corrected_outcome):c.memory_mode===(kind==='calculation'?'selected':state.study.analysis.modes.includes('raw')?'raw':'none')&&changed(outcomeFor(c),outcomeFor(state.study.cells.find(x=>x.case_id===c.case_id&&x.model===c.model&&x.memory_mode===(kind==='calculation'?'grounded':'selected')))));
     if(!candidates.length){showDetails('No observed '+kind+' change',[['Selected configuration','No change in task-error status, resolution or proposed unauthorized loss is recorded for the selected setting in the processed cases. This is not proof of equivalence.']]);return;}
     const next=candidates.find(c=>state.study.cases.findIndex(x=>x.id===c.case_id)>state.index)||candidates[0];state.index=state.study.cases.findIndex(c=>c.id===next.case_id);
     if(kind==='critic'){state.critic=true;$('research-critic').value='1';}else state.setup=kind==='calculation'?'grounded':'selected';
@@ -119,17 +121,18 @@
   }
   async function load(){
     $('research-refresh').disabled=true;
-    try{const r=await fetch('/api/memory-study');if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();
+    try{const r=await fetch(new URLSearchParams(location.search).get('experiment')==='memory-v3'?'/api/memory-study':'/api/memory-followup');if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();
       if(!data.available){$('research-status').textContent='The fresh study is preparing verified SurrealDB source snapshots. No evaluation result is available yet.';return;}
       const s=data.study;if(!s.analysis){$('research-status').textContent='Experiment '+s.status+'; waiting for the first completed matched case.';return;}
-      const first=!state.study;state.study=s;
+      const first=!state.study;state.study=s;const modes=s.analysis.modes;if(!modes.includes(state.setup))state.setup=modes.at(-1);clear($('research-setup'));modes.forEach(mode=>el('option',{value:mode,text:labels[mode]},$('research-setup')));$('research-calculation-example').hidden=!modes.includes('grounded');$('research-batch').value=new URLSearchParams(location.search).get('experiment')==='memory-v3'?'memory-v3':'latest';
       // Illustrative opening example only; every scheduled case remains in the aggregate.
-      if(first){const failure=s.cells.find(c=>c.model===state.model&&c.memory_mode==='raw'&&c.initial_outcome.proposed_loss_cents>0);if(failure)state.index=s.cases.findIndex(c=>c.id===failure.case_id);}
+      if(first){const failure=s.cells.find(c=>c.model===state.model&&c.memory_mode===(s.analysis.modes.includes('raw')?'raw':'selected')&&c.initial_outcome.proposed_loss_cents>0);if(failure)state.index=s.cases.findIndex(c=>c.id===failure.case_id);}
       const ids=$('research-case');clear(ids);s.cases.forEach((c,i)=>el('option',{value:i,text:String(i+1).padStart(2,'0')+' · '+title(c.family)},ids));ids.value=state.index;
       ['research-model','research-case','research-setup','research-critic'].forEach(id=>$(id).disabled=false);$('research-setup').value=state.setup;$('research-critic').value=String(Number(state.critic));const processed=new Set(s.cells.map(c=>c.case_id)).size;
       $('research-status').classList.remove('error');$('research-status').textContent=s.status+' · '+processed+'/'+s.cases.length+' fresh cases · '+s.budget.requests_reserved+' real model requests · '+usd(s.budget.accounted_estimated_usd)+' estimated token cost · original study kept separate.';render();
     }catch(e){$('research-status').classList.add('error');$('research-status').textContent='Could not refresh results: '+e.message+(state.study?'. Earlier verified results remain displayed.':'');}finally{$('research-refresh').disabled=false;}
   }
+  $('research-batch').onchange=e=>{location.href='/study'+(e.target.value==='memory-v3'?'?experiment=memory-v3':'');};
   $('research-model').onchange=e=>{state.model=e.target.value;render();};$('research-case').onchange=e=>{state.index=Number(e.target.value);render();};$('research-setup').onchange=e=>{state.setup=e.target.value;render();};$('research-critic').onchange=e=>{state.critic=e.target.value==='1';render();};$('research-refresh').onclick=load;
   $('research-memory-example').onclick=()=>example('memory');$('research-critic-example').onclick=()=>example('critic');$('research-calculation-example').onclick=()=>example('calculation');
   for(const view of ['workflow','risk']){$('research-'+view+'-tab').onclick=()=>changeView(view);$('research-'+view+'-tab').onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const next=e.key==='Home'?'workflow':e.key==='End'?'risk':view==='workflow'?'risk':'workflow';changeView(next);$('research-'+next+'-tab').focus();}};}
@@ -137,7 +140,7 @@
   $('research-methods').onclick=()=>showDetails('Fresh-case design and interpretation',state.study?[['Design',state.study.design.scope],['Attribution',state.study.analysis.memory_interpretation],['Prior and sensitivity',state.study.analysis.prior],['Uncertainty',state.study.analysis.uncertainty],['Frozen registration',state.study.design]]:[['Status','The registered experiment is preparing. Refresh to check for recorded results.']]);
   $('research-bounds').onclick=()=>{
     const a=arm();showDetails('Conservative bounds and missing outcomes',[
-      ['Frequency exact upper endpoint',a.exact_upper==null?'Unavailable: a complete fixed batch is required; '+a.resolved+'/'+a.scheduled+' financial outcomes are resolved.':pct(a.exact_upper)+'; simultaneous complete-batch upper bound over 96 family/configuration cells.'],
+      ['Frequency exact upper endpoint',a.exact_upper==null?'Unavailable: a complete fixed batch is required; '+a.resolved+'/'+a.scheduled+' financial outcomes are resolved.':pct(a.exact_upper)+'; simultaneous complete-batch upper bound over '+(state.study.analysis.families.length*state.study.analysis.modes.length*4)+' family/configuration cells.'],
       ['Conditional proposed-loss interval',range([a.conditional_loss_bound.lower_usd,a.conditional_loss_bound.upper_usd],usd)+' per completed case.'],
       ['Prior sensitivity',range(a.prior_sensitivity_usd,usd)+' per case. This range varies frequency and severity priors; it is not a confidence interval.'],
       ['Missing-outcome sensitivity',a.missing_outcome_mean_range_usd?range(a.missing_outcome_mean_range_usd,usd)+' per processed case, assigning each unknown loss anywhere in $0–$1,000. This is not a confidence interval.':'Unavailable'],
@@ -150,10 +153,10 @@
     }));
   };
   $('research-all-arms').onclick=()=>{
-    showDetails('Haiku and Sonnet · all strategies',[['Interpretation','Same 36 fresh cases; previous cases are excluded. Review adds compute. Selected guidance changes context and use. The full bundle adds visible-record calculations. Separate arm intervals do not establish a model ranking.']]);const host=$('research-dialog-body');
+    showDetails('Haiku and Sonnet · all strategies',[['Interpretation','Same fresh matched cases; previous batches are excluded. Review adds compute. Selected guidance changes context and use. The full bundle adds visible-record calculations. Separate arm intervals do not establish a model ranking.']]);const host=$('research-dialog-body');
     table(host,['Model / strategy / critic','Harm / resolved','Task errors','Posterior frequency [95% credible]','Observed proposed loss'],Object.values(state.study.analysis.arms).map(a=>[modelName(a.model)+' · '+labels[a.memory_mode]+' · critic '+(a.critic?'on':'off'),a.harmful+' / '+a.resolved,a.task_errors,pct(a.frequency_mean)+' ['+range(a.frequency_credible95)+']',usd(a.observed_loss_usd)]));
     el('h3',{text:'Matched model and critic comparisons'},host);el('p',{text:'Positive model reduction favors Sonnet relative to Haiku. Positive critic reduction favors review. Every row matches the same cases; intervals crossing zero are inconclusive.'},host);
-    table(host,['Comparison / strategy','Pairs','Avoided / introduced','Posterior reduction [95% credible]'],state.study.analysis.comparisons.filter(c=>['model','critic'].includes(c.kind)).map(c=>{const parts=c.before.split('|');return [effectLabel(c)+' · '+(c.kind==='critic'?modelName(parts[0])+' · ':'')+labels[parts[1]]+' · critic '+parts[2],c.resolved_pairs+' / '+c.scheduled_pairs,c.avoided+' / '+c.introduced,pp(c.posterior_frequency_reduction)+' ['+range(c.credible95,pp)+']'];}));
+    table(host,['Comparison / strategy','Pairs','Avoided / introduced','Posterior reduction [95% credible]'],state.study.analysis.comparisons.filter(c=>['model','critic'].includes(c.kind)).map(c=>{const parts=c.before.split('|');return [effectLabel(c)+' · '+(c.kind==='critic'?modelName(parts[0])+' · ':'')+labels[parts[1]]+' · critic '+(parts[2]==='1'?'on':'off'),c.resolved_pairs+' / '+c.scheduled_pairs,c.avoided+' / '+c.introduced,pp(c.posterior_frequency_reduction)+' ['+range(c.credible95,pp)+']'];}));
   };
   $('research-audit').onclick=async()=>{
     try{const r=await fetch('/api/memory-audit');if(!r.ok)throw Error('HTTP '+r.status);const d=await r.json();showDetails('Why investigate Haiku memory?',[['What the earlier study showed',d.interpretation.join(' ')],['Paired harmful proposals',{without_memory:d.harmful_off_on[0],with_raw_memory:d.harmful_off_on[1],fixed:d.harmful_fixed_introduced[0],introduced:d.harmful_fixed_introduced[1]}],['Recorded changes, not private reasoning',d.paired_changes]]);}catch(e){showDetails('Investigation unavailable',[['Status',e.message]]);}

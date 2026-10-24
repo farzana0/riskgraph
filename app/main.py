@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 from typing import Literal, Optional
 from urllib.parse import urlparse
-from fastapi import FastAPI, Header, HTTPException, Request
+from fastapi import FastAPI, Header, HTTPException, Request, BackgroundTasks
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
@@ -33,6 +33,13 @@ class RunRequest(BaseModel):
     suite: Literal["baseline", "balanced", "adversarial", "boundary", "heavy_tail", "drift", "correlated", "full_stress", "random_stress", "identity", "manipulation", "payment_edges", "compound"] = "baseline"
 
 
+class TravelLiveRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    family: Literal["wrong_date", "wrong_traveller", "duplicate_booking", "stale_quote", "fee_total", "nonrefundable", "connection", "injected_instruction"] = "fee_total"
+    model: Literal["claude-haiku-5-5", "claude-sonnet-5-5"] = "claude-haiku-5-5"
+    seed: int = Field(default=2026102471, ge=0, le=2**31-1)
+
+
 class StepRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     expected_seq: int = Field(ge=0, le=200)
@@ -48,7 +55,7 @@ class PairedAnalysisRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.9.0")
+    app = FastAPI(title="RiskGraph", version="0.10.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -82,7 +89,7 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.9.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.10.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
 
     @app.get("/demo")
     def paired_demo():
@@ -164,6 +171,42 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
     @app.get("/api/memory-audit")
     def memory_audit():
         return json.loads((STATIC.parents[1] / "docs" / "examples" / "haiku-memory-autopsy.json").read_text())
+
+    @app.get("/travel")
+    def travel_demo():
+        return FileResponse(STATIC / "travel.html")
+
+    @app.get("/api/travel-study")
+    def travel_study():
+        candidates = [Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "travel-v1" / "study.json",
+                      STATIC.parents[1] / "docs" / "examples" / "travel-v1.json"]
+        path = next((p for p in candidates if p.is_file()), None)
+        return {"available": True, "study": json.loads(path.read_text())} if path else {"available": False}
+
+    @app.get("/api/travel-stress")
+    def travel_stress():
+        return json.loads((STATIC.parents[1] / "docs" / "examples" / "travel-stress.json").read_text())
+
+    @app.post("/api/travel-live", status_code=202)
+    def travel_start(body: TravelLiveRequest, request: Request, tasks: BackgroundTasks, x_operator_token: Optional[str] = Header(default=None)):
+        if not token:
+            raise HTTPException(403, "Live requests require configured operator access")
+        authorize(request, x_operator_token)
+        from . import travel_live
+        try:
+            jid = travel_live.start(body.family, body.model, body.seed)
+            tasks.add_task(travel_live.run, jid)
+            return {"id": jid, "status": "running"}
+        except ValueError as exc:
+            raise HTTPException(409, str(exc))
+
+    @app.get("/api/travel-live")
+    def travel_progress(run: Optional[str] = None):
+        from . import travel_live
+        try:
+            return travel_live.read(run)
+        except ValueError as exc:
+            raise HTTPException(404, str(exc))
 
     @app.get("/api/memory-followup")
     def memory_followup():
@@ -295,14 +338,14 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/")
     def index():
-        return FileResponse(STATIC / "demo.html")
+        return FileResponse(STATIC / "home.html")
 
     @app.get("/workspace")
     def assessment_workspace():
         return FileResponse(STATIC / "index.html")
 
     @app.get("/study")
-    def real_model_graphs(experiment: Literal["latest", "original"] = "latest"):
+    def real_model_graphs(experiment: Literal["latest", "original", "memory-v3"] = "latest"):
         return FileResponse(STATIC / ("research.html" if experiment == "original" else "memory-study.html"))
 
     app.mount("/static", StaticFiles(directory=STATIC), name="static")

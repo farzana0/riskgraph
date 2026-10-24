@@ -60,7 +60,7 @@ def test_operational_fault_campaign_is_offline_and_never_executes_bad_responses(
 def test_deploy_assets_revalidate_and_html_references_versioned_scripts():
     client = TestClient(create_app(':memory:', seed_demo=False))
     version=client.get('/healthz').json()['version']
-    for route, assets in [('/', ['demo.js', 'graph.js', 'demo.css']), ('/demo', ['demo.js', 'graph.js', 'demo.css']), ('/workspace', ['app.js', 'style.css']), ('/study?experiment=original', ['research.js', 'research.css', 'demo.css']), ('/study', ['memory-study.js', 'memory-study.css', 'research.css', 'demo.css'])]:
+    for route, assets in [('/', ['home.css']), ('/demo', ['demo.js', 'graph.js', 'demo.css']), ('/workspace', ['app.js', 'style.css']), ('/study?experiment=original', ['research.js', 'research.css', 'demo.css']), ('/study', ['memory-study.js', 'memory-study.css', 'research.css', 'demo.css'])]:
         page = client.get(route)
         assert page.headers['cache-control'] == 'no-cache'
         for asset in assets:

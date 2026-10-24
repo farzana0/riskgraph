@@ -9,3 +9,21 @@ A persisted US$4.80 allowance reserves before every request, retains failed/unkn
 The same family Jeffreys frequency, four-band severity, and matched joint Dirichlet model as v3 is used with three equal family weights. Twelve prespecified contrasts cover memory, critic, and model comparisons. Separate 5% frequentist error families cover 24 frequency cells, 36 family/contrast cells (144 endpoints), 16 dollar streams and 12 paired-dollar streams. The four families together are not joint 95% coverage. Fixed-batch exact endpoints require complete outcomes and the stated within-family IID/fixed-policy assumptions. Missing responses retain financial uncertainty and count as service failures.
 
 Balanced prefixes of 4, 8, 12 and 16 cases per family display how marginal Bayesian intervals change as evidence accumulates. They are reuse of the same observations, not independent replications, stopping rules or simultaneous frequentist guarantees. No stopping or favorable-result selection is based on these curves. Budget or provider limits may stop collection early; incomplete cells and pair counts are retained and complete-batch endpoints are withheld.
+
+
+## Recorded results
+
+The fixed 48-case batch completed 381 real requests for US$4.5685473. Three Haiku no-memory proposals exhausted their response allowance; their critics were skipped. All six unavailable stages remain financial unknowns and task failures. No requests were retried. The [independent archive verifier](examples/memory-v4-verification.json) reconstructs requests, all source hashes, arithmetic support used only for verification, outcomes, twelve contrasts and balanced prefixes.
+
+| Initial model / strategy | Harmful / resolved | Task errors / 48 | Proposed loss | After critic: harmful / resolved |
+|---|---:|---:|---:|---:|
+| Haiku, no memory | 6 / 45 | 21 | $612.26 | 0 / 45 |
+| Haiku, selected memory | 6 / 48 | 14 | $611.43 | 1 / 48 |
+| Sonnet, no memory | 0 / 48 | 0 | $0.00 | 0 / 48 |
+| Sonnet, selected memory | 1 / 48 | 3 | $4.93 | 2 / 48 |
+
+On the 45 completed Haiku memory pairs, two harmful proposals are avoided and two introduced. The marginal 95% credible reduction interval is −10.8 to +10.3 percentage points. Selected memory improves task completion counts but has no established financial benefit. The critic avoids five harmful selected-memory Haiku proposals and introduces none: its marginal 95% credible reduction is +1.7 to +19.6 pp. This is prior/model-dependent evidence on this challenge mix; the conservative frequentist contrast interval remains wider.
+
+Review is not uniformly helpful: Sonnet's selected-memory critic fixes one harmful initial proposal but introduces two new ones, leaving two harmful corrected proposals and $12.71 proposed exposure. The deterministic gate stops these proposals. The evidence does not support a claim that adding an agent or memory always reduces risk.
+
+Balanced Haiku memory-contrast intervals narrow from 40.6 pp at the prespecified 12-case prefix to 21.1 pp at 48 cases, about 48% narrower. This is within-batch evidence accumulation, not a comparison between independent trials. The interval still includes zero. All three invalid initial responses remain in the service-failure totals and missing-data sensitivity analysis.

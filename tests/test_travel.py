@@ -30,3 +30,17 @@ def test_travel_reservations_are_atomic_across_connections(tmp_path):
         except RuntimeError:return False
     with ThreadPoolExecutor(6) as pool:results=list(pool.map(reserve,range(12)))
     assert sum(results)==2 and TravelBudget(path,1,50).totals()['accounted_estimated_usd']<=1
+
+
+def test_public_travel_routes_are_read_only_and_live_requires_operator(monkeypatch,tmp_path):
+    from fastapi.testclient import TestClient
+    from app.main import create_app
+    monkeypatch.setenv('RISKGRAPH_ADMIN_TOKEN','private-test-token')
+    monkeypatch.setenv('DATABASE_PATH',str(tmp_path/'app.sqlite3'))
+    client=TestClient(create_app(':memory:',seed_demo=False))
+    assert client.get('/').status_code==200 and 'home.css' in client.get('/').text
+    assert client.get('/travel').status_code==200
+    assert client.get('/api/travel-stress').json()['cases']==6000
+    assert client.post('/api/travel-live',json={}).status_code==401
+    assert client.post('/api/travel-live',json={},headers={'X-Operator-Token':'private-test-token'}).status_code==409
+    assert client.get('/api/travel-live?run=../invalid').status_code==404
