@@ -6,8 +6,7 @@ from threading import Lock
 from uuid import uuid4
 from .travel import generate
 from .providers import MODELS
-from .travel_calls import TravelBudget
-from scripts.travel_study import execute
+from .live_budget import LiveBudget as TravelBudget
 from scripts.hard_benchmark import write
 
 LOCK=Lock()
@@ -44,13 +43,24 @@ def start(family,model,seed):
 
 
 def run(jid):
-    d=directory();p=d/('live-'+jid+'.json');j=json.loads(p.read_text())
+    from .travel_calls import call
+    from .providers import Agent
+    from .travel import outcome
+    d=directory();p=d/('live-'+jid+'.json');j=json.loads(p.read_text());row={}
+    budget=None
     try:
-        def progress(row):write(p,{**j,**row})
-        row=execute(d,j['case'],j['model'],'travel-live:'+jid,progress)
-        write(p,{**j,**row,'status':'complete','budget':TravelBudget(d/'requests.sqlite3',1.2,256).totals()})
-    except Exception as exc:write(p,{**j,'status':'unavailable','error_type':type(exc).__name__,'message':'No booking was executed. Inspect provider status or the shared credit allowance.'})
-    finally:LOCK.release()
+        budget=TravelBudget(d/'requests.sqlite3',1.2,256)
+        agent=Agent();key='travel-live:'+jid
+        initial=call(agent,budget,j['case']['observation'],j['model'],key+':initial')
+        row={'case_id':j['case']['id'],'family':j['case']['family'],'model':j['model'],'initial':initial,'initial_outcome':outcome(j['case'],initial)}
+        if initial['status']=='complete':write(p,{**j,**row,'status':'reviewing'})
+        corrected=call(agent,budget,j['case']['observation'],MODELS[1],key+':critic',initial['proposal']) if initial['status']=='complete' else {'status':'not_started','code':'initial_proposal_unavailable'}
+        row.update(corrected=corrected,corrected_outcome=outcome(j['case'],corrected))
+        write(p,{**j,**row,'status':'complete','budget':budget.totals()})
+    except Exception as exc:write(p,{**j,**row,'status':'unavailable','error_type':type(exc).__name__,'message':'No booking was executed. Inspect provider status or the shared credit allowance.'})
+    finally:
+        if budget is not None:budget.db.close()
+        LOCK.release()
 
 
 def read(jid=None):

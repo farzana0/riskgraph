@@ -1,7 +1,8 @@
 from concurrent.futures import ThreadPoolExecutor
 import json
 from app.travel import generate,checks,outcome,current_offers,FAMILIES
-from app.travel_calls import TravelBudget,payload
+from app.travel_calls import payload
+from app.live_budget import LiveBudget as TravelBudget
 from app.providers import MODELS
 
 
@@ -28,6 +29,7 @@ def test_travel_reservations_are_atomic_across_connections(tmp_path):
         b=TravelBudget(path,1,50)
         try:b.acquire(str(i),.4);return True
         except RuntimeError:return False
+        finally:b.db.close()
     with ThreadPoolExecutor(6) as pool:results=list(pool.map(reserve,range(12)))
     assert sum(results)==2 and TravelBudget(path,1,50).totals()['accounted_estimated_usd']<=1
 
