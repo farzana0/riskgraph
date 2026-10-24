@@ -60,7 +60,7 @@ class PairedAnalysisRequest(BaseModel):
 
 
 def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
-    app = FastAPI(title="RiskGraph", version="0.12.0")
+    app = FastAPI(title="RiskGraph", version="0.13.0")
     store = Store(db_path or os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3"))
     engine = Engine(store, agent, memory)
     app.state.engine = engine
@@ -94,7 +94,35 @@ def create_app(db_path=None, seed_demo=True, agent=None, memory=None):
 
     @app.get("/healthz")
     def health():
-        return {"status": "ok", "version": "0.12.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+        return {"status": "ok", "version": "0.13.0", "revision": os.getenv("RENDER_GIT_COMMIT", "local")}
+
+    @app.get("/discover")
+    @app.get("/evidence")
+    @app.get("/challenge")
+    @app.get("/compare")
+    @app.get("/risk")
+    @app.get("/methods")
+    def guided_workflow():
+        return FileResponse(STATIC / "flow.html")
+
+    @app.get("/api/travel-v3")
+    def travel_grounded_study():
+        candidates = [Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "travel-grounded-v3" / "study.json",
+                      STATIC.parents[1] / "docs/examples/travel-v3.json"]
+        path = next((p for p in candidates if p.is_file()), None)
+        return {"available": True, "study": json.loads(path.read_text())} if path else {"available": False}
+
+    @app.get("/api/travel-discovery")
+    def travel_discovery_study():
+        candidates = [Path(os.getenv("DATABASE_PATH", "data/riskgraph.sqlite3")).parent / "travel-discovery-v1" / "study.json",
+                      STATIC.parents[1] / "docs/examples/travel-discovery.json"]
+        path = next((p for p in candidates if p.is_file()), None)
+        return {"available": True, "study": json.loads(path.read_text())} if path else {"available": False}
+
+    @app.get("/api/travel-error-audit")
+    def travel_error_audit():
+        path = STATIC.parents[1] / "docs/examples/travel-error-audit.json"
+        return json.loads(path.read_text()) if path.is_file() else {"available": False}
 
     @app.get("/demo")
     def paired_demo():

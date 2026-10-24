@@ -1,0 +1,21 @@
+{
+  "version": "travel-discovery-v1",
+  "seed": 20261024171,
+  "cases_sha256": "71318cb6f1c4bcbd94f5f02d0c96355af41024a38a8f4b3b24a65e08a96cda2f",
+  "scout_cases": 4,
+  "scout_requests": 8,
+  "discovery_requests": 2,
+  "discovery_max_tokens": 3072,
+  "max_requests": 10,
+  "max_usd": 0.5,
+  "models": [
+    "claude-haiku-5-5",
+    "claude-sonnet-5-5"
+  ],
+  "source_sha256": {
+    "scripts/travel_discovery.py": "a4d29ac6c88867a93a0dd6fefb490ae2f1042a2312a6b86c15dadd08a41e7783",
+    "app/travel_v3.py": "27238a9f0eea8162303de90792fa0930013ac053e0a071f675ae9e16d387c946",
+    "app/travel_factorial.py": "ce0e887f00033d17389f986949cf9560514f6b86275a090340539033d53aaf12"
+  },
+  "scope": "Four development trips, both models; two schema-constrained discovery calls on those scored synthetic traces. Candidate failures are hypotheses unless a cited failed trace supports occurrence. Candidate descriptions never set held-out truth, execute code, or enter a model evaluation. No claim of exhaustive discovery or learned population rates. Development trips and discovery calls are excluded from held-out statistics."
+}

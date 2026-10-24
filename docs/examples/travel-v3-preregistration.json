@@ -1,0 +1,38 @@
+{
+  "version": "travel-grounded-v3",
+  "seed": 20261024159,
+  "cases": 32,
+  "cases_sha256": "d5820582558e238d6e1d586d12834b7ae240b6cd1c9196ad0a7cf97360925598",
+  "workflows": [
+    "legacy",
+    "grounded"
+  ],
+  "models": [
+    "claude-haiku-5-5",
+    "claude-sonnet-5-5"
+  ],
+  "critic_model": "claude-sonnet-5-5",
+  "max_usd": 7.5,
+  "max_requests": 512,
+  "bank_sha256": "46b8cc572d8e99c4619205fec716ebdcc66f105cf43c8561c94ddc46aefe0aa7",
+  "legacy_archive_sha256": "d90ec4e04f8d745ee547ccd1d04cf07c8b0cdf37e0953bb3fba8f2fe61481a1a",
+  "settings": {
+    "max_tokens": 1536,
+    "thinking": "adaptive",
+    "effort": "low",
+    "output_schema": "identical unchanged Booking JSON schema for every arm"
+  },
+  "source_sha256": {
+    "app/travel_v3.py": "27238a9f0eea8162303de90792fa0930013ac053e0a071f675ae9e16d387c946",
+    "app/travel_v3_stats.py": "602993d2d56562308ecd16c588ef6eb006851939d6d5200ce31ac5f6806dbe84",
+    "scripts/travel_v3.py": "d17691146d7e1bc0f6d8bc790985d7e1074ef4b80f50c50f429212ec341c6fdd",
+    "app/travel_factorial.py": "ce0e887f00033d17389f986949cf9560514f6b86275a090340539033d53aaf12",
+    "app/travel_factorial_stats.py": "b9f3e3ba0a2cd677f364a15cd8d9cf2dca1f626ade64cdf9a0483f36fdd1a75e",
+    "app/travel.py": "966f29f702b8b97c894a250b3624be04aaf127035162bf7f771267fadd3e7a34",
+    "app/live_budget.py": "04ba0e4b5d70a440df266d1b6dbebe9a79d55f560c43ba1428f0042eb982b021",
+    "app/travel_calls.py": "f2f225305102604b0c69abd433b5177af56dcc9c7ee001e9f42fca02a25deb93",
+    "app/providers.py": "17e121e9570bed8d9524a4725fbfa9037ff0073c9c412de928757bbb30be7f5d",
+    "app/hardbench.py": "2f9c312b2fdf9bac89611cc4ce7d34801ccc3be8bdd8f83f1a63ead4c12067e3"
+  },
+  "scope": "32 fresh harder trips, four per eight equal-weight families. Both frozen legacy and revised record-grounded workflows cross two models, memory off/on, and the same Sonnet critic off/on. 16 configurations, 512 planned calls. Critic-off reuses initial proposals. Fresh exact-second boundaries, UTC offsets, 40-60 fee items, competing revisions, ledger distractors and multiple valid alternatives. Eight no-eligible controls. All API/model/schema/thinking/effort/token settings remain unchanged. Grounded workflow adds source-bound arithmetic for every arm, compact procedural memory when enabled, and a concrete-evidence critic that omits the initial prose. Across-workflow effects test that package, not memory alone. Discovery and old observations are excluded. No retries, outcome-driven case additions or extension. US$7.50 held-out cap plus a separate US$0.50 discovery cap: at most US$8 new spending."
+}
